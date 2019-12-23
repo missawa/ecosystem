@@ -38,5 +38,7 @@
     <Transaction>2019/12/17 00:28:27.363.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_cliente.dfm</Transaction>
     <Transaction>2019/12/17 00:41:18.304.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\classes\unt_classe_cliente.pas</Transaction>
     <Transaction>2019/12/17 00:44:33.476.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\classes\unt_classe_pessoa.pas</Transaction>
+    <Transaction>2019/12/19 09:29:38.879.pas,D:\Git\EcoSystem\classes\unt_classe_pessoa.pas=</Transaction>
+    <Transaction>2019/12/19 09:29:47.576.pas,D:\Git\EcoSystem\classes\unt_classe_cliente.pas=</Transaction>
   </Transactions>
 </BorlandProject>

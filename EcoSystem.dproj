@@ -45,8 +45,6 @@
     <DCCReference Include="abstratos\unt_lista_toolbar_abstrato.pas">
       <Form>frm_lista_toolbar_abstrato</Form>
     </DCCReference>
-    <DCCReference Include="classes\unt_classe_cliente.pas" />
-    <DCCReference Include="classes\unt_classe_pessoa.pas" />
     <DCCReference Include="unt_cliente.pas">
       <Form>frm_cliente</Form>
     </DCCReference>

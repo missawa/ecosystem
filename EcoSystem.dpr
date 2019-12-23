@@ -21,9 +21,7 @@ uses
   unt_uf in 'unt_uf.pas' {frm_uf},
   unt_cad_abstrato_mestre_detalhe in 'abstratos\unt_cad_abstrato_mestre_detalhe.pas' {frm_cad_abstrato_mestre_detalhe},
   unt_municipio in 'unt_municipio.pas' {frm_municipio},
-  unt_cliente in 'unt_cliente.pas' {frm_cliente},
-  unt_classe_cliente in 'classes\unt_classe_cliente.pas',
-  unt_classe_pessoa in 'classes\unt_classe_pessoa.pas';
+  unt_cliente in 'unt_cliente.pas' {frm_cliente};
 
 {$R *.res}
 
