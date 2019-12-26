@@ -3,10 +3,30 @@ unit unt_municipio;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_cad_abstrato_mestre_detalhe, ADODB, DB, Grids, Wwdbigrd,
-  Wwdbgrid, ExtCtrls, ComCtrls, ToolWin, Wwdotdot, Wwdbcomb, StdCtrls, Mask,
-  wwdbedit, wwdblook;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  ADODB,
+  DB,
+  Grids,
+  ExtCtrls,
+  ComCtrls,
+  ToolWin,
+  StdCtrls,
+  Mask,
+  wwdbigrd,
+  wwdbgrid,
+  wwdotdot,
+  wwdbcomb,
+  wwdbedit,
+  wwdblook,
+  unt_cad_abstrato_mestre_detalhe;
 
 type
   Tfrm_municipio = class(Tfrm_cad_abstrato_mestre_detalhe)
@@ -22,6 +42,7 @@ type
     qry_ufid: TAutoIncField;
     qry_ufsigla: TStringField;
     procedure FormCreate(Sender: TObject);
+    procedure dse_detalheNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -34,6 +55,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_municipio.dse_detalheNewRecord(DataSet: TDataSet);
+begin
+  dse_detalhe.FieldByName('id_municipio').AsInteger := dse.FieldByName(key_field).AsInteger;
+end;
 
 procedure Tfrm_municipio.FormCreate(Sender: TObject);
 begin

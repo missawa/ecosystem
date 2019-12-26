@@ -18,6 +18,7 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
   Position = poDesigned
   Visible = True
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 15
@@ -212,6 +213,8 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
     end
   end
   object dts: TDataSource
+    AutoEdit = False
+    DataSet = dse
     OnStateChange = dtsStateChange
     Left = 72
     Top = 104

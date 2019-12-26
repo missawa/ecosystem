@@ -49,7 +49,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_primeiroClick(Sender: TObject);
-    procedure btn_novoClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
@@ -62,15 +61,16 @@ type
     procedure btn_fecharClick(Sender: TObject);
     procedure dtsStateChange(Sender: TObject);
     procedure btn_localizarClick(Sender: TObject);
+    procedure btn_novoClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   protected
     table_name: string;
     key_field: string;
     procedure CreateParams(var Params: TCreateParams); override;
-    procedure open_dataset(pk: integer);
   private
     { Private declarations }
   public
-    { Public declarations }
+    procedure open_dataset(pk: integer);
   end;
 
 var
@@ -213,6 +213,18 @@ end;
 procedure Tfrm_cad_abstrato.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
+end;
+
+procedure Tfrm_cad_abstrato.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  if dse.State in [dsEdit,dsInsert] then
+  begin
+    msg_info('Existem dados que ainda não foram salvos no banco de dados.'#13+
+             'Clique no botão "Salvar" para guardar os dados ou em "Cancelar" para desfazer as alterações.');
+    CanClose := false;
+  end
+  else
+    CanClose := true;
 end;
 
 procedure Tfrm_cad_abstrato.FormCreate(Sender: TObject);

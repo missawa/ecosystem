@@ -1,5 +1,6 @@
 inherited frm_municipio: Tfrm_municipio
   Caption = 'Municipios'
+  ExplicitWidth = 798
   PixelsPerInch = 96
   TextHeight = 15
   inherited pnlTitulo: TPanel
@@ -10,7 +11,6 @@ inherited frm_municipio: Tfrm_municipio
       Caption = ' DADOS DO MUNIC'#205'PIO'
     end
     inherited pnl_geral: TPanel
-      ExplicitHeight = 60
       object Label1: TLabel
         Left = 10
         Top = 10
@@ -122,12 +122,8 @@ inherited frm_municipio: Tfrm_municipio
         'id'#9'4'#9'ID'
         'id_municipio'#9'6'#9'ID.MUN'#9'F'
         'nome'#9'60'#9'BAIRRO')
-      OnEnter = nil
       ExplicitHeight = 229
     end
-  end
-  inherited dts: TDataSource
-    DataSet = dse
   end
   inherited dse: TADODataSet
     CursorType = ctStatic
@@ -143,7 +139,7 @@ inherited frm_municipio: Tfrm_municipio
   inherited dse_detalhe: TADODataSet
     Active = True
     CursorType = ctStatic
-    OnNewRecord = nil
+    OnNewRecord = dse_detalheNewRecord
     CommandText = 'select * '#13#10'from bairro '#13#10'where id_municipio = :key_field'
     DataSource = dts
     Parameters = <

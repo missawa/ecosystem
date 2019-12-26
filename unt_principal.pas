@@ -19,11 +19,14 @@ type
     mnu_cadastro: TPopupMenu;
     mnu_uf: TMenuItem;
     mnu_municipio: TMenuItem;
+    mnu_atividade: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_usuarioClick(Sender: TObject);
     procedure mnu_ufClick(Sender: TObject);
     procedure mnu_municipioClick(Sender: TObject);
+    procedure btn_clienteClick(Sender: TObject);
+    procedure mnu_atividadeClick(Sender: TObject);
   private
     function log_ok: boolean;
   public
@@ -41,9 +44,14 @@ uses
   unt_func_messages,
   unt_municipio,
   unt_senha,
-  unt_uf, unt_usuario;
+  unt_uf, unt_usuario, unt_cliente, unt_atividade;
 
 {$R *.dfm}
+
+procedure Tfrm_principal.btn_clienteClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_cliente, frm_cliente);
+end;
 
 procedure Tfrm_principal.btn_fecharClick(Sender: TObject);
 begin
@@ -79,6 +87,11 @@ begin
     on e: Exception do
       msg_error(e.Message);
   end;
+end;
+
+procedure Tfrm_principal.mnu_atividadeClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_atividade, frm_atividade);
 end;
 
 procedure Tfrm_principal.mnu_municipioClick(Sender: TObject);

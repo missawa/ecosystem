@@ -37,7 +37,8 @@ object frm_principal: Tfrm_principal
       Left = 0
       Top = 0
       Caption = 'Cliente'
-      ImageIndex = 25
+      ImageIndex = 2
+      OnClick = btn_clienteClick
     end
     object btn_usuario: TToolButton
       Left = 55
@@ -85,13 +86,17 @@ object frm_principal: Tfrm_principal
   object mnu_cadastro: TPopupMenu
     Left = 128
     Top = 72
-    object mnu_uf: TMenuItem
-      Caption = 'UF'
-      OnClick = mnu_ufClick
+    object mnu_atividade: TMenuItem
+      Caption = 'Atividade'
+      OnClick = mnu_atividadeClick
     end
     object mnu_municipio: TMenuItem
       Caption = 'Municipio'
       OnClick = mnu_municipioClick
+    end
+    object mnu_uf: TMenuItem
+      Caption = 'UF'
+      OnClick = mnu_ufClick
     end
   end
 end

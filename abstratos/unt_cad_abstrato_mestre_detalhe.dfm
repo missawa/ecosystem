@@ -10,9 +10,18 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
   inherited pnlTotal: TPanel
     Height = 78
     Align = alTop
+    Padding.Left = 3
+    Padding.Right = 3
     ExplicitHeight = 78
+    inherited pnl_tit_geral: TPanel
+      Left = 3
+      Width = 776
+    end
     inherited pnl_geral: TPanel
+      Left = 3
+      Width = 776
       Height = 60
+      ExplicitHeight = 60
     end
   end
   object Panel1: TPanel [3]
@@ -23,15 +32,16 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
+    Padding.Left = 3
     Padding.Top = 3
+    Padding.Right = 3
+    Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 155
-    ExplicitHeight = 199
     object pnl_tit_detalhe: TPanel
-      Left = 0
+      Left = 3
       Top = 3
-      Width = 782
+      Width = 776
       Height = 18
       Align = alTop
       Alignment = taLeftJustify
@@ -49,12 +59,14 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitLeft = 0
+      ExplicitWidth = 782
     end
     object grd_detalhe: TwwDBGrid
-      Left = 0
+      Left = 3
       Top = 21
-      Width = 782
-      Height = 229
+      Width = 776
+      Height = 226
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
       FixedCols = 0
@@ -70,7 +82,9 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitHeight = 178
+      ExplicitLeft = 0
+      ExplicitWidth = 782
+      ExplicitHeight = 229
     end
   end
   inherited dts: TDataSource

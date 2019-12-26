@@ -21,7 +21,13 @@ uses
   unt_uf in 'unt_uf.pas' {frm_uf},
   unt_cad_abstrato_mestre_detalhe in 'abstratos\unt_cad_abstrato_mestre_detalhe.pas' {frm_cad_abstrato_mestre_detalhe},
   unt_municipio in 'unt_municipio.pas' {frm_municipio},
-  unt_cliente in 'unt_cliente.pas' {frm_cliente};
+  unt_cliente in 'unt_cliente.pas' {frm_cliente},
+  unt_integracao in 'utils\unt_integracao.pas',
+  unt_classe_endereco in 'classes\unt_classe_endereco.pas',
+  unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro},
+  unt_constantes in 'utils\unt_constantes.pas',
+  unt_atividade in 'unt_atividade.pas' {frm_atividade},
+  unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade};
 
 {$R *.res}
 
@@ -32,11 +38,11 @@ begin
   Application.CreateForm(Tfrm_principal, frm_principal);
   Application.CreateForm(Tdtm_dados, dtm_dados);
   Application.CreateForm(Tdtm_images, dtm_images);
+  Application.CreateForm(Tdtm_geral, dtm_geral);
   Application.CreateForm(Tfrm_senha, frm_senha);
   Application.CreateForm(Tfrm_mensagem, frm_mensagem);
   Application.CreateForm(Tfrm_pesquisa, frm_pesquisa);
-  Application.CreateForm(Tdtm_geral, dtm_geral);
   Application.CreateForm(Tfrm_progresso, frm_progresso);
-  Application.CreateForm(Tfrm_cliente, frm_cliente);
+  Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
   Application.Run;
 end.
