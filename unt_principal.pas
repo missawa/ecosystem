@@ -20,6 +20,9 @@ type
     mnu_uf: TMenuItem;
     mnu_municipio: TMenuItem;
     mnu_atividade: TMenuItem;
+    rgoAmbiental1: TMenuItem;
+    N1: TMenuItem;
+    mnu_tipo_licenca: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_usuarioClick(Sender: TObject);
@@ -27,6 +30,8 @@ type
     procedure mnu_municipioClick(Sender: TObject);
     procedure btn_clienteClick(Sender: TObject);
     procedure mnu_atividadeClick(Sender: TObject);
+    procedure rgoAmbiental1Click(Sender: TObject);
+    procedure mnu_tipo_licencaClick(Sender: TObject);
   private
     function log_ok: boolean;
   public
@@ -39,12 +44,17 @@ var
 implementation
 
 uses
+  unt_atividade,
+  unt_cliente,
   unt_dtm_dados,
   unt_dtm_images,
   unt_func_messages,
   unt_municipio,
+  unt_orgao_ambiental,
   unt_senha,
-  unt_uf, unt_usuario, unt_cliente, unt_atividade;
+  unt_tipo_licenca,
+  unt_uf,
+  unt_usuario;
 
 {$R *.dfm}
 
@@ -71,6 +81,11 @@ procedure Tfrm_principal.FormShow(Sender: TObject);
 begin
   if not log_ok then
     Application.Terminate;
+end;
+
+procedure Tfrm_principal.mnu_tipo_licencaClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_tipo_licenca, frm_tipo_licenca);
 end;
 
 function Tfrm_principal.log_ok: boolean;
@@ -102,6 +117,11 @@ end;
 procedure Tfrm_principal.mnu_ufClick(Sender: TObject);
 begin
   Application.CreateForm(Tfrm_uf, frm_uf);
+end;
+
+procedure Tfrm_principal.rgoAmbiental1Click(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_orgao_ambiental, frm_orgao_ambiental);
 end;
 
 end.

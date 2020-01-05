@@ -1,5 +1,5 @@
 inherited frm_uf: Tfrm_uf
-  Caption = 'frm_uf'
+  Caption = 'Unidades Federativas'
   ClientHeight = 352
   ClientWidth = 404
   ExplicitWidth = 420
@@ -8,7 +8,7 @@ inherited frm_uf: Tfrm_uf
   TextHeight = 15
   inherited pnlTitulo: TPanel
     Width = 404
-    Caption = ' UF'
+    Caption = ' UNIDADES DA FEDERA'#199#195'O'
     ExplicitWidth = 404
   end
   inherited pnlClient: TPanel
@@ -23,6 +23,7 @@ inherited frm_uf: Tfrm_uf
         'id'#9'4'#9'ID'
         'nome'#9'42'#9'NOME'
         'sigla'#9'5'#9'SIGLA')
+      ReadOnly = True
       ExplicitWidth = 402
       ExplicitHeight = 288
     end

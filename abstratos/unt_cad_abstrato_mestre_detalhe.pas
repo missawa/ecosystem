@@ -30,6 +30,7 @@ type
     dse_detalhe: TADODataSet;
     dts_detalhe: TDataSource;
     procedure dseAfterScroll(DataSet: TDataSet);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure open_dataset_detalhe(pk: integer);
     { Private declarations }
@@ -44,11 +45,20 @@ implementation
 
 {$R *.dfm}
 
+procedure Tfrm_cad_abstrato_mestre_detalhe.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  dse_detalhe.Close;
+end;
+
 procedure Tfrm_cad_abstrato_mestre_detalhe.open_dataset_detalhe(pk: integer);
 begin
-  dse_detalhe.Close;
-  dse_detalhe.Parameters.ParamByName('key_field').Value := pk;
-  dse_detalhe.Open;
+  if dse_detalhe.Parameters.FindParam('key_field') <> nil then
+  begin
+    dse_detalhe.Close;
+    dse_detalhe.Parameters.ParamByName('key_field').Value := pk;
+    dse_detalhe.Open;
+  end;
 end;
 
 procedure Tfrm_cad_abstrato_mestre_detalhe.dseAfterScroll(DataSet: TDataSet);

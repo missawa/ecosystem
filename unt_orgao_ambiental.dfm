@@ -1,16 +1,28 @@
-inherited frm_municipio: Tfrm_municipio
-  Caption = 'Municipios'
-  ExplicitWidth = 798
+inherited frm_orgao_ambiental: Tfrm_orgao_ambiental
+  Caption = #211'rg'#227'o Ambiental'
+  ClientHeight = 171
+  ExplicitHeight = 210
   PixelsPerInch = 96
   TextHeight = 15
-  inherited pnlTitulo: TPanel
-    Caption = ' MUNICIPIOS'
-  end
   inherited pnlTotal: TPanel
+    Height = 96
+    Padding.Left = 3
+    Padding.Right = 3
+    Padding.Bottom = 3
+    ExplicitHeight = 96
     inherited pnl_tit_geral: TPanel
-      Caption = ' DADOS DO MUNIC'#205'PIO'
+      Left = 3
+      Width = 776
+      ExplicitLeft = 3
+      ExplicitWidth = 776
     end
     inherited pnl_geral: TPanel
+      Left = 3
+      Width = 776
+      Height = 75
+      ExplicitLeft = 3
+      ExplicitWidth = 776
+      ExplicitHeight = 75
       object Label1: TLabel
         Left = 10
         Top = 10
@@ -21,23 +33,23 @@ inherited frm_municipio: Tfrm_municipio
       object Label2: TLabel
         Left = 65
         Top = 10
+        Width = 31
+        Height = 15
+        Caption = 'Nome'
+      end
+      object Label3: TLabel
+        Left = 445
+        Top = 10
+        Width = 27
+        Height = 15
+        Caption = 'Sigla'
+      end
+      object Label7: TLabel
+        Left = 500
+        Top = 10
         Width = 14
         Height = 15
         Caption = 'UF'
-      end
-      object Label3: TLabel
-        Left = 120
-        Top = 10
-        Width = 25
-        Height = 15
-        Caption = 'IBGE'
-      end
-      object Label4: TLabel
-        Left = 195
-        Top = 10
-        Width = 62
-        Height = 15
-        Caption = 'MUNIC'#205'PIO'
       end
       object edt_id: TwwDBEdit
         Left = 10
@@ -51,6 +63,7 @@ inherited frm_municipio: Tfrm_municipio
         DataSource = dts
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
         ReadOnly = True
         TabOrder = 0
@@ -58,27 +71,10 @@ inherited frm_municipio: Tfrm_municipio
         WantReturns = False
         WordWrap = False
       end
-      object edt_ibge: TwwDBEdit
-        Left = 120
+      object edt_nome: TwwDBEdit
+        Left = 65
         Top = 25
-        Width = 70
-        Height = 21
-        BorderStyle = bsNone
-        CharCase = ecUpperCase
-        DataField = 'ibge'
-        DataSource = dts
-        Frame.Enabled = True
-        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
-        Frame.NonFocusStyle = efsFrameEtched
-        TabOrder = 2
-        UnboundDataType = wwDefault
-        WantReturns = False
-        WordWrap = False
-      end
-      object edt_municipio: TwwDBEdit
-        Left = 195
-        Top = 25
-        Width = 300
+        Width = 375
         Height = 21
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -86,17 +82,37 @@ inherited frm_municipio: Tfrm_municipio
         DataSource = dts
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
-        TabOrder = 3
+        TabOrder = 1
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
       end
-      object wwDBLookupCombo1: TwwDBLookupCombo
-        Left = 65
+      object edt_sigla: TwwDBEdit
+        Left = 445
         Top = 25
         Width = 50
         Height = 21
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'sigla'
+        DataSource = dts
+        Frame.Enabled = True
+        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.FocusStyle = efsFrameEtched
+        Frame.NonFocusStyle = efsFrameEtched
+        TabOrder = 2
+        UnboundDataType = wwDefault
+        WantReturns = False
+        WordWrap = False
+      end
+      object cmb_uf: TwwDBLookupCombo
+        Left = 500
+        Top = 25
+        Width = 55
+        Height = 21
+        CharCase = ecUpperCase
         BorderStyle = bsNone
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
@@ -105,36 +121,26 @@ inherited frm_municipio: Tfrm_municipio
         DataSource = dts
         LookupTable = qry_uf
         LookupField = 'id'
+        Style = csDropDownList
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
-        TabOrder = 1
-        AutoDropDown = False
+        TabOrder = 3
+        AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
         AllowClearKey = False
+        ShowMatchText = True
       end
     end
   end
-  inherited Panel1: TPanel
-    inherited pnl_tit_detalhe: TPanel
-      Caption = ' BAIRROS'
-      ExplicitLeft = 3
-      ExplicitWidth = 776
-    end
-    inherited grd_detalhe: TwwDBGrid
-      Selected.Strings = (
-        'id'#9'4'#9'ID'
-        'id_municipio'#9'6'#9'ID.MUN'
-        'nome'#9'60'#9'BAIRRO')
-      ExplicitLeft = 3
-      ExplicitWidth = 776
-      ExplicitHeight = 226
-    end
+  inherited dts: TDataSource
+    Left = 662
   end
   inherited dse: TADODataSet
     CursorType = ctStatic
-    CommandText = 'select *'#13#10'from municipio '#13#10'where id = :key_field'
+    CommandText = 'select * '#13#10'from orgao_ambiental'#13#10'where id = :key_field'
     Parameters = <
       item
         Name = 'key_field'
@@ -142,20 +148,12 @@ inherited frm_municipio: Tfrm_municipio
         Size = 1
         Value = 0
       end>
+    Left = 690
   end
-  inherited dse_detalhe: TADODataSet
-    Active = True
-    CursorType = ctStatic
-    OnNewRecord = dse_detalheNewRecord
-    CommandText = 'select * '#13#10'from bairro '#13#10'where id_municipio = :key_field'
-    DataSource = dts
-    Parameters = <
-      item
-        Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
+  object dts_uf: TDataSource
+    DataSet = qry_uf
+    Left = 625
+    Top = 105
   end
   object qry_uf: TADOQuery
     Connection = dtm_dados.con_mysql
@@ -165,19 +163,7 @@ inherited frm_municipio: Tfrm_municipio
       'select id, sigla'
       'from uf'
       'order by sigla')
-    Left = 632
-    Top = 104
-    object qry_ufsigla: TStringField
-      DisplayLabel = 'UF'
-      DisplayWidth = 2
-      FieldName = 'sigla'
-      FixedChar = True
-      Size = 2
-    end
-    object qry_ufid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-      Visible = False
-    end
+    Left = 613
+    Top = 105
   end
 end

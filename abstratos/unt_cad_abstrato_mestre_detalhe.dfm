@@ -16,11 +16,15 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
     inherited pnl_tit_geral: TPanel
       Left = 3
       Width = 776
+      ExplicitLeft = 3
+      ExplicitWidth = 776
     end
     inherited pnl_geral: TPanel
       Left = 3
       Width = 776
       Height = 60
+      ExplicitLeft = 3
+      ExplicitWidth = 776
       ExplicitHeight = 60
     end
   end
@@ -59,8 +63,6 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 0
-      ExplicitWidth = 782
     end
     object grd_detalhe: TwwDBGrid
       Left = 3
@@ -82,9 +84,6 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitLeft = 0
-      ExplicitWidth = 782
-      ExplicitHeight = 229
     end
   end
   inherited dts: TDataSource

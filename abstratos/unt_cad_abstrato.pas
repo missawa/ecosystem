@@ -30,13 +30,13 @@ type
     btn_anterior: TToolButton;
     btn_proximo: TToolButton;
     btn_ultimo: TToolButton;
-    ToolButton1: TToolButton;
+    sep_3: TToolButton;
     btn_editar: TToolButton;
     btn_novo: TToolButton;
-    ToolButton2: TToolButton;
+    sep_1: TToolButton;
     btn_excluir: TToolButton;
     btn_atualizar: TToolButton;
-    ToolButton3: TToolButton;
+    sep_2: TToolButton;
     btn_salvar: TToolButton;
     btn_cancelar: TToolButton;
     btn_localizar: TToolButton;
@@ -212,6 +212,7 @@ end;
 
 procedure Tfrm_cad_abstrato.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  dse.Close;
   Action := caFree;
 end;
 
@@ -231,9 +232,10 @@ procedure Tfrm_cad_abstrato.FormCreate(Sender: TObject);
 begin
   centralizar_tela(self);
   key_field := 'id';
-  
+
   if dse.CommandText <> '' then
     open_dataset(0);
+
 end;
 
 end.

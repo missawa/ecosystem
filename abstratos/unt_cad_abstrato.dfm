@@ -65,11 +65,11 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       ImageIndex = 13
       OnClick = btn_atualizarClick
     end
-    object ToolButton2: TToolButton
+    object sep_1: TToolButton
       Left = 228
       Top = 0
       Width = 8
-      Caption = 'ToolButton2'
+      Caption = 'sep_1'
       ImageIndex = 31
       Style = tbsSeparator
     end
@@ -87,11 +87,11 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       ImageIndex = 19
       OnClick = btn_cancelarClick
     end
-    object ToolButton3: TToolButton
+    object sep_2: TToolButton
       Left = 350
       Top = 0
       Width = 8
-      Caption = 'ToolButton3'
+      Caption = 'sep_2'
       ImageIndex = 31
       Style = tbsSeparator
     end
@@ -130,11 +130,11 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       ImageIndex = 99
       OnClick = btn_ultimoClick
     end
-    object ToolButton1: TToolButton
+    object sep_3: TToolButton
       Left = 643
       Top = 0
       Width = 8
-      Caption = 'ToolButton1'
+      Caption = 'sep_3'
       ImageIndex = 31
       Style = tbsSeparator
     end

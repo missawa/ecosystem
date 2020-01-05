@@ -48,5 +48,11 @@
     <Transaction>2019/12/25 19:56:38.854.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_atividade.dfm</Transaction>
     <Transaction>2019/12/25 23:37:36.982.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_cliente_atividade.pas</Transaction>
     <Transaction>2019/12/25 23:37:36.982.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_cliente_atividade.dfm</Transaction>
+    <Transaction>2019/12/26 12:30:02.494.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_orgao_ambiental.pas</Transaction>
+    <Transaction>2019/12/26 12:30:02.494.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_orgao_ambiental.dfm</Transaction>
+    <Transaction>2019/12/26 23:46:31.202.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_licenca.pas</Transaction>
+    <Transaction>2019/12/26 23:46:31.203.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_licenca.dfm</Transaction>
+    <Transaction>2019/12/28 00:02:23.990.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_tipo_licenca.pas</Transaction>
+    <Transaction>2019/12/28 00:02:23.990.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_tipo_licenca.dfm</Transaction>
   </Transactions>
 </BorlandProject>

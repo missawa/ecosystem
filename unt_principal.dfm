@@ -90,6 +90,17 @@ object frm_principal: Tfrm_principal
       Caption = 'Atividade'
       OnClick = mnu_atividadeClick
     end
+    object rgoAmbiental1: TMenuItem
+      Caption = #211'rg'#227'o Ambiental'
+      OnClick = rgoAmbiental1Click
+    end
+    object mnu_tipo_licenca: TMenuItem
+      Caption = 'Tipo de Licen'#231'a'
+      OnClick = mnu_tipo_licencaClick
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
     object mnu_municipio: TMenuItem
       Caption = 'Municipio'
       OnClick = mnu_municipioClick

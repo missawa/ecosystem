@@ -2,6 +2,7 @@ inherited frm_cliente: Tfrm_cliente
   Caption = 'Clientes'
   ClientHeight = 459
   ClientWidth = 1131
+  OnShow = FormShow
   ExplicitWidth = 1147
   ExplicitHeight = 498
   PixelsPerInch = 96
@@ -29,7 +30,7 @@ inherited frm_cliente: Tfrm_cliente
       ExplicitLeft = 192
       ExplicitWidth = 64
     end
-    inherited ToolButton2: TToolButton
+    inherited sep_1: TToolButton
       Left = 256
       ExplicitLeft = 256
     end
@@ -43,7 +44,7 @@ inherited frm_cliente: Tfrm_cliente
       ExplicitLeft = 328
       ExplicitWidth = 64
     end
-    inherited ToolButton3: TToolButton
+    inherited sep_2: TToolButton
       Left = 392
       ExplicitLeft = 392
     end
@@ -72,29 +73,29 @@ inherited frm_cliente: Tfrm_cliente
       ExplicitLeft = 656
       ExplicitWidth = 64
     end
-    object ToolButton5: TToolButton [13]
+    inherited sep_3: TToolButton
       Left = 720
-      Top = 0
-      Width = 8
-      Caption = 'ToolButton5'
-      ImageIndex = 31
-      Style = tbsSeparator
+      ExplicitLeft = 720
     end
-    object btn_atividades: TToolButton [14]
+    inherited btn_fechar: TToolButton
       Left = 728
+      ExplicitLeft = 728
+      ExplicitWidth = 64
+    end
+    object btn_atividades: TToolButton
+      Left = 792
       Top = 0
       Caption = 'Atividades'
       ImageIndex = 103
       OnClick = btn_atividadesClick
     end
-    inherited ToolButton1: TToolButton
-      Left = 792
-      ExplicitLeft = 792
-    end
-    inherited btn_fechar: TToolButton
-      Left = 800
-      ExplicitLeft = 800
-      ExplicitWidth = 64
+    object sep_4: TToolButton
+      Left = 856
+      Top = 0
+      Width = 8
+      Caption = 'sep_4'
+      ImageIndex = 31
+      Style = tbsSeparator
     end
   end
   inherited pnlTitulo: TPanel
@@ -166,13 +167,16 @@ inherited frm_cliente: Tfrm_cliente
         Top = 25
         Width = 60
         Height = 21
+        TabStop = False
         BorderStyle = bsNone
+        Color = clBtnFace
         DataField = 'id'
         DataSource = dts_cliente
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
+        ReadOnly = True
         TabOrder = 0
         UnboundDataType = wwDefault
         WantReturns = False
@@ -440,15 +444,17 @@ inherited frm_cliente: Tfrm_cliente
         DataSource = dts_endereco
         LookupTable = qry_uf
         LookupField = 'id'
+        Style = csDropDownList
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
         TabOrder = 1
-        AutoDropDown = False
+        AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
         AllowClearKey = False
+        ShowMatchText = True
       end
       object cmb_municipio: TwwDBLookupCombo
         Left = 175
@@ -464,15 +470,17 @@ inherited frm_cliente: Tfrm_cliente
         DataSource = dts_endereco
         LookupTable = qry_municipio
         LookupField = 'id'
+        Style = csDropDownList
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
         TabOrder = 2
-        AutoDropDown = False
+        AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
         AllowClearKey = False
+        ShowMatchText = True
       end
       object cmb_bairro: TwwDBLookupCombo
         Left = 380
@@ -488,15 +496,17 @@ inherited frm_cliente: Tfrm_cliente
         DataSource = dts_endereco
         LookupTable = qry_bairro
         LookupField = 'id'
+        Style = csDropDownList
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
         Frame.NonFocusStyle = efsFrameEtched
         TabOrder = 3
-        AutoDropDown = False
+        AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
         AllowClearKey = False
+        ShowMatchText = True
       end
     end
   end
@@ -544,7 +554,7 @@ inherited frm_cliente: Tfrm_cliente
         ParentFont = False
         TabOrder = 0
       end
-      object wwDBGrid1: TwwDBGrid
+      object grd_tel: TwwDBGrid
         Left = 0
         Top = 18
         Width = 453
@@ -660,7 +670,7 @@ inherited frm_cliente: Tfrm_cliente
         ParentFont = False
         TabOrder = 0
       end
-      object wwDBGrid2: TwwDBGrid
+      object grd_email: TwwDBGrid
         Left = 3
         Top = 18
         Width = 669

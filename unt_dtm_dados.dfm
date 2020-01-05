@@ -3,13 +3,15 @@ object dtm_dados: Tdtm_dados
   Height = 256
   Width = 420
   object con_mysql: TADOConnection
-    Connected = True
+    Attributes = [xaCommitRetaining]
     ConnectionString = 
       'Provider=MSDASQL.1;Password=*Mi251011;Persist Security Info=True' +
       ';User ID=root;Extended Properties="DSN=ecoplan;DESCRIPTION=Siste' +
       'ma Ecoplan;SERVER=127.0.0.1;UID=root;PWD={*Mi251011};DATABASE=ec' +
       'oplan;PORT=3306";Initial Catalog=ecoplan'
     LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'MSDASQL.1'
     Left = 21
     Top = 16
   end

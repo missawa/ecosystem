@@ -3,10 +3,31 @@ unit unt_cliente;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_cad_abstrato, ADODB, DB, ExtCtrls, ComCtrls, ToolWin, Wwdotdot,
-  Wwdbcomb, StdCtrls, Mask, wwdbedit, DBClient, wwdblook, Grids, Wwdbigrd,
-  Wwdbgrid;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Grids,
+  Controls,
+  Forms,
+  Dialogs,
+  ADODB,
+  ComCtrls,
+  DB,
+  DBClient,
+  ExtCtrls,
+  Mask,
+  StdCtrls,
+  ToolWin,
+  Wwdotdot,
+  Wwdbcomb,
+  wwdbedit,
+  wwdblook,
+  Wwdbigrd,
+  Wwdbgrid,
+  unt_cad_abstrato;
 
 type
   Tfrm_cliente = class(Tfrm_cad_abstrato)
@@ -51,19 +72,19 @@ type
     pnl_contato: TPanel;
     onl_telefone: TPanel;
     pnl_tit_telefone: TPanel;
-    wwDBGrid1: TwwDBGrid;
+    grd_tel: TwwDBGrid;
     dse_tel: TADODataSet;
     cmb_tipo_tel: TwwDBComboBox;
     cmb_desc_tel: TwwDBComboBox;
     Panel1: TPanel;
     Panel2: TPanel;
-    wwDBGrid2: TwwDBGrid;
+    grd_email: TwwDBGrid;
     cmb_tipo_email: TwwDBComboBox;
     cmb_desc_email: TwwDBComboBox;
     dts_email: TDataSource;
     dse_email: TADODataSet;
     btn_atividades: TToolButton;
-    ToolButton5: TToolButton;
+    sep_4: TToolButton;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure dse_clienteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -90,8 +111,10 @@ type
     procedure dseAfterOpen(DataSet: TDataSet);
     procedure btn_atividadesClick(Sender: TObject);
     procedure cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
+    procedure FormShow(Sender: TObject);
   private
     procedure mostra_cnpj_cpf;
+    procedure open_aux_queries; 
     { Private declarations }
   public
     { Public declarations }
@@ -107,14 +130,13 @@ uses
   unt_func_messages,
   unt_functions,
   unt_classe_endereco,
-  unt_integracao, unt_constantes, unt_cliente_atividade;
+  unt_integracao, unt_constantes, unt_cliente_atividade, unt_proc_abrir_telas;
 
 {$R *.dfm}
 
 procedure Tfrm_cliente.btn_atividadesClick(Sender: TObject);
 begin
-  Application.CreateForm(Tfrm_cliente_atividade, frm_cliente_atividade);
-  frm_cliente_atividade.open_dataset(dse.FieldByName(key_field).AsInteger);
+  abrir_atividade(dse.FieldByName(key_field).AsInteger);
 end;
 
 procedure Tfrm_cliente.cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
@@ -334,15 +356,28 @@ begin
   end;  
 end;
 
+procedure Tfrm_cliente.open_aux_queries;
+begin
+  qry_uf.Open;
+  dse_cliente.Open;
+  dse_endereco.Open;
+end;
+
 procedure Tfrm_cliente.FormCreate(Sender: TObject);
 begin
   key_field := 'id';
   table_name := 'pessoa';
+  open_aux_queries;
   inherited;
-  qry_uf.Open;
-  dse_cliente.Open;
-  dse_endereco.Open;
   Application.ProcessMessages;
+end;
+
+procedure Tfrm_cliente.FormShow(Sender: TObject);
+begin
+  inherited;
+  btn_atividades.Left := 728;
+  sep_4.Left := 792;
+  btn_fechar.Left := 800;
 end;
 
 procedure Tfrm_cliente.qry_bairroBeforeOpen(DataSet: TDataSet);

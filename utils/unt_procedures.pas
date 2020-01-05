@@ -12,9 +12,12 @@ uses
   ShellApi,
   SysUtils,
   Windows,
-  WWDBGrid;
+  wwDBGrid,
+  wwDBComb;
 
 procedure abrir_arquivo(arquivo: string);
+procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true);
+procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
 procedure exportar_csv(qry: TCustomADODataset);
 procedure exportar_excel(grdExportar: TwwDBGrid);
@@ -26,12 +29,63 @@ procedure verifica_conf_data_windows;
 
 implementation
 
-uses unt_func_messages, unt_dtm_dados, unt_principal, unt_dtm_geral,
+uses
+  unt_dtm_dados,
+  unt_dtm_geral,
+  unt_func_messages,
+  unt_principal,
   unt_progresso;
 
 procedure abrir_arquivo(arquivo: string);
 begin
   ShellExecute(frm_principal.handle,'open',PChar(arquivo), '','',SW_SHOWNORMAL)
+end;
+
+procedure carrega_combo(
+  cmb: TwwDBComboBox;
+  sql: string;
+  Limpar: boolean = true);
+
+var
+  q: TADOQuery;
+begin
+
+  q := TADOQuery.Create(nil);
+  q.Connection := dtm_dados.con_mysql;
+
+  if Limpar then
+    cmb.Items.Clear;
+
+  open_query(
+    q,
+    sql);
+
+  cmb.Clear;
+
+  q.First;
+  while not q.eof do
+  begin
+    cmb.Items.Add(q.FieldByName('nome').Text + #9 + q.FieldByName('id').Text);
+    q.Next;
+  end;
+
+  q.Free;
+
+end;
+
+procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
+var
+  sql: string;
+
+begin
+
+  sql :=
+    'select id, nome            '#13+
+    'from atividade             '#13+
+    'order by nome';
+
+  carrega_combo(cmb, sql, limpar);
+
 end;
 
 procedure centralizar_tela(form: TForm);
@@ -103,8 +157,6 @@ begin
   planilha.visible := true;
 
   qry := grdExportar.DataSource.DataSet;
-
-
   qry.First;
 
   for linha := 0 to qry.RecordCount - 1 do
