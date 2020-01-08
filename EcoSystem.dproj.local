@@ -54,5 +54,9 @@
     <Transaction>2019/12/26 23:46:31.203.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_licenca.dfm</Transaction>
     <Transaction>2019/12/28 00:02:23.990.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_tipo_licenca.pas</Transaction>
     <Transaction>2019/12/28 00:02:23.990.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_tipo_licenca.dfm</Transaction>
+    <Transaction>2020/01/07 21:56:55.745.pas,D:\Git\EcoSystem\unt_licenca.pas=D:\Git\EcoSystem\unt_licenca_old.pas</Transaction>
+    <Transaction>2020/01/07 21:56:55.745.dfm,D:\Git\EcoSystem\unt_licenca.dfm=D:\Git\EcoSystem\unt_licenca_old.dfm</Transaction>
+    <Transaction>2020/01/07 21:57:48.921.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_licenca.pas</Transaction>
+    <Transaction>2020/01/07 21:57:48.921.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_licenca.dfm</Transaction>
   </Transactions>
 </BorlandProject>

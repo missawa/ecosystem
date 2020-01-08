@@ -1,113 +1,80 @@
-object frm_licenca: Tfrm_licenca
-  Left = 0
-  Top = 0
-  Caption = 'frm_licenca'
-  ClientHeight = 566
-  ClientWidth = 1308
-  Color = clWhite
-  Ctl3D = False
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
-  Font.Style = []
-  FormStyle = fsMDIChild
-  OldCreateOrder = False
-  Visible = True
-  OnCreate = FormCreate
+inherited frm_licenca_old: Tfrm_licenca_old
+  Caption = 'Licen'#231'a de Atividade'
+  ClientHeight = 513
+  ClientWidth = 1478
+  ExplicitWidth = 1494
+  ExplicitHeight = 552
   PixelsPerInch = 96
-  TextHeight = 13
-  object pnlTotal: TPanel
-    Left = 0
-    Top = 0
-    Width = 1308
-    Height = 70
-    Align = alTop
-    BevelOuter = bvNone
-    Padding.Left = 3
-    Padding.Right = 3
-    TabOrder = 0
-    ExplicitLeft = -843
-    ExplicitTop = 75
+  TextHeight = 15
+  inherited toolbar: TToolBar
+    Width = 1478
     ExplicitWidth = 1478
-    object pnl_tit_geral: TPanel
-      Left = 3
-      Top = 0
-      Width = 1302
-      Height = 18
-      Align = alTop
-      Alignment = taLeftJustify
-      BevelOuter = bvNone
-      BorderStyle = bsSingle
+  end
+  inherited pnlTitulo: TPanel
+    Width = 1478
+    Caption = ' LICEN'#199'A PARA EXERCER ATIVIDADE'
+    ExplicitWidth = 1478
+  end
+  inherited pnlTotal: TPanel
+    Width = 1478
+    Height = 70
+    ExplicitWidth = 1478
+    ExplicitHeight = 70
+    inherited pnl_tit_geral: TPanel
+      Width = 1472
       Caption = ' CLIENTE / ATIVIDADE'
-      Color = 12159842
-      Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentCtl3D = False
-      ParentFont = False
-      TabOrder = 0
       ExplicitWidth = 1472
     end
-    object pnl_geral: TPanel
-      Left = 3
-      Top = 18
-      Width = 1302
+    inherited pnl_geral: TPanel
+      Width = 1472
       Height = 52
-      Align = alClient
-      BevelOuter = bvNone
-      BorderStyle = bsSingle
-      ParentBackground = False
-      TabOrder = 1
+      ExplicitWidth = 1472
+      ExplicitHeight = 52
       object Label1: TLabel
         Left = 10
         Top = 10
-        Width = 11
-        Height = 13
+        Width = 12
+        Height = 15
         Caption = 'ID'
       end
       object lbl_cnpj_cpf: TLabel
         Left = 75
         Top = 10
-        Width = 54
-        Height = 13
+        Width = 56
+        Height = 15
         Caption = 'CNPJ / CPF'
       end
       object Label4: TLabel
         Left = 210
         Top = 10
-        Width = 97
-        Height = 13
+        Width = 112
+        Height = 15
         Caption = 'Nome / Raz'#227'o Social'
       end
       object Label5: TLabel
         Left = 490
         Top = 10
-        Width = 41
-        Height = 13
+        Width = 48
+        Height = 15
         Caption = 'Fantasia'
       end
       object Label2: TLabel
         Left = 770
         Top = 10
-        Width = 45
-        Height = 13
+        Width = 51
+        Height = 15
         Caption = 'Atividade'
       end
       object edt_id: TwwDBEdit
         Left = 10
         Top = 25
         Width = 60
-        Height = 19
+        Height = 21
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
         DataField = 'id'
-        DataSource = dts_cliente
+        DataSource = dts_cliente_atividade
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -122,12 +89,12 @@ object frm_licenca: Tfrm_licenca
         Left = 75
         Top = 25
         Width = 130
-        Height = 19
+        Height = 21
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
         DataField = 'cnpj'
-        DataSource = dts_cliente
+        DataSource = dts_cliente_atividade
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -142,13 +109,13 @@ object frm_licenca: Tfrm_licenca
         Left = 210
         Top = 25
         Width = 275
-        Height = 19
+        Height = 21
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
         Color = clBtnFace
         DataField = 'nome'
-        DataSource = dts_cliente
+        DataSource = dts_cliente_atividade
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -163,13 +130,13 @@ object frm_licenca: Tfrm_licenca
         Left = 490
         Top = 25
         Width = 274
-        Height = 19
+        Height = 21
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
         Color = clBtnFace
         DataField = 'fantasia'
-        DataSource = dts_cliente
+        DataSource = dts_cliente_atividade
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -182,15 +149,15 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_atividade: TwwDBEdit
         Left = 770
-        Top = 27
+        Top = 25
         Width = 274
-        Height = 19
+        Height = 21
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
         Color = clBtnFace
         DataField = 'atividade'
-        DataSource = dts_cliente
+        DataSource = dts_cliente_atividade
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -203,11 +170,42 @@ object frm_licenca: Tfrm_licenca
       end
     end
   end
-  object Panel2: TPanel
+  inherited Panel1: TPanel
+    Top = 266
+    Width = 1478
+    Height = 247
+    Padding.Top = 0
+    ExplicitTop = 266
+    ExplicitWidth = 1478
+    ExplicitHeight = 247
+    inherited pnl_tit_detalhe: TPanel
+      Top = 0
+      Width = 1472
+      Caption = ' CONDICIONANTE'
+      ExplicitTop = 0
+      ExplicitWidth = 1472
+    end
+    inherited grd_detalhe: TwwDBGrid
+      Top = 18
+      Width = 1472
+      Selected.Strings = (
+        'id'#9'10'#9'id'
+        'id_licenca'#9'10'#9'id_licenca'
+        'id_pessoa_executor'#9'10'#9'id_pessoa_executor'
+        'id_pressoa_responsavel'#9'10'#9'id_pressoa_responsavel'
+        'descricao'#9'10'#9'descricao'
+        'cumprida'#9'1'#9'cumprida'
+        'dt_venc'#9'10'#9'dt_venc'
+        'dt_cumprimento'#9'10'#9'dt_cumprimento')
+      ExplicitTop = 18
+      ExplicitWidth = 1472
+    end
+  end
+  object Panel2: TPanel [4]
     Left = 0
-    Top = 70
-    Width = 1308
-    Height = 211
+    Top = 145
+    Width = 1478
+    Height = 121
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
@@ -216,11 +214,11 @@ object frm_licenca: Tfrm_licenca
     Padding.Right = 2
     Padding.Bottom = 3
     ParentBackground = False
-    TabOrder = 1
+    TabOrder = 4
     object Panel3: TPanel
       Left = 3
       Top = 3
-      Width = 1303
+      Width = 1473
       Height = 18
       Align = alTop
       Alignment = taLeftJustify
@@ -239,13 +237,12 @@ object frm_licenca: Tfrm_licenca
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1473
     end
     object grd: TwwDBGrid
       Left = 3
       Top = 21
-      Width = 959
-      Height = 187
+      Width = 1129
+      Height = 97
       ControlType.Strings = (
         'id_tipo_licenca;CustomEdit;cmb_tipo;T'
         'id_orgao;CustomEdit;cmb_orgao;T'
@@ -264,32 +261,27 @@ object frm_licenca: Tfrm_licenca
       FixedCols = 0
       ShowHorzScrollBar = True
       Align = alClient
-      DataSource = dts_licenca
+      DataSource = dts
       TabOrder = 1
       TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Height = -13
+      TitleFont.Name = 'Calibri'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitLeft = -72
-      ExplicitTop = 6
-      ExplicitHeight = 97
     end
     object pnl_desc_licenca: TPanel
-      Left = 962
+      Left = 1132
       Top = 21
       Width = 344
-      Height = 187
+      Height = 97
       Align = alRight
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitLeft = 1132
-      ExplicitHeight = 97
       object pnl_tit_desc_licenca: TPanel
         Left = 2
         Top = 2
@@ -304,29 +296,29 @@ object frm_licenca: Tfrm_licenca
         Left = 2
         Top = 23
         Width = 340
-        Height = 162
+        Height = 72
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
         BorderStyle = bsNone
         Ctl3D = False
         DataField = 'descricao'
+        DataSource = dts
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitHeight = 72
       end
     end
     object cmb_tipo: TwwDBLookupCombo
       Left = 16
       Top = 40
       Width = 67
-      Height = 19
+      Height = 21
       CharCase = ecUpperCase
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'sigla'#9'8'#9'TIPO'#9'F')
       DataField = 'id_tipo_licenca'
-      DataSource = dts_licenca
+      DataSource = dts
       LookupTable = qry_tipo
       LookupField = 'id'
       Style = csDropDownList
@@ -340,13 +332,13 @@ object frm_licenca: Tfrm_licenca
     object cmb_orgao: TwwDBLookupCombo
       Left = 84
       Top = 40
-      Width = 64
-      Height = 16
+      Width = 74
+      Height = 18
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'sigla'#9'8'#9#211'RG'#195'O'#9'F')
       DataField = 'id_orgao'
-      DataSource = dts_licenca
+      DataSource = dts
       LookupTable = qry_orgao
       LookupField = 'id'
       Style = csDropDownList
@@ -359,15 +351,15 @@ object frm_licenca: Tfrm_licenca
       ShowMatchText = True
     end
     object cmb_municipio: TwwDBLookupCombo
-      Left = 747
+      Left = 668
       Top = 40
-      Width = 214
-      Height = 16
+      Width = 249
+      Height = 18
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'nome'#9'100'#9'MUNIC'#205'PIO'#9'F')
       DataField = 'id_municipio'
-      DataSource = dts_licenca
+      DataSource = dts
       LookupTable = qry_municipio
       LookupField = 'id'
       Style = csDropDownList
@@ -380,160 +372,26 @@ object frm_licenca: Tfrm_licenca
       ShowMatchText = True
     end
     object edt_assinou: TwwDBEdit
-      Left = 528
+      Left = 418
       Top = 40
-      Width = 213
-      Height = 19
+      Width = 251
+      Height = 21
       CharCase = ecUpperCase
-      DataSource = dts_licenca
       TabOrder = 6
       UnboundDataType = wwDefault
       WantReturns = False
       WordWrap = False
     end
   end
-  object Panel1: TPanel
-    Left = 0
-    Top = 281
-    Width = 1308
-    Height = 285
-    Align = alClient
-    BevelOuter = bvNone
-    Color = clWhite
-    Padding.Left = 3
-    Padding.Right = 3
-    Padding.Bottom = 3
-    ParentBackground = False
-    TabOrder = 2
-    ExplicitLeft = -170
-    ExplicitTop = 266
-    ExplicitWidth = 1478
-    ExplicitHeight = 247
-    object pnl_tit_detalhe: TPanel
-      Left = 3
-      Top = 0
-      Width = 1302
-      Height = 18
-      Align = alTop
-      Alignment = taLeftJustify
-      BevelOuter = bvNone
-      BorderStyle = bsSingle
-      Caption = ' CONDICIONANTE'
-      Color = 12159842
-      Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentBackground = False
-      ParentCtl3D = False
-      ParentFont = False
-      TabOrder = 0
-      ExplicitWidth = 1472
-    end
-    object grd_detalhe: TwwDBGrid
-      Left = 3
-      Top = 18
-      Width = 1302
-      Height = 264
-      Selected.Strings = (
-        'id'#9'10'#9'id'
-        'id_licenca'#9'10'#9'id_licenca'
-        'id_pessoa_executor'#9'10'#9'id_pessoa_executor'
-        'id_pressoa_responsavel'#9'10'#9'id_pressoa_responsavel'
-        'descricao'#9'10'#9'descricao'
-        'cumprida'#9'1'#9'cumprida'
-        'dt_venc'#9'10'#9'dt_venc'
-        'dt_cumprimento'#9'10'#9'dt_cumprimento')
-      IniAttributes.Delimiter = ';;'
-      TitleColor = clBtnFace
-      FixedCols = 0
-      ShowHorzScrollBar = True
-      Align = alClient
-      TabOrder = 1
-      TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      TitleLines = 1
-      TitleButtons = False
-      ExplicitLeft = 6
-      ExplicitHeight = 448
-    end
+  inherited dts: TDataSource
+    Left = 1019
+    Top = 184
   end
-  object qry_tipo: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, sigla '
-      'from tipo_licenca'
-      'order by nome')
-    Left = 33
-    Top = 137
-    object qry_tiposigla: TStringField
-      DisplayLabel = 'TIPO'
-      DisplayWidth = 8
-      FieldName = 'sigla'
-      Size = 8
-    end
-    object qry_tipoid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-      Visible = False
-    end
-  end
-  object qry_orgao: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, sigla'
-      'from orgao_ambiental'
-      'order by nome ')
-    Left = 103
-    Top = 137
-    object qry_orgaoid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qry_orgaosigla: TStringField
-      FieldName = 'sigla'
-      Size = 8
-    end
-  end
-  object qry_municipio: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, nome'
-      'from municipio'
-      'order by nome')
-    Left = 618
-    Top = 137
-    object qry_municipioid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qry_municipionome: TStringField
-      FieldName = 'nome'
-      Size = 100
-    end
-  end
-  object dts_licenca: TDataSource
-    DataSet = dse_licenca
-    Left = 984
-    Top = 149
-  end
-  object dse_licenca: TADODataSet
+  inherited dse: TADODataSet
     Active = True
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
-    OnNewRecord = dse_licencaNewRecord
+    LockType = ltBatchOptimistic
+    OnNewRecord = dseNewRecord
     CommandText = 
       'select * '#13#10'from licenca '#13#10'where id_cliente = :id_cliente'#13#10'    an' +
       'd id_atividade = :id_atividade'
@@ -606,16 +464,29 @@ object frm_licenca: Tfrm_licenca
         Value = 0
       end>
     StoreDefs = True
-    Left = 1012
-    Top = 149
+    Left = 1047
+    Top = 184
   end
-  object dts_cliente: TDataSource
-    AutoEdit = False
-    DataSet = qry_cliente
-    Left = 1059
-    Top = 33
+  inherited dse_detalhe: TADODataSet
+    CursorType = ctStatic
+    BeforeOpen = dse_detalheBeforeOpen
+    OnNewRecord = dse_detalheNewRecord
+    CommandText = 'select *'#13#10'from condicionante'#13#10'where id_licenca = :id_licenca'
+    Parameters = <
+      item
+        Name = 'id_licenca'
+        DataType = ftInteger
+        Size = 1
+        Value = 0
+      end>
+    Left = 1052
+    Top = 304
   end
-  object qry_cliente: TADOQuery
+  inherited dts_detalhe: TDataSource
+    Left = 1024
+    Top = 304
+  end
+  object qry_cliente_atividade: TADOQuery
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     Parameters = <
@@ -649,28 +520,72 @@ object frm_licenca: Tfrm_licenca
       '        on a.id = ca.id_atividade'
       'where p.id = :id_cliente'
       '    and a.id = :id_atividade')
-    Left = 1088
-    Top = 32
+    Left = 1058
+    Top = 107
   end
-  object dse_condicionante: TADODataSet
+  object dts_cliente_atividade: TDataSource
+    DataSet = qry_cliente_atividade
+    Left = 1029
+    Top = 108
+  end
+  object qry_tipo: TADOQuery
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
-    BeforeOpen = dse_condicionanteBeforeOpen
-    OnNewRecord = dse_condicionanteNewRecord
-    CommandText = 'select *'#13#10'from condicionante'#13#10'where id_licenca = :id_licenca'
-    Parameters = <
-      item
-        Name = 'id_licenca'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 1022
-    Top = 239
+    Parameters = <>
+    SQL.Strings = (
+      'select id, sigla '
+      'from tipo_licenca'
+      'order by nome')
+    Left = 18
+    Top = 212
+    object qry_tiposigla: TStringField
+      DisplayLabel = 'TIPO'
+      DisplayWidth = 8
+      FieldName = 'sigla'
+      Size = 8
+    end
+    object qry_tipoid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+      Visible = False
+    end
   end
-  object dts_condicionante: TDataSource
-    DataSet = dse_condicionante
-    Left = 994
-    Top = 239
+  object qry_orgao: TADOQuery
+    Connection = dtm_dados.con_mysql
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select id, sigla'
+      'from orgao_ambiental'
+      'order by nome ')
+    Left = 98
+    Top = 212
+    object qry_orgaoid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object qry_orgaosigla: TStringField
+      FieldName = 'sigla'
+      Size = 8
+    end
+  end
+  object qry_municipio: TADOQuery
+    Connection = dtm_dados.con_mysql
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select id, nome'
+      'from municipio'
+      'order by nome')
+    Left = 673
+    Top = 212
+    object qry_municipioid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object qry_municipionome: TStringField
+      FieldName = 'nome'
+      Size = 100
+    end
   end
 end

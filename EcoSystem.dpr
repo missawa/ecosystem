@@ -29,8 +29,8 @@ uses
   unt_atividade in 'unt_atividade.pas' {frm_atividade},
   unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade},
   unt_orgao_ambiental in 'unt_orgao_ambiental.pas' {frm_orgao_ambiental},
-  unt_licenca in 'unt_licenca.pas' {frm_licenca},
-  unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca};
+  unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca},
+  unt_licenca in 'unt_licenca.pas' {frm_licenca};
 
 {$R *.res}
 

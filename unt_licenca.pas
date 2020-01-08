@@ -4,27 +4,27 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_cad_abstrato_mestre_detalhe, ADODB, DB, Grids, Wwdbigrd,
-  Wwdbgrid, ExtCtrls, ComCtrls, ToolWin, StdCtrls, Mask, wwdbedit, DBCtrls,
-  wwdblook;
+  Dialogs, ADODB, DB, wwdblook, StdCtrls, DBCtrls, Grids, Wwdbigrd, Wwdbgrid,
+  Mask, wwdbedit, ExtCtrls;
 
 type
-  Tfrm_licenca = class(Tfrm_cad_abstrato_mestre_detalhe)
+  Tfrm_licenca = class(TForm)
+    pnlTotal: TPanel;
+    pnl_tit_geral: TPanel;
+    pnl_geral: TPanel;
     Label1: TLabel;
     lbl_cnpj_cpf: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    Label2: TLabel;
     edt_id: TwwDBEdit;
     edt_cnpj_cpf: TwwDBEdit;
     edt_nome: TwwDBEdit;
     edt_fantasia: TwwDBEdit;
-    Label2: TLabel;
     edt_atividade: TwwDBEdit;
-    qry_cliente_atividade: TADOQuery;
     Panel2: TPanel;
     Panel3: TPanel;
     grd: TwwDBGrid;
-    dts_cliente_atividade: TDataSource;
     pnl_desc_licenca: TPanel;
     pnl_tit_desc_licenca: TPanel;
     mmo_desc_licenca: TDBMemo;
@@ -32,23 +32,33 @@ type
     cmb_orgao: TwwDBLookupCombo;
     cmb_municipio: TwwDBLookupCombo;
     edt_assinou: TwwDBEdit;
+    Panel1: TPanel;
+    pnl_tit_detalhe: TPanel;
+    grd_detalhe: TwwDBGrid;
     qry_tipo: TADOQuery;
-    qry_orgao: TADOQuery;
-    qry_municipio: TADOQuery;
+    qry_tiposigla: TStringField;
     qry_tipoid: TAutoIncField;
+    qry_orgao: TADOQuery;
     qry_orgaoid: TAutoIncField;
     qry_orgaosigla: TStringField;
+    qry_municipio: TADOQuery;
     qry_municipioid: TAutoIncField;
     qry_municipionome: TStringField;
-    qry_tiposigla: TStringField;
+    dts_licenca: TDataSource;
+    dse_licenca: TADODataSet;
+    dts_cliente: TDataSource;
+    qry_cliente: TADOQuery;
+    dse_condicionante: TADODataSet;
+    dts_condicionante: TDataSource;
+    procedure dse_licencaNewRecord(DataSet: TDataSet);
+    procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
-    procedure dse_detalheBeforeOpen(DataSet: TDataSet);
-    procedure dse_detalheNewRecord(DataSet: TDataSet);
+    procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
   private
     procedure open_aux_queries;
     { Private declarations }
   public
-    procedure open_dataset(pk: integer; pk_detalhe: integer);
+    procedure open_dataset(id_cliente: integer; id_atividade: integer);
   end;
 
 var
@@ -56,19 +66,30 @@ var
 
 implementation
 
-uses unt_procedures, unt_dtm_dados;
+uses unt_procedures;
 
 {$R *.dfm}
 
-procedure Tfrm_licenca.dse_detalheBeforeOpen(DataSet: TDataSet);
+procedure Tfrm_licenca.dse_licencaNewRecord(DataSet: TDataSet);
 begin
-  dse_detalhe.Parameters.ParamByName('id_licenca').Value := dse.FieldByName(key_field).Value;
+  dse_licenca.FieldByName('id_cliente').Value := qry_cliente.FieldByName('id').Value;
+  dse_licenca.FieldByName('id_atividade').Value := qry_cliente.FieldByName('id_atividade').Value
 end;
 
-procedure Tfrm_licenca.dse_detalheNewRecord(DataSet: TDataSet);
+procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
 begin
-  inherited;
-  dse_detalhe.FieldByName('id_licenca').AsInteger := dse.FieldByName('id_licenca').AsInteger;
+  dse_condicionante.Parameters.ParamByName('id_licenca').Value :=  dse_licenca.FieldByName('id').Value;
+end;
+
+procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
+begin
+  dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
+end;
+
+procedure Tfrm_licenca.FormCreate(Sender: TObject);
+begin
+  centralizar_tela(self);
+  open_aux_queries;
 end;
 
 procedure Tfrm_licenca.open_aux_queries;
@@ -78,26 +99,22 @@ begin
   qry_municipio.Open;
 end;
 
-procedure Tfrm_licenca.FormCreate(Sender: TObject);
+procedure Tfrm_licenca.open_dataset(id_cliente: integer; id_atividade: integer);
 begin
-  centralizar_tela(self);
-  key_field := 'id';
-  table_name := 'licenca';
-  open_aux_queries;
-  open_dataset(0,0);
-end;
+  qry_cliente.Close;
+  qry_cliente.Parameters.ParamByName('id_cliente').Value := id_cliente;
+  qry_cliente.Parameters.ParamByName('id_atividade').Value := id_atividade;
+  qry_cliente.Open;
 
-procedure Tfrm_licenca.open_dataset(pk: integer; pk_detalhe: integer);
-begin
-  qry_cliente_atividade.Close;
-  qry_cliente_atividade.Parameters.ParamByName('id_cliente').Value := pk;
-  qry_cliente_atividade.Parameters.ParamByName('id_atividade').Value := pk_detalhe;
-  qry_cliente_atividade.Open;
+  dse_licenca.Close;
+  dse_licenca.Parameters.ParamByName('id_cliente').Value := id_cliente;
+  dse_licenca.Parameters.ParamByName('id_atividade').Value := id_atividade;
+  dse_licenca.Open;
 
-  dse.Close;
-  dse.Parameters.ParamByName('id_cliente').Value := pk;
-  dse.Parameters.ParamByName('id_atividade').Value := pk_detalhe;
-  dse.Open;
+
+  dse_condicionante.Close;
+  dse_condicionante.Parameters.ParamByName('id_licenca').Value := dse_licenca.FieldByName('id').Value;
+  dse_condicionante.Open;
 end;
 
 end.

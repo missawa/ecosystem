@@ -70,6 +70,9 @@
     <DCCReference Include="unt_licenca.pas">
       <Form>frm_licenca</Form>
     </DCCReference>
+    <DCCReference Include="unt_licenca_old.pas">
+      <Form>frm_licenca_old</Form>
+    </DCCReference>
     <DCCReference Include="unt_municipio.pas">
       <Form>frm_municipio</Form>
     </DCCReference>
