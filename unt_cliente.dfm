@@ -1,10 +1,11 @@
 inherited frm_cliente: Tfrm_cliente
   Caption = 'Clientes'
-  ClientHeight = 459
+  ClientHeight = 630
   ClientWidth = 1131
   OnShow = FormShow
+  ExplicitLeft = -386
   ExplicitWidth = 1147
-  ExplicitHeight = 498
+  ExplicitHeight = 669
   PixelsPerInch = 96
   TextHeight = 15
   inherited toolbar: TToolBar
@@ -171,7 +172,7 @@ inherited frm_cliente: Tfrm_cliente
         BorderStyle = bsNone
         Color = clBtnFace
         DataField = 'id'
-        DataSource = dts_cliente
+        DataSource = dts
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -200,7 +201,7 @@ inherited frm_cliente: Tfrm_cliente
         WordWrap = False
         OnExit = edt_cnpj_cpfExit
       end
-      object wwDBEdit2: TwwDBEdit
+      object edt_nome: TwwDBEdit
         Left = 315
         Top = 25
         Width = 275
@@ -252,7 +253,7 @@ inherited frm_cliente: Tfrm_cliente
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'fantasia'
-        DataSource = dts_cliente
+        DataSource = dts
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
         Frame.FocusStyle = efsFrameEtched
@@ -514,8 +515,8 @@ inherited frm_cliente: Tfrm_cliente
     Left = 0
     Top = 228
     Width = 1131
-    Height = 231
-    Align = alClient
+    Height = 191
+    Align = alTop
     BevelOuter = bvNone
     Color = clWhite
     Padding.Left = 3
@@ -528,7 +529,7 @@ inherited frm_cliente: Tfrm_cliente
       Left = 3
       Top = 3
       Width = 453
-      Height = 225
+      Height = 185
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 0
@@ -558,7 +559,7 @@ inherited frm_cliente: Tfrm_cliente
         Left = 0
         Top = 18
         Width = 453
-        Height = 207
+        Height = 167
         ControlType.Strings = (
           'descricao;CustomEdit;cmb_desc_tel;F'
           'tipo;CustomEdit;cmb_tipo_tel;F'
@@ -643,7 +644,7 @@ inherited frm_cliente: Tfrm_cliente
       Left = 456
       Top = 3
       Width = 672
-      Height = 225
+      Height = 185
       Align = alClient
       BevelOuter = bvNone
       Padding.Left = 3
@@ -674,7 +675,7 @@ inherited frm_cliente: Tfrm_cliente
         Left = 3
         Top = 18
         Width = 669
-        Height = 207
+        Height = 167
         ControlType.Strings = (
           'descricao;CustomEdit;cmb_desc_email;F'
           'tipo;CustomEdit;cmb_tipo_email;F'
@@ -754,6 +755,110 @@ inherited frm_cliente: Tfrm_cliente
       end
     end
   end
+  object pnl_obs: TPanel [5]
+    Left = 0
+    Top = 419
+    Width = 1131
+    Height = 211
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clWhite
+    Padding.Left = 3
+    Padding.Top = 3
+    Padding.Right = 3
+    Padding.Bottom = 3
+    ParentBackground = False
+    TabOrder = 5
+    object pnl_tit_obs: TPanel
+      Left = 3
+      Top = 3
+      Width = 1125
+      Height = 18
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      Caption = ' OBSERVA'#199#213'ES'
+      Color = 12159842
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object Panel4: TPanel
+      Left = 3
+      Top = 21
+      Width = 1125
+      Height = 187
+      Align = alClient
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      Padding.Left = 10
+      Padding.Top = 10
+      Padding.Right = 10
+      Padding.Bottom = 10
+      ParentBackground = False
+      TabOrder = 1
+      object Panel5: TPanel
+        Left = 10
+        Top = 10
+        Width = 1103
+        Height = 165
+        Align = alClient
+        BevelInner = bvRaised
+        BevelOuter = bvLowered
+        TabOrder = 0
+        object rce_obs: TwwDBRichEdit
+          Left = 2
+          Top = 2
+          Width = 1099
+          Height = 161
+          Align = alClient
+          AutoURLDetect = False
+          BorderStyle = bsNone
+          DataField = 'obs'
+          DataSource = dts
+          PrintJobName = 'EcoSystem - CodeGear Delphi for Microsoft Windows - unt_cliente'
+          TabOrder = 0
+          EditorCaption = 'Observa'#231#245'es'
+          EditorPosition.Left = 0
+          EditorPosition.Top = 0
+          EditorPosition.Width = 0
+          EditorPosition.Height = 0
+          MeasurementUnits = muInches
+          PrintMargins.Top = 1.000000000000000000
+          PrintMargins.Bottom = 1.000000000000000000
+          PrintMargins.Left = 1.000000000000000000
+          PrintMargins.Right = 1.000000000000000000
+          PrintHeader.VertMargin = 0.500000000000000000
+          PrintHeader.Font.Charset = DEFAULT_CHARSET
+          PrintHeader.Font.Color = clWindowText
+          PrintHeader.Font.Height = -11
+          PrintHeader.Font.Name = 'Tahoma'
+          PrintHeader.Font.Style = []
+          PrintFooter.VertMargin = 0.500000000000000000
+          PrintFooter.Font.Charset = DEFAULT_CHARSET
+          PrintFooter.Font.Color = clWindowText
+          PrintFooter.Font.Height = -11
+          PrintFooter.Font.Name = 'Tahoma'
+          PrintFooter.Font.Style = []
+          RichEditVersion = 2
+          Data = {
+            7F0000007B5C727466315C616E73695C616E7369637067313235325C64656666
+            305C6465666C616E67313034367B5C666F6E7474626C7B5C66305C666E696C5C
+            6663686172736574302043616C696272693B7D7D0D0A5C766965776B696E6434
+            5C7563315C706172645C66305C66733230207263655F6F62735C7061720D0A7D
+            0D0A00}
+        end
+      end
+    end
+  end
   inherited dts: TDataSource
     Left = 887
     Top = 110
@@ -762,11 +867,10 @@ inherited frm_cliente: Tfrm_cliente
     CursorType = ctStatic
     AfterOpen = dseAfterOpen
     AfterClose = dseAfterClose
-    AfterEdit = dseAfterEdit
     AfterPost = dseAfterPost
     AfterCancel = dseAfterCancel
     AfterScroll = dseAfterScroll
-    CommandText = 'select * '#13#10'from pessoa '#13#10'where id = :key_field'
+    CommandText = 'select * '#13#10'from cliente '#13#10'where id = :key_field'
     Parameters = <
       item
         Name = 'key_field'
@@ -779,30 +883,6 @@ inherited frm_cliente: Tfrm_cliente
   end
   inherited qry: TADOQuery
     Left = 968
-  end
-  object dse_cliente: TADODataSet
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = dse_clienteBeforeOpen
-    OnNewRecord = dse_clienteNewRecord
-    CommandText = 
-      'select *'#13#10'from cliente '#13#10'where id_pessoa = :id_pessoa '#13#10'order by' +
-      ' fantasia'
-    MasterFields = 'id'
-    Parameters = <
-      item
-        Name = 'id_pessoa'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 976
-    Top = 109
-  end
-  object dts_cliente: TDataSource
-    DataSet = dse_cliente
-    Left = 948
-    Top = 109
   end
   object qry_uf: TADOQuery
     Connection = dtm_dados.con_mysql
@@ -897,7 +977,6 @@ inherited frm_cliente: Tfrm_cliente
     Top = 300
   end
   object dse_tel: TADODataSet
-    Active = True
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     BeforeOpen = dse_telBeforeOpen
@@ -922,7 +1001,6 @@ inherited frm_cliente: Tfrm_cliente
     Top = 300
   end
   object dse_email: TADODataSet
-    Active = True
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     BeforeOpen = dse_emailBeforeOpen

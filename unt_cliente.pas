@@ -27,19 +27,17 @@ uses
   wwdblook,
   Wwdbigrd,
   Wwdbgrid,
-  unt_cad_abstrato;
+  unt_cad_abstrato, wwriched;
 
 type
   Tfrm_cliente = class(Tfrm_cad_abstrato)
-    dse_cliente: TADODataSet;
-    dts_cliente: TDataSource;
     Label1: TLabel;
     Label2: TLabel;
     lbl_cnpj_cpf: TLabel;
     Label4: TLabel;
     edt_id: TwwDBEdit;
     edt_cnpj_cpf: TwwDBEdit;
-    wwDBEdit2: TwwDBEdit;
+    edt_nome: TwwDBEdit;
     cmb_tipo: TwwDBComboBox;
     Label5: TLabel;
     edt_fantasia: TwwDBEdit;
@@ -85,13 +83,15 @@ type
     dse_email: TADODataSet;
     btn_atividades: TToolButton;
     sep_4: TToolButton;
+    pnl_obs: TPanel;
+    pnl_tit_obs: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    rce_obs: TwwDBRichEdit;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
-    procedure dse_clienteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure edt_fantasiaEnter(Sender: TObject);
-    procedure dseAfterEdit(DataSet: TDataSet);
     procedure dseAfterPost(DataSet: TDataSet);
-    procedure dse_clienteBeforeOpen(DataSet: TDataSet);
     procedure dse_enderecoBeforeOpen(DataSet: TDataSet);
     procedure edt_cnpj_cpfExit(Sender: TObject);
     procedure edt_cepExit(Sender: TObject);
@@ -159,8 +159,8 @@ begin
   inherited;
 
   try
-    if dse_cliente.State in [dsEdit, dsInsert] then
-      dse_cliente.Cancel;
+    if dse.State in [dsEdit, dsInsert] then
+      dse.Cancel;
     if dse_endereco.State in [dsEdit, dsInsert] then
       dse_endereco.Cancel;
     if dse_tel.State in [dsEdit, dsInsert] then
@@ -177,22 +177,16 @@ end;
 procedure Tfrm_cliente.dseAfterClose(DataSet: TDataSet);
 begin
   inherited;
-  dse_cliente.Close;
+  dse.Close;
   dse_endereco.Close;
   dse_tel.Close;
   dse_email.Close;
 end;
 
-procedure Tfrm_cliente.dseAfterEdit(DataSet: TDataSet);
-begin
-  dse_cliente.Edit;
-  dse_endereco.Edit;
-end;
-
 procedure Tfrm_cliente.dseAfterOpen(DataSet: TDataSet);
 begin
   inherited;
-  dse_cliente.Open;
+  dse.Open;
   dse_endereco.Open;
   dse_tel.Open;
   dse_email.Open;
@@ -205,8 +199,6 @@ procedure Tfrm_cliente.dseAfterPost(DataSet: TDataSet);
 begin
 
   try
-    if dse_cliente.State in [dsEdit, dsInsert] then
-      dse_cliente.Post;
     if dse_endereco.State in [dsEdit, dsInsert] then
       dse_endereco.Post;
     if dse_tel.State in [dsEdit, dsInsert] then
@@ -222,29 +214,15 @@ end;
 
 procedure Tfrm_cliente.dseAfterScroll(DataSet: TDataSet);
 begin
-  dse_cliente.Close;
   dse_endereco.Close;
   dse_tel.Close;
   dse_email.Close;
 
-  dse_cliente.Open;
   dse_endereco.Open;
   dse_tel.Open;
   dse_email.Open;
 
   mostra_cnpj_cpf;
-end;
-
-procedure Tfrm_cliente.dse_clienteBeforeOpen(DataSet: TDataSet);
-begin
-  if dse.Active then
-    dse_cliente.Parameters.ParamByName('id_pessoa').Value := dse.FieldByName(key_field).AsInteger;
-end;
-
-procedure Tfrm_cliente.dse_clienteNewRecord(DataSet: TDataSet);
-begin
-  if dse.Active then
-    dse_cliente.FieldByName('id_pessoa').AsInteger := dse.FieldByName('id').AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_emailBeforeOpen(DataSet: TDataSet);
@@ -293,7 +271,6 @@ begin
   inherited;
 
   edt := dse.State in [dsEdit,dsInsert];
-  dts_cliente.AutoEdit := edt;
   dts_endereco.AutoEdit := edt;
   dts_tel.AutoEdit := edt;
   dts_email.AutoEdit := edt;
@@ -359,14 +336,13 @@ end;
 procedure Tfrm_cliente.open_aux_queries;
 begin
   qry_uf.Open;
-  dse_cliente.Open;
   dse_endereco.Open;
 end;
 
 procedure Tfrm_cliente.FormCreate(Sender: TObject);
 begin
   key_field := 'id';
-  table_name := 'pessoa';
+  table_name := 'cliente';
   open_aux_queries;
   inherited;
   Application.ProcessMessages;

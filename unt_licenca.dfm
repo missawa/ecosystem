@@ -1,7 +1,7 @@
 object frm_licenca: Tfrm_licenca
   Left = 0
   Top = 0
-  Caption = 'frm_licenca'
+  Caption = 'Licen'#231'a'
   ClientHeight = 566
   ClientWidth = 1308
   Color = clWhite
@@ -27,9 +27,6 @@ object frm_licenca: Tfrm_licenca
     Padding.Left = 3
     Padding.Right = 3
     TabOrder = 0
-    ExplicitLeft = -843
-    ExplicitTop = 75
-    ExplicitWidth = 1478
     object pnl_tit_geral: TPanel
       Left = 3
       Top = 0
@@ -51,7 +48,6 @@ object frm_licenca: Tfrm_licenca
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1472
     end
     object pnl_geral: TPanel
       Left = 3
@@ -239,7 +235,6 @@ object frm_licenca: Tfrm_licenca
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1473
     end
     object grd: TwwDBGrid
       Left = 3
@@ -275,9 +270,6 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitLeft = -72
-      ExplicitTop = 6
-      ExplicitHeight = 97
     end
     object pnl_desc_licenca: TPanel
       Left = 962
@@ -288,8 +280,6 @@ object frm_licenca: Tfrm_licenca
       BevelInner = bvRaised
       BevelOuter = bvLowered
       TabOrder = 2
-      ExplicitLeft = 1132
-      ExplicitHeight = 97
       object pnl_tit_desc_licenca: TPanel
         Left = 2
         Top = 2
@@ -313,7 +303,6 @@ object frm_licenca: Tfrm_licenca
         DataField = 'descricao'
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitHeight = 72
       end
     end
     object cmb_tipo: TwwDBLookupCombo
@@ -341,7 +330,7 @@ object frm_licenca: Tfrm_licenca
       Left = 84
       Top = 40
       Width = 64
-      Height = 16
+      Height = 19
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'sigla'#9'8'#9#211'RG'#195'O'#9'F')
@@ -362,7 +351,7 @@ object frm_licenca: Tfrm_licenca
       Left = 747
       Top = 40
       Width = 214
-      Height = 16
+      Height = 19
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'nome'#9'100'#9'MUNIC'#205'PIO'#9'F')
@@ -405,10 +394,6 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = -170
-    ExplicitTop = 266
-    ExplicitWidth = 1478
-    ExplicitHeight = 247
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 0
@@ -430,7 +415,6 @@ object frm_licenca: Tfrm_licenca
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1472
     end
     object grd_detalhe: TwwDBGrid
       Left = 3
@@ -460,8 +444,6 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitLeft = 6
-      ExplicitHeight = 448
     end
   end
   object qry_tipo: TADOQuery
@@ -530,7 +512,6 @@ object frm_licenca: Tfrm_licenca
     Top = 149
   end
   object dse_licenca: TADODataSet
-    Active = True
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     OnNewRecord = dse_licencaNewRecord

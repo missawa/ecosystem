@@ -4,6 +4,9 @@ inherited frm_orgao_ambiental: Tfrm_orgao_ambiental
   ExplicitHeight = 210
   PixelsPerInch = 96
   TextHeight = 15
+  inherited pnlTitulo: TPanel
+    Caption = ' '#211'RG'#195'OS AMBIENTAIS'
+  end
   inherited pnlTotal: TPanel
     Height = 96
     Padding.Left = 3
