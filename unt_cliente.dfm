@@ -3,7 +3,6 @@ inherited frm_cliente: Tfrm_cliente
   ClientHeight = 630
   ClientWidth = 1131
   OnShow = FormShow
-  ExplicitLeft = -386
   ExplicitWidth = 1147
   ExplicitHeight = 669
   PixelsPerInch = 96
@@ -870,7 +869,9 @@ inherited frm_cliente: Tfrm_cliente
     AfterPost = dseAfterPost
     AfterCancel = dseAfterCancel
     AfterScroll = dseAfterScroll
-    CommandText = 'select * '#13#10'from cliente '#13#10'where id = :key_field'
+    CommandText = 
+      'select * '#13#10'from pessoa '#13#10'where id = :key_field'#13#10'    and cliente ' +
+      '= '#39'N'#39
     Parameters = <
       item
         Name = 'key_field'

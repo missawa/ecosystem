@@ -19,6 +19,7 @@ type
     dsp_usuario: TDataSetProvider;
     cds_usuario: TClientDataSet;
     procedure con_mysqlBeforeConnect(Sender: TObject);
+    procedure con_mysqlAfterConnect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +31,14 @@ var
 
 implementation
 
+uses unt_principal;
+
 {$R *.dfm}
+
+procedure Tdtm_dados.con_mysqlAfterConnect(Sender: TObject);
+begin
+  frm_principal.Caption := con_mysql.ConnectionString;
+end;
 
 procedure Tdtm_dados.con_mysqlBeforeConnect(Sender: TObject);
 var

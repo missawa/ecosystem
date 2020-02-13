@@ -12,6 +12,7 @@ object dtm_dados: Tdtm_dados
       'oplan;PORT=3306";Initial Catalog=ecoplan'
     LoginPrompt = False
     Mode = cmReadWrite
+    AfterConnect = con_mysqlAfterConnect
     BeforeConnect = con_mysqlBeforeConnect
     Left = 21
     Top = 16
