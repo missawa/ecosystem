@@ -10,7 +10,7 @@ uses
   Controls,
   ADODB,
   DBClient,
-  Provider;
+  Provider, UniProvider, MySQLUniProvider;
 
 type
   Tdtm_dados = class(TDataModule)
@@ -18,6 +18,7 @@ type
     qry_usuario: TADOQuery;
     dsp_usuario: TDataSetProvider;
     cds_usuario: TClientDataSet;
+    MySQLUniProvider1: TMySQLUniProvider;
     procedure con_mysqlBeforeConnect(Sender: TObject);
     procedure con_mysqlAfterConnect(Sender: TObject);
   private

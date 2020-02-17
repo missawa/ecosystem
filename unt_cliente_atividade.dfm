@@ -205,10 +205,9 @@ inherited frm_cliente_atividade: Tfrm_cliente_atividade
     CursorType = ctStatic
     AfterOpen = dseAfterOpen
     CommandText = 
-      'select '#13#10'    c.id, '#13#10'    p.tipo,'#13#10'    p.cnpj,'#13#10'    p.cpf,'#13#10'    p' +
-      '.nome,'#13#10'    c.fantasia'#13#10'from cliente c'#13#10'    left join pessoa p '#13 +
-      #10'        on p.id = c.id_pessoa'#13#10'where c.id = :key_field'#13#10'order b' +
-      'y p.nome'
+      'select '#13#10'    p.id, '#13#10'    p.tipo,'#13#10'    p.cnpj,'#13#10'    p.cpf,'#13#10'    p' +
+      '.nome,'#13#10'    p.fantasia'#13#10'from pessoa p '#13#10'where p.id = :key_field'#13 +
+      #10'    and p.cliente = '#39'S'#39#13#10'order by p.nome'
     Parameters = <
       item
         Name = 'key_field'

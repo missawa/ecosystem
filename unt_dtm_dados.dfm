@@ -7,9 +7,8 @@ object dtm_dados: Tdtm_dados
     Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=*Mi251011;Persist Security Info=True' +
-      ';User ID=root;Extended Properties="DSN=ecoplan;DESCRIPTION=Siste' +
-      'ma Ecoplan;SERVER=127.0.0.1;UID=root;PWD={*Mi251011};DATABASE=ec' +
-      'oplan;PORT=3306";Initial Catalog=ecoplan'
+      ';User ID=root;Data Source=ecoplan;Mode=ReadWrite;Initial Catalog' +
+      '=ecoplan'
     LoginPrompt = False
     Mode = cmReadWrite
     AfterConnect = con_mysqlAfterConnect
@@ -50,5 +49,9 @@ object dtm_dados: Tdtm_dados
     ProviderName = 'dsp_usuario'
     Left = 21
     Top = 184
+  end
+  object MySQLUniProvider1: TMySQLUniProvider
+    Left = 150
+    Top = 25
   end
 end

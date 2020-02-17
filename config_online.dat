@@ -1,0 +1,1 @@
+Provider=MSDASQL.1;Password=Eco2020;Persist Security Info=True;User ID=ecoplan;Data Source=ecoplan_online;Mode=ReadWrite;Extended Properties="DSN=ecoplan;UID=ecoplan;PWD=Eco2020;";Initial Catalog=ecoplan

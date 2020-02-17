@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ADODB, DB, wwdblook, StdCtrls, DBCtrls, Grids, Wwdbigrd, Wwdbgrid,
-  Mask, wwdbedit, ExtCtrls;
+  Mask, wwdbedit, ExtCtrls, Wwdotdot, Wwdbcomb;
 
 type
   Tfrm_licenca = class(TForm)
@@ -50,6 +50,11 @@ type
     qry_cliente: TADOQuery;
     dse_condicionante: TADODataSet;
     dts_condicionante: TDataSource;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    DBMemo1: TDBMemo;
+    cmb_responsavel: TwwDBComboBox;
+    cmb_executor: TwwDBComboBox;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -66,7 +71,7 @@ var
 
 implementation
 
-uses unt_procedures;
+uses unt_procedures, unt_dtm_dados;
 
 {$R *.dfm}
 
@@ -90,6 +95,8 @@ procedure Tfrm_licenca.FormCreate(Sender: TObject);
 begin
   centralizar_tela(self);
   open_aux_queries;
+  carrega_combo_usuarios(cmb_responsavel);
+  carrega_combo_usuarios(cmb_executor);
 end;
 
 procedure Tfrm_licenca.open_aux_queries;

@@ -419,22 +419,25 @@ object frm_licenca: Tfrm_licenca
     object grd_detalhe: TwwDBGrid
       Left = 3
       Top = 18
-      Width = 1302
+      Width = 958
       Height = 264
+      ControlType.Strings = (
+        'cumprida;CheckBox;S;N'
+        'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
+        'id_pessoa_executor;CustomEdit;cmb_executor;T')
       Selected.Strings = (
-        'id'#9'10'#9'id'
-        'id_licenca'#9'10'#9'id_licenca'
-        'id_pessoa_executor'#9'10'#9'id_pessoa_executor'
-        'id_pressoa_responsavel'#9'10'#9'id_pressoa_responsavel'
-        'descricao'#9'10'#9'descricao'
-        'cumprida'#9'1'#9'cumprida'
-        'dt_venc'#9'10'#9'dt_venc'
-        'dt_cumprimento'#9'10'#9'dt_cumprimento')
+        'id_pressoa_responsavel'#9'37'#9'RESPONS'#193'VEL'#9#9
+        'id_pessoa_executor'#9'31'#9'EXECUTOR'#9#9
+        'dt_aviso'#9'12'#9'AVISO'#9#9
+        'dt_venc'#9'12'#9'VENCIMENTO'#9#9
+        'dt_cumprimento'#9'12'#9'CUMPRIMENTO'#9#9
+        'cumprida'#9'2'#9'OK'#9#9)
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
       Align = alClient
+      DataSource = dts_condicionante
       TabOrder = 1
       TitleAlignment = taLeftJustify
       TitleFont.Charset = DEFAULT_CHARSET
@@ -444,6 +447,71 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+    end
+    object Panel4: TPanel
+      Left = 961
+      Top = 18
+      Width = 344
+      Height = 264
+      Align = alRight
+      BevelInner = bvRaised
+      BevelOuter = bvLowered
+      TabOrder = 2
+      object Panel5: TPanel
+        Left = 2
+        Top = 2
+        Width = 340
+        Height = 21
+        Align = alTop
+        BevelOuter = bvNone
+        Caption = 'DESCRI'#199#195'O'
+        TabOrder = 0
+      end
+      object DBMemo1: TDBMemo
+        Left = 2
+        Top = 23
+        Width = 340
+        Height = 239
+        Align = alClient
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
+        Ctl3D = False
+        DataField = 'descricao'
+        DataSource = dts_condicionante
+        ParentCtl3D = False
+        TabOrder = 1
+      end
+    end
+    object cmb_responsavel: TwwDBComboBox
+      Left = 16
+      Top = 55
+      Width = 121
+      Height = 19
+      ShowButton = True
+      Style = csDropDown
+      MapList = True
+      AllowClearKey = False
+      DropDownCount = 8
+      ItemHeight = 0
+      Sorted = False
+      TabOrder = 3
+      UnboundDataType = wwDefault
+    end
+    object cmb_executor: TwwDBComboBox
+      Left = 250
+      Top = 60
+      Width = 190
+      Height = 16
+      ShowButton = True
+      Style = csDropDown
+      MapList = True
+      AllowClearKey = False
+      DropDownCount = 8
+      ItemHeight = 0
+      Sorted = False
+      TabOrder = 4
+      UnboundDataType = wwDefault
     end
   end
   object qry_tipo: TADOQuery
@@ -618,14 +686,12 @@ object frm_licenca: Tfrm_licenca
       '    p.cnpj,'
       '    p.cpf,'
       '    p.nome,'
-      '    c.fantasia,'
+      '    p.fantasia,'
       '    a.nome as atividade,'
       '    a.id as id_atividade'
       'from pessoa p'
-      '    left join cliente c'
-      '        on c.id_pessoa = p.id'
       '    left join cliente_atividade ca'
-      '        on ca.id_cliente = c.id'
+      '        on ca.id_cliente = p.id'
       '    left join atividade a'
       '        on a.id = ca.id_atividade'
       'where p.id = :id_cliente'
@@ -634,6 +700,7 @@ object frm_licenca: Tfrm_licenca
     Top = 32
   end
   object dse_condicionante: TADODataSet
+    Active = True
     Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     BeforeOpen = dse_condicionanteBeforeOpen

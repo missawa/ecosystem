@@ -27,23 +27,13 @@ uses
   wwdblook,
   Wwdbigrd,
   Wwdbgrid,
-  unt_cad_abstrato, wwriched;
+  unt_cad_abstrato, wwriched, Provider;
 
 type
-  Tfrm_cliente = class(Tfrm_cad_abstrato)
-    Label1: TLabel;
-    Label2: TLabel;
-    lbl_cnpj_cpf: TLabel;
-    Label4: TLabel;
-    edt_id: TwwDBEdit;
-    edt_cnpj_cpf: TwwDBEdit;
-    edt_nome: TwwDBEdit;
-    cmb_tipo: TwwDBComboBox;
-    Label5: TLabel;
-    edt_fantasia: TwwDBEdit;
+  Tfrm_cliente = class(TForm)
     pnl_endereco: TPanel;
     pnl_tit_endereco: TPanel;
-    Panel3: TPanel;
+    pnl_dados_endereco: TPanel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
@@ -81,17 +71,49 @@ type
     cmb_desc_email: TwwDBComboBox;
     dts_email: TDataSource;
     dse_email: TADODataSet;
-    btn_atividades: TToolButton;
-    sep_4: TToolButton;
     pnl_obs: TPanel;
     pnl_tit_obs: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
     rce_obs: TwwDBRichEdit;
+    toolbar: TToolBar;
+    btn_novo: TToolButton;
+    btn_editar: TToolButton;
+    btn_excluir: TToolButton;
+    btn_atualizar: TToolButton;
+    sep_1: TToolButton;
+    btn_salvar: TToolButton;
+    btn_cancelar: TToolButton;
+    sep_2: TToolButton;
+    btn_localizar: TToolButton;
+    btn_primeiro: TToolButton;
+    btn_anterior: TToolButton;
+    btn_proximo: TToolButton;
+    btn_ultimo: TToolButton;
+    sep_3: TToolButton;
+    btn_fechar: TToolButton;
+    pnlTitulo: TPanel;
+    Panel3: TPanel;
+    pnl_geral: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    lbl_cnpj_cpf: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    edt_id: TwwDBEdit;
+    edt_cnpj_cpf: TwwDBEdit;
+    edt_nome: TwwDBEdit;
+    cmb_tipo: TwwDBComboBox;
+    edt_fantasia: TwwDBEdit;
+    dts_cliente: TDataSource;
+    btn_atividades: TToolButton;
+    ToolButton2: TToolButton;
+    qry: TADOQuery;
+    dse_cliente: TADODataSet;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure edt_fantasiaEnter(Sender: TObject);
-    procedure dseAfterPost(DataSet: TDataSet);
+    procedure dse_clienteAfterPost(DataSet: TDataSet);
     procedure dse_enderecoBeforeOpen(DataSet: TDataSet);
     procedure edt_cnpj_cpfExit(Sender: TObject);
     procedure edt_cepExit(Sender: TObject);
@@ -99,25 +121,42 @@ type
     procedure qry_municipioAfterScroll(DataSet: TDataSet);
     procedure qry_municipioBeforeOpen(DataSet: TDataSet);
     procedure qry_bairroBeforeOpen(DataSet: TDataSet);
-    procedure dseAfterScroll(DataSet: TDataSet);
+    procedure dse_clienteAfterScroll(DataSet: TDataSet);
     procedure dse_telBeforeOpen(DataSet: TDataSet);
     procedure dse_telNewRecord(DataSet: TDataSet);
     procedure dse_telAfterScroll(DataSet: TDataSet);
     procedure cmb_tipo_telCloseUp(Sender: TwwDBComboBox; Select: Boolean);
     procedure dse_emailBeforeOpen(DataSet: TDataSet);
     procedure dtsStateChange(Sender: TObject);
-    procedure dseAfterCancel(DataSet: TDataSet);
-    procedure dseAfterClose(DataSet: TDataSet);
-    procedure dseAfterOpen(DataSet: TDataSet);
+    procedure dse_clienteAfterCancel(DataSet: TDataSet);
+    procedure dse_clienteAfterClose(DataSet: TDataSet);
+    procedure dse_clienteAfterOpen(DataSet: TDataSet);
     procedure btn_atividadesClick(Sender: TObject);
     procedure cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
-    procedure FormShow(Sender: TObject);
+    procedure open_dataset(pk: integer);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_novoClick(Sender: TObject);
+    procedure btn_editarClick(Sender: TObject);
+    procedure btn_excluirClick(Sender: TObject);
+    procedure btn_atualizarClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_localizarClick(Sender: TObject);
+    procedure btn_fecharClick(Sender: TObject);
+    procedure btn_primeiroClick(Sender: TObject);
+    procedure btn_proximoClick(Sender: TObject);
+    procedure btn_ultimoClick(Sender: TObject);
+    procedure btn_anteriorClick(Sender: TObject);
+    procedure dts_clienteStateChange(Sender: TObject);
+  protected
+    procedure CreateParams(var Params: TCreateParams); override;
   private
     procedure mostra_cnpj_cpf;
     procedure open_aux_queries; 
     { Private declarations }
   public
-    { Public declarations }
+    table_name: string;
+    key_field: string;
   end;
 
 var
@@ -127,16 +166,107 @@ implementation
 
 uses
   unt_dtm_dados,
+  unt_classe_endereco,
+  unt_constantes,
+  unt_cliente_atividade,
   unt_func_messages,
   unt_functions,
-  unt_classe_endereco,
-  unt_integracao, unt_constantes, unt_cliente_atividade, unt_proc_abrir_telas;
+  unt_integracao,
+  unt_proc_abrir_telas,
+  unt_procedures;
 
 {$R *.dfm}
 
+procedure Tfrm_cliente.CreateParams(var Params: TCreateParams);
+begin 
+  inherited; 
+  Params.Style := WS_BORDER;
+  BorderStyle := bsNone;
+  BorderWidth := 0;
+end;
+
+procedure Tfrm_cliente.btn_anteriorClick(Sender: TObject);
+begin
+  open_dataset(prior_id(table_name, key_field, dse_cliente.FieldByName(key_field).AsInteger));
+end;
+
 procedure Tfrm_cliente.btn_atividadesClick(Sender: TObject);
 begin
-  abrir_atividade(dse.FieldByName(key_field).AsInteger);
+  abrir_atividade(dse_cliente.FieldByName(key_field).AsInteger);
+end;
+
+procedure Tfrm_cliente.btn_atualizarClick(Sender: TObject);
+begin
+  dse_cliente.Close;
+  dse_cliente.Open;  
+end;
+
+procedure Tfrm_cliente.btn_cancelarClick(Sender: TObject);
+begin
+  dse_cliente.Cancel;
+end;
+
+procedure Tfrm_cliente.btn_editarClick(Sender: TObject);
+begin
+  dse_cliente.Edit;
+end;
+
+procedure Tfrm_cliente.btn_excluirClick(Sender: TObject);
+begin
+  if msg_quest('Confirma Exclusão de Cliente?') then
+    dse_cliente.Delete;
+end;
+
+procedure Tfrm_cliente.btn_fecharClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure Tfrm_cliente.btn_localizarClick(Sender: TObject);
+var
+  ok: boolean;
+
+begin
+  try
+
+    ok :=
+      pesquisar(
+        qry,
+        'select * from ' + table_name,
+        'nome',
+      self.Name);
+
+    if ok then
+      open_dataset(qry.FieldByName(key_field).AsInteger);
+
+  except
+    on e:exception do msg_error('Erro 8755: ' + e.message);
+  end;
+end;
+
+procedure Tfrm_cliente.btn_novoClick(Sender: TObject);
+begin
+  dse_cliente.Append;
+end;
+
+procedure Tfrm_cliente.btn_primeiroClick(Sender: TObject);
+begin
+  open_dataset(first_id(table_name,key_field));
+end;
+
+procedure Tfrm_cliente.btn_proximoClick(Sender: TObject);
+begin
+  open_dataset(next_id(table_name, key_field, dse_cliente.FieldByName(key_field).AsInteger));
+end;
+
+procedure Tfrm_cliente.btn_salvarClick(Sender: TObject);
+begin
+  dse_cliente.Post;
+end;
+
+procedure Tfrm_cliente.btn_ultimoClick(Sender: TObject);
+begin
+  open_dataset(last_id(table_name,key_field));
 end;
 
 procedure Tfrm_cliente.cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
@@ -154,13 +284,13 @@ begin
     TStringField(dse_tel.FieldByName('numero')).EditMask := msk_tel_celular;
 end;
 
-procedure Tfrm_cliente.dseAfterCancel(DataSet: TDataSet);
+procedure Tfrm_cliente.dse_clienteAfterCancel(DataSet: TDataSet);
 begin
   inherited;
 
   try
-    if dse.State in [dsEdit, dsInsert] then
-      dse.Cancel;
+    if dse_cliente.State in [dsEdit, dsInsert] then
+      dse_cliente.Cancel;
     if dse_endereco.State in [dsEdit, dsInsert] then
       dse_endereco.Cancel;
     if dse_tel.State in [dsEdit, dsInsert] then
@@ -174,28 +304,28 @@ begin
 
 end;
 
-procedure Tfrm_cliente.dseAfterClose(DataSet: TDataSet);
+procedure Tfrm_cliente.dse_clienteAfterClose(DataSet: TDataSet);
 begin
   inherited;
-  dse.Close;
+  dse_cliente.Close;
   dse_endereco.Close;
   dse_tel.Close;
   dse_email.Close;
 end;
 
-procedure Tfrm_cliente.dseAfterOpen(DataSet: TDataSet);
+procedure Tfrm_cliente.dse_clienteAfterOpen(DataSet: TDataSet);
 begin
   inherited;
-  dse.Open;
+  dse_cliente.Open;
   dse_endereco.Open;
   dse_tel.Open;
   dse_email.Open;
 
-  TStringField(dse.FieldByName('cpf')).EditMask := msk_cpf;
-  TStringField(dse.FieldByName('cnpj')).EditMask := msk_cnpj;
+  TStringField(dse_cliente.FieldByName('cpf')).EditMask := msk_cpf;
+  TStringField(dse_cliente.FieldByName('cnpj')).EditMask := msk_cnpj;
 end;
 
-procedure Tfrm_cliente.dseAfterPost(DataSet: TDataSet);
+procedure Tfrm_cliente.dse_clienteAfterPost(DataSet: TDataSet);
 begin
 
   try
@@ -212,7 +342,7 @@ begin
 
 end;
 
-procedure Tfrm_cliente.dseAfterScroll(DataSet: TDataSet);
+procedure Tfrm_cliente.dse_clienteAfterScroll(DataSet: TDataSet);
 begin
   dse_endereco.Close;
   dse_tel.Close;
@@ -227,19 +357,19 @@ end;
 
 procedure Tfrm_cliente.dse_emailBeforeOpen(DataSet: TDataSet);
 begin
-  if dse.Active then
-    dse_email.Parameters.ParamByName('id_pessoa').Value := dse.FieldByName(key_field).AsInteger;
+  if dse_cliente.Active then
+    dse_email.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoBeforeOpen(DataSet: TDataSet);
 begin
-  if dse.Active then
-    dse_endereco.Parameters.ParamByName('id_pessoa').Value := dse.FieldByName(key_field).AsInteger;
+  if dse_cliente.Active then
+    dse_endereco.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoNewRecord(DataSet: TDataSet);
 begin
-  dse_endereco.FieldByName('id_pessoa').AsInteger := dse.FieldByName('id').AsInteger;
+  dse_endereco.FieldByName('id_pessoa').AsInteger := dse_cliente.FieldByName('id').AsInteger;
   dse_endereco.FieldByName('descricao').AsString := 'Principal';
 end;
 
@@ -248,20 +378,20 @@ var
   num: string;
 begin
 
-  num := ajusta_numero_telefone(dse.FieldByName('numero').Text);
-  TStringField(dse.FieldByName('numero')).EditMask := define_mascara_telefone(num);
+  num := ajusta_numero_telefone(dse_tel.FieldByName('numero').Text);
+  TStringField(dse_tel.FieldByName('numero')).EditMask := define_mascara_telefone(num);
 end;
 
 procedure Tfrm_cliente.dse_telBeforeOpen(DataSet: TDataSet);
 begin
-  if dse.Active then
-    dse_tel.Parameters.ParamByName('id_pessoa').Value := dse.FieldByName(key_field).Value;
+  if dse_cliente.Active then
+    dse_tel.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).Value;
 end;
 
 procedure Tfrm_cliente.dse_telNewRecord(DataSet: TDataSet);
 begin
-  if dse.Active then
-    dse_tel.FieldByName('id_pessoa').AsInteger := dse.FieldByName(key_field).AsInteger;
+  if dse_cliente.Active then
+    dse_tel.FieldByName('id_pessoa').AsInteger := dse_cliente.FieldByName(key_field).AsInteger;
 end;
 
 procedure Tfrm_cliente.dtsStateChange(Sender: TObject);
@@ -270,11 +400,35 @@ var
 begin
   inherited;
 
-  edt := dse.State in [dsEdit,dsInsert];
+  edt := dse_cliente.State in [dsEdit,dsInsert];
   dts_endereco.AutoEdit := edt;
   dts_tel.AutoEdit := edt;
   dts_email.AutoEdit := edt;
 
+end;
+
+procedure Tfrm_cliente.dts_clienteStateChange(Sender: TObject);
+var edt: boolean;
+begin
+
+  if key_field <> '' then
+  begin
+
+    edt := dse_cliente.State in [dsEdit,dsInsert];
+
+    btn_novo.Enabled := not edt;
+    btn_editar.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
+    btn_excluir.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
+    btn_atualizar.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
+    btn_salvar.Enabled := edt;
+    btn_cancelar.Enabled := edt;
+    btn_localizar.Enabled := not edt;
+
+    dts_endereco.AutoEdit := edt;
+    dts_tel.AutoEdit := edt;
+    dts_email.AutoEdit := edt;
+
+  end;
 end;
 
 procedure Tfrm_cliente.edt_cepExit(Sender: TObject);
@@ -326,34 +480,47 @@ end;
 
 procedure Tfrm_cliente.edt_fantasiaEnter(Sender: TObject);
 begin
-  if dse.FieldByName('id').IsNull then
+  if dse_cliente.FieldByName('id').IsNull then
   begin
-    dse.Post;
-    dse.Edit;
+    dse_cliente.Post;
+    dse_cliente.Edit;
   end;  
 end;
 
 procedure Tfrm_cliente.open_aux_queries;
 begin
   qry_uf.Open;
+  qry_municipio.Open;
+  qry_bairro.Open;
   dse_endereco.Open;
+  dse_tel.Open;
+  dse_email.Open;
+end;
+
+procedure Tfrm_cliente.open_dataset(pk: integer);
+begin
+  dse_cliente.Close;
+  dse_cliente.CommandText :=
+    'select *                     '#13+
+    'from pessoa                  '#13+
+    'where id = ' + intToStr(pk)  +#13+
+    '    and cliente = ''S''';
+  dse_cliente.Open;
+end;
+
+procedure Tfrm_cliente.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action := caFree;
 end;
 
 procedure Tfrm_cliente.FormCreate(Sender: TObject);
 begin
+  centralizar_tela(self);
   key_field := 'id';
-  table_name := 'cliente';
+  table_name := 'pessoa';
+  dse_cliente.Open;
   open_aux_queries;
-  inherited;
   Application.ProcessMessages;
-end;
-
-procedure Tfrm_cliente.FormShow(Sender: TObject);
-begin
-  inherited;
-  btn_atividades.Left := 728;
-  sep_4.Left := 792;
-  btn_fechar.Left := 800;
 end;
 
 procedure Tfrm_cliente.qry_bairroBeforeOpen(DataSet: TDataSet);

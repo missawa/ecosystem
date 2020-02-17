@@ -18,6 +18,7 @@ uses
 procedure abrir_arquivo(arquivo: string);
 procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true);
 procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
+procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
 procedure exportar_csv(qry: TCustomADODataset);
 procedure exportar_excel(grdExportar: TwwDBGrid);
@@ -82,6 +83,22 @@ begin
   sql :=
     'select id, nome            '#13+
     'from atividade             '#13+
+    'order by nome';
+
+  carrega_combo(cmb, sql, limpar);
+
+end;
+
+procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
+var
+  sql: string;
+
+begin
+
+  sql :=
+    'select id, nome          '#13+
+    'from pessoa              '#13+
+    'where usuario = ''S''    '#13+
     'order by nome';
 
   carrega_combo(cmb, sql, limpar);
