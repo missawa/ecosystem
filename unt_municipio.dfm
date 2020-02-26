@@ -1,6 +1,5 @@
 inherited frm_municipio: Tfrm_municipio
   Caption = 'Municipios'
-  ExplicitWidth = 798
   PixelsPerInch = 96
   TextHeight = 15
   inherited pnlTitulo: TPanel
@@ -119,65 +118,33 @@ inherited frm_municipio: Tfrm_municipio
   inherited Panel1: TPanel
     inherited pnl_tit_detalhe: TPanel
       Caption = ' BAIRROS'
-      ExplicitLeft = 3
-      ExplicitWidth = 776
     end
     inherited grd_detalhe: TwwDBGrid
       Selected.Strings = (
         'id'#9'4'#9'ID'
         'id_municipio'#9'6'#9'ID.MUN'
         'nome'#9'60'#9'BAIRRO')
-      ExplicitLeft = 3
-      ExplicitWidth = 776
-      ExplicitHeight = 226
     end
   end
-  inherited dse: TADODataSet
-    CursorType = ctStatic
-    CommandText = 'select *'#13#10'from municipio '#13#10'where id = :key_field'
-    Parameters = <
-      item
-        Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-  end
-  inherited dse_detalhe: TADODataSet
-    Active = True
-    CursorType = ctStatic
+  inherited dse_detalhe: TUniQuery
+    SQL.Strings = (
+      'select * '
+      'from bairro '
+      'where id_municipio = :key_field')
     OnNewRecord = dse_detalheNewRecord
-    CommandText = 'select * '#13#10'from bairro '#13#10'where id_municipio = :key_field'
-    DataSource = dts
-    Parameters = <
+    ParamData = <
       item
+        DataType = ftUnknown
         Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
       end>
   end
-  object qry_uf: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    Parameters = <>
+  object qry_uf: TUniQuery
+    Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select id, sigla'
       'from uf'
       'order by sigla')
-    Left = 632
-    Top = 104
-    object qry_ufsigla: TStringField
-      DisplayLabel = 'UF'
-      DisplayWidth = 2
-      FieldName = 'sigla'
-      FixedChar = True
-      Size = 2
-    end
-    object qry_ufid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-      Visible = False
-    end
+    Left = 88
+    Top = 142
   end
 end

@@ -1,6 +1,7 @@
 inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
   Caption = 'Cadastro Abstrato Mestre / Detalhe'
   ClientHeight = 403
+  ExplicitWidth = 798
   ExplicitHeight = 442
   PixelsPerInch = 96
   TextHeight = 15
@@ -89,19 +90,17 @@ inherited frm_cad_abstrato_mestre_detalhe: Tfrm_cad_abstrato_mestre_detalhe
   inherited dts: TDataSource
     Left = 704
   end
-  inherited dse: TADODataSet
+  inherited dse: TUniQuery
     AfterScroll = dseAfterScroll
     Left = 732
-  end
-  object dse_detalhe: TADODataSet
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
-    Left = 732
-    Top = 184
   end
   object dts_detalhe: TDataSource
     DataSet = dse_detalhe
     Left = 704
+    Top = 184
+  end
+  object dse_detalhe: TUniQuery
+    Left = 732
     Top = 184
   end
 end

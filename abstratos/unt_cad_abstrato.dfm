@@ -214,21 +214,18 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
   end
   object dts: TDataSource
     AutoEdit = False
-    DataSet = dse
     OnStateChange = dtsStateChange
     Left = 72
     Top = 104
   end
-  object dse: TADODataSet
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 720
+    Top = 40
+  end
+  object dse: TUniQuery
+    Connection = dtm_dados.mysql_conn
     Left = 100
     Top = 104
-  end
-  object qry: TADOQuery
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
-    Left = 728
-    Top = 32
   end
 end

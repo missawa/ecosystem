@@ -2,6 +2,7 @@ inherited frm_atividade: Tfrm_atividade
   Caption = 'Atividades'
   ClientWidth = 902
   ExplicitWidth = 918
+  ExplicitHeight = 386
   PixelsPerInch = 96
   TextHeight = 15
   inherited pnlTitulo: TPanel
@@ -37,12 +38,10 @@ inherited frm_atividade: Tfrm_atividade
       end
     end
   end
-  inherited dse: TADODataSet
-    Active = True
-    CursorType = ctStatic
-    CommandText = 'select *'#13#10'from atividade'#13#10'order by nome'#13#10
+  inherited dts: TDataSource
+    Top = 226
   end
-  inherited qry: TADOQuery
-    CursorType = ctStatic
+  inherited dse: TUniQuery
+    Top = 226
   end
 end

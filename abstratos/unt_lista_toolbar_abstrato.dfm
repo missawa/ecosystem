@@ -165,7 +165,7 @@ inherited frm_lista_toolbar_abstrato: Tfrm_lista_toolbar_abstrato
       end
     end
   end
-  object popExportar: TPopupMenu
+  object popExportar: TPopupMenu [3]
     Left = 136
     Top = 24
     object mnuExportar_Excel: TMenuItem

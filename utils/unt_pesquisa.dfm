@@ -652,14 +652,12 @@ object frm_pesquisa: Tfrm_pesquisa
     end
   end
   object dts: TDataSource
-    DataSet = qry
     Left = 620
     Top = 40
   end
-  object qry: TADOQuery
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
     Left = 648
-    Top = 40
+    Top = 39
   end
 end

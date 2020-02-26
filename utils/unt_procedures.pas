@@ -3,7 +3,6 @@ unit unt_procedures;
 interface
 
 uses
-  ADODB,
   DB,
   Forms,
   Classes,
@@ -11,6 +10,7 @@ uses
   Registry,
   ShellApi,
   SysUtils,
+  Uni,
   Windows,
   wwDBGrid,
   wwDBComb;
@@ -20,12 +20,13 @@ procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true)
 procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
-procedure exportar_csv(qry: TCustomADODataset);
+procedure exec_sql(sql: widestring);
+procedure exportar_csv(qry: TUniQuery);
 procedure exportar_excel(grdExportar: TwwDBGrid);
 procedure fechar_progresso;
 procedure incrementar_progresso;
 procedure inicializar_progresso(caption: string; max: integer);
-procedure open_query(var dataset: TADOQuery; sql: string; retorna_erro: boolean = true);
+procedure open_query(var dataset: TUniQuery; sql: string; retorna_erro: boolean = true);
 procedure verifica_conf_data_windows;
 
 implementation
@@ -48,11 +49,11 @@ procedure carrega_combo(
   Limpar: boolean = true);
 
 var
-  q: TADOQuery;
+  q: TUniQuery;
 begin
 
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   if Limpar then
     cmb.Items.Clear;
@@ -111,7 +112,21 @@ begin
   form.Left := Trunc((frm_principal.Width - form.Width)/2);
 end;
 
-procedure exportar_csv(qry: TCustomADODataset);
+procedure exec_sql(sql: widestring);
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+
+  q.SQL.Text := sql;
+
+  q.ExecSQL;
+
+end;
+
+procedure exportar_csv(qry: TUniQuery);
 var
   linha: string;
   coluna: integer;
@@ -219,7 +234,7 @@ begin
 end;
 
 procedure open_query(
-  var dataset: TADOQuery;
+  var dataset: TUniQuery;
   sql: string;
   retorna_erro: boolean = true);
 

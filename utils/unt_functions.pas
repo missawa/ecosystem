@@ -3,10 +3,10 @@ unit unt_functions;
 interface
 
 uses
-  ADODB,
   Controls,
   Forms,
-  SysUtils;
+  SysUtils,
+  Uni;
 
   function ajusta_numero_telefone(tel: string): string;
   function arredonda(valor: currency): currency;
@@ -19,7 +19,7 @@ uses
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function next_id(tabela: string; pk: string; id: integer): integer;
-  function pesquisar(var q: TADOQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
+  function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
   function prior_id(tabela: string; pk: string; id: integer): integer;
   function troca_acentos(texto: string): string;
   function valor_str(valor: currency): string;
@@ -224,11 +224,11 @@ function first_id(
   tabela: string;
   pk: string): integer;
 var
-  q: TADOQuery;
+  q: TUniQuery;
 begin
 
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   try
     open_query(
@@ -248,11 +248,11 @@ function last_id(
   tabela: string;
   pk: string): integer;
 var
-  q: TADOQuery;
+  q: TUniQuery;
 begin
 
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   try
     open_query(
@@ -273,11 +273,11 @@ function next_id(
   pk: string;
   id: integer): integer;
 var
-  q: TADOQuery;
+  q: TUniQuery;
 begin
 
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   try
     open_query(
@@ -298,7 +298,7 @@ begin
 end;
 
 function pesquisar(
-  var q: TADOQuery;
+  var q: TUniQuery;
   sql: string;
   campo: string;
   tela: string;
@@ -335,11 +335,11 @@ function prior_id(
   pk: string;
   id: integer): integer;
 var
-  q: TADOQuery;
+  q: TUniQuery;
 begin
 
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   try
     open_query(

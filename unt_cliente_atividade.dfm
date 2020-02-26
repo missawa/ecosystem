@@ -201,45 +201,21 @@ inherited frm_cliente_atividade: Tfrm_cliente_atividade
       UnboundDataType = wwDefault
     end
   end
-  inherited dse: TADODataSet
-    CursorType = ctStatic
-    AfterOpen = dseAfterOpen
-    CommandText = 
-      'select '#13#10'    p.id, '#13#10'    p.tipo,'#13#10'    p.cnpj,'#13#10'    p.cpf,'#13#10'    p' +
-      '.nome,'#13#10'    p.fantasia'#13#10'from pessoa p '#13#10'where p.id = :key_field'#13 +
-      #10'    and p.cliente = '#39'S'#39#13#10'order by p.nome'
-    Parameters = <
-      item
-        Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-  end
-  inherited qry: TADOQuery
+  inherited qry: TUniQuery
     Left = 788
     Top = 47
   end
-  inherited dse_detalhe: TADODataSet
-    Active = True
-    CursorType = ctStatic
-    AfterOpen = dse_detalheAfterOpen
-    OnNewRecord = dse_detalheNewRecord
-    CommandText = 
-      'select * '#13#10'from cliente_atividade '#13#10'where id_cliente = :key_fiel' +
-      'd'
-    Parameters = <
-      item
-        Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 722
-    Top = 219
+  inherited dse: TUniQuery
+    AfterOpen = dseAfterOpen
   end
   inherited dts_detalhe: TDataSource
-    Left = 694
-    Top = 219
+    Left = 698
+    Top = 208
+  end
+  inherited dse_detalhe: TUniQuery
+    AfterOpen = dse_detalheAfterOpen
+    OnNewRecord = dse_detalheNewRecord
+    Left = 726
+    Top = 208
   end
 end

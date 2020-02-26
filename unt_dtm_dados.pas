@@ -8,17 +8,18 @@ uses
   DB,
   DBAccess,
   Controls,
-  ADODB,
-  DBClient,
-  Provider, UniProvider, MySQLUniProvider;
+  Provider,
+  UniProvider,
+  MySQLUniProvider,
+  Uni,
+  MemDS, ODBCUniProvider;
 
 type
   Tdtm_dados = class(TDataModule)
-    con_mysql: TADOConnection;
-    qry_usuario: TADOQuery;
-    dsp_usuario: TDataSetProvider;
-    cds_usuario: TClientDataSet;
-    MySQLUniProvider1: TMySQLUniProvider;
+    mysql_provider: TMySQLUniProvider;
+    qry_usuario: TUniQuery;
+    mysql_conn: TUniConnection;
+    ODBCUniProvider1: TODBCUniProvider;
     procedure con_mysqlBeforeConnect(Sender: TObject);
     procedure con_mysqlAfterConnect(Sender: TObject);
   private
@@ -38,7 +39,7 @@ uses unt_principal;
 
 procedure Tdtm_dados.con_mysqlAfterConnect(Sender: TObject);
 begin
-  frm_principal.Caption := con_mysql.ConnectionString;
+  frm_principal.Caption := mysql_conn.ConnectString;
 end;
 
 procedure Tdtm_dados.con_mysqlBeforeConnect(Sender: TObject);
@@ -47,7 +48,7 @@ var
 begin
   con := TStringList.Create;
   con.LoadFromFile('config.dat');
-  con_mysql.ConnectionString := con.Text;
+  mysql_conn.ConnectString := con.Text;
   con.Free;
 end;
 

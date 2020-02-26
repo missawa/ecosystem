@@ -328,19 +328,17 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
   end
   object dts: TDataSource
     DataSet = dse
-    Left = 304
-    Top = 104
+    Left = 421
+    Top = 278
   end
-  object dse: TADODataSet
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
-    Left = 332
-    Top = 104
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 445
+    Top = 5
   end
-  object qry: TADOQuery
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
-    Left = 272
-    Top = 104
+  object dse: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 449
+    Top = 278
   end
 end

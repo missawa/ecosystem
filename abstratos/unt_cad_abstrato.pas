@@ -19,7 +19,9 @@ uses
   DB,
   IBQuery,
   IBDatabase,
-  ADODB;
+  MemDS,
+  DBAccess,
+  Uni;
 
 type
   Tfrm_cad_abstrato = class(TForm)
@@ -44,8 +46,8 @@ type
     pnlTotal: TPanel;
     pnl_tit_geral: TPanel;
     pnl_geral: TPanel;
-    dse: TADODataSet;
-    qry: TADOQuery;
+    qry: TUniQuery;
+    dse: TUniQuery;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_primeiroClick(Sender: TObject);
@@ -78,7 +80,11 @@ var
 
 implementation
 
-uses unt_functions, unt_dtm_images, unt_dtm_dados, unt_func_messages,
+uses
+  unt_functions,
+  unt_dtm_images,
+  unt_dtm_dados,
+  unt_func_messages,
   unt_procedures;
 
 {$R *.dfm}
@@ -106,7 +112,7 @@ end;
 procedure Tfrm_cad_abstrato.open_dataset(pk: integer);
 begin
   dse.Close;
-  dse.Parameters.ParamByName('key_field').Value := pk;
+  dse.Params.ParamByName('key_field').Value := pk;
   dse.Open;
 end;
 
@@ -233,7 +239,7 @@ begin
   centralizar_tela(self);
   key_field := 'id';
 
-  if dse.CommandText <> '' then
+  if dse.sql.Text <> '' then
     open_dataset(0);
 
 end;

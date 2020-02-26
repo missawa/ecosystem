@@ -46,9 +46,4 @@ inherited frm_uf: Tfrm_uf
       end
     end
   end
-  inherited dse: TADODataSet
-    Active = True
-    CursorType = ctStatic
-    CommandText = 'select *'#13#10'from uf'
-  end
 end

@@ -3,10 +3,10 @@ unit unt_integracao;
 interface
 
 uses
-  ADODB,
   ComObj,
   SysUtils,
   uLkJson,
+  Uni,
   unt_classe_endereco;
 
 function busca_cep(cep: string): TEndereco;
@@ -22,15 +22,15 @@ var
   m: variant;
   api: string;
   endereco: TEndereco;
-  q: TADOQuery;
+  q: TUniQuery;
   nome_municipio: string;
   nome_bairro: string;
 
 begin
 
   endereco := TEndereco.Create;
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 
   // requisição
   api := 'http://viacep.com.br/ws/'+CEP+'/json/';

@@ -1,57 +1,45 @@
 object dtm_dados: Tdtm_dados
   OldCreateOrder = False
-  Height = 256
-  Width = 420
-  object con_mysql: TADOConnection
-    Attributes = [xaCommitRetaining]
-    Connected = True
-    ConnectionString = 
-      'Provider=MSDASQL.1;Password=*Mi251011;Persist Security Info=True' +
-      ';User ID=root;Data Source=ecoplan;Mode=ReadWrite;Initial Catalog' +
-      '=ecoplan'
-    LoginPrompt = False
-    Mode = cmReadWrite
-    AfterConnect = con_mysqlAfterConnect
-    BeforeConnect = con_mysqlBeforeConnect
-    Left = 21
-    Top = 16
+  Height = 175
+  Width = 413
+  object mysql_provider: TMySQLUniProvider
+    Left = 35
+    Top = 10
   end
-  object qry_usuario: TADOQuery
-    Connection = con_mysql
-    CursorType = ctStatic
-    Parameters = <
-      item
-        Name = 'login'
-        Size = -1
-        Value = Null
-      end
-      item
-        Name = 'senha'
-        Size = -1
-        Value = Null
-      end>
+  object qry_usuario: TUniQuery
+    Connection = mysql_conn
     SQL.Strings = (
       'select *'
       'from usuario'
       'where login = :login'
-      '  and senha = :senha')
-    Left = 21
-    Top = 72
+      '    and senha = :senha')
+    Left = 35
+    Top = 100
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'login'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'senha'
+        ParamType = ptInput
+      end>
   end
-  object dsp_usuario: TDataSetProvider
-    DataSet = qry_usuario
-    Left = 21
-    Top = 128
+  object mysql_conn: TUniConnection
+    ProviderName = 'ODBC'
+    Port = 3306
+    Username = 'root'
+    Server = 'ecoplan'
+    Connected = True
+    LoginPrompt = False
+    Left = 35
+    Top = 55
+    EncryptedPassword = 'D5FFB2FF96FFCDFFCAFFCEFFCFFFCEFFCEFF'
   end
-  object cds_usuario: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dsp_usuario'
-    Left = 21
-    Top = 184
-  end
-  object MySQLUniProvider1: TMySQLUniProvider
-    Left = 150
-    Top = 25
+  object ODBCUniProvider1: TODBCUniProvider
+    Left = 140
+    Top = 10
   end
 end

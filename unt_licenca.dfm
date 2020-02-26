@@ -502,7 +502,7 @@ object frm_licenca: Tfrm_licenca
       Left = 250
       Top = 60
       Width = 190
-      Height = 16
+      Height = 19
       ShowButton = True
       Style = csDropDown
       MapList = True
@@ -515,7 +515,6 @@ object frm_licenca: Tfrm_licenca
     end
   end
   object qry_tipo: TADOQuery
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -537,7 +536,6 @@ object frm_licenca: Tfrm_licenca
     end
   end
   object qry_orgao: TADOQuery
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -556,7 +554,6 @@ object frm_licenca: Tfrm_licenca
     end
   end
   object qry_municipio: TADOQuery
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -580,7 +577,6 @@ object frm_licenca: Tfrm_licenca
     Top = 149
   end
   object dse_licenca: TADODataSet
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     OnNewRecord = dse_licencaNewRecord
     CommandText = 
@@ -665,7 +661,6 @@ object frm_licenca: Tfrm_licenca
     Top = 33
   end
   object qry_cliente: TADOQuery
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     Parameters = <
       item
@@ -697,11 +692,9 @@ object frm_licenca: Tfrm_licenca
       'where p.id = :id_cliente'
       '    and a.id = :id_atividade')
     Left = 1088
-    Top = 32
+    Top = 33
   end
   object dse_condicionante: TADODataSet
-    Active = True
-    Connection = dtm_dados.con_mysql
     CursorType = ctStatic
     BeforeOpen = dse_condicionanteBeforeOpen
     OnNewRecord = dse_condicionanteNewRecord
@@ -720,5 +713,35 @@ object frm_licenca: Tfrm_licenca
     DataSet = dse_condicionante
     Left = 994
     Top = 239
+  end
+  object UniQuery1: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 1120
+    Top = 35
+  end
+  object UniQuery2: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 1050
+    Top = 145
+  end
+  object UniQuery3: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 1055
+    Top = 240
+  end
+  object UniQuery4: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 645
+    Top = 140
+  end
+  object UniQuery5: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 30
+    Top = 170
+  end
+  object UniQuery6: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 105
+    Top = 165
   end
 end

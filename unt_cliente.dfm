@@ -377,7 +377,6 @@ object frm_cliente: Tfrm_cliente
           'sigla'#9'2'#9'UF'#9'F')
         DataField = 'id_uf'
         DataSource = dts_endereco
-        LookupTable = qry_uf
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -403,7 +402,6 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'MUNIC'#205'PIO'#9'F')
         DataField = 'id_municipio'
         DataSource = dts_endereco
-        LookupTable = qry_municipio
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -429,7 +427,6 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'BAIRRO'#9'F')
         DataField = 'id_bairro'
         DataSource = dts_endereco
-        LookupTable = qry_bairro
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -785,7 +782,6 @@ object frm_cliente: Tfrm_cliente
           PrintFooter.Font.Name = 'Tahoma'
           PrintFooter.Font.Style = []
           RichEditVersion = 2
-          ExplicitLeft = 0
           Data = {
             740000007B5C727466315C616E73695C616E7369637067313235325C64656666
             305C6465666C616E67313034367B5C666F6E7474626C7B5C66305C666E696C20
@@ -957,161 +953,150 @@ object frm_cliente: Tfrm_cliente
     ParentFont = False
     TabOrder = 5
   end
-  object qry_uf: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    AfterScroll = qry_ufAfterScroll
-    Parameters = <>
-    SQL.Strings = (
-      'select id, sigla'
-      'from uf'
-      'order by sigla')
-    Left = 133
-    Top = 177
-  end
-  object qry_municipio: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = qry_municipioBeforeOpen
-    AfterScroll = qry_municipioAfterScroll
-    Parameters = <
-      item
-        Name = 'id_uf'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select id, nome'
-      'from municipio'
-      'where id_uf = :id_uf'
-      'order by nome')
-    Left = 238
-    Top = 182
-  end
-  object qry_bairro: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = qry_bairroBeforeOpen
-    Parameters = <
-      item
-        Name = 'id_municipio'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    SQL.Strings = (
-      'select * '
-      'from bairro '
-      'where id_municipio = :id_municipio')
-    Left = 418
-    Top = 182
-  end
   object dts_uf: TDataSource
     DataSet = qry_uf
-    Left = 145
-    Top = 175
+    Left = 95
+    Top = 197
   end
   object dts_municipio: TDataSource
     DataSet = qry_municipio
-    Left = 250
-    Top = 180
+    Left = 272
+    Top = 197
   end
   object dts_bairro: TDataSource
     DataSet = qry_bairro
-    Left = 430
-    Top = 185
+    Left = 450
+    Top = 197
   end
   object dts_endereco: TDataSource
-    DataSet = dse_endereco
-    Left = 1085
-    Top = 180
-  end
-  object dse_endereco: TADODataSet
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = dse_enderecoBeforeOpen
-    OnNewRecord = dse_enderecoNewRecord
-    CommandText = 'select * '#13#10'from endereco '#13#10'where id_pessoa = :id_pessoa'
-    MasterFields = 'id'
-    Parameters = <
-      item
-        Name = 'id_pessoa'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 1070
-    Top = 180
+    Left = 921
+    Top = 178
   end
   object dts_tel: TDataSource
     AutoEdit = False
     DataSet = dse_tel
-    Left = 330
-    Top = 300
-  end
-  object dse_tel: TADODataSet
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = dse_telBeforeOpen
-    AfterScroll = dse_telAfterScroll
-    OnNewRecord = dse_telNewRecord
-    CommandText = 
-      'select *'#13#10'from telefone '#13#10'where id_pessoa = :id_pessoa'#13#10'order by' +
-      ' descricao'
-    Parameters = <
-      item
-        Name = 'id_pessoa'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 360
-    Top = 300
+    Left = 339
+    Top = 340
   end
   object dts_email: TDataSource
     AutoEdit = False
     DataSet = dse_email
-    Left = 530
-    Top = 300
-  end
-  object dse_email: TADODataSet
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    BeforeOpen = dse_emailBeforeOpen
-    CommandText = 'select *'#13#10'from email'#13#10'where id_pessoa = :id_pessoa'
-    Parameters = <
-      item
-        Name = 'id_pessoa'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 558
-    Top = 300
+    Left = 921
+    Top = 340
   end
   object dts_cliente: TDataSource
     AutoEdit = False
     DataSet = dse_cliente
     OnStateChange = dts_clienteStateChange
-    Left = 437
-    Top = 100
+    Left = 921
+    Top = 110
   end
-  object qry: TADOQuery
-    Connection = dtm_dados.con_mysql
-    Parameters = <>
-    Left = 813
-    Top = 32
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 790
+    Top = 35
   end
-  object dse_cliente: TADODataSet
-    Connection = dtm_dados.con_mysql
-    AfterOpen = dse_clienteAfterOpen
-    AfterClose = dse_clienteAfterClose
-    AfterPost = dse_clienteAfterPost
-    AfterScroll = dse_clienteAfterScroll
-    CommandText = 'select * '#13#10'from pessoa '#13#10'where id = 0'#13#10'    and cliente = '#39'S'#39
-    Parameters = <>
-    Left = 465
-    Top = 100
+  object dse_cliente: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select * '
+      'from pessoa '
+      'where id = :id'
+      '    and cliente = '#39'S'#39)
+    Left = 949
+    Top = 110
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+      end>
+  end
+  object dse_endereco: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select * '
+      'from endereco '
+      'where id_pessoa = :id_pessoa')
+    OnNewRecord = dse_enderecoNewRecord
+    Left = 949
+    Top = 178
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_pessoa'
+      end>
+  end
+  object qry_uf: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select id, sigla'
+      'from uf'
+      'order by sigla')
+    Left = 123
+    Top = 197
+  end
+  object qry_municipio: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select id, nome'
+      'from municipio'
+      'where id_uf = :id_uf'
+      'order by nome')
+    BeforeOpen = qry_municipioBeforeOpen
+    AfterScroll = qry_municipioAfterScroll
+    Left = 300
+    Top = 197
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_uf'
+      end>
+  end
+  object qry_bairro: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select * '
+      'from bairro '
+      'where id_municipio = :id_municipio')
+    BeforeOpen = qry_bairroBeforeOpen
+    Left = 478
+    Top = 197
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_municipio'
+      end>
+  end
+  object dse_tel: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select *'
+      'from telefone '
+      'where id_pessoa = :id_pessoa'
+      'order by descricao')
+    BeforeOpen = dse_telBeforeOpen
+    AfterScroll = dse_telAfterScroll
+    Left = 367
+    Top = 340
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_pessoa'
+      end>
+  end
+  object dse_email: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select *'
+      'from email'
+      'where id_pessoa = :id_pessoa')
+    BeforeOpen = dse_emailBeforeOpen
+    Left = 949
+    Top = 340
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_pessoa'
+      end>
   end
 end

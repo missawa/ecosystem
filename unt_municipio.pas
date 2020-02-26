@@ -12,7 +12,6 @@ uses
   Controls,
   Forms,
   Dialogs,
-  ADODB,
   DB,
   Grids,
   ExtCtrls,
@@ -26,7 +25,7 @@ uses
   wwdbcomb,
   wwdbedit,
   wwdblook,
-  unt_cad_abstrato_mestre_detalhe;
+  unt_cad_abstrato_mestre_detalhe, MemDS, DBAccess, Uni;
 
 type
   Tfrm_municipio = class(Tfrm_cad_abstrato_mestre_detalhe)
@@ -37,10 +36,8 @@ type
     edt_id: TwwDBEdit;
     edt_ibge: TwwDBEdit;
     edt_municipio: TwwDBEdit;
-    qry_uf: TADOQuery;
     wwDBLookupCombo1: TwwDBLookupCombo;
-    qry_ufid: TAutoIncField;
-    qry_ufsigla: TStringField;
+    qry_uf: TUniQuery;
     procedure FormCreate(Sender: TObject);
     procedure dse_detalheNewRecord(DataSet: TDataSet);
   private

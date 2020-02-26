@@ -1,28 +1,35 @@
 inherited frm_orgao_ambiental: Tfrm_orgao_ambiental
   Caption = #211'rg'#227'o Ambiental'
-  ClientHeight = 171
-  ExplicitHeight = 210
+  ClientHeight = 160
+  ClientWidth = 838
+  ExplicitWidth = 854
+  ExplicitHeight = 199
   PixelsPerInch = 96
   TextHeight = 15
+  inherited toolbar: TToolBar
+    Width = 838
+  end
   inherited pnlTitulo: TPanel
+    Width = 838
     Caption = ' '#211'RG'#195'OS AMBIENTAIS'
   end
   inherited pnlTotal: TPanel
-    Height = 96
+    Width = 838
+    Height = 85
     Padding.Left = 3
     Padding.Right = 3
     Padding.Bottom = 3
     ExplicitHeight = 96
     inherited pnl_tit_geral: TPanel
       Left = 3
-      Width = 776
+      Width = 832
       ExplicitLeft = 3
       ExplicitWidth = 776
     end
     inherited pnl_geral: TPanel
       Left = 3
-      Width = 776
-      Height = 75
+      Width = 832
+      Height = 64
       ExplicitLeft = 3
       ExplicitWidth = 776
       ExplicitHeight = 75
@@ -141,32 +148,20 @@ inherited frm_orgao_ambiental: Tfrm_orgao_ambiental
   inherited dts: TDataSource
     Left = 662
   end
-  inherited dse: TADODataSet
-    CursorType = ctStatic
-    CommandText = 'select * '#13#10'from orgao_ambiental'#13#10'where id = :key_field'
-    Parameters = <
-      item
-        Name = 'key_field'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
+  inherited dse: TUniQuery
     Left = 690
   end
   object dts_uf: TDataSource
-    DataSet = qry_uf
     Left = 625
     Top = 105
   end
-  object qry_uf: TADOQuery
-    Connection = dtm_dados.con_mysql
-    CursorType = ctStatic
-    Parameters = <>
+  object qry_uf: TUniQuery
+    Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select id, sigla'
       'from uf'
       'order by sigla')
-    Left = 613
-    Top = 105
+    Left = 566
+    Top = 112
   end
 end

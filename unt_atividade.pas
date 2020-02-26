@@ -3,9 +3,22 @@ unit unt_atividade;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_lista_abstrato, ADODB, DB, ExtCtrls, Buttons, Grids, Wwdbigrd,
-  Wwdbgrid;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  DB,
+  ExtCtrls,
+  Buttons,
+  Grids,
+  Wwdbigrd,
+  Wwdbgrid,
+  unt_lista_abstrato, MemDS, DBAccess, Uni;
 
 type
   Tfrm_atividade = class(Tfrm_lista_abstrato)

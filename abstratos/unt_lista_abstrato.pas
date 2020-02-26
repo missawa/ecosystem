@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, wwdblook, StdCtrls, wwdbdatetimepicker, Mask, wwdbedit, ExtCtrls,
   Buttons, DB, IBCustomDataSet, IBQuery, IBDatabase, Grids, Wwdbigrd, Wwdbgrid,
-  Wwdotdot, Wwdbcomb, ADODB;
+  Wwdotdot, Wwdbcomb, Uni, MemDS, DBAccess;
 
 type
   Tfrm_lista_abstrato = class(TForm)
@@ -18,8 +18,8 @@ type
     btnOK: TSpeedButton;
     btnCancelar: TSpeedButton;
     Bevel1: TBevel;
-    dse: TADODataSet;
-    qry: TADOQuery;
+    qry: TUniQuery;
+    dse: TUniQuery;
     procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -48,7 +48,7 @@ uses unt_procedures, unt_dtm_dados;
 
 procedure Tfrm_lista_abstrato.CarregarDados;
 begin
-  if dse.CommandText <> EmptyStr then
+  if dse.SQL.Text <> EmptyStr then
     dse.Open;
 end;
 

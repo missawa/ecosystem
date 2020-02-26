@@ -23,8 +23,10 @@ uses
   StdCtrls,
   wwdbdatetimepicker,
   ExtCtrls,
+  Uni,
   DB,
-  ADODB;
+  MemDS,
+  DBAccess;
 
 type
   Tfrm_pesquisa = class(TForm)
@@ -48,7 +50,7 @@ type
     Label5: TLabel;
     dts: TDataSource;
     btn_pesquisar: TSpeedButton;
-    qry: TADOQuery;
+    qry: TUniQuery;
     procedure FormShow(Sender: TObject);
     procedure btn_confirmarClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
@@ -62,7 +64,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
-    q: TADOQuery;
+    q: TUniQuery;
     criterio: string;
     valor: string;
     tipo_campo: integer;
@@ -198,8 +200,8 @@ end;
 
 procedure Tfrm_pesquisa.FormCreate(Sender: TObject);
 begin
-  q := TADOQuery.Create(nil);
-  q.Connection := dtm_dados.con_mysql;
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
 end;
 
 procedure Tfrm_pesquisa.FormDestroy(Sender: TObject);

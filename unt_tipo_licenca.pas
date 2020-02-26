@@ -3,9 +3,25 @@ unit unt_tipo_licenca;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_lista_abstrato, ADODB, DB, ExtCtrls, Buttons, Grids, Wwdbigrd,
-  Wwdbgrid, StdCtrls, Mask, wwdbedit;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  DB,
+  ExtCtrls,
+  Buttons,
+  Grids,
+  Wwdbigrd,
+  Wwdbgrid,
+  StdCtrls,
+  Mask,
+  wwdbedit,
+  unt_lista_abstrato, MemDS, DBAccess, Uni;
 
 type
   Tfrm_tipo_licenca = class(Tfrm_lista_abstrato)

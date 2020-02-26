@@ -3,9 +3,24 @@ unit unt_orgao_ambiental;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, unt_cad_abstrato, ADODB, DB, ExtCtrls, ComCtrls, ToolWin, StdCtrls,
-  Mask, wwdbedit, wwdblook;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  DB,
+  ExtCtrls,
+  ComCtrls,
+  ToolWin,
+  StdCtrls,
+  Mask,
+  wwdbedit,
+  wwdblook,
+  unt_cad_abstrato, ADODB, MemDS, DBAccess, Uni;
 
 type
   Tfrm_orgao_ambiental = class(Tfrm_cad_abstrato)
@@ -16,9 +31,9 @@ type
     edt_nome: TwwDBEdit;
     edt_sigla: TwwDBEdit;
     dts_uf: TDataSource;
-    qry_uf: TADOQuery;
     cmb_uf: TwwDBLookupCombo;
     Label7: TLabel;
+    qry_uf: TUniQuery;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private

@@ -13,7 +13,6 @@ uses
   Forms,
   Dialogs,
   unt_cad_abstrato_mestre_detalhe,
-  ADODB,
   DB,
   Grids,
   Wwdbigrd,
@@ -24,7 +23,7 @@ uses
   StdCtrls,
   Mask,
   wwdbedit,
-  wwdblook, Wwdotdot, Wwdbcomb;
+  wwdblook, Wwdotdot, Wwdbcomb, MemDS, DBAccess, Uni;
 
 type
   Tfrm_cliente_atividade = class(Tfrm_cad_abstrato_mestre_detalhe)

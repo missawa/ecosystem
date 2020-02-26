@@ -24,7 +24,10 @@ uses
   Grids,
   Wwdbigrd,
   Wwdbgrid,
-  Menus, ADODB;
+  Menus,
+  Uni,
+  MemDS,
+  DBAccess;
 
 type
   Tfrm_lista_toolbar_abstrato = class(Tfrm_lista_abstrato)

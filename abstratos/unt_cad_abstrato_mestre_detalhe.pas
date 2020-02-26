@@ -12,7 +12,6 @@ uses
   Controls,
   Forms,
   Dialogs,
-  ADODB,
   DB,
   ExtCtrls,
   ComCtrls,
@@ -20,6 +19,9 @@ uses
   Grids,
   Wwdbigrd,
   Wwdbgrid,
+  MemDS,
+  DBAccess,
+  Uni,
   unt_cad_abstrato;
 
 type
@@ -27,8 +29,8 @@ type
     Panel1: TPanel;
     pnl_tit_detalhe: TPanel;
     grd_detalhe: TwwDBGrid;
-    dse_detalhe: TADODataSet;
     dts_detalhe: TDataSource;
+    dse_detalhe: TUniQuery;
     procedure dseAfterScroll(DataSet: TDataSet);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
@@ -53,10 +55,10 @@ end;
 
 procedure Tfrm_cad_abstrato_mestre_detalhe.open_dataset_detalhe(pk: integer);
 begin
-  if dse_detalhe.Parameters.FindParam('key_field') <> nil then
+  if dse_detalhe.Params.FindParam('key_field') <> nil then
   begin
     dse_detalhe.Close;
-    dse_detalhe.Parameters.ParamByName('key_field').Value := pk;
+    dse_detalhe.Params.ParamByName('key_field').Value := pk;
     dse_detalhe.Open;
   end;
 end;

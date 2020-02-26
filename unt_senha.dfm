@@ -18440,7 +18440,7 @@ object frm_senha: Tfrm_senha
     Left = 34
     Top = 185
     Width = 186
-    Height = 25
+    Height = 27
     BorderStyle = bsNone
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -18462,7 +18462,7 @@ object frm_senha: Tfrm_senha
     Left = 34
     Top = 129
     Width = 186
-    Height = 25
+    Height = 27
     BorderStyle = bsNone
     CharCase = ecLowerCase
     Font.Charset = DEFAULT_CHARSET

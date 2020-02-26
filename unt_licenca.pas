@@ -3,9 +3,27 @@ unit unt_licenca;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ADODB, DB, wwdblook, StdCtrls, DBCtrls, Grids, Wwdbigrd, Wwdbgrid,
-  Mask, wwdbedit, ExtCtrls, Wwdotdot, Wwdbcomb;
+  Windows,
+  Messages,
+  SysUtils,
+  Variants,
+  Classes,
+  Graphics,
+  Controls,
+  Forms,
+  Dialogs,
+  DB,
+  wwdblook,
+  StdCtrls,
+  DBCtrls,
+  Grids,
+  Wwdbigrd,
+  Wwdbgrid,
+  Mask,
+  wwdbedit,
+  ExtCtrls,
+  Wwdotdot,
+  Wwdbcomb, MemDS, DBAccess, Uni, ADODB;
 
 type
   Tfrm_licenca = class(TForm)
@@ -55,6 +73,12 @@ type
     DBMemo1: TDBMemo;
     cmb_responsavel: TwwDBComboBox;
     cmb_executor: TwwDBComboBox;
+    UniQuery1: TUniQuery;
+    UniQuery2: TUniQuery;
+    UniQuery3: TUniQuery;
+    UniQuery4: TUniQuery;
+    UniQuery5: TUniQuery;
+    UniQuery6: TUniQuery;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);

@@ -13,7 +13,6 @@ uses
   Controls,
   Forms,
   Dialogs,
-  ADODB,
   ComCtrls,
   DB,
   DBClient,
@@ -27,7 +26,7 @@ uses
   wwdblook,
   Wwdbigrd,
   Wwdbgrid,
-  unt_cad_abstrato, wwriched, Provider;
+  unt_cad_abstrato, wwriched, Provider, MemDS, DBAccess, Uni;
 
 type
   Tfrm_cliente = class(TForm)
@@ -45,23 +44,18 @@ type
     edt_numero: TwwDBEdit;
     Label11: TLabel;
     Label12: TLabel;
-    qry_uf: TADOQuery;
     cmb_uf: TwwDBLookupCombo;
     cmb_municipio: TwwDBLookupCombo;
     cmb_bairro: TwwDBLookupCombo;
-    qry_municipio: TADOQuery;
-    qry_bairro: TADOQuery;
     dts_uf: TDataSource;
     dts_municipio: TDataSource;
     dts_bairro: TDataSource;
     dts_endereco: TDataSource;
-    dse_endereco: TADODataSet;
     dts_tel: TDataSource;
     pnl_contato: TPanel;
     onl_telefone: TPanel;
     pnl_tit_telefone: TPanel;
     grd_tel: TwwDBGrid;
-    dse_tel: TADODataSet;
     cmb_tipo_tel: TwwDBComboBox;
     cmb_desc_tel: TwwDBComboBox;
     Panel1: TPanel;
@@ -70,7 +64,6 @@ type
     cmb_tipo_email: TwwDBComboBox;
     cmb_desc_email: TwwDBComboBox;
     dts_email: TDataSource;
-    dse_email: TADODataSet;
     pnl_obs: TPanel;
     pnl_tit_obs: TPanel;
     Panel4: TPanel;
@@ -108,8 +101,14 @@ type
     dts_cliente: TDataSource;
     btn_atividades: TToolButton;
     ToolButton2: TToolButton;
-    qry: TADOQuery;
-    dse_cliente: TADODataSet;
+    qry: TUniQuery;
+    dse_cliente: TUniQuery;
+    dse_endereco: TUniQuery;
+    qry_uf: TUniQuery;
+    qry_municipio: TUniQuery;
+    qry_bairro: TUniQuery;
+    dse_tel: TUniQuery;
+    dse_email: TUniQuery;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure edt_fantasiaEnter(Sender: TObject);
@@ -148,6 +147,8 @@ type
     procedure btn_ultimoClick(Sender: TObject);
     procedure btn_anteriorClick(Sender: TObject);
     procedure dts_clienteStateChange(Sender: TObject);
+    procedure dse_clienteBeforePost(DataSet: TDataSet);
+    procedure dse_clienteNewRecord(DataSet: TDataSet);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -261,7 +262,17 @@ end;
 
 procedure Tfrm_cliente.btn_salvarClick(Sender: TObject);
 begin
-  dse_cliente.Post;
+  if dse_cliente.State in [dsEdit, dsInsert] then
+    dse_cliente.Post;
+
+  if dse_endereco.State in [dsEdit, dsInsert] then
+    dse_endereco.Post;
+
+  if dse_email.State in [dsEdit, dsInsert] then
+    dse_email.Post;
+
+  if dse_tel.State in [dsEdit, dsInsert] then
+    dse_tel.Post;
 end;
 
 procedure Tfrm_cliente.btn_ultimoClick(Sender: TObject);
@@ -355,16 +366,26 @@ begin
   mostra_cnpj_cpf;
 end;
 
+procedure Tfrm_cliente.dse_clienteBeforePost(DataSet: TDataSet);
+begin
+  dse_cliente.FieldByName('cliente').Text := 'S';
+end;
+
+procedure Tfrm_cliente.dse_clienteNewRecord(DataSet: TDataSet);
+begin
+  dse_cliente.FieldByName('cliente').Text := 'S';
+end;
+
 procedure Tfrm_cliente.dse_emailBeforeOpen(DataSet: TDataSet);
 begin
   if dse_cliente.Active then
-    dse_email.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
+    dse_email.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoBeforeOpen(DataSet: TDataSet);
 begin
   if dse_cliente.Active then
-    dse_endereco.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
+    dse_endereco.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoNewRecord(DataSet: TDataSet);
@@ -385,7 +406,7 @@ end;
 procedure Tfrm_cliente.dse_telBeforeOpen(DataSet: TDataSet);
 begin
   if dse_cliente.Active then
-    dse_tel.Parameters.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).Value;
+    dse_tel.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).Value;
 end;
 
 procedure Tfrm_cliente.dse_telNewRecord(DataSet: TDataSet);
@@ -500,7 +521,7 @@ end;
 procedure Tfrm_cliente.open_dataset(pk: integer);
 begin
   dse_cliente.Close;
-  dse_cliente.CommandText :=
+  dse_cliente.SQL.Text :=
     'select *                     '#13+
     'from pessoa                  '#13+
     'where id = ' + intToStr(pk)  +#13+
@@ -525,7 +546,7 @@ end;
 
 procedure Tfrm_cliente.qry_bairroBeforeOpen(DataSet: TDataSet);
 begin
-  qry_bairro.Parameters.ParamByName('id_municipio').Value := qry_municipio.FieldByName('id').Value;
+  qry_bairro.Params.ParamByName('id_municipio').Value := qry_municipio.FieldByName('id').Value;
 end;
 
 procedure Tfrm_cliente.qry_municipioAfterScroll(DataSet: TDataSet);
@@ -536,7 +557,7 @@ end;
 
 procedure Tfrm_cliente.qry_municipioBeforeOpen(DataSet: TDataSet);
 begin
-  qry_municipio.Parameters.ParamByName('id_uf').Value := qry_uf.FieldByName('id').Value;
+  qry_municipio.Params.ParamByName('id_uf').Value := qry_uf.FieldByName('id').Value;
 end;
 
 procedure Tfrm_cliente.qry_ufAfterScroll(DataSet: TDataSet);

@@ -17,8 +17,8 @@ uses
   wwdbedit,
   Messages,
   IBQuery,
-  ADODB,
-  jpeg;
+  jpeg,
+  Uni;
 
 type
   Tfrm_senha = class(TForm)
@@ -63,7 +63,7 @@ end;
 
 procedure Tfrm_senha.btn_okClick(Sender: TObject);
 var
-  q: TADOQuery;
+  q: TUniQuery;
 
   procedure ConfigBdUser;
   var
@@ -78,8 +78,8 @@ begin
 
   verifica_conf_data_windows;
 
-  dtm_dados.qry_usuario.Parameters.ParamByName('login').Value := edt_login.Text;
-  dtm_dados.qry_usuario.Parameters.ParamByName('senha').Value := edt_senha.Text;
+  dtm_dados.qry_usuario.Params.ParamByName('login').Value := edt_login.Text;
+  dtm_dados.qry_usuario.Params.ParamByName('senha').Value := edt_senha.Text;
   dtm_dados.qry_usuario.Open;
 
   if not dtm_dados.qry_usuario.IsEmpty then
