@@ -118,7 +118,12 @@ end;
 
 procedure Tfrm_cad_abstrato.btn_anteriorClick(Sender: TObject);
 begin
-  open_dataset(prior_id(table_name, key_field, dse.FieldByName(key_field).AsInteger));
+  open_dataset(
+    prior_id(
+      table_name,
+      key_field,
+      dse.FieldByName(key_field).AsInteger,
+      ''));
 end;
 
 procedure Tfrm_cad_abstrato.btn_atualizarClick(Sender: TObject);
@@ -177,12 +182,12 @@ end;
 
 procedure Tfrm_cad_abstrato.btn_primeiroClick(Sender: TObject);
 begin
-  open_dataset(first_id(table_name,key_field));
+  open_dataset(first_id(table_name,key_field,''));
 end;
 
 procedure Tfrm_cad_abstrato.btn_proximoClick(Sender: TObject);
 begin
-  open_dataset(next_id(table_name, key_field, dse.FieldByName(key_field).AsInteger));
+  open_dataset(next_id(table_name, key_field, dse.FieldByName(key_field).AsInteger,''));
 end;
 
 procedure Tfrm_cad_abstrato.btn_salvarClick(Sender: TObject);
@@ -192,7 +197,11 @@ end;
 
 procedure Tfrm_cad_abstrato.btn_ultimoClick(Sender: TObject);
 begin
-  open_dataset(last_id(table_name,key_field));
+  open_dataset(
+    last_id(
+      table_name,
+      key_field,
+      ''));
 end;
 
 procedure Tfrm_cad_abstrato.dtsStateChange(Sender: TObject);

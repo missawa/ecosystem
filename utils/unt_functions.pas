@@ -14,13 +14,13 @@ uses
   function cnpj_valido(cnpj: string): boolean;
   function data_sql(data: TDate): string;
   function define_mascara_telefone(tel: string): string;
-  function first_id(tabela: string; pk: string): integer;
-  function last_id(tabela: string; pk: string): integer;
+  function first_id(tabela: string; pk: string; filter: string): integer;
+  function last_id(tabela: string; pk: string; filter: string): integer;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
-  function next_id(tabela: string; pk: string; id: integer): integer;
+  function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
-  function prior_id(tabela: string; pk: string; id: integer): integer;
+  function prior_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function troca_acentos(texto: string): string;
   function valor_str(valor: currency): string;
 
@@ -222,56 +222,8 @@ end;
 
 function first_id(
   tabela: string;
-  pk: string): integer;
-var
-  q: TUniQuery;
-begin
-
-  q := TUniQuery.Create(nil);
-  q.Connection := dtm_dados.mysql_conn;
-
-  try
-    open_query(
-      q,
-      'select coalesce(min(' + pk + '),0) as id '#13+
-      'from ' + tabela);
-
-    result := q.FieldByName('id').AsInteger;
-
-  except
-    q.Free;
-  end;
-
-end;
-
-function last_id(
-  tabela: string;
-  pk: string): integer;
-var
-  q: TUniQuery;
-begin
-
-  q := TUniQuery.Create(nil);
-  q.Connection := dtm_dados.mysql_conn;
-
-  try
-    open_query(
-      q,
-      'select coalesce(max(' + pk + '),0) as id '#13+
-      'from ' + tabela);
-
-    result := q.FieldByName('id').AsInteger;
-
-  except
-    q.Free;
-  end;
-
-end;
-
-function next_id(
-  tabela: string;
   pk: string;
-  id: integer): integer;
+  filter: string): integer;
 var
   q: TUniQuery;
 begin
@@ -284,10 +236,66 @@ begin
       q,
       'select coalesce(min(' + pk + '),0) as id '#13+
       'from ' + tabela                          +#13+
-      'where ' + pk + ' > ' + intToStr(id));
+      'where ' + pk + ' is not null             '#13+
+      filter);
+
+    result := q.FieldByName('id').AsInteger;
+
+  except
+    q.Free;
+  end;
+
+end;
+
+function last_id(
+  tabela: string;
+  pk: string;
+  filter: string): integer;
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+
+  try
+    open_query(
+      q,
+      'select coalesce(max(' + pk + '),0) as id '#13+
+      'from ' + tabela                          +#13+
+      'where ' + pk + ' is not null             '#13+
+      filter);
+
+    result := q.FieldByName('id').AsInteger;
+
+  except
+    q.Free;
+  end;
+
+end;
+
+function next_id(
+  tabela: string;
+  pk: string;
+  id: integer;
+  filter: string): integer;
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+
+  try
+    open_query(
+      q,
+      'select coalesce(min(' + pk + '),0) as id '#13+
+      'from ' + tabela                          +#13+
+      'where ' + pk + ' > ' + intToStr(id)      +#13+
+      filter);
 
     if q.FieldByName('id').AsInteger = 0 then
-      result := last_id(tabela,pk)
+      result := last_id(tabela,pk,filter)
     else
       result := q.FieldByName('id').AsInteger;
 
@@ -333,7 +341,8 @@ end;
 function prior_id(
   tabela: string;
   pk: string;
-  id: integer): integer;
+  id: integer;
+  filter: string): integer;
 var
   q: TUniQuery;
 begin
@@ -346,10 +355,11 @@ begin
       q,
       'select coalesce(max(' + pk + '),0) as id '#13+
       'from ' + tabela                          +#13+
-      'where ' + pk + ' < ' + intToStr(id));
+      'where ' + pk + ' < ' + intToStr(id)      +#13+
+      filter);
 
     if q.FieldByName('id').AsInteger = 0 then
-      result := first_id(tabela,pk)
+      result := first_id(tabela,pk,filter)
     else
       result := q.FieldByName('id').AsInteger;
 

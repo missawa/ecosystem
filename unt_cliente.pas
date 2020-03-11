@@ -109,23 +109,28 @@ type
     qry_bairro: TUniQuery;
     dse_tel: TUniQuery;
     dse_email: TUniQuery;
+    dse_enderecoid: TIntegerField;
+    dse_enderecoid_pessoa: TIntegerField;
+    dse_enderecodescricao: TStringField;
+    dse_enderecocep: TStringField;
+    dse_enderecoid_uf: TIntegerField;
+    dse_enderecoid_municipio: TIntegerField;
+    dse_enderecoid_bairro: TIntegerField;
+    dse_enderecologradouro: TStringField;
+    dse_endereconumero: TIntegerField;
+    dse_enderecocomplemento: TStringField;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure edt_fantasiaEnter(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
-    procedure dse_enderecoBeforeOpen(DataSet: TDataSet);
     procedure edt_cnpj_cpfExit(Sender: TObject);
     procedure edt_cepExit(Sender: TObject);
     procedure qry_ufAfterScroll(DataSet: TDataSet);
     procedure qry_municipioAfterScroll(DataSet: TDataSet);
-    procedure qry_municipioBeforeOpen(DataSet: TDataSet);
-    procedure qry_bairroBeforeOpen(DataSet: TDataSet);
     procedure dse_clienteAfterScroll(DataSet: TDataSet);
-    procedure dse_telBeforeOpen(DataSet: TDataSet);
     procedure dse_telNewRecord(DataSet: TDataSet);
     procedure dse_telAfterScroll(DataSet: TDataSet);
     procedure cmb_tipo_telCloseUp(Sender: TwwDBComboBox; Select: Boolean);
-    procedure dse_emailBeforeOpen(DataSet: TDataSet);
     procedure dtsStateChange(Sender: TObject);
     procedure dse_clienteAfterCancel(DataSet: TDataSet);
     procedure dse_clienteAfterClose(DataSet: TDataSet);
@@ -149,6 +154,9 @@ type
     procedure dts_clienteStateChange(Sender: TObject);
     procedure dse_clienteBeforePost(DataSet: TDataSet);
     procedure dse_clienteNewRecord(DataSet: TDataSet);
+    procedure dse_clienteAfterEdit(DataSet: TDataSet);
+    procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -188,7 +196,12 @@ end;
 
 procedure Tfrm_cliente.btn_anteriorClick(Sender: TObject);
 begin
-  open_dataset(prior_id(table_name, key_field, dse_cliente.FieldByName(key_field).AsInteger));
+  open_dataset(
+    prior_id(
+      table_name,
+      key_field,
+      dse_cliente.FieldByName(key_field).AsInteger,
+      'and cliente = ''S'''));
 end;
 
 procedure Tfrm_cliente.btn_atividadesClick(Sender: TObject);
@@ -252,12 +265,21 @@ end;
 
 procedure Tfrm_cliente.btn_primeiroClick(Sender: TObject);
 begin
-  open_dataset(first_id(table_name,key_field));
+  open_dataset(
+    first_id(
+      table_name,
+      key_field,
+      'and cliente = ''S'''));
 end;
 
 procedure Tfrm_cliente.btn_proximoClick(Sender: TObject);
 begin
-  open_dataset(next_id(table_name, key_field, dse_cliente.FieldByName(key_field).AsInteger));
+  open_dataset(
+    next_id(
+      table_name,
+      key_field,
+      dse_cliente.FieldByName(key_field).AsInteger,
+      'and cliente = ''S'''));
 end;
 
 procedure Tfrm_cliente.btn_salvarClick(Sender: TObject);
@@ -277,7 +299,11 @@ end;
 
 procedure Tfrm_cliente.btn_ultimoClick(Sender: TObject);
 begin
-  open_dataset(last_id(table_name,key_field));
+  open_dataset(
+    last_id(
+      table_name,
+      key_field,
+      'and cliente = ''S'''));
 end;
 
 procedure Tfrm_cliente.cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
@@ -322,6 +348,11 @@ begin
   dse_endereco.Close;
   dse_tel.Close;
   dse_email.Close;
+end;
+
+procedure Tfrm_cliente.dse_clienteAfterEdit(DataSet: TDataSet);
+begin
+  dse_endereco.Edit;
 end;
 
 procedure Tfrm_cliente.dse_clienteAfterOpen(DataSet: TDataSet);
@@ -376,18 +407,6 @@ begin
   dse_cliente.FieldByName('cliente').Text := 'S';
 end;
 
-procedure Tfrm_cliente.dse_emailBeforeOpen(DataSet: TDataSet);
-begin
-  if dse_cliente.Active then
-    dse_email.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
-end;
-
-procedure Tfrm_cliente.dse_enderecoBeforeOpen(DataSet: TDataSet);
-begin
-  if dse_cliente.Active then
-    dse_endereco.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).AsInteger;
-end;
-
 procedure Tfrm_cliente.dse_enderecoNewRecord(DataSet: TDataSet);
 begin
   dse_endereco.FieldByName('id_pessoa').AsInteger := dse_cliente.FieldByName('id').AsInteger;
@@ -398,15 +417,8 @@ procedure Tfrm_cliente.dse_telAfterScroll(DataSet: TDataSet);
 var
   num: string;
 begin
-
-  num := ajusta_numero_telefone(dse_tel.FieldByName('numero').Text);
-  TStringField(dse_tel.FieldByName('numero')).EditMask := define_mascara_telefone(num);
-end;
-
-procedure Tfrm_cliente.dse_telBeforeOpen(DataSet: TDataSet);
-begin
-  if dse_cliente.Active then
-    dse_tel.Params.ParamByName('id_pessoa').Value := dse_cliente.FieldByName(key_field).Value;
+{  num := ajusta_numero_telefone(dse_tel.FieldByName('numero').Text);
+  TStringField(dse_tel.FieldByName('numero')).EditMask := define_mascara_telefone(num);    }
 end;
 
 procedure Tfrm_cliente.dse_telNewRecord(DataSet: TDataSet);
@@ -529,6 +541,18 @@ begin
   dse_cliente.Open;
 end;
 
+procedure Tfrm_cliente.pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+const
+  SC_DRAGMOVE = $F012;
+begin
+  if Button = mbleft then
+  begin
+    ReleaseCapture;
+    self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
+  end;
+end;
+
 procedure Tfrm_cliente.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   action := caFree;
@@ -544,20 +568,10 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure Tfrm_cliente.qry_bairroBeforeOpen(DataSet: TDataSet);
-begin
-  qry_bairro.Params.ParamByName('id_municipio').Value := qry_municipio.FieldByName('id').Value;
-end;
-
 procedure Tfrm_cliente.qry_municipioAfterScroll(DataSet: TDataSet);
 begin
   qry_bairro.Close;
   qry_bairro.Open;
-end;
-
-procedure Tfrm_cliente.qry_municipioBeforeOpen(DataSet: TDataSet);
-begin
-  qry_municipio.Params.ParamByName('id_uf').Value := qry_uf.FieldByName('id').Value;
 end;
 
 procedure Tfrm_cliente.qry_ufAfterScroll(DataSet: TDataSet);

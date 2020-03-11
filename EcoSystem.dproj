@@ -55,6 +55,9 @@
     <DCCReference Include="unt_cliente_atividade.pas">
       <Form>frm_cliente_atividade</Form>
     </DCCReference>
+    <DCCReference Include="unt_cliente_atividade_apagar.pas">
+      <Form>frm_cliente_atividade_apagar</Form>
+    </DCCReference>
     <DCCReference Include="unt_dtm_dados.pas">
       <Form>dtm_dados</Form>
       <DesignClass>TDataModule</DesignClass>

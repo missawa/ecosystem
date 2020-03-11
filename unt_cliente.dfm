@@ -377,6 +377,7 @@ object frm_cliente: Tfrm_cliente
           'sigla'#9'2'#9'UF'#9'F')
         DataField = 'id_uf'
         DataSource = dts_endereco
+        LookupTable = qry_uf
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -402,6 +403,7 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'MUNIC'#205'PIO'#9'F')
         DataField = 'id_municipio'
         DataSource = dts_endereco
+        LookupTable = qry_municipio
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -427,6 +429,7 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'BAIRRO'#9'F')
         DataField = 'id_bairro'
         DataSource = dts_endereco
+        LookupTable = qry_bairro
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -952,6 +955,7 @@ object frm_cliente: Tfrm_cliente
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 5
+    OnMouseDown = pnlTituloMouseDown
   end
   object dts_uf: TDataSource
     DataSet = qry_uf
@@ -969,17 +973,16 @@ object frm_cliente: Tfrm_cliente
     Top = 197
   end
   object dts_endereco: TDataSource
+    DataSet = dse_endereco
     Left = 921
     Top = 178
   end
   object dts_tel: TDataSource
-    AutoEdit = False
     DataSet = dse_tel
     Left = 339
     Top = 340
   end
   object dts_email: TDataSource
-    AutoEdit = False
     DataSet = dse_email
     Left = 921
     Top = 340
@@ -997,12 +1000,49 @@ object frm_cliente: Tfrm_cliente
     Top = 35
   end
   object dse_cliente: TUniQuery
+    UpdatingTable = 'pessoa'
+    SQLInsert.Strings = (
+      'INSERT INTO pessoa'
+      
+        '  (id, tipo, cpf, cnpj, nome, fantasia, cliente, fornecedor, usu' +
+        'ario, obs)'
+      'VALUES'
+      
+        '  (:id, :tipo, :cpf, :cnpj, :nome, :fantasia, :cliente, :fornece' +
+        'dor, :usuario, :obs)')
+    SQLDelete.Strings = (
+      'DELETE FROM pessoa'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE pessoa'
+      'SET'
+      
+        '  id = :id, tipo = :tipo, cpf = :cpf, cnpj = :cnpj, nome = :nome' +
+        ', fantasia = :fantasia, cliente = :cliente, fornecedor = :fornec' +
+        'edor, usuario = :usuario, obs = :obs'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      
+        'SELECT id, tipo, cpf, cnpj, nome, fantasia, cliente, fornecedor,' +
+        ' usuario, obs FROM pessoa'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM pessoa'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select * '
       'from pessoa '
       'where id = :id'
       '    and cliente = '#39'S'#39)
+    Options.StrictUpdate = False
+    AfterOpen = dse_clienteAfterOpen
+    AfterClose = dse_clienteAfterClose
+    AfterEdit = dse_clienteAfterEdit
+    AfterScroll = dse_clienteAfterScroll
     Left = 949
     Top = 110
     ParamData = <
@@ -1012,19 +1052,91 @@ object frm_cliente: Tfrm_cliente
       end>
   end
   object dse_endereco: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO endereco'
+      
+        '  (id, id_pessoa, descricao, cep, id_uf, id_municipio, id_bairro' +
+        ', logradouro, numero, complemento)'
+      'VALUES'
+      
+        '  (:id, :id_pessoa, :descricao, :cep, :id_uf, :id_municipio, :id' +
+        '_bairro, :logradouro, :numero, :complemento)')
+    SQLDelete.Strings = (
+      'DELETE FROM endereco'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE endereco'
+      'SET'
+      
+        '  id = :id, id_pessoa = :id_pessoa, descricao = :descricao, cep ' +
+        '= :cep, id_uf = :id_uf, id_municipio = :id_municipio, id_bairro ' +
+        '= :id_bairro, logradouro = :logradouro, numero = :numero, comple' +
+        'mento = :complemento'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      
+        'SELECT id, id_pessoa, descricao, cep, id_uf, id_municipio, id_ba' +
+        'irro, logradouro, numero, complemento FROM endereco'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM endereco'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select * '
       'from endereco '
-      'where id_pessoa = :id_pessoa')
+      'where id_pessoa = :id')
+    MasterSource = dts_cliente
+    Options.StrictUpdate = False
     OnNewRecord = dse_enderecoNewRecord
     Left = 949
     Top = 178
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_pessoa'
+        Name = 'id'
       end>
+    object dse_enderecoid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_enderecoid_pessoa: TIntegerField
+      FieldName = 'id_pessoa'
+    end
+    object dse_enderecodescricao: TStringField
+      FieldName = 'descricao'
+      Required = True
+      Size = 45
+    end
+    object dse_enderecocep: TStringField
+      FieldName = 'cep'
+      Size = 8
+    end
+    object dse_enderecoid_uf: TIntegerField
+      FieldName = 'id_uf'
+      Required = True
+    end
+    object dse_enderecoid_municipio: TIntegerField
+      FieldName = 'id_municipio'
+      Required = True
+    end
+    object dse_enderecoid_bairro: TIntegerField
+      FieldName = 'id_bairro'
+      Required = True
+    end
+    object dse_enderecologradouro: TStringField
+      FieldName = 'logradouro'
+      Required = True
+      Size = 100
+    end
+    object dse_endereconumero: TIntegerField
+      FieldName = 'numero'
+    end
+    object dse_enderecocomplemento: TStringField
+      FieldName = 'complemento'
+    end
   end
   object qry_uf: TUniQuery
     Connection = dtm_dados.mysql_conn
@@ -1032,6 +1144,7 @@ object frm_cliente: Tfrm_cliente
       'select id, sigla'
       'from uf'
       'order by sigla')
+    Active = True
     Left = 123
     Top = 197
   end
@@ -1040,16 +1153,19 @@ object frm_cliente: Tfrm_cliente
     SQL.Strings = (
       'select id, nome'
       'from municipio'
-      'where id_uf = :id_uf'
+      'where id_uf = :id'
       'order by nome')
-    BeforeOpen = qry_municipioBeforeOpen
+    MasterSource = dts_uf
+    Active = True
     AfterScroll = qry_municipioAfterScroll
     Left = 300
     Top = 197
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'id_uf'
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+        Value = 1
       end>
   end
   object qry_bairro: TUniQuery
@@ -1057,46 +1173,100 @@ object frm_cliente: Tfrm_cliente
     SQL.Strings = (
       'select * '
       'from bairro '
-      'where id_municipio = :id_municipio')
-    BeforeOpen = qry_bairroBeforeOpen
+      'where id_municipio = :id')
+    MasterSource = dts_municipio
+    Active = True
     Left = 478
     Top = 197
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'id_municipio'
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
       end>
   end
   object dse_tel: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO telefone'
+      '  (id, tipo, numero, tem_whatsapp, id_pessoa, descricao)'
+      'VALUES'
+      '  (:id, :tipo, :numero, :tem_whatsapp, :id_pessoa, :descricao)')
+    SQLDelete.Strings = (
+      'DELETE FROM telefone'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE telefone'
+      'SET'
+      
+        '  id = :id, tipo = :tipo, numero = :numero, tem_whatsapp = :tem_' +
+        'whatsapp, id_pessoa = :id_pessoa, descricao = :descricao'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      
+        'SELECT id, tipo, numero, tem_whatsapp, id_pessoa, descricao FROM' +
+        ' telefone'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM telefone'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select *'
       'from telefone '
-      'where id_pessoa = :id_pessoa'
+      'where id_pessoa = :id'
       'order by descricao')
-    BeforeOpen = dse_telBeforeOpen
+    MasterSource = dts_cliente
+    Options.StrictUpdate = False
     AfterScroll = dse_telAfterScroll
     Left = 367
     Top = 340
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_pessoa'
+        Name = 'id'
       end>
   end
   object dse_email: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO email'
+      '  (id, id_pessoa, tipo, endereco, descricao)'
+      'VALUES'
+      '  (:id, :id_pessoa, :tipo, :endereco, :descricao)')
+    SQLDelete.Strings = (
+      'DELETE FROM email'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE email'
+      'SET'
+      
+        '  id = :id, id_pessoa = :id_pessoa, tipo = :tipo, endereco = :en' +
+        'dereco, descricao = :descricao'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      'SELECT id, id_pessoa, tipo, endereco, descricao FROM email'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM email'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select *'
       'from email'
-      'where id_pessoa = :id_pessoa')
-    BeforeOpen = dse_emailBeforeOpen
+      'where id_pessoa = :id')
+    MasterSource = dts_cliente
+    Options.StrictUpdate = False
     Left = 949
     Top = 340
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_pessoa'
+        Name = 'id'
       end>
   end
 end

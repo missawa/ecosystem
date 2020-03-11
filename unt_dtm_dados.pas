@@ -22,6 +22,7 @@ type
     ODBCUniProvider1: TODBCUniProvider;
     procedure con_mysqlBeforeConnect(Sender: TObject);
     procedure con_mysqlAfterConnect(Sender: TObject);
+    procedure mysql_connBeforeConnect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,6 +51,16 @@ begin
   con.LoadFromFile('config.dat');
   mysql_conn.ConnectString := con.Text;
   con.Free;
+end;
+
+procedure Tdtm_dados.mysql_connBeforeConnect(Sender: TObject);
+var
+  conn: TStringList;
+begin
+  conn := TStringList.Create;
+  conn.LoadFromFile('config.dat');
+  mysql_conn.ConnectString := conn.Text;
+  conn.Free;
 end;
 
 end.

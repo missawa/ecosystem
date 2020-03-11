@@ -30,10 +30,12 @@ object dtm_dados: Tdtm_dados
   object mysql_conn: TUniConnection
     ProviderName = 'ODBC'
     Port = 3306
+    DefaultTransaction.DefaultCloseAction = taCommit
     Username = 'root'
     Server = 'ecoplan'
     Connected = True
     LoginPrompt = False
+    BeforeConnect = mysql_connBeforeConnect
     Left = 35
     Top = 55
     EncryptedPassword = 'D5FFB2FF96FFCDFFCAFFCEFFCFFFCEFFCEFF'

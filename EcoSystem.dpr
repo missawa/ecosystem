@@ -26,11 +26,12 @@ uses
   unt_classe_endereco in 'classes\unt_classe_endereco.pas',
   unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro},
   unt_constantes in 'utils\unt_constantes.pas',
-  unt_atividade in 'unt_atividade.pas' {frm_atividade},
-  unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade},
+  unt_cliente_atividade_apagar in 'unt_cliente_atividade_apagar.pas' {frm_cliente_atividade_apagar},
   unt_orgao_ambiental in 'unt_orgao_ambiental.pas' {frm_orgao_ambiental},
   unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca},
-  unt_licenca in 'unt_licenca.pas' {frm_licenca};
+  unt_licenca in 'unt_licenca.pas' {frm_licenca},
+  unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade},
+  unt_atividade in 'unt_atividade.pas' {frm_atividade};
 
 {$R *.res}
 

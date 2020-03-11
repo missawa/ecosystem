@@ -23,7 +23,11 @@ uses
   wwdbedit,
   ExtCtrls,
   Wwdotdot,
-  Wwdbcomb, MemDS, DBAccess, Uni, ADODB;
+  Wwdbcomb,
+  MemDS,
+  DBAccess,
+  Uni,
+  ADODB;
 
 type
   Tfrm_licenca = class(TForm)
@@ -53,20 +57,9 @@ type
     Panel1: TPanel;
     pnl_tit_detalhe: TPanel;
     grd_detalhe: TwwDBGrid;
-    qry_tipo: TADOQuery;
-    qry_tiposigla: TStringField;
-    qry_tipoid: TAutoIncField;
-    qry_orgao: TADOQuery;
-    qry_orgaoid: TAutoIncField;
-    qry_orgaosigla: TStringField;
-    qry_municipio: TADOQuery;
-    qry_municipioid: TAutoIncField;
-    qry_municipionome: TStringField;
     dts_licenca: TDataSource;
-    dse_licenca: TADODataSet;
     dts_cliente: TDataSource;
     qry_cliente: TADOQuery;
-    dse_condicionante: TADODataSet;
     dts_condicionante: TDataSource;
     Panel4: TPanel;
     Panel5: TPanel;
@@ -74,11 +67,11 @@ type
     cmb_responsavel: TwwDBComboBox;
     cmb_executor: TwwDBComboBox;
     UniQuery1: TUniQuery;
-    UniQuery2: TUniQuery;
-    UniQuery3: TUniQuery;
-    UniQuery4: TUniQuery;
-    UniQuery5: TUniQuery;
-    UniQuery6: TUniQuery;
+    dse_licenca: TUniQuery;
+    dse_condicionante: TUniQuery;
+    qry_tipo: TUniQuery;
+    qry_orgao: TUniQuery;
+    qry_municipio: TUniQuery;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -107,7 +100,7 @@ end;
 
 procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
 begin
-  dse_condicionante.Parameters.ParamByName('id_licenca').Value :=  dse_licenca.FieldByName('id').Value;
+  dse_condicionante.Params.ParamByName('id_licenca').Value :=  dse_licenca.FieldByName('id').Value;
 end;
 
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
@@ -138,13 +131,13 @@ begin
   qry_cliente.Open;
 
   dse_licenca.Close;
-  dse_licenca.Parameters.ParamByName('id_cliente').Value := id_cliente;
-  dse_licenca.Parameters.ParamByName('id_atividade').Value := id_atividade;
+  dse_licenca.Params.ParamByName('id_cliente').Value := id_cliente;
+  dse_licenca.Params.ParamByName('id_atividade').Value := id_atividade;
   dse_licenca.Open;
 
 
   dse_condicionante.Close;
-  dse_condicionante.Parameters.ParamByName('id_licenca').Value := dse_licenca.FieldByName('id').Value;
+  dse_condicionante.Params.ParamByName('id_licenca').Value := dse_licenca.FieldByName('id').Value;
   dse_condicionante.Open;
 end;
 

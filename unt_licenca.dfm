@@ -2,7 +2,7 @@ object frm_licenca: Tfrm_licenca
   Left = 0
   Top = 0
   Caption = 'Licen'#231'a'
-  ClientHeight = 566
+  ClientHeight = 412
   ClientWidth = 1308
   Color = clWhite
   Ctl3D = False
@@ -203,7 +203,7 @@ object frm_licenca: Tfrm_licenca
     Left = 0
     Top = 70
     Width = 1308
-    Height = 211
+    Height = 143
     Align = alTop
     BevelOuter = bvNone
     Color = clWhite
@@ -240,7 +240,7 @@ object frm_licenca: Tfrm_licenca
       Left = 3
       Top = 21
       Width = 959
-      Height = 187
+      Height = 119
       ControlType.Strings = (
         'id_tipo_licenca;CustomEdit;cmb_tipo;T'
         'id_orgao;CustomEdit;cmb_orgao;T'
@@ -270,31 +270,33 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
+      ExplicitHeight = 187
     end
     object pnl_desc_licenca: TPanel
       Left = 962
       Top = 21
       Width = 344
-      Height = 187
+      Height = 119
       Align = alRight
-      BevelInner = bvRaised
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
       TabOrder = 2
       object pnl_tit_desc_licenca: TPanel
-        Left = 2
-        Top = 2
-        Width = 340
+        Left = 0
+        Top = 0
+        Width = 342
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
+        ParentBackground = False
         TabOrder = 0
       end
       object mmo_desc_licenca: TDBMemo
-        Left = 2
-        Top = 23
-        Width = 340
-        Height = 162
+        Left = 0
+        Top = 21
+        Width = 342
+        Height = 96
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -348,8 +350,8 @@ object frm_licenca: Tfrm_licenca
       ShowMatchText = True
     end
     object cmb_municipio: TwwDBLookupCombo
-      Left = 747
-      Top = 40
+      Left = 741
+      Top = 41
       Width = 214
       Height = 19
       DropDownAlignment = taLeftJustify
@@ -383,9 +385,9 @@ object frm_licenca: Tfrm_licenca
   end
   object Panel1: TPanel
     Left = 0
-    Top = 281
+    Top = 213
     Width = 1308
-    Height = 285
+    Height = 199
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -394,6 +396,8 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
+    ExplicitTop = 281
+    ExplicitHeight = 285
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 0
@@ -420,7 +424,7 @@ object frm_licenca: Tfrm_licenca
       Left = 3
       Top = 18
       Width = 958
-      Height = 264
+      Height = 178
       ControlType.Strings = (
         'cumprida;CheckBox;S;N'
         'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
@@ -447,20 +451,21 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      ExplicitHeight = 264
     end
     object Panel4: TPanel
       Left = 961
       Top = 18
       Width = 344
-      Height = 264
+      Height = 178
       Align = alRight
-      BevelInner = bvRaised
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
       TabOrder = 2
       object Panel5: TPanel
-        Left = 2
-        Top = 2
-        Width = 340
+        Left = 0
+        Top = 0
+        Width = 342
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -468,10 +473,10 @@ object frm_licenca: Tfrm_licenca
         TabOrder = 0
       end
       object DBMemo1: TDBMemo
-        Left = 2
-        Top = 23
-        Width = 340
-        Height = 239
+        Left = 0
+        Top = 21
+        Width = 342
+        Height = 155
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -514,145 +519,10 @@ object frm_licenca: Tfrm_licenca
       UnboundDataType = wwDefault
     end
   end
-  object qry_tipo: TADOQuery
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, sigla '
-      'from tipo_licenca'
-      'order by nome')
-    Left = 33
-    Top = 137
-    object qry_tiposigla: TStringField
-      DisplayLabel = 'TIPO'
-      DisplayWidth = 8
-      FieldName = 'sigla'
-      Size = 8
-    end
-    object qry_tipoid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-      Visible = False
-    end
-  end
-  object qry_orgao: TADOQuery
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, sigla'
-      'from orgao_ambiental'
-      'order by nome ')
-    Left = 103
-    Top = 137
-    object qry_orgaoid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qry_orgaosigla: TStringField
-      FieldName = 'sigla'
-      Size = 8
-    end
-  end
-  object qry_municipio: TADOQuery
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select id, nome'
-      'from municipio'
-      'order by nome')
-    Left = 618
-    Top = 137
-    object qry_municipioid: TAutoIncField
-      FieldName = 'id'
-      ReadOnly = True
-    end
-    object qry_municipionome: TStringField
-      FieldName = 'nome'
-      Size = 100
-    end
-  end
   object dts_licenca: TDataSource
     DataSet = dse_licenca
-    Left = 984
-    Top = 149
-  end
-  object dse_licenca: TADODataSet
-    CursorType = ctStatic
-    OnNewRecord = dse_licencaNewRecord
-    CommandText = 
-      'select * '#13#10'from licenca '#13#10'where id_cliente = :id_cliente'#13#10'    an' +
-      'd id_atividade = :id_atividade'
-    FieldDefs = <
-      item
-        Name = 'id'
-        Attributes = [faReadonly, faFixed]
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'id_tipo_licenca'
-        Attributes = [faFixed]
-        DataType = ftInteger
-      end
-      item
-        Name = 'id_atividade'
-        Attributes = [faFixed]
-        DataType = ftInteger
-      end
-      item
-        Name = 'id_orgao'
-        Attributes = [faFixed]
-        DataType = ftInteger
-      end
-      item
-        Name = 'numero'
-        DataType = ftString
-        Size = 60
-      end
-      item
-        Name = 'dt_ini'
-        Attributes = [faFixed]
-        DataType = ftDate
-      end
-      item
-        Name = 'dt_venc'
-        Attributes = [faFixed]
-        DataType = ftDate
-      end
-      item
-        Name = 'assinatura'
-        DataType = ftString
-        Size = 120
-      end
-      item
-        Name = 'id_cliente'
-        Attributes = [faFixed]
-        DataType = ftInteger
-      end
-      item
-        Name = 'id_municipio'
-        Attributes = [faFixed]
-        DataType = ftInteger
-      end
-      item
-        Name = 'descricao'
-        DataType = ftMemo
-      end>
-    Parameters = <
-      item
-        Name = 'id_cliente'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end
-      item
-        Name = 'id_atividade'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    StoreDefs = True
-    Left = 1012
-    Top = 149
+    Left = 1249
+    Top = 180
   end
   object dts_cliente: TDataSource
     AutoEdit = False
@@ -694,54 +564,76 @@ object frm_licenca: Tfrm_licenca
     Left = 1088
     Top = 33
   end
-  object dse_condicionante: TADODataSet
-    CursorType = ctStatic
-    BeforeOpen = dse_condicionanteBeforeOpen
-    OnNewRecord = dse_condicionanteNewRecord
-    CommandText = 'select *'#13#10'from condicionante'#13#10'where id_licenca = :id_licenca'
-    Parameters = <
-      item
-        Name = 'id_licenca'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
-    Left = 1022
-    Top = 239
-  end
   object dts_condicionante: TDataSource
     DataSet = dse_condicionante
-    Left = 994
-    Top = 239
+    Left = 1247
+    Top = 534
   end
   object UniQuery1: TUniQuery
     Connection = dtm_dados.mysql_conn
     Left = 1120
     Top = 35
   end
-  object UniQuery2: TUniQuery
+  object dse_licenca: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 1050
-    Top = 145
+    SQL.Strings = (
+      'select * '
+      'from licenca '
+      'where id_cliente = :id_cliente'
+      '    and id_atividade = :id_atividade')
+    OnNewRecord = dse_licencaNewRecord
+    Left = 1277
+    Top = 180
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_atividade'
+      end>
   end
-  object UniQuery3: TUniQuery
+  object dse_condicionante: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 1055
-    Top = 240
+    SQL.Strings = (
+      'select *'
+      'from condicionante'
+      'where id_licenca = :id_licenca')
+    BeforeOpen = dse_condicionanteBeforeOpen
+    Left = 1275
+    Top = 534
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_licenca'
+      end>
   end
-  object UniQuery4: TUniQuery
+  object qry_tipo: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 645
-    Top = 140
+    SQL.Strings = (
+      'select id, sigla '
+      'from tipo_licenca'
+      'order by nome')
+    Left = 56
+    Top = 130
   end
-  object UniQuery5: TUniQuery
+  object qry_orgao: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 30
-    Top = 170
+    SQL.Strings = (
+      'select id, sigla'
+      'from orgao_ambiental'
+      'order by nome ')
+    Left = 120
+    Top = 130
   end
-  object UniQuery6: TUniQuery
+  object qry_municipio: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 105
-    Top = 165
+    SQL.Strings = (
+      'select id, nome'
+      'from municipio'
+      'order by nome')
+    Left = 927
+    Top = 130
   end
 end
