@@ -3,6 +3,7 @@ unit unt_cliente;
 interface
 
 uses
+  ClipBrd,
   Windows,
   Messages,
   SysUtils,
@@ -26,7 +27,12 @@ uses
   wwdblook,
   Wwdbigrd,
   Wwdbgrid,
-  unt_cad_abstrato, wwriched, Provider, MemDS, DBAccess, Uni;
+  unt_cad_abstrato,
+  wwriched,
+  Provider,
+  MemDS,
+  DBAccess,
+  Uni;
 
 type
   Tfrm_cliente = class(TForm)
@@ -119,6 +125,27 @@ type
     dse_enderecologradouro: TStringField;
     dse_endereconumero: TIntegerField;
     dse_enderecocomplemento: TStringField;
+    dse_clienteid: TIntegerField;
+    dse_clientetipo: TStringField;
+    dse_clientecpf: TStringField;
+    dse_clientecnpj: TStringField;
+    dse_clientenome: TStringField;
+    dse_clientefantasia: TStringField;
+    dse_clientecliente: TStringField;
+    dse_clientefornecedor: TStringField;
+    dse_clienteusuario: TStringField;
+    dse_clienteobs: TMemoField;
+    dse_telid: TIntegerField;
+    dse_teltipo: TStringField;
+    dse_telnumero: TStringField;
+    dse_teltem_whatsapp: TStringField;
+    dse_telid_pessoa: TIntegerField;
+    dse_teldescricao: TStringField;
+    dse_emailid: TIntegerField;
+    dse_emailid_pessoa: TIntegerField;
+    dse_emailtipo: TStringField;
+    dse_emailendereco: TStringField;
+    dse_emaildescricao: TStringField;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure edt_fantasiaEnter(Sender: TObject);
@@ -157,6 +184,8 @@ type
     procedure dse_clienteAfterEdit(DataSet: TDataSet);
     procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure dse_emailNewRecord(DataSet: TDataSet);
+    procedure lbl_cnpj_cpfClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -404,7 +433,14 @@ end;
 
 procedure Tfrm_cliente.dse_clienteNewRecord(DataSet: TDataSet);
 begin
-  dse_cliente.FieldByName('cliente').Text := 'S';
+  dse_clientecliente.Text := 'S';
+  dse_clientefornecedor.Text := 'N';
+  dse_clienteusuario.Text := 'N';
+end;
+
+procedure Tfrm_cliente.dse_emailNewRecord(DataSet: TDataSet);
+begin
+  dse_emailid_pessoa.AsInteger := dse_clienteid.AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoNewRecord(DataSet: TDataSet);
@@ -423,8 +459,7 @@ end;
 
 procedure Tfrm_cliente.dse_telNewRecord(DataSet: TDataSet);
 begin
-  if dse_cliente.Active then
-    dse_tel.FieldByName('id_pessoa').AsInteger := dse_cliente.FieldByName(key_field).AsInteger;
+  dse_telid_pessoa.AsInteger := dse_clienteid.AsInteger;
 end;
 
 procedure Tfrm_cliente.dtsStateChange(Sender: TObject);
@@ -566,6 +601,12 @@ begin
   dse_cliente.Open;
   open_aux_queries;
   Application.ProcessMessages;
+end;
+
+procedure Tfrm_cliente.lbl_cnpj_cpfClick(Sender: TObject);
+begin
+  Clipboard.AsText := dse_clientecnpj.AsString;
+  msg_info('O CNPJ foi copiado.'); 
 end;
 
 procedure Tfrm_cliente.qry_municipioAfterScroll(DataSet: TDataSet);

@@ -79,7 +79,9 @@ object frm_cliente: Tfrm_cliente
         Top = 9
         Width = 62
         Height = 13
+        Cursor = crHandPoint
         Caption = 'CNPJ ou CPF'
+        OnClick = lbl_cnpj_cpfClick
       end
       object Label4: TLabel
         Left = 273
@@ -614,10 +616,6 @@ object frm_cliente: Tfrm_cliente
           'descricao;CustomEdit;cmb_desc_email;F'
           'tipo;CustomEdit;cmb_tipo_email;F'
           'tem_whatsapp;CheckBox;S;N')
-        Selected.Strings = (
-          'descricao'#9'23'#9'DESCRI'#199#195'O'
-          'tipo'#9'14'#9'TIPO'
-          'endereco'#9'52'#9'E-MAIL')
         IniAttributes.Delimiter = ';;'
         TitleColor = clBtnFace
         FixedCols = 0
@@ -1043,6 +1041,7 @@ object frm_cliente: Tfrm_cliente
     AfterClose = dse_clienteAfterClose
     AfterEdit = dse_clienteAfterEdit
     AfterScroll = dse_clienteAfterScroll
+    OnNewRecord = dse_clienteNewRecord
     Left = 949
     Top = 110
     ParamData = <
@@ -1050,6 +1049,49 @@ object frm_cliente: Tfrm_cliente
         DataType = ftUnknown
         Name = 'id'
       end>
+    object dse_clienteid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_clientetipo: TStringField
+      FieldName = 'tipo'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clientecpf: TStringField
+      FieldName = 'cpf'
+      Size = 11
+    end
+    object dse_clientecnpj: TStringField
+      FieldName = 'cnpj'
+      Size = 14
+    end
+    object dse_clientenome: TStringField
+      FieldName = 'nome'
+      Size = 120
+    end
+    object dse_clientefantasia: TStringField
+      FieldName = 'fantasia'
+      Size = 100
+    end
+    object dse_clientecliente: TStringField
+      FieldName = 'cliente'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clientefornecedor: TStringField
+      FieldName = 'fornecedor'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clienteusuario: TStringField
+      FieldName = 'usuario'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clienteobs: TMemoField
+      FieldName = 'obs'
+      BlobType = ftMemo
+    end
   end
   object dse_endereco: TUniQuery
     SQLInsert.Strings = (
@@ -1221,6 +1263,7 @@ object frm_cliente: Tfrm_cliente
     MasterSource = dts_cliente
     Options.StrictUpdate = False
     AfterScroll = dse_telAfterScroll
+    OnNewRecord = dse_telNewRecord
     Left = 367
     Top = 340
     ParamData = <
@@ -1228,6 +1271,30 @@ object frm_cliente: Tfrm_cliente
         DataType = ftUnknown
         Name = 'id'
       end>
+    object dse_telid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_teltipo: TStringField
+      FieldName = 'tipo'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_telnumero: TStringField
+      FieldName = 'numero'
+      Size = 11
+    end
+    object dse_teltem_whatsapp: TStringField
+      FieldName = 'tem_whatsapp'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_telid_pessoa: TIntegerField
+      FieldName = 'id_pessoa'
+    end
+    object dse_teldescricao: TStringField
+      FieldName = 'descricao'
+      Size = 30
+    end
   end
   object dse_email: TUniQuery
     SQLInsert.Strings = (
@@ -1261,6 +1328,7 @@ object frm_cliente: Tfrm_cliente
       'where id_pessoa = :id')
     MasterSource = dts_cliente
     Options.StrictUpdate = False
+    OnNewRecord = dse_emailNewRecord
     Left = 949
     Top = 340
     ParamData = <
@@ -1268,5 +1336,24 @@ object frm_cliente: Tfrm_cliente
         DataType = ftUnknown
         Name = 'id'
       end>
+    object dse_emailid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_emailid_pessoa: TIntegerField
+      FieldName = 'id_pessoa'
+    end
+    object dse_emailtipo: TStringField
+      FieldName = 'tipo'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_emailendereco: TStringField
+      FieldName = 'endereco'
+      Size = 120
+    end
+    object dse_emaildescricao: TStringField
+      FieldName = 'descricao'
+      Size = 30
+    end
   end
 end

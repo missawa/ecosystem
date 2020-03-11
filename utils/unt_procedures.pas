@@ -98,8 +98,7 @@ begin
 
   sql :=
     'select id, nome          '#13+
-    'from pessoa              '#13+
-    'where usuario = ''S''    '#13+
+    'from usuario             '#13+
     'order by nome';
 
   carrega_combo(cmb, sql, limpar);

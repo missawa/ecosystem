@@ -2,7 +2,7 @@ object frm_licenca: Tfrm_licenca
   Left = 0
   Top = 0
   Caption = 'Licen'#231'a'
-  ClientHeight = 412
+  ClientHeight = 571
   ClientWidth = 1308
   Color = clWhite
   Ctl3D = False
@@ -156,7 +156,7 @@ object frm_licenca: Tfrm_licenca
         WordWrap = False
       end
       object edt_fantasia: TwwDBEdit
-        Left = 490
+        Left = 491
         Top = 25
         Width = 274
         Height = 19
@@ -178,7 +178,7 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_atividade: TwwDBEdit
         Left = 770
-        Top = 27
+        Top = 25
         Width = 274
         Height = 19
         TabStop = False
@@ -270,7 +270,6 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitHeight = 187
     end
     object pnl_desc_licenca: TPanel
       Left = 962
@@ -303,6 +302,7 @@ object frm_licenca: Tfrm_licenca
         BorderStyle = bsNone
         Ctl3D = False
         DataField = 'descricao'
+        DataSource = dts_licenca
         ParentCtl3D = False
         TabOrder = 1
       end
@@ -387,7 +387,7 @@ object frm_licenca: Tfrm_licenca
     Left = 0
     Top = 213
     Width = 1308
-    Height = 199
+    Height = 358
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -396,8 +396,7 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 281
-    ExplicitHeight = 285
+    ExplicitHeight = 199
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 0
@@ -424,7 +423,7 @@ object frm_licenca: Tfrm_licenca
       Left = 3
       Top = 18
       Width = 958
-      Height = 178
+      Height = 337
       ControlType.Strings = (
         'cumprida;CheckBox;S;N'
         'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
@@ -451,17 +450,17 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitHeight = 264
     end
     object Panel4: TPanel
       Left = 961
       Top = 18
       Width = 344
-      Height = 178
+      Height = 337
       Align = alRight
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 2
+      ExplicitHeight = 178
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -472,11 +471,11 @@ object frm_licenca: Tfrm_licenca
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
       end
-      object DBMemo1: TDBMemo
+      object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
         Width = 342
-        Height = 155
+        Height = 314
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -486,6 +485,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
+        ExplicitHeight = 155
       end
     end
     object cmb_responsavel: TwwDBComboBox
@@ -507,7 +507,7 @@ object frm_licenca: Tfrm_licenca
       Left = 250
       Top = 60
       Width = 190
-      Height = 19
+      Height = 16
       ShowButton = True
       Style = csDropDown
       MapList = True
@@ -530,21 +530,13 @@ object frm_licenca: Tfrm_licenca
     Left = 1059
     Top = 33
   end
-  object qry_cliente: TADOQuery
-    CursorType = ctStatic
-    Parameters = <
-      item
-        Name = 'id_cliente'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end
-      item
-        Name = 'id_atividade'
-        DataType = ftInteger
-        Size = 1
-        Value = 0
-      end>
+  object dts_condicionante: TDataSource
+    DataSet = dse_condicionante
+    Left = 1247
+    Top = 534
+  end
+  object qry_cliente: TUniQuery
+    Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select '
       '    p.id,'
@@ -561,26 +553,61 @@ object frm_licenca: Tfrm_licenca
       '        on a.id = ca.id_atividade'
       'where p.id = :id_cliente'
       '    and a.id = :id_atividade')
-    Left = 1088
+    Left = 1087
     Top = 33
-  end
-  object dts_condicionante: TDataSource
-    DataSet = dse_condicionante
-    Left = 1247
-    Top = 534
-  end
-  object UniQuery1: TUniQuery
-    Connection = dtm_dados.mysql_conn
-    Left = 1120
-    Top = 35
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_atividade'
+      end>
   end
   object dse_licenca: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO licenca'
+      
+        '  (id, id_tipo_licenca, id_atividade, id_orgao, numero, dt_ini, ' +
+        'dt_venc, assinatura, id_cliente, id_municipio, descricao)'
+      'VALUES'
+      
+        '  (:id, :id_tipo_licenca, :id_atividade, :id_orgao, :numero, :dt' +
+        '_ini, :dt_venc, :assinatura, :id_cliente, :id_municipio, :descri' +
+        'cao)')
+    SQLDelete.Strings = (
+      'DELETE FROM licenca'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE licenca'
+      'SET'
+      
+        '  id = :id, id_tipo_licenca = :id_tipo_licenca, id_atividade = :' +
+        'id_atividade, id_orgao = :id_orgao, numero = :numero, dt_ini = :' +
+        'dt_ini, dt_venc = :dt_venc, assinatura = :assinatura, id_cliente' +
+        ' = :id_cliente, id_municipio = :id_municipio, descricao = :descr' +
+        'icao'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      
+        'SELECT id, id_tipo_licenca, id_atividade, id_orgao, numero, dt_i' +
+        'ni, dt_venc, assinatura, id_cliente, id_municipio, descricao FRO' +
+        'M licenca'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM licenca'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select * '
       'from licenca '
       'where id_cliente = :id_cliente'
       '    and id_atividade = :id_atividade')
+    Options.StrictUpdate = False
     OnNewRecord = dse_licencaNewRecord
     Left = 1277
     Top = 180
@@ -593,21 +620,148 @@ object frm_licenca: Tfrm_licenca
         DataType = ftUnknown
         Name = 'id_atividade'
       end>
+    object dse_licencaid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_licencaid_tipo_licenca: TIntegerField
+      FieldName = 'id_tipo_licenca'
+      Required = True
+    end
+    object dse_licencaid_atividade: TIntegerField
+      FieldName = 'id_atividade'
+    end
+    object dse_licencaid_orgao: TIntegerField
+      FieldName = 'id_orgao'
+      Required = True
+    end
+    object dse_licencanumero: TStringField
+      FieldName = 'numero'
+      Required = True
+      Size = 60
+    end
+    object dse_licencadt_ini: TDateField
+      FieldName = 'dt_ini'
+      Required = True
+    end
+    object dse_licencadt_venc: TDateField
+      FieldName = 'dt_venc'
+    end
+    object dse_licencaassinatura: TStringField
+      FieldName = 'assinatura'
+      Size = 120
+    end
+    object dse_licencaid_cliente: TIntegerField
+      FieldName = 'id_cliente'
+    end
+    object dse_licencaid_municipio: TIntegerField
+      FieldName = 'id_municipio'
+    end
+    object dse_licencadescricao: TMemoField
+      FieldName = 'descricao'
+      BlobType = ftMemo
+    end
   end
   object dse_condicionante: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO condicionante'
+      
+        '  (id, id_licenca, id_pessoa_executor, id_pressoa_responsavel, d' +
+        'escricao, cumprida, dt_venc, dt_cumprimento, dt_aviso)'
+      'VALUES'
+      
+        '  (:id, :id_licenca, :id_pessoa_executor, :id_pressoa_responsave' +
+        'l, :descricao, :cumprida, :dt_venc, :dt_cumprimento, :dt_aviso)')
+    SQLDelete.Strings = (
+      'DELETE FROM condicionante'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE condicionante'
+      'SET'
+      
+        '  id = :id, id_licenca = :id_licenca, id_pessoa_executor = :id_p' +
+        'essoa_executor, id_pressoa_responsavel = :id_pressoa_responsavel' +
+        ', descricao = :descricao, cumprida = :cumprida, dt_venc = :dt_ve' +
+        'nc, dt_cumprimento = :dt_cumprimento, dt_aviso = :dt_aviso'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      
+        'SELECT id, id_licenca, id_pessoa_executor, id_pressoa_responsave' +
+        'l, descricao, cumprida, dt_venc, dt_cumprimento, dt_aviso FROM c' +
+        'ondicionante'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM condicionante'
+      ')')
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select *'
       'from condicionante'
-      'where id_licenca = :id_licenca')
-    BeforeOpen = dse_condicionanteBeforeOpen
+      'where id_licenca = :id')
+    MasterSource = dts_licenca
+    Options.StrictUpdate = False
+    Active = True
+    OnNewRecord = dse_condicionanteNewRecord
     Left = 1275
     Top = 534
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_licenca'
+        Name = 'id'
+        Value = Null
       end>
+    object dse_condicionanteid_pressoa_responsavel: TIntegerField
+      DisplayLabel = 'RESPONS'#193'VEL'
+      DisplayWidth = 37
+      FieldName = 'id_pressoa_responsavel'
+    end
+    object dse_condicionanteid_pessoa_executor: TIntegerField
+      DisplayLabel = 'EXECUTOR'
+      DisplayWidth = 31
+      FieldName = 'id_pessoa_executor'
+    end
+    object dse_condicionantedt_aviso: TDateField
+      DisplayLabel = 'AVISO'
+      DisplayWidth = 12
+      FieldName = 'dt_aviso'
+    end
+    object dse_condicionantedt_venc: TDateField
+      DisplayLabel = 'VENCIMENTO'
+      DisplayWidth = 12
+      FieldName = 'dt_venc'
+      Required = True
+    end
+    object dse_condicionantedt_cumprimento: TDateField
+      DisplayLabel = 'CUMPRIMENTO'
+      DisplayWidth = 12
+      FieldName = 'dt_cumprimento'
+    end
+    object dse_condicionantecumprida: TStringField
+      DisplayLabel = 'OK'
+      DisplayWidth = 2
+      FieldName = 'cumprida'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object dse_condicionanteid: TIntegerField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'id'
+      Visible = False
+    end
+    object dse_condicionanteid_licenca: TIntegerField
+      FieldName = 'id_licenca'
+      Required = True
+      Visible = False
+    end
+    object dse_condicionantedescricao: TMemoField
+      FieldName = 'descricao'
+      Required = True
+      Visible = False
+      BlobType = ftMemo
+    end
   end
   object qry_tipo: TUniQuery
     Connection = dtm_dados.mysql_conn

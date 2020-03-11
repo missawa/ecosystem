@@ -59,23 +59,41 @@ type
     grd_detalhe: TwwDBGrid;
     dts_licenca: TDataSource;
     dts_cliente: TDataSource;
-    qry_cliente: TADOQuery;
     dts_condicionante: TDataSource;
     Panel4: TPanel;
     Panel5: TPanel;
-    DBMemo1: TDBMemo;
+    mmo_desc_condicionante: TDBMemo;
     cmb_responsavel: TwwDBComboBox;
     cmb_executor: TwwDBComboBox;
-    UniQuery1: TUniQuery;
+    qry_cliente: TUniQuery;
     dse_licenca: TUniQuery;
     dse_condicionante: TUniQuery;
     qry_tipo: TUniQuery;
     qry_orgao: TUniQuery;
     qry_municipio: TUniQuery;
+    dse_licencaid: TIntegerField;
+    dse_licencaid_tipo_licenca: TIntegerField;
+    dse_licencaid_atividade: TIntegerField;
+    dse_licencaid_orgao: TIntegerField;
+    dse_licencanumero: TStringField;
+    dse_licencadt_ini: TDateField;
+    dse_licencadt_venc: TDateField;
+    dse_licencaassinatura: TStringField;
+    dse_licencaid_cliente: TIntegerField;
+    dse_licencaid_municipio: TIntegerField;
+    dse_licencadescricao: TMemoField;
+    dse_condicionanteid: TIntegerField;
+    dse_condicionanteid_licenca: TIntegerField;
+    dse_condicionanteid_pessoa_executor: TIntegerField;
+    dse_condicionanteid_pressoa_responsavel: TIntegerField;
+    dse_condicionantedescricao: TMemoField;
+    dse_condicionantecumprida: TStringField;
+    dse_condicionantedt_venc: TDateField;
+    dse_condicionantedt_cumprimento: TDateField;
+    dse_condicionantedt_aviso: TDateField;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
-    procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
   private
     procedure open_aux_queries;
     { Private declarations }
@@ -98,14 +116,10 @@ begin
   dse_licenca.FieldByName('id_atividade').Value := qry_cliente.FieldByName('id_atividade').Value
 end;
 
-procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
-begin
-  dse_condicionante.Params.ParamByName('id_licenca').Value :=  dse_licenca.FieldByName('id').Value;
-end;
-
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
 begin
-  dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
+  dse_condicionanteid_licenca.AsInteger := dse_licencaid.AsInteger;
+  dse_condicionantecumprida.Text := 'N';
 end;
 
 procedure Tfrm_licenca.FormCreate(Sender: TObject);
@@ -126,18 +140,34 @@ end;
 procedure Tfrm_licenca.open_dataset(id_cliente: integer; id_atividade: integer);
 begin
   qry_cliente.Close;
-  qry_cliente.Parameters.ParamByName('id_cliente').Value := id_cliente;
-  qry_cliente.Parameters.ParamByName('id_atividade').Value := id_atividade;
+  qry_cliente.SQL.Text :=
+    'select                                       '#13+
+    '    p.id,                                    '#13+
+    '    p.cnpj,                                  '#13+
+    '    p.cpf,                                   '#13+
+    '    p.nome,                                  '#13+
+    '    p.fantasia,                              '#13+
+    '    a.nome as atividade,                     '#13+
+    '    a.id as id_atividade                     '#13+
+    'from pessoa p                                '#13+
+    '    left join cliente_atividade ca           '#13+
+    '        on ca.id_cliente = p.id              '#13+
+    '    left join atividade a                    '#13+
+    '        on a.id = ca.id_atividade            '#13+
+    'where p.id = ' + intToStr(id_cliente)        +#13+
+    '    and a.id = ' + intToStr(id_atividade);
+
   qry_cliente.Open;
 
   dse_licenca.Close;
-  dse_licenca.Params.ParamByName('id_cliente').Value := id_cliente;
-  dse_licenca.Params.ParamByName('id_atividade').Value := id_atividade;
+  dse_licenca.SQL.Text :=
+    'select *                                           '#13+
+    'from licenca                                       '#13+
+    'where id_cliente = ' + intToStr(id_cliente)        +#13+
+    '    and id_atividade = ' + intToStr(id_atividade);
   dse_licenca.Open;
 
 
-  dse_condicionante.Close;
-  dse_condicionante.Params.ParamByName('id_licenca').Value := dse_licenca.FieldByName('id').Value;
   dse_condicionante.Open;
 end;
 

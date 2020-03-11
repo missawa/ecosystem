@@ -122,7 +122,7 @@ end;
 
 procedure Tfrm_cliente_atividade.dseAfterScroll(DataSet: TDataSet);
 begin
-  mostra_cnpj_cpf
+  mostra_cnpj_cpf;
 end;
 
 procedure Tfrm_cliente_atividade.dse_detalheAfterOpen(DataSet: TDataSet);
