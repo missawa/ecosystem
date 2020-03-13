@@ -287,12 +287,14 @@ object frm_cliente: Tfrm_cliente
         Height = 13
         Caption = 'Munic'#237'pio'
       end
-      object Label12: TLabel
+      object lbl_bairro: TLabel
         Left = 329
         Top = 9
         Width = 28
         Height = 13
         Caption = 'Bairro'
+        DragCursor = crHandPoint
+        OnClick = lbl_bairroClick
       end
       object edt_complemento: TwwDBEdit
         Left = 819
@@ -379,7 +381,7 @@ object frm_cliente: Tfrm_cliente
           'sigla'#9'2'#9'UF'#9'F')
         DataField = 'id_uf'
         DataSource = dts_endereco
-        LookupTable = qry_uf
+        LookupTable = dtm_dados.qry_uf
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -405,7 +407,7 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'MUNIC'#205'PIO'#9'F')
         DataField = 'id_municipio'
         DataSource = dts_endereco
-        LookupTable = qry_municipio
+        LookupTable = dtm_dados.qry_municipio
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -431,7 +433,7 @@ object frm_cliente: Tfrm_cliente
           'nome'#9'60'#9'BAIRRO'#9'F')
         DataField = 'id_bairro'
         DataSource = dts_endereco
-        LookupTable = qry_bairro
+        LookupTable = dtm_dados.qry_bairro
         LookupField = 'id'
         Style = csDropDownList
         Frame.Enabled = True
@@ -955,21 +957,6 @@ object frm_cliente: Tfrm_cliente
     TabOrder = 5
     OnMouseDown = pnlTituloMouseDown
   end
-  object dts_uf: TDataSource
-    DataSet = qry_uf
-    Left = 95
-    Top = 197
-  end
-  object dts_municipio: TDataSource
-    DataSet = qry_municipio
-    Left = 272
-    Top = 197
-  end
-  object dts_bairro: TDataSource
-    DataSet = qry_bairro
-    Left = 450
-    Top = 197
-  end
   object dts_endereco: TDataSource
     DataSet = dse_endereco
     Left = 921
@@ -1179,53 +1166,6 @@ object frm_cliente: Tfrm_cliente
     object dse_enderecocomplemento: TStringField
       FieldName = 'complemento'
     end
-  end
-  object qry_uf: TUniQuery
-    Connection = dtm_dados.mysql_conn
-    SQL.Strings = (
-      'select id, sigla'
-      'from uf'
-      'order by sigla')
-    Active = True
-    Left = 123
-    Top = 197
-  end
-  object qry_municipio: TUniQuery
-    Connection = dtm_dados.mysql_conn
-    SQL.Strings = (
-      'select id, nome'
-      'from municipio'
-      'where id_uf = :id'
-      'order by nome')
-    MasterSource = dts_uf
-    Active = True
-    AfterScroll = qry_municipioAfterScroll
-    Left = 300
-    Top = 197
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'id'
-        ParamType = ptInput
-        Value = 1
-      end>
-  end
-  object qry_bairro: TUniQuery
-    Connection = dtm_dados.mysql_conn
-    SQL.Strings = (
-      'select * '
-      'from bairro '
-      'where id_municipio = :id')
-    MasterSource = dts_municipio
-    Active = True
-    Left = 478
-    Top = 197
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'id'
-        ParamType = ptInput
-      end>
   end
   object dse_tel: TUniQuery
     SQLInsert.Strings = (

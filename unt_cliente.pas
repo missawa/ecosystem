@@ -49,13 +49,10 @@ type
     edt_logradouro: TwwDBEdit;
     edt_numero: TwwDBEdit;
     Label11: TLabel;
-    Label12: TLabel;
+    lbl_bairro: TLabel;
     cmb_uf: TwwDBLookupCombo;
     cmb_municipio: TwwDBLookupCombo;
     cmb_bairro: TwwDBLookupCombo;
-    dts_uf: TDataSource;
-    dts_municipio: TDataSource;
-    dts_bairro: TDataSource;
     dts_endereco: TDataSource;
     dts_tel: TDataSource;
     pnl_contato: TPanel;
@@ -110,9 +107,6 @@ type
     qry: TUniQuery;
     dse_cliente: TUniQuery;
     dse_endereco: TUniQuery;
-    qry_uf: TUniQuery;
-    qry_municipio: TUniQuery;
-    qry_bairro: TUniQuery;
     dse_tel: TUniQuery;
     dse_email: TUniQuery;
     dse_enderecoid: TIntegerField;
@@ -152,8 +146,6 @@ type
     procedure dse_clienteAfterPost(DataSet: TDataSet);
     procedure edt_cnpj_cpfExit(Sender: TObject);
     procedure edt_cepExit(Sender: TObject);
-    procedure qry_ufAfterScroll(DataSet: TDataSet);
-    procedure qry_municipioAfterScroll(DataSet: TDataSet);
     procedure dse_clienteAfterScroll(DataSet: TDataSet);
     procedure dse_telNewRecord(DataSet: TDataSet);
     procedure dse_telAfterScroll(DataSet: TDataSet);
@@ -186,6 +178,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure dse_emailNewRecord(DataSet: TDataSet);
     procedure lbl_cnpj_cpfClick(Sender: TObject);
+    procedure lbl_bairroClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -557,9 +550,9 @@ end;
 
 procedure Tfrm_cliente.open_aux_queries;
 begin
-  qry_uf.Open;
-  qry_municipio.Open;
-  qry_bairro.Open;
+  dtm_dados.qry_uf.Open;
+  dtm_dados.qry_municipio.Open;
+  dtm_dados.qry_bairro.Open;
   dse_endereco.Open;
   dse_tel.Open;
   dse_email.Open;
@@ -603,22 +596,29 @@ begin
   Application.ProcessMessages;
 end;
 
+procedure Tfrm_cliente.lbl_bairroClick(Sender: TObject);
+begin
+
+  if dse_endereco.State in [dsEdit, dsInsert] then
+  begin
+    if msg_quest('Deseja cadastrar novo bairro para o Município ' + cmb_municipio.Text + '?') then
+    begin
+      dse_enderecoid_bairro.AsInteger :=  novo_bairro(dse_enderecoid_municipio.AsInteger);
+      dtm_dados.qry_bairro.Locate('id',dse_enderecoid_bairro.AsInteger,[]);
+      cmb_bairro.Text := dtm_dados.qry_bairro.FieldByName('nome').Text;
+      cmb_bairro.Refresh;
+      edt_logradouro.SetFocus;
+    end;
+  end;
+
+
+
+end;
+
 procedure Tfrm_cliente.lbl_cnpj_cpfClick(Sender: TObject);
 begin
   Clipboard.AsText := dse_clientecnpj.AsString;
   msg_info('O CNPJ foi copiado.'); 
-end;
-
-procedure Tfrm_cliente.qry_municipioAfterScroll(DataSet: TDataSet);
-begin
-  qry_bairro.Close;
-  qry_bairro.Open;
-end;
-
-procedure Tfrm_cliente.qry_ufAfterScroll(DataSet: TDataSet);
-begin
-  qry_municipio.Close;
-  qry_municipio.Open;
 end;
 
 procedure Tfrm_cliente.mostra_cnpj_cpf;

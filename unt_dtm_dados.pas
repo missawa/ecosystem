@@ -20,6 +20,12 @@ type
     qry_usuario: TUniQuery;
     mysql_conn: TUniConnection;
     ODBCUniProvider1: TODBCUniProvider;
+    qry_bairro: TUniQuery;
+    dts_uf: TDataSource;
+    qry_uf: TUniQuery;
+    dts_municipio: TDataSource;
+    dts_bairro: TDataSource;
+    qry_municipio: TUniQuery;
     procedure con_mysqlBeforeConnect(Sender: TObject);
     procedure con_mysqlAfterConnect(Sender: TObject);
     procedure mysql_connBeforeConnect(Sender: TObject);

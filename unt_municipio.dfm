@@ -1,48 +1,244 @@
-inherited frm_municipio: Tfrm_municipio
-  Caption = 'Municipios'
+object frm_municipio: Tfrm_municipio
+  Left = 0
+  Top = 0
+  Caption = 'Munic'#237'pio'
+  ClientHeight = 397
+  ClientWidth = 826
+  Color = clWindow
+  Ctl3D = False
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 15
-  inherited pnlTitulo: TPanel
-    Caption = ' MUNICIPIOS'
-  end
-  inherited pnlTotal: TPanel
-    inherited pnl_tit_geral: TPanel
-      Caption = ' DADOS DO MUNIC'#205'PIO'
+  TextHeight = 13
+  object toolbar: TToolBar
+    Left = 0
+    Top = 21
+    Width = 826
+    Height = 52
+    AutoSize = True
+    ButtonHeight = 52
+    ButtonWidth = 49
+    Caption = 'Novo'
+    DisabledImages = dtm_images.img_32
+    Images = dtm_images.img_32
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 0
+    object btn_novo: TToolButton
+      Left = 0
+      Top = 0
+      Caption = 'Novo'
+      ImageIndex = 25
+      OnClick = btn_novoClick
     end
-    inherited pnl_geral: TPanel
+    object btn_editar: TToolButton
+      Left = 49
+      Top = 0
+      Caption = 'Editar'
+      ImageIndex = 7
+      OnClick = btn_editarClick
+    end
+    object btn_excluir: TToolButton
+      Left = 98
+      Top = 0
+      Caption = 'Excluir'
+      ImageIndex = 1
+      OnClick = btn_excluirClick
+    end
+    object btn_atualizar: TToolButton
+      Left = 147
+      Top = 0
+      Caption = 'Atualizar'
+      ImageIndex = 13
+      OnClick = btn_atualizarClick
+    end
+    object sep_1: TToolButton
+      Left = 196
+      Top = 0
+      Width = 8
+      Caption = 'sep_1'
+      ImageIndex = 31
+      Style = tbsSeparator
+    end
+    object btn_salvar: TToolButton
+      Left = 204
+      Top = 0
+      Caption = 'Salvar'
+      ImageIndex = 32
+      OnClick = btn_salvarClick
+    end
+    object btn_cancelar: TToolButton
+      Left = 253
+      Top = 0
+      Caption = 'Cancelar'
+      ImageIndex = 19
+      OnClick = btn_cancelarClick
+    end
+    object sep_2: TToolButton
+      Left = 302
+      Top = 0
+      Width = 8
+      Caption = 'sep_2'
+      ImageIndex = 31
+      Style = tbsSeparator
+    end
+    object btn_localizar: TToolButton
+      Left = 310
+      Top = 0
+      Caption = 'Localizar'
+      ImageIndex = 14
+      OnClick = btn_localizarClick
+    end
+    object btn_primeiro: TToolButton
+      Left = 359
+      Top = 0
+      Caption = 'Primeiro'
+      ImageIndex = 96
+      OnClick = btn_primeiroClick
+    end
+    object btn_anterior: TToolButton
+      Left = 408
+      Top = 0
+      Caption = 'Anterior'
+      ImageIndex = 97
+      OnClick = btn_anteriorClick
+    end
+    object btn_proximo: TToolButton
+      Left = 457
+      Top = 0
+      Caption = 'Pr'#243'ximo'
+      ImageIndex = 98
+      OnClick = btn_proximoClick
+    end
+    object btn_ultimo: TToolButton
+      Left = 506
+      Top = 0
+      Caption = #218'ltimo'
+      ImageIndex = 99
+      OnClick = btn_ultimoClick
+    end
+    object sep_3: TToolButton
+      Left = 555
+      Top = 0
+      Width = 8
+      Caption = 'sep_3'
+      ImageIndex = 31
+      Style = tbsSeparator
+    end
+    object btn_fechar: TToolButton
+      Left = 563
+      Top = 0
+      Hint = 'Fechar Tela'
+      Caption = 'Fechar'
+      ImageIndex = 30
+      OnClick = btn_fecharClick
+    end
+  end
+  object pnlTitulo: TPanel
+    Left = 0
+    Top = 0
+    Width = 826
+    Height = 21
+    Align = alTop
+    Alignment = taLeftJustify
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    Caption = ' MUNIC'#205'PIOS'
+    Color = 12159842
+    Ctl3D = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -15
+    Font.Name = 'Calibri'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 1
+  end
+  object pnlTotal: TPanel
+    Left = 0
+    Top = 73
+    Width = 826
+    Height = 78
+    Align = alTop
+    BevelOuter = bvNone
+    Padding.Left = 3
+    Padding.Right = 3
+    TabOrder = 2
+    object pnl_tit_geral: TPanel
+      Left = 3
+      Top = 0
+      Width = 820
+      Height = 18
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      Caption = ' DADOS DO MUNIC'#205'PIO'
+      Color = 12159842
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object pnl_geral: TPanel
+      Left = 3
+      Top = 18
+      Width = 820
+      Height = 60
+      Align = alClient
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      ParentBackground = False
+      TabOrder = 1
       object Label1: TLabel
         Left = 10
         Top = 10
-        Width = 12
-        Height = 15
+        Width = 11
+        Height = 13
         Caption = 'ID'
       end
       object Label2: TLabel
         Left = 65
         Top = 10
-        Width = 14
-        Height = 15
+        Width = 13
+        Height = 13
         Caption = 'UF'
       end
       object Label3: TLabel
         Left = 120
         Top = 10
-        Width = 25
-        Height = 15
+        Width = 23
+        Height = 13
         Caption = 'IBGE'
       end
       object Label4: TLabel
         Left = 195
         Top = 10
-        Width = 62
-        Height = 15
+        Width = 55
+        Height = 13
         Caption = 'MUNIC'#205'PIO'
       end
       object edt_id: TwwDBEdit
         Left = 10
         Top = 25
         Width = 50
-        Height = 21
+        Height = 19
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -61,7 +257,7 @@ inherited frm_municipio: Tfrm_municipio
         Left = 120
         Top = 25
         Width = 70
-        Height = 21
+        Height = 19
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'ibge'
@@ -78,7 +274,7 @@ inherited frm_municipio: Tfrm_municipio
         Left = 195
         Top = 25
         Width = 300
-        Height = 21
+        Height = 19
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'nome'
@@ -95,14 +291,14 @@ inherited frm_municipio: Tfrm_municipio
         Left = 65
         Top = 25
         Width = 50
-        Height = 21
+        Height = 19
         BorderStyle = bsNone
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
           'sigla'#9'2'#9'UF'#9'F')
         DataField = 'id_uf'
         DataSource = dts
-        LookupTable = qry_uf
+        LookupTable = dtm_dados.qry_uf
         LookupField = 'id'
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
@@ -115,36 +311,148 @@ inherited frm_municipio: Tfrm_municipio
       end
     end
   end
-  inherited Panel1: TPanel
-    inherited pnl_tit_detalhe: TPanel
+  object Panel1: TPanel
+    Left = 0
+    Top = 151
+    Width = 826
+    Height = 246
+    Align = alClient
+    BevelOuter = bvNone
+    Color = clWhite
+    Padding.Left = 3
+    Padding.Top = 3
+    Padding.Right = 3
+    Padding.Bottom = 3
+    ParentBackground = False
+    TabOrder = 3
+    object pnl_tit_detalhe: TPanel
+      Left = 3
+      Top = 3
+      Width = 820
+      Height = 18
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
       Caption = ' BAIRROS'
+      Color = 12159842
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
     end
-    inherited grd_detalhe: TwwDBGrid
+    object grd_detalhe: TwwDBGrid
+      Left = 3
+      Top = 21
+      Width = 820
+      Height = 222
       Selected.Strings = (
         'id'#9'4'#9'ID'
         'id_municipio'#9'6'#9'ID.MUN'
         'nome'#9'60'#9'BAIRRO')
+      IniAttributes.Delimiter = ';;'
+      TitleColor = clBtnFace
+      FixedCols = 0
+      ShowHorzScrollBar = True
+      Align = alClient
+      DataSource = dts_detalhe
+      TabOrder = 1
+      TitleAlignment = taLeftJustify
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      TitleLines = 1
+      TitleButtons = False
     end
   end
-  inherited dse_detalhe: TUniQuery
+  object dts: TDataSource
+    AutoEdit = False
+    Left = 704
+    Top = 104
+  end
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 720
+    Top = 40
+  end
+  object dse: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO municipio'
+      '  (id, id_uf, ibge, nome)'
+      'VALUES'
+      '  (:id, :id_uf, :ibge, :nome)')
+    SQLDelete.Strings = (
+      'DELETE FROM municipio'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE municipio'
+      'SET'
+      '  id = :id, id_uf = :id_uf, ibge = :ibge, nome = :nome'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      'SELECT id, id_uf, ibge, nome FROM municipio'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM municipio'
+      ')')
+    Connection = dtm_dados.mysql_conn
+    SQL.Strings = (
+      'select *'
+      'from municipio')
+    Left = 732
+    Top = 104
+  end
+  object dts_detalhe: TDataSource
+    DataSet = dse_detalhe
+    Left = 704
+    Top = 184
+  end
+  object dse_detalhe: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO bairro'
+      '  (id, id_municipio, nome)'
+      'VALUES'
+      '  (:id, :id_municipio, :nome)')
+    SQLDelete.Strings = (
+      'DELETE FROM bairro'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE bairro'
+      'SET'
+      '  id = :id, id_municipio = :id_municipio, nome = :nome'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      'SELECT id, id_municipio, nome FROM bairro'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM bairro'
+      ')')
+    Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select * '
       'from bairro '
       'where id_municipio = :key_field')
     OnNewRecord = dse_detalheNewRecord
+    Left = 732
+    Top = 184
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'key_field'
       end>
-  end
-  object qry_uf: TUniQuery
-    Connection = dtm_dados.mysql_conn
-    SQL.Strings = (
-      'select id, sigla'
-      'from uf'
-      'order by sigla')
-    Left = 88
-    Top = 142
   end
 end

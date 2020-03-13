@@ -52,7 +52,6 @@ type
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_primeiroClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
-    procedure btn_editarClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_atualizarClick(Sender: TObject);
     procedure btn_ultimoClick(Sender: TObject);
@@ -65,6 +64,7 @@ type
     procedure btn_localizarClick(Sender: TObject);
     procedure btn_novoClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure btn_editarClick(Sender: TObject);
   protected
     table_name: string;
     key_field: string;
@@ -136,6 +136,8 @@ procedure Tfrm_cad_abstrato.btn_cancelarClick(Sender: TObject);
 begin
   dse.Cancel;
 end;
+
+
 
 procedure Tfrm_cad_abstrato.btn_editarClick(Sender: TObject);
 begin

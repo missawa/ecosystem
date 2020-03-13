@@ -2,11 +2,13 @@ unit unt_func_messages;
 
 interface
 
-uses Graphics;
+uses
+  Controls,
+  Graphics;
 
   function msg_quest(texto: string; titulo: string = ''): boolean;
 
-  procedure msg(texto: string; titulo: string; sim: boolean; nao: boolean; ok: boolean; multidev: boolean; cor: TColor);
+  function msg(texto: string; titulo: string; sim: boolean; nao: boolean; ok: boolean; multidev: boolean; cor: TColor): TModalResult;
   procedure msg_alert(texto: string; titulo: string = 'Alerta!');
   procedure msg_error(texto: string; titulo: string = 'Erro!');
   procedure msg_info(texto: string; titulo: string = 'Informação!');
@@ -20,18 +22,31 @@ uses
   unt_mensagem;
 
 function msg_quest(texto: string; titulo: string = ''): boolean;
+var
+  modal_result: TModalResult;
 begin
+
+  modal_result := msg(
+    texto,
+    titulo,
+    true,
+    true,
+    false,
+    false,
+    cl_pergunta);
+
+  result := mrYes = modal_result;
 
 end;
 
-procedure msg(
+function msg(
   texto: string;
   titulo: string;
   sim: boolean;
   nao: boolean;
   ok: boolean;
   multidev: boolean;
-  cor: TColor);
+  cor: TColor): TModalResult;
 
 begin
   frm_mensagem.mmo_mensagem.Lines.Text := texto;
@@ -48,7 +63,7 @@ begin
 
   frm_mensagem.pnl_titulo.Caption := titulo;
   frm_mensagem.Color := cor;
-  frm_mensagem.ShowModal;
+  result := frm_mensagem.ShowModal;
 end;
 
 procedure msg_alert(texto: string; titulo: string = 'Alerta!');

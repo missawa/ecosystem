@@ -20,7 +20,6 @@ uses
   unt_usuario in 'unt_usuario.pas' {frm_usuario},
   unt_uf in 'unt_uf.pas' {frm_uf},
   unt_cad_abstrato_mestre_detalhe in 'abstratos\unt_cad_abstrato_mestre_detalhe.pas' {frm_cad_abstrato_mestre_detalhe},
-  unt_municipio in 'unt_municipio.pas' {frm_municipio},
   unt_cliente in 'unt_cliente.pas' {frm_cliente},
   unt_integracao in 'utils\unt_integracao.pas',
   unt_classe_endereco in 'classes\unt_classe_endereco.pas',
@@ -31,7 +30,9 @@ uses
   unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca},
   unt_licenca in 'unt_licenca.pas' {frm_licenca},
   unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade},
-  unt_atividade in 'unt_atividade.pas' {frm_atividade};
+  unt_atividade in 'unt_atividade.pas' {frm_atividade},
+  unt_input_texto in 'unt_input_texto.pas' {frm_input_texto},
+  unt_municipio in 'unt_municipio.pas' {frm_municipio};
 
 {$R *.res}
 
@@ -48,5 +49,6 @@ begin
   Application.CreateForm(Tfrm_pesquisa, frm_pesquisa);
   Application.CreateForm(Tfrm_progresso, frm_progresso);
   Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
+  Application.CreateForm(Tfrm_input_texto, frm_input_texto);
   Application.Run;
 end.

@@ -18,7 +18,9 @@ uses
   function last_id(tabela: string; pk: string; filter: string): integer;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
+  function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
   function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
+  function novo_bairro(id_municipio: integer): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
   function prior_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function troca_acentos(texto: string): string;
@@ -31,7 +33,7 @@ uses
   unt_dtm_dados,
   unt_func_messages,
   unt_procedures,
-  unt_pesquisa, unt_input_inteiro;
+  unt_pesquisa, unt_input_inteiro, unt_dtm_geral, unt_input_texto;
 
 function ajusta_numero_telefone(tel: string): string;
 var
@@ -302,6 +304,53 @@ begin
   except
     q.Free;
   end;
+
+end;
+
+function input_texto(
+  titulo: string;
+  default: string = '';
+  max: integer = 0;
+  CharCase: char = 'U'): string;
+begin
+
+  with frm_input_texto do
+  begin
+    FCharCase := CharCase;
+
+    MaxLength := max;
+
+    if MaxLength = 0 then
+      Width := 200
+    else
+      Width := max * 5;
+
+    mmo_texto.Text := default;
+    pnl_titulo.Caption := titulo;
+
+    if ShowModal = mrOK then
+      result := Trim(mmo_texto.Text)
+    else
+      result := EmptyStr;
+  end;
+
+end;
+
+
+function novo_bairro(id_municipio: integer): integer;
+var
+  id: integer;
+  bairro: string;
+begin
+
+  bairro := input_texto('BAIRRO', '', 100, 'S');
+  dtm_dados.qry_bairro.Insert;
+  dtm_dados.qry_bairro.FieldByName('id_municipio').AsInteger := id_municipio;
+  dtm_dados.qry_bairro.FieldByName('nome').AsString := bairro;
+  dtm_dados.qry_bairro.Post;
+  dtm_dados.qry_bairro.Refresh;
+  
+  result := dtm_dados.qry_bairro.FieldByName('id').AsInteger;
 
 end;
 
