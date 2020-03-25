@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ToolWin, ComCtrls, DB, Grids, Wwdbigrd, Wwdbgrid, ExtCtrls, Menus;
+  Dialogs, ToolWin, ComCtrls, DB, Grids, Wwdbigrd, Wwdbgrid, ExtCtrls, Menus,
+  StdCtrls, jpeg;
 
 type
   Tfrm_principal = class(TForm)
@@ -23,6 +24,10 @@ type
     rgoAmbiental1: TMenuItem;
     N1: TMenuItem;
     mnu_tipo_licenca: TMenuItem;
+    imgMultidev: TImage;
+    lblVersao: TLabel;
+    img_logo: TImage;
+    Shape1: TShape;
     procedure FormShow(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_usuarioClick(Sender: TObject);
@@ -32,6 +37,9 @@ type
     procedure mnu_atividadeClick(Sender: TObject);
     procedure rgoAmbiental1Click(Sender: TObject);
     procedure mnu_tipo_licencaClick(Sender: TObject);
+    procedure btn_relatorioClick(Sender: TObject);
+    procedure FormCanResize(Sender: TObject; var NewWidth, NewHeight: Integer;
+      var Resize: Boolean);
   private
     function log_ok: boolean;
   public
@@ -54,7 +62,7 @@ uses
   unt_senha,
   unt_tipo_licenca,
   unt_uf,
-  unt_usuario;
+  unt_usuario, unt_relatorio;
 
 {$R *.dfm}
 
@@ -72,9 +80,19 @@ begin
   end;
 end;
 
+procedure Tfrm_principal.btn_relatorioClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_relatorio, frm_relatorio);
+end;
+
 procedure Tfrm_principal.btn_usuarioClick(Sender: TObject);
 begin
   Application.CreateForm(Tfrm_usuario, frm_usuario);
+end;
+
+procedure Tfrm_principal.FormCanResize(Sender: TObject; var NewWidth, NewHeight: Integer; var Resize: Boolean);
+begin
+  img_logo.Left := Trunc((Width - img_logo.Width)/2);
 end;
 
 procedure Tfrm_principal.FormShow(Sender: TObject);

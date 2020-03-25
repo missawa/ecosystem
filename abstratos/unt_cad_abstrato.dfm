@@ -49,7 +49,6 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       Top = 0
       Caption = 'Editar'
       ImageIndex = 7
-      OnClick = btn_editarClick
     end
     object btn_excluir: TToolButton
       Left = 114

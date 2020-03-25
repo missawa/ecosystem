@@ -39,7 +39,7 @@ var
 
 implementation
 
-uses unt_func_messages;
+uses unt_func_messages, unt_functions;
 
 {$R *.dfm}
 
@@ -67,7 +67,7 @@ var
 begin
 
   if FCharCase = 'U' then
-    letra := UpperCase(Key)
+    letra := maiusculas(Key)
   else if FCharCase = 'L' then
     letra := LowerCase(Key)
   else

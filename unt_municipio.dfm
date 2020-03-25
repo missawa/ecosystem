@@ -3,7 +3,7 @@ object frm_municipio: Tfrm_municipio
   Top = 0
   Caption = 'Munic'#237'pio'
   ClientHeight = 397
-  ClientWidth = 826
+  ClientWidth = 645
   Color = clWindow
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
@@ -14,13 +14,14 @@ object frm_municipio: Tfrm_municipio
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object toolbar: TToolBar
     Left = 0
     Top = 21
-    Width = 826
+    Width = 645
     Height = 52
     AutoSize = True
     ButtonHeight = 52
@@ -32,6 +33,7 @@ object frm_municipio: Tfrm_municipio
     ShowCaptions = True
     ShowHint = True
     TabOrder = 0
+    ExplicitWidth = 826
     object btn_novo: TToolButton
       Left = 0
       Top = 0
@@ -51,7 +53,6 @@ object frm_municipio: Tfrm_municipio
       Top = 0
       Caption = 'Excluir'
       ImageIndex = 1
-      OnClick = btn_excluirClick
     end
     object btn_atualizar: TToolButton
       Left = 147
@@ -73,7 +74,6 @@ object frm_municipio: Tfrm_municipio
       Top = 0
       Caption = 'Salvar'
       ImageIndex = 32
-      OnClick = btn_salvarClick
     end
     object btn_cancelar: TToolButton
       Left = 253
@@ -145,7 +145,7 @@ object frm_municipio: Tfrm_municipio
   object pnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 826
+    Width = 645
     Height = 21
     Align = alTop
     Alignment = taLeftJustify
@@ -163,21 +163,24 @@ object frm_municipio: Tfrm_municipio
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
+    OnMouseDown = pnlTituloMouseDown
+    ExplicitWidth = 826
   end
   object pnlTotal: TPanel
     Left = 0
     Top = 73
-    Width = 826
+    Width = 645
     Height = 78
     Align = alTop
     BevelOuter = bvNone
     Padding.Left = 3
     Padding.Right = 3
     TabOrder = 2
+    ExplicitWidth = 826
     object pnl_tit_geral: TPanel
       Left = 3
       Top = 0
-      Width = 820
+      Width = 639
       Height = 18
       Align = alTop
       Alignment = taLeftJustify
@@ -195,17 +198,19 @@ object frm_municipio: Tfrm_municipio
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 820
     end
     object pnl_geral: TPanel
       Left = 3
       Top = 18
-      Width = 820
+      Width = 639
       Height = 60
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       ParentBackground = False
       TabOrder = 1
+      ExplicitWidth = 820
       object Label1: TLabel
         Left = 10
         Top = 10
@@ -314,7 +319,7 @@ object frm_municipio: Tfrm_municipio
   object Panel1: TPanel
     Left = 0
     Top = 151
-    Width = 826
+    Width = 645
     Height = 246
     Align = alClient
     BevelOuter = bvNone
@@ -325,10 +330,11 @@ object frm_municipio: Tfrm_municipio
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
+    ExplicitWidth = 826
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 3
-      Width = 820
+      Width = 639
       Height = 18
       Align = alTop
       Alignment = taLeftJustify
@@ -346,16 +352,15 @@ object frm_municipio: Tfrm_municipio
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 820
     end
     object grd_detalhe: TwwDBGrid
       Left = 3
       Top = 21
-      Width = 820
+      Width = 639
       Height = 222
       Selected.Strings = (
-        'id'#9'4'#9'ID'
-        'id_municipio'#9'6'#9'ID.MUN'
-        'nome'#9'60'#9'BAIRRO')
+        'nome'#9'100'#9'BAIRRO')
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
       FixedCols = 0
@@ -371,17 +376,19 @@ object frm_municipio: Tfrm_municipio
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      ExplicitWidth = 820
     end
   end
   object dts: TDataSource
     AutoEdit = False
-    Left = 704
+    DataSet = dse
+    Left = 551
     Top = 104
   end
   object qry: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 720
-    Top = 40
+    Left = 512
+    Top = 105
   end
   object dse: TUniQuery
     SQLInsert.Strings = (
@@ -410,12 +417,12 @@ object frm_municipio: Tfrm_municipio
     SQL.Strings = (
       'select *'
       'from municipio')
-    Left = 732
+    Left = 579
     Top = 104
   end
   object dts_detalhe: TDataSource
     DataSet = dse_detalhe
-    Left = 704
+    Left = 551
     Top = 184
   end
   object dse_detalhe: TUniQuery
@@ -445,14 +452,16 @@ object frm_municipio: Tfrm_municipio
     SQL.Strings = (
       'select * '
       'from bairro '
-      'where id_municipio = :key_field')
+      'where id_municipio = :id')
+    MasterSource = dts
     OnNewRecord = dse_detalheNewRecord
-    Left = 732
+    Left = 579
     Top = 184
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'key_field'
+        Name = 'id'
+        Value = Null
       end>
   end
 end

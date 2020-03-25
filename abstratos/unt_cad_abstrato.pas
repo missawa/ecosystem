@@ -64,7 +64,6 @@ type
     procedure btn_localizarClick(Sender: TObject);
     procedure btn_novoClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure btn_editarClick(Sender: TObject);
   protected
     table_name: string;
     key_field: string;
@@ -106,7 +105,6 @@ begin
     ReleaseCapture;
     self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end;
-  
 end;
 
 procedure Tfrm_cad_abstrato.open_dataset(pk: integer);
@@ -138,11 +136,6 @@ begin
 end;
 
 
-
-procedure Tfrm_cad_abstrato.btn_editarClick(Sender: TObject);
-begin
-  dse.Edit;
-end;
 
 procedure Tfrm_cad_abstrato.btn_excluirClick(Sender: TObject);
 begin

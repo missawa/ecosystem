@@ -263,7 +263,7 @@ begin
       cmb_campo.Text +
       criterio +
       iif(criterio = ' LIKE ',
-        QuotedStr('%' + trim(valor) + '%'),
+        QuotedStr(trim(valor)),
         trim(Valor)) +
       'order by ' + cmb_campo.Text;
 

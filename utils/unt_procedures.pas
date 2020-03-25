@@ -18,6 +18,7 @@ uses
 procedure abrir_arquivo(arquivo: string);
 procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true);
 procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
+procedure carrega_combo_bairro(cmb: TwwDBComboBox; id_municipio: integer; limpar: boolean = true);
 procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
 procedure exec_sql(sql: widestring);
@@ -90,19 +91,30 @@ begin
 
 end;
 
+procedure carrega_combo_bairro(
+  cmb: TwwDBComboBox;
+  id_municipio: integer;
+  limpar: boolean = true);
+var
+  sql: string;
+begin
+  sql :=
+    'select id, nome                                  '#13+
+    'from bairro                                      '#13+
+    'where id_municipio = ' + intToSTr(id_municipio)  +#13+
+    'order by nome';
+  carrega_combo(cmb, sql, limpar);
+end;
+
 procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 var
   sql: string;
-
 begin
-
   sql :=
-    'select id, nome          '#13+
-    'from usuario             '#13+
+    'select id, nome           '#13+
+    'from usuario              '#13+
     'order by nome';
-
   carrega_combo(cmb, sql, limpar);
-
 end;
 
 procedure centralizar_tela(form: TForm);

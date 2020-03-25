@@ -196,7 +196,6 @@ object frm_cliente: Tfrm_cliente
         UnboundDataType = wwDefault
         WantReturns = False
         WordWrap = False
-        OnEnter = edt_fantasiaEnter
       end
     end
   end
@@ -288,13 +287,22 @@ object frm_cliente: Tfrm_cliente
         Caption = 'Munic'#237'pio'
       end
       object lbl_bairro: TLabel
-        Left = 329
+        Left = 330
         Top = 9
         Width = 28
         Height = 13
         Caption = 'Bairro'
         DragCursor = crHandPoint
-        OnClick = lbl_bairroClick
+      end
+      object btn_bairro: TSpeedButton
+        Left = 485
+        Top = 21
+        Width = 15
+        Height = 20
+        Caption = '+'
+        Margin = 0
+        Spacing = 0
+        OnClick = btn_bairroClick
       end
       object edt_complemento: TwwDBEdit
         Left = 819
@@ -420,32 +428,31 @@ object frm_cliente: Tfrm_cliente
         PreciseEditRegion = False
         AllowClearKey = False
         ShowMatchText = True
+        OnCloseUp = cmb_municipioCloseUp
       end
-      object cmb_bairro: TwwDBLookupCombo
-        Left = 329
+      object cmb_bairro: TwwDBComboBox
+        Left = 330
         Top = 22
-        Width = 174
+        Width = 155
         Height = 19
-        CharCase = ecUpperCase
-        BorderStyle = bsNone
-        DropDownAlignment = taLeftJustify
-        Selected.Strings = (
-          'nome'#9'60'#9'BAIRRO'#9'F')
-        DataField = 'id_bairro'
-        DataSource = dts_endereco
-        LookupTable = dtm_dados.qry_bairro
-        LookupField = 'id'
-        Style = csDropDownList
-        Frame.Enabled = True
-        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
-        Frame.FocusStyle = efsFrameEtched
-        Frame.NonFocusStyle = efsFrameEtched
-        TabOrder = 3
-        AutoDropDown = True
         ShowButton = True
-        PreciseEditRegion = False
+        Style = csDropDown
+        MapList = True
         AllowClearKey = False
         ShowMatchText = True
+        BorderStyle = bsNone
+        CharCase = ecUpperCase
+        DataField = 'id_bairro'
+        DataSource = dts_endereco
+        DropDownCount = 8
+        Frame.Enabled = True
+        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.NonFocusStyle = efsFrameEtched
+        ItemHeight = 0
+        Sorted = False
+        TabOrder = 3
+        UnboundDataType = wwDefault
+        OnExit = cmb_bairroExit
       end
     end
   end
@@ -500,13 +507,13 @@ object frm_cliente: Tfrm_cliente
         Height = 143
         ControlType.Strings = (
           'descricao;CustomEdit;cmb_desc_tel;F'
-          'tipo;CustomEdit;cmb_tipo_tel;F'
+          'tipo;CustomEdit;cmb_tipo_tel;T'
           'tem_whatsapp;CheckBox;S;N')
         Selected.Strings = (
-          'descricao'#9'23'#9'DESCRI'#199#195'O'
-          'tipo'#9'14'#9'TIPO'
-          'numero'#9'14'#9'N'#218'MERO'
-          'tem_whatsapp'#9'6'#9'WHATS?')
+          'descricao'#9'22'#9'DESC.'#9#9
+          'tipo'#9'12'#9'TIPO'#9#9
+          'numero'#9'14'#9'N'#218'MERO'#9#9
+          'tem_whatsapp'#9'7'#9'WHATS?'#9#9)
         IniAttributes.Delimiter = ';;'
         TitleColor = clBtnFace
         FixedCols = 0
@@ -522,45 +529,22 @@ object frm_cliente: Tfrm_cliente
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-      end
-      object cmb_tipo_tel: TwwDBComboBox
-        Left = 154
-        Top = 33
-        Width = 90
-        Height = 19
-        ShowButton = True
-        Style = csDropDown
-        MapList = True
-        AllowClearKey = False
-        BorderStyle = bsNone
-        CharCase = ecUpperCase
-        DataField = 'tipo'
-        DropDownCount = 8
-        Frame.Enabled = True
-        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
-        Frame.FocusStyle = efsFrameEtched
-        Frame.NonFocusStyle = efsFrameEtched
-        ItemHeight = 0
-        Items.Strings = (
-          'Celular'#9'C'
-          'Fixo'#9'F')
-        Sorted = False
-        TabOrder = 2
-        UnboundDataType = wwDefault
-        OnCloseUp = cmb_tipo_telCloseUp
+        UseTFields = False
+        ExplicitLeft = -3
       end
       object cmb_desc_tel: TwwDBComboBox
-        Left = 10
-        Top = 33
+        Left = 12
+        Top = 68
         Width = 145
         Height = 19
         ShowButton = True
         Style = csDropDown
-        MapList = True
+        MapList = False
         AllowClearKey = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        DataField = 'tipo'
+        DataField = 'descricao'
+        DataSource = dts_tel
         DropDownCount = 8
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
@@ -568,11 +552,31 @@ object frm_cliente: Tfrm_cliente
         Frame.NonFocusStyle = efsFrameEtched
         ItemHeight = 0
         Items.Strings = (
-          'Pessoal'#9'Pessoal'
-          'Trabalho'#9'Trabalho'
-          'Recado'#9'Recado'
-          'Residencial'#9'Residencial'
-          'Tempor'#225'ro'#9'Tempor'#225'ro')
+          'Pessoal'
+          'Trabalho'
+          'Recado'
+          'Residencial'
+          'Tempor'#225'ro')
+        Sorted = False
+        TabOrder = 2
+        UnboundDataType = wwDefault
+      end
+      object cmb_tipo_tel: TwwDBComboBox
+        Left = 163
+        Top = 70
+        Width = 76
+        Height = 16
+        ShowButton = True
+        Style = csDropDown
+        MapList = True
+        AllowClearKey = False
+        DataField = 'tipo'
+        DataSource = dts_tel
+        DropDownCount = 8
+        ItemHeight = 0
+        Items.Strings = (
+          'CELULAR'#9'C'
+          'FIXO'#9'F')
         Sorted = False
         TabOrder = 3
         UnboundDataType = wwDefault
@@ -618,6 +622,10 @@ object frm_cliente: Tfrm_cliente
           'descricao;CustomEdit;cmb_desc_email;F'
           'tipo;CustomEdit;cmb_tipo_email;F'
           'tem_whatsapp;CheckBox;S;N')
+        Selected.Strings = (
+          'tipo'#9'10'#9'TIPO'
+          'endereco'#9'38'#9'ENDERE'#199'O'
+          'descricao'#9'30'#9'DESC.')
         IniAttributes.Delimiter = ';;'
         TitleColor = clBtnFace
         FixedCols = 0
@@ -635,9 +643,9 @@ object frm_cliente: Tfrm_cliente
         TitleButtons = False
       end
       object cmb_tipo_email: TwwDBComboBox
-        Left = 157
-        Top = 32
-        Width = 91
+        Left = 20
+        Top = 57
+        Width = 80
         Height = 19
         ShowButton = True
         Style = csDropDown
@@ -646,6 +654,7 @@ object frm_cliente: Tfrm_cliente
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'tipo'
+        DataSource = dts_email
         DropDownCount = 8
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
@@ -653,24 +662,25 @@ object frm_cliente: Tfrm_cliente
         Frame.NonFocusStyle = efsFrameEtched
         ItemHeight = 0
         Items.Strings = (
-          'Celular'#9'C'
-          'Fixo'#9'F')
+          'CELULAR'#9'C'
+          'FIXO'#9'F')
         Sorted = False
         TabOrder = 2
         UnboundDataType = wwDefault
       end
       object cmb_desc_email: TwwDBComboBox
-        Left = 13
-        Top = 32
-        Width = 145
+        Left = 187
+        Top = 72
+        Width = 91
         Height = 19
         ShowButton = True
         Style = csDropDown
-        MapList = True
+        MapList = False
         AllowClearKey = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
-        DataField = 'tipo'
+        DataField = 'descricao'
+        DataSource = dts_email
         DropDownCount = 8
         Frame.Enabled = True
         Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
@@ -678,11 +688,11 @@ object frm_cliente: Tfrm_cliente
         Frame.NonFocusStyle = efsFrameEtched
         ItemHeight = 0
         Items.Strings = (
-          'Pessoal'#9'Pessoal'
-          'Trabalho'#9'Trabalho'
-          'Recado'#9'Recado'
-          'Residencial'#9'Residencial'
-          'Tempor'#225'ro'#9'Tempor'#225'ro')
+          'Pessoal'
+          'Trabalho'
+          'Recado'
+          'Residencial'
+          'Tempor'#225'ro')
         Sorted = False
         TabOrder = 3
         UnboundDataType = wwDefault
@@ -959,7 +969,7 @@ object frm_cliente: Tfrm_cliente
   end
   object dts_endereco: TDataSource
     DataSet = dse_endereco
-    Left = 921
+    Left = 948
     Top = 178
   end
   object dts_tel: TDataSource
@@ -1036,49 +1046,6 @@ object frm_cliente: Tfrm_cliente
         DataType = ftUnknown
         Name = 'id'
       end>
-    object dse_clienteid: TIntegerField
-      FieldName = 'id'
-    end
-    object dse_clientetipo: TStringField
-      FieldName = 'tipo'
-      FixedChar = True
-      Size = 1
-    end
-    object dse_clientecpf: TStringField
-      FieldName = 'cpf'
-      Size = 11
-    end
-    object dse_clientecnpj: TStringField
-      FieldName = 'cnpj'
-      Size = 14
-    end
-    object dse_clientenome: TStringField
-      FieldName = 'nome'
-      Size = 120
-    end
-    object dse_clientefantasia: TStringField
-      FieldName = 'fantasia'
-      Size = 100
-    end
-    object dse_clientecliente: TStringField
-      FieldName = 'cliente'
-      FixedChar = True
-      Size = 1
-    end
-    object dse_clientefornecedor: TStringField
-      FieldName = 'fornecedor'
-      FixedChar = True
-      Size = 1
-    end
-    object dse_clienteusuario: TStringField
-      FieldName = 'usuario'
-      FixedChar = True
-      Size = 1
-    end
-    object dse_clienteobs: TMemoField
-      FieldName = 'obs'
-      BlobType = ftMemo
-    end
   end
   object dse_endereco: TUniQuery
     SQLInsert.Strings = (
@@ -1121,7 +1088,7 @@ object frm_cliente: Tfrm_cliente
     MasterSource = dts_cliente
     Options.StrictUpdate = False
     OnNewRecord = dse_enderecoNewRecord
-    Left = 949
+    Left = 921
     Top = 178
     ParamData = <
       item
@@ -1202,6 +1169,7 @@ object frm_cliente: Tfrm_cliente
       'order by descricao')
     MasterSource = dts_cliente
     Options.StrictUpdate = False
+    Active = True
     AfterScroll = dse_telAfterScroll
     OnNewRecord = dse_telNewRecord
     Left = 367
@@ -1210,30 +1178,44 @@ object frm_cliente: Tfrm_cliente
       item
         DataType = ftUnknown
         Name = 'id'
+        Value = Null
       end>
-    object dse_telid: TIntegerField
-      FieldName = 'id'
+    object dse_teldescricao: TStringField
+      DisplayLabel = 'DESC.'
+      DisplayWidth = 22
+      FieldName = 'descricao'
+      Size = 30
     end
     object dse_teltipo: TStringField
+      DisplayLabel = 'TIPO'
+      DisplayWidth = 12
       FieldName = 'tipo'
       FixedChar = True
       Size = 1
     end
     object dse_telnumero: TStringField
+      DisplayLabel = 'N'#218'MERO'
+      DisplayWidth = 14
       FieldName = 'numero'
       Size = 11
     end
     object dse_teltem_whatsapp: TStringField
+      DisplayLabel = 'WHATS?'
+      DisplayWidth = 7
       FieldName = 'tem_whatsapp'
       FixedChar = True
       Size = 1
     end
-    object dse_telid_pessoa: TIntegerField
-      FieldName = 'id_pessoa'
+    object dse_telid: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DisplayWidth = 6
+      FieldName = 'id'
+      Visible = False
     end
-    object dse_teldescricao: TStringField
-      FieldName = 'descricao'
-      Size = 30
+    object dse_telid_pessoa: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'id_pessoa'
+      Visible = False
     end
   end
   object dse_email: TUniQuery
@@ -1268,6 +1250,7 @@ object frm_cliente: Tfrm_cliente
       'where id_pessoa = :id')
     MasterSource = dts_cliente
     Options.StrictUpdate = False
+    Active = True
     OnNewRecord = dse_emailNewRecord
     Left = 949
     Top = 340
@@ -1275,25 +1258,37 @@ object frm_cliente: Tfrm_cliente
       item
         DataType = ftUnknown
         Name = 'id'
+        Value = Null
       end>
-    object dse_emailid: TIntegerField
-      FieldName = 'id'
-    end
-    object dse_emailid_pessoa: TIntegerField
-      FieldName = 'id_pessoa'
-    end
     object dse_emailtipo: TStringField
+      DisplayLabel = 'TIPO'
+      DisplayWidth = 10
       FieldName = 'tipo'
       FixedChar = True
       Size = 1
     end
     object dse_emailendereco: TStringField
+      DisplayLabel = 'ENDERE'#199'O'
+      DisplayWidth = 38
       FieldName = 'endereco'
       Size = 120
     end
     object dse_emaildescricao: TStringField
+      DisplayLabel = 'DESC.'
+      DisplayWidth = 30
       FieldName = 'descricao'
       Size = 30
+    end
+    object dse_emailid: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DisplayWidth = 10
+      FieldName = 'id'
+      Visible = False
+    end
+    object dse_emailid_pessoa: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'id_pessoa'
+      Visible = False
     end
   end
 end

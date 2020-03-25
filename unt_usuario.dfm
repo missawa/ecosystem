@@ -226,6 +226,7 @@ object frm_usuario: Tfrm_usuario
     Top = 105
   end
   object dse_usuario: TUniQuery
+    Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select *'
       'from usuario'

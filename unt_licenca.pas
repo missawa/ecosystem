@@ -27,7 +27,7 @@ uses
   MemDS,
   DBAccess,
   Uni,
-  ADODB;
+  ADODB, Buttons;
 
 type
   Tfrm_licenca = class(TForm)
@@ -56,44 +56,32 @@ type
     edt_assinou: TwwDBEdit;
     Panel1: TPanel;
     pnl_tit_detalhe: TPanel;
-    grd_detalhe: TwwDBGrid;
     dts_licenca: TDataSource;
     dts_cliente: TDataSource;
     dts_condicionante: TDataSource;
     Panel4: TPanel;
     Panel5: TPanel;
     mmo_desc_condicionante: TDBMemo;
-    cmb_responsavel: TwwDBComboBox;
     cmb_executor: TwwDBComboBox;
     qry_cliente: TUniQuery;
     dse_licenca: TUniQuery;
-    dse_condicionante: TUniQuery;
     qry_tipo: TUniQuery;
     qry_orgao: TUniQuery;
     qry_municipio: TUniQuery;
-    dse_licencaid: TIntegerField;
-    dse_licencaid_tipo_licenca: TIntegerField;
-    dse_licencaid_atividade: TIntegerField;
-    dse_licencaid_orgao: TIntegerField;
-    dse_licencanumero: TStringField;
-    dse_licencadt_ini: TDateField;
-    dse_licencadt_venc: TDateField;
-    dse_licencaassinatura: TStringField;
-    dse_licencaid_cliente: TIntegerField;
-    dse_licencaid_municipio: TIntegerField;
-    dse_licencadescricao: TMemoField;
-    dse_condicionanteid: TIntegerField;
-    dse_condicionanteid_licenca: TIntegerField;
-    dse_condicionanteid_pessoa_executor: TIntegerField;
-    dse_condicionanteid_pressoa_responsavel: TIntegerField;
-    dse_condicionantedescricao: TMemoField;
-    dse_condicionantecumprida: TStringField;
-    dse_condicionantedt_venc: TDateField;
-    dse_condicionantedt_cumprimento: TDateField;
-    dse_condicionantedt_aviso: TDateField;
+    Panel6: TPanel;
+    btn_ok: TSpeedButton;
+    grd_condicionante: TwwDBGrid;
+    cmb_responsavel: TwwDBComboBox;
+    dse_condicionante: TUniQuery;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
+    procedure pnl_tit_geralMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_okClick(Sender: TObject);
+    procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
+  protected
+    procedure CreateParams(var Params: TCreateParams);
   private
     procedure open_aux_queries;
     { Private declarations }
@@ -110,24 +98,55 @@ uses unt_procedures, unt_dtm_dados;
 
 {$R *.dfm}
 
+procedure Tfrm_licenca.btn_okClick(Sender: TObject);
+begin
+  if dse_licenca.State in [dsEdit, dsInsert] then
+    dse_licenca.Post;
+  if dse_condicionante.State in [dsEdit, dsInsert] then
+    dse_condicionante.Post;
+  close;
+end;
+
+procedure Tfrm_licenca.CreateParams(var Params: TCreateParams);
+begin
+  inherited;
+  Params.Style := WS_BORDER;
+  BorderStyle := bsNone;
+  BorderWidth := 0;
+end;
+
 procedure Tfrm_licenca.dse_licencaNewRecord(DataSet: TDataSet);
 begin
   dse_licenca.FieldByName('id_cliente').Value := qry_cliente.FieldByName('id').Value;
   dse_licenca.FieldByName('id_atividade').Value := qry_cliente.FieldByName('id_atividade').Value
 end;
 
+procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
+begin
+  dse_condicionante.SQL.Text :=
+    'select *                                                   '#13+
+    'from condicionante                                         '#13+
+    'where id_licenca = ' + dse_licenca.FieldByName('id').Text;
+end;
+
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
 begin
-  dse_condicionanteid_licenca.AsInteger := dse_licencaid.AsInteger;
-  dse_condicionantecumprida.Text := 'N';
+  dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
+  dse_condicionante.FieldByName('cumprida').Text := 'N';
+end;
+
+procedure Tfrm_licenca.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
 end;
 
 procedure Tfrm_licenca.FormCreate(Sender: TObject);
 begin
-  centralizar_tela(self);
-  open_aux_queries;
   carrega_combo_usuarios(cmb_responsavel);
   carrega_combo_usuarios(cmb_executor);
+  centralizar_tela(self);
+  open_aux_queries;
+
 end;
 
 procedure Tfrm_licenca.open_aux_queries;
@@ -169,6 +188,18 @@ begin
 
 
   dse_condicionante.Open;
+end;
+
+procedure Tfrm_licenca.pnl_tit_geralMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+const
+  SC_DRAGMOVE = $F012;
+begin
+  if Button = mbleft then
+  begin
+    ReleaseCapture;
+    self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
+  end;
 end;
 
 end.

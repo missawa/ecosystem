@@ -257,6 +257,5 @@ object frm_input_texto: Tfrm_input_texto
     ParentFont = False
     TabOrder = 1
     OnMouseDown = pnl_tituloMouseDown
-    ExplicitWidth = 469
   end
 end

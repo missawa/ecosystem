@@ -10,6 +10,7 @@ uses
 
   function ajusta_numero_telefone(tel: string): string;
   function arredonda(valor: currency): currency;
+  function bairro_cadastrado(id_municipio: integer; nome_bairro: string): boolean;
   function cpf_valido(cpf: string): boolean;
   function cnpj_valido(cnpj: string): boolean;
   function data_sql(data: TDate): string;
@@ -19,8 +20,9 @@ uses
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
+  function maiusculas(s: string): string;
   function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
-  function novo_bairro(id_municipio: integer): integer;
+  function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
   function prior_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function troca_acentos(texto: string): string;
@@ -65,6 +67,24 @@ begin
       result := valor;
     end;
   end;
+end;
+
+function bairro_cadastrado(id_municipio: integer; nome_bairro: string): boolean;
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+
+  open_query(
+    q,
+    'select * from bairro                             '#13+
+    'where id_municipio = ' + intToStr(id_municipio)  +#13+
+    '    and nome = ' + quotedStr(nome_bairro));
+  result := not q.isEmpty;
+  q.free;
+
 end;
 
 function cpf_valido(cpf: string): boolean;
@@ -276,6 +296,33 @@ begin
 
 end;
 
+function maiusculas(s: string): string;
+var
+  i: integer;
+begin
+  s := upperCase(s);
+  result := EmptyStr;
+
+  for i := 1 to length(s) do
+  begin
+    case s[i] of
+      'ç': s[i] := 'Ç';
+      'á': s[i] := 'Á';
+      'ã': s[i] := 'Ã';
+      'â': s[i] := 'Â';
+      'à': s[i] := 'À';
+      'é': s[i] := 'É';
+      'ê': s[i] := 'Ê';
+      'ó': s[i] := 'Ó';
+      'õ': s[i] := 'Õ';
+      'ô': s[i] := 'Ô';
+      'í': s[i] := 'Í';
+    end;
+    result := result + s[i];
+  end;
+end;
+
+
 function next_id(
   tabela: string;
   pk: string;
@@ -337,14 +384,14 @@ begin
 end;
 
 
-function novo_bairro(id_municipio: integer): integer;
+function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
 var
   id: integer;
-  bairro: string;
 begin
 
-  bairro := input_texto('BAIRRO', '', 100, 'S');
-  dtm_dados.qry_bairro.Insert;
+  if bairro = '' then
+    bairro := input_texto('BAIRRO', '', 100, 'U');
+  dtm_dados.qry_bairro.Append;
   dtm_dados.qry_bairro.FieldByName('id_municipio').AsInteger := id_municipio;
   dtm_dados.qry_bairro.FieldByName('nome').AsString := bairro;
   dtm_dados.qry_bairro.Post;

@@ -73,6 +73,7 @@ object dtm_dados: Tdtm_dados
       'from bairro '
       'where id_municipio = :id')
     MasterSource = dts_municipio
+    Options.StrictUpdate = False
     Left = 158
     Top = 172
     ParamData = <
@@ -115,6 +116,7 @@ object dtm_dados: Tdtm_dados
       'select *'
       'from uf'
       'order by sigla')
+    Options.StrictUpdate = False
     Left = 163
     Top = 72
   end
@@ -158,6 +160,7 @@ object dtm_dados: Tdtm_dados
       'where id_uf = :id'
       'order by nome')
     MasterSource = dts_uf
+    Options.StrictUpdate = False
     Left = 160
     Top = 120
     ParamData = <

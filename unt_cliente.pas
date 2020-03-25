@@ -32,7 +32,7 @@ uses
   Provider,
   MemDS,
   DBAccess,
-  Uni;
+  Uni, Buttons;
 
 type
   Tfrm_cliente = class(TForm)
@@ -52,20 +52,16 @@ type
     lbl_bairro: TLabel;
     cmb_uf: TwwDBLookupCombo;
     cmb_municipio: TwwDBLookupCombo;
-    cmb_bairro: TwwDBLookupCombo;
     dts_endereco: TDataSource;
     dts_tel: TDataSource;
     pnl_contato: TPanel;
     onl_telefone: TPanel;
     pnl_tit_telefone: TPanel;
     grd_tel: TwwDBGrid;
-    cmb_tipo_tel: TwwDBComboBox;
     cmb_desc_tel: TwwDBComboBox;
     Panel1: TPanel;
     Panel2: TPanel;
     grd_email: TwwDBGrid;
-    cmb_tipo_email: TwwDBComboBox;
-    cmb_desc_email: TwwDBComboBox;
     dts_email: TDataSource;
     pnl_obs: TPanel;
     pnl_tit_obs: TPanel;
@@ -119,16 +115,6 @@ type
     dse_enderecologradouro: TStringField;
     dse_endereconumero: TIntegerField;
     dse_enderecocomplemento: TStringField;
-    dse_clienteid: TIntegerField;
-    dse_clientetipo: TStringField;
-    dse_clientecpf: TStringField;
-    dse_clientecnpj: TStringField;
-    dse_clientenome: TStringField;
-    dse_clientefantasia: TStringField;
-    dse_clientecliente: TStringField;
-    dse_clientefornecedor: TStringField;
-    dse_clienteusuario: TStringField;
-    dse_clienteobs: TMemoField;
     dse_telid: TIntegerField;
     dse_teltipo: TStringField;
     dse_telnumero: TStringField;
@@ -140,16 +126,19 @@ type
     dse_emailtipo: TStringField;
     dse_emailendereco: TStringField;
     dse_emaildescricao: TStringField;
+    cmb_bairro: TwwDBComboBox;
+    btn_bairro: TSpeedButton;
+    cmb_tipo_tel: TwwDBComboBox;
+    cmb_tipo_email: TwwDBComboBox;
+    cmb_desc_email: TwwDBComboBox;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
-    procedure edt_fantasiaEnter(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
     procedure edt_cnpj_cpfExit(Sender: TObject);
     procedure edt_cepExit(Sender: TObject);
     procedure dse_clienteAfterScroll(DataSet: TDataSet);
     procedure dse_telNewRecord(DataSet: TDataSet);
     procedure dse_telAfterScroll(DataSet: TDataSet);
-    procedure cmb_tipo_telCloseUp(Sender: TwwDBComboBox; Select: Boolean);
     procedure dtsStateChange(Sender: TObject);
     procedure dse_clienteAfterCancel(DataSet: TDataSet);
     procedure dse_clienteAfterClose(DataSet: TDataSet);
@@ -174,11 +163,13 @@ type
     procedure dse_clienteBeforePost(DataSet: TDataSet);
     procedure dse_clienteNewRecord(DataSet: TDataSet);
     procedure dse_clienteAfterEdit(DataSet: TDataSet);
-    procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure dse_emailNewRecord(DataSet: TDataSet);
     procedure lbl_cnpj_cpfClick(Sender: TObject);
-    procedure lbl_bairroClick(Sender: TObject);
+    procedure cmb_municipioCloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+    procedure cmb_bairroExit(Sender: TObject);
+    procedure btn_bairroClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -209,8 +200,8 @@ uses
 {$R *.dfm}
 
 procedure Tfrm_cliente.CreateParams(var Params: TCreateParams);
-begin 
-  inherited; 
+begin
+  inherited;
   Params.Style := WS_BORDER;
   BorderStyle := bsNone;
   BorderWidth := 0;
@@ -283,6 +274,7 @@ end;
 procedure Tfrm_cliente.btn_novoClick(Sender: TObject);
 begin
   dse_cliente.Append;
+  edt_cnpj_cpf.SetFocus;
 end;
 
 procedure Tfrm_cliente.btn_primeiroClick(Sender: TObject);
@@ -328,19 +320,37 @@ begin
       'and cliente = ''S'''));
 end;
 
+procedure Tfrm_cliente.cmb_bairroExit(Sender: TObject);
+var
+  id_municipio: integer;
+  id_bairro: integer;
+  i: integer;
+begin
+  if dse_endereco.State in [dsEdit, dsInsert] then
+  begin
+
+    id_municipio := dse_endereco.FieldByName('id_municipio').AsInteger;
+
+    if not bairro_cadastrado(id_municipio, cmb_bairro.Text) then
+    begin
+      id_bairro := novo_bairro(id_municipio, cmb_bairro.Text);
+      cmb_bairro.Items.Add(cmb_bairro.Text + #9 + intToStr(id_bairro));
+      dse_endereco.FieldByName('id_bairro').AsInteger := id_bairro;
+      cmb_bairro.ItemIndex := 10;
+    end;
+  end;
+end;
+
+procedure Tfrm_cliente.cmb_municipioCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+begin
+  carrega_combo_bairro(
+    cmb_bairro,
+    dse_endereco.FieldByName('id_municipio').AsInteger);
+end;
+
 procedure Tfrm_cliente.cmb_tipoCloseUp(Sender: TwwDBComboBox; Select: Boolean);
 begin
   mostra_cnpj_cpf;
-end;
-
-procedure Tfrm_cliente.cmb_tipo_telCloseUp(Sender: TwwDBComboBox; Select: Boolean);
-var
-  num: string;
-begin
-  if cmb_tipo_tel.Value = 'F' then
-    TStringField(dse_tel.FieldByName('numero')).EditMask := msk_tel_fixo
-  else if cmb_tipo_tel.Value = 'C' then
-    TStringField(dse_tel.FieldByName('numero')).EditMask := msk_tel_celular;
 end;
 
 procedure Tfrm_cliente.dse_clienteAfterCancel(DataSet: TDataSet);
@@ -387,6 +397,11 @@ begin
 
   TStringField(dse_cliente.FieldByName('cpf')).EditMask := msk_cpf;
   TStringField(dse_cliente.FieldByName('cnpj')).EditMask := msk_cnpj;
+  TStringField(dse_endereco.FieldByName('cep')).EditMask := msk_cep;
+
+  carrega_combo_bairro(
+    cmb_bairro,
+    dse_endereco.FieldByName('id_municipio').AsInteger);
 end;
 
 procedure Tfrm_cliente.dse_clienteAfterPost(DataSet: TDataSet);
@@ -426,14 +441,15 @@ end;
 
 procedure Tfrm_cliente.dse_clienteNewRecord(DataSet: TDataSet);
 begin
-  dse_clientecliente.Text := 'S';
-  dse_clientefornecedor.Text := 'N';
-  dse_clienteusuario.Text := 'N';
+  dse_cliente.fieldByName('cliente').Text := 'S';
+  dse_cliente.fieldByName('fornecedor').Text := 'N';
+  dse_cliente.fieldByName('usuario').Text := 'N';
+  dse_cliente.fieldByName('tipo').Text := 'J';
 end;
 
 procedure Tfrm_cliente.dse_emailNewRecord(DataSet: TDataSet);
 begin
-  dse_emailid_pessoa.AsInteger := dse_clienteid.AsInteger;
+  dse_emailid_pessoa.AsInteger := dse_cliente.fieldByName('id').AsInteger;
 end;
 
 procedure Tfrm_cliente.dse_enderecoNewRecord(DataSet: TDataSet);
@@ -446,13 +462,15 @@ procedure Tfrm_cliente.dse_telAfterScroll(DataSet: TDataSet);
 var
   num: string;
 begin
-{  num := ajusta_numero_telefone(dse_tel.FieldByName('numero').Text);
-  TStringField(dse_tel.FieldByName('numero')).EditMask := define_mascara_telefone(num);    }
+  if cmb_tipo_tel.Value = 'F' then
+    TStringField(dse_tel.FieldByName('numero')).EditMask := msk_tel_fixo
+  else if cmb_tipo_tel.Value = 'C' then
+    TStringField(dse_tel.FieldByName('numero')).EditMask := msk_tel_celular;
 end;
 
 procedure Tfrm_cliente.dse_telNewRecord(DataSet: TDataSet);
 begin
-  dse_telid_pessoa.AsInteger := dse_clienteid.AsInteger;
+  dse_telid_pessoa.AsInteger := dse_cliente.fieldByName('id').AsInteger;
 end;
 
 procedure Tfrm_cliente.dtsStateChange(Sender: TObject);
@@ -514,11 +532,13 @@ begin
       dse_endereco.FieldByName('id_uf').AsInteger := ender.id_uf;
       dse_endereco.FieldByName('id_municipio').AsInteger := ender.id_municipio;
 
+      carrega_combo_bairro(
+        cmb_bairro,
+        ender.id_municipio);
+
       if ender.id_bairro <> 0 then
         dse_endereco.FieldByName('id_bairro').AsInteger := ender.id_bairro;
 
-      //edt_bairroExit(Sender);
-      //edt_municipioExit(Sender);
     end;
   end;
 end;
@@ -537,15 +557,6 @@ begin
     edt_cnpj_cpf.SetFocus;
   end;
 
-end;
-
-procedure Tfrm_cliente.edt_fantasiaEnter(Sender: TObject);
-begin
-  if dse_cliente.FieldByName('id').IsNull then
-  begin
-    dse_cliente.Post;
-    dse_cliente.Edit;
-  end;  
 end;
 
 procedure Tfrm_cliente.open_aux_queries;
@@ -569,8 +580,7 @@ begin
   dse_cliente.Open;
 end;
 
-procedure Tfrm_cliente.pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure Tfrm_cliente.pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 const
   SC_DRAGMOVE = $F012;
 begin
@@ -579,6 +589,26 @@ begin
     ReleaseCapture;
     self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end;
+end;
+
+procedure Tfrm_cliente.btn_bairroClick(Sender: TObject);
+var
+  novo_id_bairro: integer;
+begin
+
+  if dse_endereco.State in [dsEdit, dsInsert] then
+  begin
+    if msg_quest('Deseja cadastrar novo bairro para o Município ' + cmb_municipio.Text + '?') then
+    begin
+      novo_id_bairro := novo_bairro(dse_enderecoid_municipio.AsInteger);
+      carrega_combo_bairro(
+        cmb_bairro,
+        dse_enderecoid_municipio.AsInteger);
+      dse_enderecoid_bairro.AsInteger := novo_id_bairro;
+      cmb_bairro.Refresh;
+    end;
+  end;
+
 end;
 
 procedure Tfrm_cliente.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -596,28 +626,9 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure Tfrm_cliente.lbl_bairroClick(Sender: TObject);
-begin
-
-  if dse_endereco.State in [dsEdit, dsInsert] then
-  begin
-    if msg_quest('Deseja cadastrar novo bairro para o Município ' + cmb_municipio.Text + '?') then
-    begin
-      dse_enderecoid_bairro.AsInteger :=  novo_bairro(dse_enderecoid_municipio.AsInteger);
-      dtm_dados.qry_bairro.Locate('id',dse_enderecoid_bairro.AsInteger,[]);
-      cmb_bairro.Text := dtm_dados.qry_bairro.FieldByName('nome').Text;
-      cmb_bairro.Refresh;
-      edt_logradouro.SetFocus;
-    end;
-  end;
-
-
-
-end;
-
 procedure Tfrm_cliente.lbl_cnpj_cpfClick(Sender: TObject);
 begin
-  Clipboard.AsText := dse_clientecnpj.AsString;
+  Clipboard.AsText := dse_cliente.fieldByName('cnpj').AsString;
   msg_info('O CNPJ foi copiado.'); 
 end;
 

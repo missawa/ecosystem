@@ -652,6 +652,7 @@ object frm_pesquisa: Tfrm_pesquisa
     end
   end
   object dts: TDataSource
+    DataSet = qry
     Left = 620
     Top = 40
   end
