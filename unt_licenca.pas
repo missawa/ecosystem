@@ -123,10 +123,16 @@ end;
 
 procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
 begin
-  dse_condicionante.SQL.Text :=
-    'select *                                                   '#13+
-    'from condicionante                                         '#13+
-    'where id_licenca = ' + dse_licenca.FieldByName('id').Text;
+  if dse_licenca.FieldByName('id').Text = '' then
+    dse_condicionante.SQL.Text :=
+      'select *                                                   '#13+
+      'from condicionante                                         '#13+
+      'where id_licenca is null'
+  else
+    dse_condicionante.SQL.Text :=
+      'select *                                                   '#13+
+      'from condicionante                                         '#13+
+      'where id_licenca = ' + dse_licenca.FieldByName('id').Text;
 end;
 
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);

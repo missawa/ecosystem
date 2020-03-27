@@ -399,7 +399,6 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 358
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 18
@@ -433,7 +432,6 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitWidth = 958
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -475,7 +473,6 @@ object frm_licenca: Tfrm_licenca
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
-        ExplicitWidth = 342
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
@@ -491,15 +488,13 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitWidth = 342
-        ExplicitHeight = 314
       end
     end
     object cmb_executor: TwwDBComboBox
       Left = 250
       Top = 60
       Width = 190
-      Height = 16
+      Height = 19
       ShowButton = True
       Style = csDropDown
       MapList = True
