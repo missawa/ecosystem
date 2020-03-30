@@ -78,13 +78,16 @@ begin
 
   verifica_conf_data_windows;
 
-  dtm_dados.qry_usuario.Params.ParamByName('login').Value := edt_login.Text;
-  dtm_dados.qry_usuario.Params.ParamByName('senha').Value := edt_senha.Text;
-  dtm_dados.qry_usuario.Open;
+  dtm_dados.open_query_usuario(
+    edt_login.Text,
+    edt_senha.Text);
 
   if not dtm_dados.qry_usuario.IsEmpty then
   begin
     try
+      dtm_dados.id_usuario_logado := dtm_dados.qry_usuario.FieldByName('id').AsInteger;
+      dtm_dados.nome_usuario_logado := dtm_dados.qry_usuario.FieldByName('login').AsString;
+      //dtm_dados.email_usuario_logado := dtm_dados.qry_usuario.FieldByName('').AsString;
       ModalResult := mrOK;
     except
       on e:exception do msg_error(e.message);

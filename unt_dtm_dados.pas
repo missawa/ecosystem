@@ -32,7 +32,11 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    id_usuario_logado: integer;
+    nome_usuario_logado: string;
+    email_usuario_logado: string;
+
+    procedure open_query_usuario(login, senha: string);
   end;
 
 var
@@ -43,6 +47,19 @@ implementation
 uses unt_principal;
 
 {$R *.dfm}
+
+procedure Tdtm_dados.open_query_usuario(
+  login: string;
+  senha: string);
+begin
+  qry_usuario.Close;
+  qry_usuario.SQL.Text :=
+    'select *                             '#13+
+    'from usuario                         '#13+
+    'where login = ' + quotedStr(login)   +#13+
+    '    and senha = ' + quotedStr(senha);
+  qry_usuario.Open;
+end;
 
 procedure Tdtm_dados.con_mysqlAfterConnect(Sender: TObject);
 begin

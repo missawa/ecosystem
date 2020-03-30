@@ -73,6 +73,7 @@ type
     grd_condicionante: TwwDBGrid;
     cmb_responsavel: TwwDBComboBox;
     dse_condicionante: TUniQuery;
+    btn_recarregar: TSpeedButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -80,6 +81,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_okClick(Sender: TObject);
     procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
+    procedure btn_recarregarClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams);
   private
@@ -105,6 +107,21 @@ begin
   if dse_condicionante.State in [dsEdit, dsInsert] then
     dse_condicionante.Post;
   close;
+end;
+
+procedure Tfrm_licenca.btn_recarregarClick(Sender: TObject);
+var
+  id_pessoa: integer;
+  id_atividade: integer;
+begin
+  id_pessoa := qry_cliente.FieldByName('id').AsInteger;
+  id_atividade := qry_cliente.FieldByName('id_atividade').AsInteger;
+
+  dse_condicionante.Close;
+  dse_licenca.Close;
+  qry_cliente.Close;
+
+  open_dataset(id_pessoa, id_atividade);
 end;
 
 procedure Tfrm_licenca.CreateParams(var Params: TCreateParams);
@@ -139,6 +156,8 @@ procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
 begin
   dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
   dse_condicionante.FieldByName('cumprida').Text := 'N';
+  dse_condicionante.FieldByName('id_executor').AsInteger := dtm_dados.id_usuario_logado;
+  dse_condicionante.FieldByName('id_responsavel').AsInteger := dtm_dados.id_usuario_logado;
 end;
 
 procedure Tfrm_licenca.FormClose(Sender: TObject; var Action: TCloseAction);

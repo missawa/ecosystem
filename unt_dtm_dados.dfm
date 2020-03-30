@@ -7,25 +7,37 @@ object dtm_dados: Tdtm_dados
     Top = 10
   end
   object qry_usuario: TUniQuery
+    SQLInsert.Strings = (
+      'INSERT INTO usuario'
+      '  (id, id_pessoa, login, senha, nome)'
+      'VALUES'
+      '  (:id, :id_pessoa, :login, :senha, :nome)')
+    SQLDelete.Strings = (
+      'DELETE FROM usuario'
+      'WHERE'
+      '  id = :Old_id')
+    SQLUpdate.Strings = (
+      'UPDATE usuario'
+      'SET'
+      
+        '  id = :id, id_pessoa = :id_pessoa, login = :login, senha = :sen' +
+        'ha, nome = :nome'
+      'WHERE'
+      '  id = :Old_id')
+    SQLRefresh.Strings = (
+      'SELECT id, id_pessoa, login, senha, nome FROM usuario'
+      'WHERE'
+      '  id = :id')
+    SQLRecCount.Strings = (
+      'SELECT COUNT(*) FROM (SELECT * FROM usuario'
+      ')')
     Connection = mysql_conn
     SQL.Strings = (
       'select *'
-      'from usuario'
-      'where login = :login'
-      '    and senha = :senha')
+      'from usuario')
+    Active = True
     Left = 35
     Top = 100
-    ParamData = <
-      item
-        DataType = ftString
-        Name = 'login'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'senha'
-        ParamType = ptInput
-      end>
   end
   object mysql_conn: TUniConnection
     ProviderName = 'ODBC'

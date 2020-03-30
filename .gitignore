@@ -2,3 +2,15 @@
 *.exe
 __history/
 dcu/
+EcoSystem.7z
+unt_cliente.dcu
+unt_dtm_dados.dcu
+unt_licenca.dcu
+unt_municipio.dcu
+unt_orgao_ambiental.dcu
+unt_senha.dcu
+utils/unt_functions.dcu
+utils/unt_integracao.dcu
+utils/unt_pesquisa.dcu
+utils/unt_proc_abrir_telas.dcu
+utils/unt_procedures.dcu
