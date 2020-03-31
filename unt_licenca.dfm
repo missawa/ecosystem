@@ -3,7 +3,7 @@ object frm_licenca: Tfrm_licenca
   Top = 0
   BorderStyle = bsNone
   Caption = 'Licen'#231'a'
-  ClientHeight = 571
+  ClientHeight = 420
   ClientWidth = 1308
   Color = clWhite
   Ctl3D = False
@@ -531,7 +531,7 @@ object frm_licenca: Tfrm_licenca
     Left = 0
     Top = 213
     Width = 1308
-    Height = 321
+    Height = 170
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -540,11 +540,12 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
+    ExplicitHeight = 321
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 18
       Width = 712
-      Height = 300
+      Height = 149
       ControlType.Strings = (
         'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
         'id_pessoa_executor;CustomEdit;cmb_executor;T'
@@ -573,6 +574,7 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      ExplicitHeight = 300
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -600,11 +602,12 @@ object frm_licenca: Tfrm_licenca
       Left = 715
       Top = 18
       Width = 590
-      Height = 300
+      Height = 149
       Align = alRight
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
+      ExplicitHeight = 300
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -619,7 +622,7 @@ object frm_licenca: Tfrm_licenca
         Left = 0
         Top = 21
         Width = 588
-        Height = 277
+        Height = 126
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -629,6 +632,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
+        ExplicitHeight = 277
       end
     end
     object cmb_executor: TwwDBComboBox
@@ -673,11 +677,12 @@ object frm_licenca: Tfrm_licenca
   end
   object Panel6: TPanel
     Left = 0
-    Top = 534
+    Top = 383
     Width = 1308
     Height = 37
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 534
     object btn_ok: TSpeedButton
       Left = 1251
       Top = -1

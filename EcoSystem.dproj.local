@@ -7,5 +7,9 @@
     <Transaction>2020/03/16 16:32:04.705.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_orgao_ambiental.dfm</Transaction>
     <Transaction>2020/03/16 17:39:57.133.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_relatorio.pas</Transaction>
     <Transaction>2020/03/16 17:39:57.133.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_relatorio.dfm</Transaction>
+    <Transaction>2020/03/30 14:14:52.405.pas,D:\Git\EcoSystem\unt_tipo_licenca.pas=</Transaction>
+    <Transaction>2020/03/30 14:14:52.408.dfm,D:\Git\EcoSystem\unt_tipo_licenca.dfm=</Transaction>
+    <Transaction>2020/03/30 14:15:00.362.pas,D:\Git\EcoSystem\Unit1.pas=D:\Git\EcoSystem\unt_tipo_licenca.pas</Transaction>
+    <Transaction>2020/03/30 14:15:00.362.dfm,D:\Git\EcoSystem\Unit1.dfm=D:\Git\EcoSystem\unt_tipo_licenca.dfm</Transaction>
   </Transactions>
 </BorlandProject>

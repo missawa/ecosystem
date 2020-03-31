@@ -83,7 +83,7 @@ type
     procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
     procedure btn_recarregarClick(Sender: TObject);
   protected
-    procedure CreateParams(var Params: TCreateParams);
+    procedure CreateParams(var Params: TCreateParams); override;
   private
     procedure open_aux_queries;
     { Private declarations }
@@ -171,7 +171,6 @@ begin
   carrega_combo_usuarios(cmb_executor);
   centralizar_tela(self);
   open_aux_queries;
-
 end;
 
 procedure Tfrm_licenca.open_aux_queries;

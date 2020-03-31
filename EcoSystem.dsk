@@ -1,54 +1,62 @@
 [Closed Files]
-File_0=TSourceModule,'D:\Git\EcoSystem\utils\unt_proc_abrir_telas.pas',0,1,39,1,52,0,0,,
-File_1=TSourceModule,'D:\Git\EcoSystem\unt_dtm_images.pas',0,1,1,1,1,0,0,,
-File_2=TSourceModule,'D:\Git\EcoSystem\utils\unt_procedures.pas',0,1,96,69,116,0,0,,
-File_3=TSourceModule,'D:\Git\EcoSystem\utils\unt_pesquisa.pas',0,1,239,1,252,0,0,,
-File_4=TSourceModule,'D:\Git\EcoSystem\unt_municipio.pas',0,1,228,1,230,0,0,,
-File_5=TSourceModule,'D:\Git\EcoSystem\unt_relatorio.pas',0,1,78,20,103,0,0,,
-File_6=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\ReportBuilder\Source\ppTBXThemes.pas',0,1,888,39,901,0,0,,
-File_7=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\wwdbedit.pas',0,1,2586,49,2601,0,0,,
-File_8=TSourceModule,'D:\Git\EcoSystem\unt_atividade.pas',0,1,75,1,58,0,0,,
-File_9=TSourceModule,'D:\Git\EcoSystem\utils\unt_input_inteiro.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\Wwdbigrd.pas',0,1,6036,35,6053,0,0,,
+File_1=TSourceModule,'D:\Git\EcoSystem\unt_senha.pas',0,1,94,49,110,0,0,,
+File_2=TSourceModule,'D:\Git\EcoSystem\unt_dtm_dados.pas',0,1,43,43,62,0,0,,
+File_3=TSourceModule,'D:\Git\EcoSystem\unt_tipo_licenca.pas',0,1,13,1,1,0,0,,
+File_4=TSourceModule,'D:\Git\EcoSystem\utils\unt_proc_abrir_telas.pas',0,1,39,1,52,0,0,,
+File_5=TSourceModule,'D:\Git\EcoSystem\utils\unt_procedures.pas',0,1,96,69,116,0,0,,
+File_6=TSourceModule,'D:\Git\EcoSystem\utils\unt_pesquisa.pas',0,1,239,1,252,0,0,,
+File_7=TSourceModule,'D:\Git\EcoSystem\unt_municipio.pas',0,1,228,1,230,0,0,,
+File_8=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\ReportBuilder\Source\ppTBXThemes.pas',0,1,888,39,901,0,0,,
+File_9=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\wwdbedit.pas',0,1,2586,49,2601,0,0,,
 
 [Modules]
-Module0=D:\Git\EcoSystem\unt_licenca.pas
-Module1=D:\Git\EcoSystem\unt_senha.pas
-Module2=D:\Git\EcoSystem\unt_dtm_dados.pas
+Module0=D:\Git\EcoSystem\unt_relatorio.pas
+Module1=D:\Git\EcoSystem\unt_licenca.pas
+Module2=D:\Git\EcoSystem\unt_tipo_licenca.pas
 Module3=D:\Git\EcoSystem\unt_principal.pas
 Module4=default.htm
 Count=5
 EditWindowCount=1
 
+[D:\Git\EcoSystem\unt_relatorio.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
 [D:\Git\EcoSystem\unt_licenca.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
-[D:\Git\EcoSystem\unt_senha.pas]
+[D:\Git\EcoSystem\unt_tipo_licenca.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
-
-[D:\Git\EcoSystem\unt_dtm_dados.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [D:\Git\EcoSystem\unt_principal.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
 
+[D:\Git\EcoSystem\unt_dtm_dados.pas]
+FormState=1
+FormOnTop=0
+
 [D:\Git\EcoSystem\unt_dtm_images.pas]
 FormState=1
-FormOnTop=1
+FormOnTop=0
+
+[D:\Git\EcoSystem\abstratos\unt_lista_abstrato.pas]
+FormState=1
+FormOnTop=0
 
 [EditWindow0]
 ViewCount=5
-CurrentEditView=D:\Git\EcoSystem\unt_licenca.pas
+CurrentEditView=D:\Git\EcoSystem\unt_relatorio.pas
 View0=0
 View1=1
 View2=2
@@ -73,13 +81,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1206
 LeftPanelClients=StructureView,ToolForm
-LeftPanelData=000008000101010000001100000053747275637475726556696577466F726DD20E00000000000001B60400000000000001000000003F1A000008000000546F6F6C466F726DFFFFFFFF
+LeftPanelData=000008000101010000001100000053747275637475726556696577466F726DB31200000000000001B60400000000000001000000001D21000008000000546F6F6C466F726DFFFFFFFF
 RightPanelSize=1897
 RightPanelClients=DockSite2,PropertyInspector
 RightPanelData=0000080001000100000009000000446F636B53697465329A1A000000000000002C0D00000000000001000000009A1A00001100000050726F7065727479496E73706563746F72FFFFFFFF
-BottomPanelSize=1719
+BottomPanelSize=0
 BottomPanelClients=MessageView@EditWindow0,DockSite1
-BottomPanelData=0000080001020100000009000000446F636B53697465312C4500000000000002B70600000000000001000000002C4500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=000008000102020000000B0000004D6573736167655669657709000000446F636B53697465312C4500000000000002B70600000000000001000000002C4500000B0000004D65737361676556696577FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0
 BottomMiddelPanelData=0000080001000100000009000000446F636B53697465303A1900000000000000771B000000000000FFFFFFFF
@@ -91,46 +99,46 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=D:\Git\EcoSystem\unt_principal.pas
-CursorX=1
-CursorY=103
-TopLine=90
+CursorX=41
+CursorY=118
+TopLine=104
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=D:\Git\EcoSystem\unt_principal.pas
+
+[View2]
+CustomEditViewType=TEditView
+Module=D:\Git\EcoSystem\unt_tipo_licenca.pas
+CursorX=38
+CursorY=76
+TopLine=62
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View2]
-CustomEditViewType=TEditView
-Module=D:\Git\EcoSystem\unt_senha.pas
-CursorX=49
-CursorY=110
-TopLine=94
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\Git\EcoSystem\unt_senha.pas
-
 [View3]
 CustomEditViewType=TEditView
-Module=D:\Git\EcoSystem\unt_dtm_dados.pas
-CursorX=43
-CursorY=62
-TopLine=43
+Module=D:\Git\EcoSystem\unt_relatorio.pas
+CursorX=84
+CursorY=55
+TopLine=48
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\Git\EcoSystem\unt_dtm_dados.pas
+EditViewName=D:\Git\EcoSystem\unt_relatorio.pas
 
 [View4]
 CustomEditViewType=TEditView
 Module=D:\Git\EcoSystem\unt_licenca.pas
-CursorX=36
-CursorY=180
-TopLine=155
+CursorX=29
+CursorY=99
+TopLine=87
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=D:\Git\EcoSystem\unt_licenca.pas
+EditViewName=Borland.FormDesignerView
 
 [Watches]
 Count=0
@@ -212,11 +220,11 @@ State=0
 Left=0
 Top=23
 Width=1206
-Height=6772
+Height=8626
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1206
-ClientHeight=6772
+ClientHeight=8626
 TBDockHeight=6552
 LRDockWidth=1206
 Dockable=1
@@ -436,11 +444,11 @@ State=0
 Left=0
 Top=23
 Width=1897
-Height=6772
+Height=8626
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1897
-ClientHeight=6772
+ClientHeight=8626
 TBDockHeight=6552
 LRDockWidth=1897
 Dockable=1
@@ -449,8 +457,8 @@ SplitPos=153
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Name,OnNewRecord
-ExpandedItems=Connection=0,Encryption=0,FilterOptions=0,MasterSource=0,Options=0,Transaction=0,Anchors=0,Constraints=0,Font=0,Margins=0,BorderIcons=0,GlassFrame=0,HorzScrollBar=0,DefaultTransaction=0,PoolingOptions=0,DataSet=0
+SelectedItem=Action,OnCreate
+ExpandedItems=Connection=0,Encryption=0,FilterOptions=0,MasterSource=0,Options=0,Transaction=0,Anchors=0,Constraints=0,Font=0,Margins=0,BorderIcons=0,GlassFrame=0,HorzScrollBar=0,DefaultTransaction=0,PoolingOptions=0,DataSet=0,ActiveControl=0,Menu=0,DataSource=0,DittoAttributes=0,EditControlOptions=0,ExportOptions=0,Padding=0,BevelEdges=0,RefreshOptions=0,SmartFetch=0,Frame=0,Picture=0,VertScrollBar=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -613,7 +621,7 @@ StayOnTop=0
 [MessageView@EditWindow0]
 PercentageSizes=1
 Create=1
-Visible=1
+Visible=0
 Docked=1
 State=0
 Left=0
