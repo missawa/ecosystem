@@ -2,9 +2,9 @@ object frm_relatorio: Tfrm_relatorio
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  Caption = 'frm_relatorio'
-  ClientHeight = 136
-  ClientWidth = 330
+  Caption = 'Relat'#243'rios'
+  ClientHeight = 184
+  ClientWidth = 390
   Color = clWindow
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object frm_relatorio: Tfrm_relatorio
   object pnl_titulo: TPanel
     Left = 0
     Top = 0
-    Width = 330
+    Width = 390
     Height = 21
     Align = alTop
     Alignment = taLeftJustify
@@ -41,12 +41,16 @@ object frm_relatorio: Tfrm_relatorio
     ParentFont = False
     TabOrder = 0
     OnMouseDown = pnl_tituloMouseDown
+    DesignSize = (
+      388
+      19)
     object btnFechar: TSpeedButton
-      Left = 307
-      Top = -3
+      Left = 363
+      Top = -2
       Width = 22
       Height = 23
       Margins.Top = 0
+      Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -76,13 +80,14 @@ object frm_relatorio: Tfrm_relatorio
         D0F1F1FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       OnClick = btnFecharClick
+      ExplicitLeft = 365
     end
   end
   object pnl_parametros: TPanel
     Left = 0
     Top = 21
-    Width = 330
-    Height = 115
+    Width = 390
+    Height = 163
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
@@ -96,8 +101,8 @@ object frm_relatorio: Tfrm_relatorio
       Caption = 'Modelo'
     end
     object btn_imprimir: TSpeedButton
-      Left = 245
-      Top = 52
+      Left = 316
+      Top = 25
       Width = 65
       Height = 54
       Caption = 'Imprimir'
@@ -204,6 +209,27 @@ object frm_relatorio: Tfrm_relatorio
       Spacing = 0
       OnClick = btn_imprimirClick
     end
+    object Label1: TLabel
+      Left = 10
+      Top = 55
+      Width = 124
+      Height = 15
+      Caption = 'Per'#237'odo de Vencimento'
+    end
+    object Label3: TLabel
+      Left = 135
+      Top = 73
+      Width = 7
+      Height = 15
+      Caption = 'a'
+    end
+    object Label4: TLabel
+      Left = 10
+      Top = 100
+      Width = 48
+      Height = 15
+      Caption = 'Situa'#231#227'o'
+    end
     object cmb_tipo: TwwDBComboBox
       Left = 10
       Top = 25
@@ -228,6 +254,54 @@ object frm_relatorio: Tfrm_relatorio
       ItemIndex = 0
       Sorted = False
       TabOrder = 0
+      UnboundDataType = wwDefault
+    end
+    object dtp_ini: TwwDBDateTimePicker
+      Left = 10
+      Top = 70
+      Width = 121
+      Height = 23
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 1
+    end
+    object dtp_fim: TwwDBDateTimePicker
+      Left = 145
+      Top = 70
+      Width = 121
+      Height = 23
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 2
+    end
+    object cmb_situacao: TwwDBComboBox
+      Left = 10
+      Top = 115
+      Width = 121
+      Height = 21
+      ShowButton = True
+      Style = csDropDown
+      MapList = True
+      AllowClearKey = False
+      DropDownCount = 8
+      ItemHeight = 0
+      Items.Strings = (
+        'TODAS'#9'T'
+        'CUMPRIDA'#9'S'
+        'PENDENTE'#9'N')
+      ItemIndex = 2
+      Sorted = False
+      TabOrder = 3
       UnboundDataType = wwDefault
     end
   end
@@ -270,19 +344,81 @@ object frm_relatorio: Tfrm_relatorio
       ''
       'order by dt_venc')
     Active = True
-    Left = 105
-    Top = 95
+    Left = 255
+    Top = 130
   end
   object dts_01: TDataSource
     DataSet = qry_01
-    Left = 133
-    Top = 95
+    Left = 283
+    Top = 130
   end
   object pip_01: TppDBPipeline
     DataSource = dts_01
     UserName = 'pip_01'
-    Left = 161
-    Top = 95
+    Left = 311
+    Top = 130
+    object pip_01ppField1: TppField
+      FieldAlias = 'tipo'
+      FieldName = 'tipo'
+      FieldLength = 0
+      DisplayWidth = 0
+      Position = 0
+    end
+    object pip_01ppField2: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'id'
+      FieldName = 'id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 1
+    end
+    object pip_01ppField3: TppField
+      FieldAlias = 'cnpj'
+      FieldName = 'cnpj'
+      FieldLength = 14
+      DisplayWidth = 14
+      Position = 2
+    end
+    object pip_01ppField4: TppField
+      FieldAlias = 'nome'
+      FieldName = 'nome'
+      FieldLength = 120
+      DisplayWidth = 120
+      Position = 3
+    end
+    object pip_01ppField5: TppField
+      FieldAlias = 'fantasia'
+      FieldName = 'fantasia'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 4
+    end
+    object pip_01ppField6: TppField
+      FieldAlias = 'numero'
+      FieldName = 'numero'
+      FieldLength = 60
+      DisplayWidth = 60
+      Position = 5
+    end
+    object pip_01ppField7: TppField
+      FieldAlias = 'descricao'
+      FieldName = 'descricao'
+      FieldLength = 0
+      DataType = dtMemo
+      DisplayWidth = 10
+      Position = 6
+      Searchable = False
+      Sortable = False
+    end
+    object pip_01ppField8: TppField
+      FieldAlias = 'dt_venc'
+      FieldName = 'dt_venc'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 7
+    end
   end
   object rel_01: TppReport
     AutoStop = False
@@ -310,8 +446,8 @@ object frm_relatorio: Tfrm_relatorio
     PreviewFormSettings.ZoomSetting = zsPageWidth
     TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
-    Left = 189
-    Top = 95
+    Left = 339
+    Top = 130
     Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'pip_01'
@@ -319,6 +455,16 @@ object frm_relatorio: Tfrm_relatorio
       mmBottomOffset = 0
       mmHeight = 12965
       mmPrintPosition = 0
+      object ppShape2: TppShape
+        UserName = 'Shape1'
+        ParentWidth = True
+        Pen.Color = clSilver
+        mmHeight = 5027
+        mmLeft = 0
+        mmTop = 8202
+        mmWidth = 197300
+        BandType = 0
+      end
       object ppLabel1: TppLabel
         UserName = 'Label1'
         Border.BorderPositions = []
@@ -338,35 +484,6 @@ object frm_relatorio: Tfrm_relatorio
         mmWidth = 59002
         BandType = 0
       end
-      object ppLine1: TppLine
-        UserName = 'Line1'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        ParentWidth = True
-        Weight = 0.750000000000000000
-        mmHeight = 529
-        mmLeft = 0
-        mmTop = 8467
-        mmWidth = 197300
-        BandType = 0
-      end
-      object ppLine2: TppLine
-        UserName = 'Line2'
-        Border.BorderPositions = []
-        Border.Color = clBlack
-        Border.Style = psSolid
-        Border.Visible = False
-        ParentWidth = True
-        Position = lpBottom
-        Weight = 0.750000000000000000
-        mmHeight = 1323
-        mmLeft = 0
-        mmTop = 11642
-        mmWidth = 197300
-        BandType = 0
-      end
       object ppLabel2: TppLabel
         UserName = 'Label2'
         Border.BorderPositions = []
@@ -382,7 +499,7 @@ object frm_relatorio: Tfrm_relatorio
         TextAlignment = taCentered
         Transparent = True
         mmHeight = 3852
-        mmLeft = 104511
+        mmLeft = 96309
         mmTop = 8731
         mmWidth = 2836
         BandType = 0
@@ -401,7 +518,7 @@ object frm_relatorio: Tfrm_relatorio
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 3852
-        mmLeft = 110331
+        mmLeft = 102129
         mmTop = 8731
         mmWidth = 19346
         BandType = 0
@@ -420,7 +537,7 @@ object frm_relatorio: Tfrm_relatorio
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 3852
-        mmLeft = 169069
+        mmLeft = 168011
         mmTop = 8731
         mmWidth = 6308
         BandType = 0
@@ -487,8 +604,21 @@ object frm_relatorio: Tfrm_relatorio
     object ppDetailBand1: TppDetailBand
       PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 11113
+      mmHeight = 6615
       mmPrintPosition = 0
+      object ppShape1: TppShape
+        UserName = 'shp_zebra'
+        Brush.Color = 16316664
+        ParentHeight = True
+        ParentWidth = True
+        Pen.Color = clSilver
+        StretchWithParent = True
+        mmHeight = 6615
+        mmLeft = 0
+        mmTop = 0
+        mmWidth = 197300
+        BandType = 4
+      end
       object ppDBText1: TppDBText
         UserName = 'DBText1'
         Border.BorderPositions = []
@@ -507,7 +637,7 @@ object frm_relatorio: Tfrm_relatorio
         mmHeight = 3969
         mmLeft = 35983
         mmTop = 0
-        mmWidth = 65088
+        mmWidth = 56621
         BandType = 4
       end
       object ppDBText2: TppDBText
@@ -549,7 +679,7 @@ object frm_relatorio: Tfrm_relatorio
         Transparent = True
         DataPipelineName = 'pip_01'
         mmHeight = 3852
-        mmLeft = 101336
+        mmLeft = 93134
         mmTop = 0
         mmWidth = 8996
         BandType = 4
@@ -570,9 +700,9 @@ object frm_relatorio: Tfrm_relatorio
         Transparent = True
         DataPipelineName = 'pip_01'
         mmHeight = 3969
-        mmLeft = 110331
+        mmLeft = 102129
         mmTop = 0
-        mmWidth = 58473
+        mmWidth = 64823
         BandType = 4
       end
       object ppDBText5: TppDBText
@@ -592,7 +722,7 @@ object frm_relatorio: Tfrm_relatorio
         Transparent = True
         DataPipelineName = 'pip_01'
         mmHeight = 3969
-        mmLeft = 169069
+        mmLeft = 168011
         mmTop = 0
         mmWidth = 27252
         BandType = 4
@@ -614,10 +744,10 @@ object frm_relatorio: Tfrm_relatorio
         Stretch = True
         Transparent = True
         DataPipelineName = 'pip_01'
-        mmHeight = 5292
-        mmLeft = 0
+        mmHeight = 794
+        mmLeft = 1058
         mmTop = 4763
-        mmWidth = 196321
+        mmWidth = 194205
         BandType = 4
         mmBottomOffset = 0
         mmOverFlowOffset = 0
@@ -640,7 +770,7 @@ object frm_relatorio: Tfrm_relatorio
         Transparent = True
         DataPipelineName = 'pip_01'
         mmHeight = 3852
-        mmLeft = 0
+        mmLeft = 1058
         mmTop = 0
         mmWidth = 13494
         BandType = 4
@@ -732,6 +862,23 @@ object frm_relatorio: Tfrm_relatorio
         mmWidth = 15346
         BandType = 8
       end
+    end
+    object raCodeModule1: TraCodeModule
+      ProgramStream = {
+        01060F5472614576656E7448616E646C65720B50726F6772616D4E616D650610
+        7368705F7A656272614F6E5072696E740B50726F6772616D54797065070B7474
+        50726F63656475726506536F7572636506F170726F636564757265207368705F
+        7A656272614F6E5072696E743B0D0A626567696E0D0A20206966207368705F7A
+        656272612E746167203D2030207468656E0D0A2020626567696E0D0A20202020
+        7368705F7A656272612E62727573682E636F6C6F72203A3D2031363331363636
+        343B0D0A202020207368705F7A656272612E746167203A3D20313B0D0A202065
+        6E640D0A2020656C73650D0A2020626567696E0D0A202020207368705F7A6562
+        72612E62727573682E636F6C6F72203A3D20636C57686974653B0D0A20202020
+        7368705F7A656272612E746167203A3D20303B0D0A2020656E643B0D0A656E64
+        3B0D0A0D436F6D706F6E656E744E616D6506097368705F7A6562726109457665
+        6E744E616D6506074F6E5072696E74074576656E74494402200000}
+    end
+    object ppParameterList1: TppParameterList
     end
   end
 end

@@ -540,11 +540,10 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 321
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 18
-      Width = 712
+      Width = 587
       Height = 149
       ControlType.Strings = (
         'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
@@ -553,12 +552,12 @@ object frm_licenca: Tfrm_licenca
         'id_executor;CustomEdit;cmb_executor;F'
         'cumprida;CheckBox;S;N')
       Selected.Strings = (
-        'dt_venc'#9'12'#9'VENC.'
-        'dt_aviso'#9'12'#9'AVISO'
-        'id_responsavel'#9'30'#9'RESPONS'#193'VEL'
-        'id_executor'#9'30'#9'EXECUTOR'#9'F'
-        'dt_cumprimento'#9'10'#9'CUMPRIMENTO'
-        'cumprida'#9'1'#9'OK')
+        'id_executor'#9'20'#9'EXECUTOR'#9'F'
+        'id_responsavel'#9'20'#9'RESPONS'#193'VEL'#9'F'
+        'dt_venc'#9'15'#9'VENCIMENTO'#9'F'
+        'dt_cumprimento'#9'15'#9'DT.CUMP.'#9'F'
+        'dt_aviso'#9'15'#9'AVISO'#9'F'
+        'cumprida'#9'2'#9'OK'#9'F')
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
       FixedCols = 0
@@ -574,7 +573,8 @@ object frm_licenca: Tfrm_licenca
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
-      ExplicitHeight = 300
+      UseTFields = False
+      ExplicitWidth = 712
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -599,29 +599,29 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 715
+      Left = 590
       Top = 18
-      Width = 590
+      Width = 715
       Height = 149
       Align = alRight
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitHeight = 300
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 588
+        Width = 713
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
+        ExplicitWidth = 588
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 588
+        Width = 713
         Height = 126
         Align = alClient
         BevelInner = bvNone
@@ -632,7 +632,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitHeight = 277
+        ExplicitWidth = 588
       end
     end
     object cmb_executor: TwwDBComboBox
@@ -682,7 +682,6 @@ object frm_licenca: Tfrm_licenca
     Height = 37
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 534
     object btn_ok: TSpeedButton
       Left = 1251
       Top = -1
@@ -804,8 +803,8 @@ object frm_licenca: Tfrm_licenca
   end
   object dts_condicionante: TDataSource
     DataSet = dse_condicionante
-    Left = 1247
-    Top = 500
+    Left = 246
+    Top = 300
   end
   object qry_cliente: TUniQuery
     Connection = dtm_dados.mysql_conn
@@ -959,10 +958,11 @@ object frm_licenca: Tfrm_licenca
       'from condicionante'
       'where id_licenca = :id')
     MasterSource = dts_licenca
+    Active = True
     BeforeOpen = dse_condicionanteBeforeOpen
     OnNewRecord = dse_condicionanteNewRecord
-    Left = 1275
-    Top = 500
+    Left = 275
+    Top = 300
     ParamData = <
       item
         DataType = ftUnknown

@@ -11,6 +11,7 @@ uses
   function ajusta_numero_telefone(tel: string): string;
   function arredonda(valor: currency): currency;
   function bairro_cadastrado(id_municipio: integer; nome_bairro: string): boolean;
+  function between_datas(field: string; ini: TDate; fim: TDate; add_and: boolean = true): string;
   function cpf_valido(cpf: string): boolean;
   function cnpj_valido(cnpj: string): boolean;
   function data_sql(data: TDate): string;
@@ -24,8 +25,10 @@ uses
   function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
+  function primeiro_dia_mes(data: TDate): TDate;
   function prior_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function troca_acentos(texto: string): string;
+  function ultimo_dia_mes(data: TDate):TDate;
   function valor_str(valor: currency): string;
 
 implementation
@@ -203,7 +206,7 @@ end;
 
 function data_sql(data: TDate): string;
 begin
-  result := QuotedStr(FormatDateTime('MM/dd/yyyy', data));
+  result := QuotedStr(FormatDateTime('yyyy-mm-dd', data));
 end;
 
 function define_mascara_telefone(tel: string): string;
@@ -522,6 +525,34 @@ begin
     Delete(v, pos(',', v), 1);
   end;
   result := v;
+end;
+
+function between_datas(
+  field: string;
+  ini: TDate;
+  fim: TDate;
+  add_and: boolean = true): string;
+begin
+  if add_and then
+    result := '    and ' + field + ' between ' + data_sql(ini) + ' and ' + data_sql(fim)
+  else
+    result := '    ' + field + ' between ' + data_sql(ini) + ' and ' + data_sql(fim);
+end;
+
+function ultimo_dia_mes(data: TDate):TDate;
+var d, m, a: word;
+begin
+	decodeDate(data, a, m, d);
+	a	:= iif(m = 12, a + 1, a);
+	m := iif(m = 12, 1, m + 1);
+	result 		:= encodeDate(a, m, 1) - 1;
+end;
+
+function primeiro_dia_mes(data: TDate): TDate;
+var d, m, a: word;
+begin
+	decodeDate(data, a, m, d);
+	result := encodeDate(a, m, 1);
 end;
 
 
