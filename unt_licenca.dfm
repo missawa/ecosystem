@@ -546,8 +546,6 @@ object frm_licenca: Tfrm_licenca
       Width = 587
       Height = 149
       ControlType.Strings = (
-        'id_pressoa_responsavel;CustomEdit;cmb_responsavel;T'
-        'id_pessoa_executor;CustomEdit;cmb_executor;T'
         'id_responsavel;CustomEdit;cmb_responsavel;F'
         'id_executor;CustomEdit;cmb_executor;F'
         'cumprida;CheckBox;S;N')
@@ -574,7 +572,6 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitWidth = 712
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -616,7 +613,6 @@ object frm_licenca: Tfrm_licenca
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
-        ExplicitWidth = 588
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
@@ -632,7 +628,6 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitWidth = 588
       end
     end
     object cmb_executor: TwwDBComboBox

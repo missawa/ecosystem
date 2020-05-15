@@ -1,14 +1,14 @@
 [Closed Files]
-File_0=TSourceModule,'D:\Git\EcoSystem\unt_licenca.pas',0,1,1,51,12,0,0,,
-File_1=TSourceModule,'D:\Git\EcoSystem\utils\unt_functions.pas',0,1,28,33,28,0,0,,
-File_2=TSourceModule,'D:\Git\EcoSystem\unt_relatorio.pas',0,1,97,60,111,0,0,,
-File_3=TSourceModule,'D:\Git\EcoSystem\unt_relatorio.dfm',0,1,1,1,1,0,0,,
-File_4=TSourceModule,'D:\Git\EcoSystem\unt_tipo_licenca.pas',0,1,62,38,76,0,0,,
-File_5=TSourceModule,'D:\Git\EcoSystem\unt_licenca.dfm',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'D:\Git\EcoSystem\unt_cliente.pas',0,1,1,1,1,0,0,,
-File_7=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\Wwdbigrd.pas',0,1,6036,35,6053,0,0,,
-File_8=TSourceModule,'D:\Git\EcoSystem\unt_senha.pas',0,1,94,49,110,0,0,,
-File_9=TSourceModule,'D:\Git\EcoSystem\utils\unt_proc_abrir_telas.pas',0,1,39,1,52,0,0,,
+File_0=TSourceModule,'D:\Git\EcoSystem\utils\unt_procedures.pas',0,1,96,39,111,0,0,,
+File_1=TSourceModule,'D:\Git\EcoSystem\unt_licenca.pas',0,1,177,1,190,0,0,,
+File_2=TSourceModule,'D:\Git\EcoSystem\utils\unt_proc_abrir_telas.pas',0,1,39,26,42,0,0,,
+File_3=TSourceModule,'D:\Git\EcoSystem\unt_licenca.dfm',0,1,1,1,1,0,0,,
+File_4=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\wwdbgrid.pas',0,1,1454,31,1476,0,0,,
+File_5=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\wwdbedit.pas',0,1,1544,1,1557,0,0,,
+File_6=TSourceModule,'C:\Program Files (x86)\CodeGear\RAD Studio\5.0\Componentes2007\InfoPower\wwcommon.pas',0,1,3057,1,3070,0,0,,
+File_7=TSourceModule,'D:\Git\EcoSystem\utils\unt_functions.pas',0,1,28,33,28,0,0,,
+File_8=TSourceModule,'D:\Git\EcoSystem\unt_relatorio.pas',0,1,97,60,111,0,0,,
+File_9=TSourceModule,'D:\Git\EcoSystem\unt_relatorio.dfm',0,1,1,1,1,0,0,,
 
 [Modules]
 Module0=D:\Git\EcoSystem\unt_principal.pas
@@ -23,6 +23,10 @@ FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
+
+[D:\Git\EcoSystem\unt_dtm_dados.pas]
+FormState=1
+FormOnTop=0
 
 [D:\Git\EcoSystem\unt_dtm_images.pas]
 FormState=1
@@ -392,6 +396,11 @@ LRDockWidth=1896
 Dockable=1
 StayOnTop=0
 SplitPos=210
+
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=Name,
+ExpandedItems=
 
 [ModelViewTool]
 PercentageSizes=1
