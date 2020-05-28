@@ -572,6 +572,7 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
+      OnEnter = grd_condicionanteEnter
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -874,6 +875,7 @@ object frm_licenca: Tfrm_licenca
       'where id_cliente = :id_cliente'
       '    and id_atividade = :id_atividade')
     Options.StrictUpdate = False
+    AfterScroll = dse_licencaAfterScroll
     OnNewRecord = dse_licencaNewRecord
     Left = 1277
     Top = 180
@@ -953,8 +955,8 @@ object frm_licenca: Tfrm_licenca
       'from condicionante'
       'where id_licenca = :id')
     MasterSource = dts_licenca
-    Active = True
     BeforeOpen = dse_condicionanteBeforeOpen
+    BeforePost = dse_condicionanteBeforePost
     OnNewRecord = dse_condicionanteNewRecord
     Left = 275
     Top = 300

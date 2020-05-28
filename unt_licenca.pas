@@ -82,6 +82,9 @@ type
     procedure btn_okClick(Sender: TObject);
     procedure dse_condicionanteBeforeOpen(DataSet: TDataSet);
     procedure btn_recarregarClick(Sender: TObject);
+    procedure dse_licencaAfterScroll(DataSet: TDataSet);
+    procedure grd_condicionanteEnter(Sender: TObject);
+    procedure dse_condicionanteBeforePost(DataSet: TDataSet);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -132,6 +135,12 @@ begin
   BorderWidth := 0;
 end;
 
+procedure Tfrm_licenca.dse_licencaAfterScroll(DataSet: TDataSet);
+begin
+  dse_condicionante.Close;
+  dse_condicionante.Open;
+end;
+
 procedure Tfrm_licenca.dse_licencaNewRecord(DataSet: TDataSet);
 begin
   dse_licenca.FieldByName('id_cliente').Value := qry_cliente.FieldByName('id').Value;
@@ -157,6 +166,11 @@ begin
   end;
 end;
 
+procedure Tfrm_licenca.dse_condicionanteBeforePost(DataSet: TDataSet);
+begin
+  dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
+end;
+
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);
 begin
   dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
@@ -176,6 +190,12 @@ begin
   carrega_combo_usuarios(cmb_executor);
   centralizar_tela(self);
   open_aux_queries;
+end;
+
+procedure Tfrm_licenca.grd_condicionanteEnter(Sender: TObject);
+begin
+  if dse_licenca.State in [dsEdit, dsInsert] then
+    dse_licenca.Post;
 end;
 
 procedure Tfrm_licenca.open_aux_queries;
