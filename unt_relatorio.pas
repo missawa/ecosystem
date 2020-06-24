@@ -52,12 +52,16 @@ type
     raCodeModule1: TraCodeModule;
     ppShape2: TppShape;
     ppParameterList1: TppParameterList;
+    cmb_cliente: TwwDBComboDlg;
+    Label5: TLabel;
+    qry: TUniQuery;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnFecharClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btn_imprimirClick(Sender: TObject);
+    procedure cmb_clienteCustomDlg(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -72,13 +76,38 @@ var
 
 implementation
 
-uses unt_dtm_dados, unt_procedures, unt_functions;
+uses unt_dtm_dados, unt_procedures, unt_functions, unt_func_messages;
 
 {$R *.dfm}
 
 procedure Tfrm_relatorio.btn_imprimirClick(Sender: TObject);
 begin
   imprimir_rel01;
+end;
+
+procedure Tfrm_relatorio.cmb_clienteCustomDlg(Sender: TObject);
+var
+  ok: boolean;
+
+begin
+  try
+
+    ok :=
+      pesquisar(
+        qry,
+        'select id,nome,fantasia from pessoa where cliente = ''S''',
+        'nome',
+      self.Name);
+
+    if ok then
+    begin
+      cmb_cliente.Text := qry.FieldByName('nome').Text ;
+      cmb_cliente.Tag := qry.FieldByName('id').AsInteger;
+    end;
+
+  except
+    on e:exception do msg_error('Erro 8755: ' + e.message);
+  end;
 end;
 
 procedure Tfrm_relatorio.CreateParams(var Params: TCreateParams);
@@ -110,6 +139,7 @@ procedure Tfrm_relatorio.imprimir_rel01;
 var
   per_lic: string;
   per_con: string;
+  cli: string;
   sit: string;
 begin
 
@@ -130,6 +160,11 @@ begin
     2: sit := '    and c.cumprida = ''N'''#13;
   end;
 
+  if cmb_cliente.Text = '' then
+    cli := ''
+  else
+    cli := '    and p.id = ' + intToStr(cmb_cliente.Tag) + #13;
+
   qry_01.Close;
   qry_01.SQL.Text :=
     'select                               '#13+
@@ -145,6 +180,7 @@ begin
     '  left join licenca l                '#13+
     '    on l.id_cliente = p.id           '#13+
     'where cliente = ''S''                '#13+
+    cli +
     per_lic +
     '                                     '#13+
     'union                                '#13+
@@ -164,6 +200,7 @@ begin
     '  left join condicionante c          '#13+
     '    on c.id_licenca = l.id           '#13+
     'where cliente = ''S''                '#13+
+    cli +
     per_con +
     sit +
     'order by dt_venc, id, numero ';

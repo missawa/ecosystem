@@ -550,7 +550,7 @@ object frm_licenca: Tfrm_licenca
         'id_executor;CustomEdit;cmb_executor;F'
         'cumprida;CheckBox;S;N')
       Selected.Strings = (
-        'id_executor'#9'20'#9'EXECUTOR'#9'F'
+        'numero'#9'7'#9'N'#218'M.'#9'F'
         'id_responsavel'#9'20'#9'RESPONS'#193'VEL'#9'F'
         'dt_venc'#9'15'#9'VENCIMENTO'#9'F'
         'dt_cumprimento'#9'15'#9'DT.CUMP.'#9'F'
@@ -920,12 +920,12 @@ object frm_licenca: Tfrm_licenca
     SQLInsert.Strings = (
       'INSERT INTO condicionante'
       
-        '  (id, id_licenca, descricao, cumprida, dt_venc, dt_cumprimento,' +
-        ' dt_aviso, id_responsavel, id_executor)'
+        '  (id, id_licenca, numero, descricao, cumprida, dt_venc, dt_cump' +
+        'rimento, dt_aviso, id_responsavel, id_executor)'
       'VALUES'
       
-        '  (:id, :id_licenca, :descricao, :cumprida, :dt_venc, :dt_cumpri' +
-        'mento, :dt_aviso, :id_responsavel, :id_executor)')
+        '  (:id, :id_licenca, :numero, :descricao, :cumprida, :dt_venc, :' +
+        'dt_cumprimento, :dt_aviso, :id_responsavel, :id_executor)')
     SQLDelete.Strings = (
       'DELETE FROM condicionante'
       'WHERE'
@@ -934,16 +934,17 @@ object frm_licenca: Tfrm_licenca
       'UPDATE condicionante'
       'SET'
       
-        '  id = :id, id_licenca = :id_licenca, descricao = :descricao, cu' +
-        'mprida = :cumprida, dt_venc = :dt_venc, dt_cumprimento = :dt_cum' +
-        'primento, dt_aviso = :dt_aviso, id_responsavel = :id_responsavel' +
-        ', id_executor = :id_executor'
+        '  id = :id, id_licenca = :id_licenca, numero = :numero, descrica' +
+        'o = :descricao, cumprida = :cumprida, dt_venc = :dt_venc, dt_cum' +
+        'primento = :dt_cumprimento, dt_aviso = :dt_aviso, id_responsavel' +
+        ' = :id_responsavel, id_executor = :id_executor'
       'WHERE'
       '  id = :Old_id')
     SQLRefresh.Strings = (
       
-        'SELECT id, id_licenca, descricao, cumprida, dt_venc, dt_cumprime' +
-        'nto, dt_aviso, id_responsavel, id_executor FROM condicionante'
+        'SELECT id, id_licenca, numero, descricao, cumprida, dt_venc, dt_' +
+        'cumprimento, dt_aviso, id_responsavel, id_executor FROM condicio' +
+        'nante'
       'WHERE'
       '  id = :id')
     SQLRecCount.Strings = (
@@ -964,7 +965,6 @@ object frm_licenca: Tfrm_licenca
       item
         DataType = ftUnknown
         Name = 'id'
-        Value = Null
       end>
   end
 end

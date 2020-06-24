@@ -3,8 +3,8 @@ object frm_relatorio: Tfrm_relatorio
   Top = 0
   BorderStyle = bsNone
   Caption = 'Relat'#243'rios'
-  ClientHeight = 184
-  ClientWidth = 390
+  ClientHeight = 270
+  ClientWidth = 397
   Color = clWindow
   Ctl3D = False
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object frm_relatorio: Tfrm_relatorio
   object pnl_titulo: TPanel
     Left = 0
     Top = 0
-    Width = 390
+    Width = 397
     Height = 21
     Align = alTop
     Alignment = taLeftJustify
@@ -41,11 +41,12 @@ object frm_relatorio: Tfrm_relatorio
     ParentFont = False
     TabOrder = 0
     OnMouseDown = pnl_tituloMouseDown
+    ExplicitWidth = 390
     DesignSize = (
-      388
+      395
       19)
     object btnFechar: TSpeedButton
-      Left = 363
+      Left = 366
       Top = -2
       Width = 22
       Height = 23
@@ -86,13 +87,14 @@ object frm_relatorio: Tfrm_relatorio
   object pnl_parametros: TPanel
     Left = 0
     Top = 21
-    Width = 390
-    Height = 163
+    Width = 397
+    Height = 249
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 390
     object Label2: TLabel
       Left = 10
       Top = 10
@@ -211,24 +213,31 @@ object frm_relatorio: Tfrm_relatorio
     end
     object Label1: TLabel
       Left = 10
-      Top = 55
+      Top = 100
       Width = 124
       Height = 15
       Caption = 'Per'#237'odo de Vencimento'
     end
     object Label3: TLabel
       Left = 135
-      Top = 73
+      Top = 118
       Width = 7
       Height = 15
       Caption = 'a'
     end
     object Label4: TLabel
       Left = 10
-      Top = 100
+      Top = 145
       Width = 48
       Height = 15
       Caption = 'Situa'#231#227'o'
+    end
+    object Label5: TLabel
+      Left = 10
+      Top = 55
+      Width = 38
+      Height = 15
+      Caption = 'Cliente'
     end
     object cmb_tipo: TwwDBComboBox
       Left = 10
@@ -258,7 +267,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_ini: TwwDBDateTimePicker
       Left = 10
-      Top = 70
+      Top = 115
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -272,7 +281,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_fim: TwwDBDateTimePicker
       Left = 145
-      Top = 70
+      Top = 115
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -286,7 +295,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object cmb_situacao: TwwDBComboBox
       Left = 10
-      Top = 115
+      Top = 160
       Width = 121
       Height = 21
       ShowButton = True
@@ -302,6 +311,22 @@ object frm_relatorio: Tfrm_relatorio
       ItemIndex = 2
       Sorted = False
       TabOrder = 3
+      UnboundDataType = wwDefault
+    end
+    object cmb_cliente: TwwDBComboDlg
+      Left = 10
+      Top = 70
+      Width = 300
+      Height = 21
+      OnCustomDlg = cmb_clienteCustomDlg
+      ShowButton = True
+      Style = csDropDown
+      BorderStyle = bsNone
+      Frame.Enabled = True
+      Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+      Frame.NonFocusStyle = efsFrameEtched
+      TabOrder = 4
+      WordWrap = False
       UnboundDataType = wwDefault
     end
   end
@@ -343,20 +368,19 @@ object frm_relatorio: Tfrm_relatorio
       #9'and c.dt_venc is not null'
       ''
       'order by dt_venc')
-    Active = True
     Left = 255
-    Top = 130
+    Top = 185
   end
   object dts_01: TDataSource
     DataSet = qry_01
     Left = 283
-    Top = 130
+    Top = 185
   end
   object pip_01: TppDBPipeline
     DataSource = dts_01
     UserName = 'pip_01'
     Left = 311
-    Top = 130
+    Top = 185
     object pip_01ppField1: TppField
       FieldAlias = 'tipo'
       FieldName = 'tipo'
@@ -447,7 +471,7 @@ object frm_relatorio: Tfrm_relatorio
     TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
     Left = 339
-    Top = 130
+    Top = 185
     Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'pip_01'
@@ -880,5 +904,10 @@ object frm_relatorio: Tfrm_relatorio
     end
     object ppParameterList1: TppParameterList
     end
+  end
+  object qry: TUniQuery
+    Connection = dtm_dados.mysql_conn
+    Left = 320
+    Top = 100
   end
 end
