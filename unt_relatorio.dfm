@@ -19,6 +19,13 @@ object frm_relatorio: Tfrm_relatorio
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 15
+  object Label7: TLabel
+    Left = 135
+    Top = 160
+    Width = 7
+    Height = 15
+    Caption = 'a'
+  end
   object pnl_titulo: TPanel
     Left = 0
     Top = 0
@@ -41,12 +48,11 @@ object frm_relatorio: Tfrm_relatorio
     ParentFont = False
     TabOrder = 0
     OnMouseDown = pnl_tituloMouseDown
-    ExplicitWidth = 390
     DesignSize = (
       395
       19)
     object btnFechar: TSpeedButton
-      Left = 366
+      Left = 362
       Top = -2
       Width = 22
       Height = 23
@@ -94,7 +100,6 @@ object frm_relatorio: Tfrm_relatorio
     BorderStyle = bsSingle
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 390
     object Label2: TLabel
       Left = 10
       Top = 10
@@ -227,7 +232,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object Label4: TLabel
       Left = 10
-      Top = 145
+      Top = 190
       Width = 48
       Height = 15
       Caption = 'Situa'#231#227'o'
@@ -238,6 +243,20 @@ object frm_relatorio: Tfrm_relatorio
       Width = 38
       Height = 15
       Caption = 'Cliente'
+    end
+    object Label6: TLabel
+      Left = 10
+      Top = 145
+      Width = 91
+      Height = 15
+      Caption = 'Per'#237'odo de Aviso'
+    end
+    object Label8: TLabel
+      Left = 135
+      Top = 163
+      Width = 7
+      Height = 15
+      Caption = 'a'
     end
     object cmb_tipo: TwwDBComboBox
       Left = 10
@@ -265,22 +284,8 @@ object frm_relatorio: Tfrm_relatorio
       TabOrder = 0
       UnboundDataType = wwDefault
     end
-    object dtp_ini: TwwDBDateTimePicker
+    object dtp_venc_ini: TwwDBDateTimePicker
       Left = 10
-      Top = 115
-      Width = 121
-      Height = 23
-      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
-      CalendarAttributes.Font.Color = clWindowText
-      CalendarAttributes.Font.Height = -11
-      CalendarAttributes.Font.Name = 'Tahoma'
-      CalendarAttributes.Font.Style = []
-      Epoch = 1950
-      ShowButton = True
-      TabOrder = 1
-    end
-    object dtp_fim: TwwDBDateTimePicker
-      Left = 145
       Top = 115
       Width = 121
       Height = 23
@@ -293,9 +298,23 @@ object frm_relatorio: Tfrm_relatorio
       ShowButton = True
       TabOrder = 2
     end
+    object dtp_venc_fim: TwwDBDateTimePicker
+      Left = 145
+      Top = 115
+      Width = 121
+      Height = 23
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 3
+    end
     object cmb_situacao: TwwDBComboBox
       Left = 10
-      Top = 160
+      Top = 205
       Width = 121
       Height = 21
       ShowButton = True
@@ -310,7 +329,7 @@ object frm_relatorio: Tfrm_relatorio
         'PENDENTE'#9'N')
       ItemIndex = 2
       Sorted = False
-      TabOrder = 3
+      TabOrder = 6
       UnboundDataType = wwDefault
     end
     object cmb_cliente: TwwDBComboDlg
@@ -325,9 +344,37 @@ object frm_relatorio: Tfrm_relatorio
       Frame.Enabled = True
       Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
       Frame.NonFocusStyle = efsFrameEtched
-      TabOrder = 4
+      TabOrder = 1
       WordWrap = False
       UnboundDataType = wwDefault
+    end
+    object dtp_aviso_fim: TwwDBDateTimePicker
+      Left = 145
+      Top = 160
+      Width = 121
+      Height = 23
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 5
+    end
+    object dtp_aviso_ini: TwwDBDateTimePicker
+      Left = 10
+      Top = 160
+      Width = 121
+      Height = 23
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 4
     end
   end
   object qry_01: TUniQuery
@@ -341,7 +388,9 @@ object frm_relatorio: Tfrm_relatorio
       '    p.fantasia,'
       '    l.numero,'
       '    l.descricao,'
-      '    l.dt_venc'
+      '    l.dt_venc,'
+      '    '
+      '    null as dt_aviso'
       'from pessoa p'
       #9'left join licenca l'
       #9#9'on l.id_cliente = p.id'
@@ -358,7 +407,8 @@ object frm_relatorio: Tfrm_relatorio
       '    p.fantasia,'
       '    l.numero,'
       '    c.descricao,'
-      '    c.dt_venc'
+      '    c.dt_venc,'
+      '    c.dt_aviso'
       'from pessoa p'
       #9'left join licenca l'
       #9#9'on l.id_cliente = p.id'
@@ -442,6 +492,14 @@ object frm_relatorio: Tfrm_relatorio
       DataType = dtDate
       DisplayWidth = 10
       Position = 7
+    end
+    object pip_01ppField9: TppField
+      FieldAlias = 'dt_aviso'
+      FieldName = 'dt_aviso'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 8
     end
   end
   object rel_01: TppReport
@@ -600,7 +658,7 @@ object frm_relatorio: Tfrm_relatorio
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 3852
-        mmLeft = 35983
+        mmLeft = 55298
         mmTop = 8731
         mmWidth = 12404
         BandType = 0
@@ -622,6 +680,26 @@ object frm_relatorio: Tfrm_relatorio
         mmLeft = 1102
         mmTop = 8731
         mmWidth = 6265
+        BandType = 0
+      end
+      object ppLabel10: TppLabel
+        UserName = 'Label10'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
+        Caption = 'AVISO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Calibri'
+        Font.Size = 9
+        Font.Style = [fsBold]
+        TextAlignment = taCentered
+        Transparent = True
+        mmHeight = 3852
+        mmLeft = 41255
+        mmTop = 8731
+        mmWidth = 8086
         BandType = 0
       end
     end
@@ -659,9 +737,9 @@ object frm_relatorio: Tfrm_relatorio
         Transparent = True
         DataPipelineName = 'pip_01'
         mmHeight = 3969
-        mmLeft = 35983
+        mmLeft = 55298
         mmTop = 0
-        mmWidth = 56621
+        mmWidth = 37306
         BandType = 4
       end
       object ppDBText2: TppDBText
@@ -797,6 +875,28 @@ object frm_relatorio: Tfrm_relatorio
         mmLeft = 1058
         mmTop = 0
         mmWidth = 13494
+        BandType = 4
+      end
+      object ppDBText7: TppDBText
+        UserName = 'DBText7'
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
+        DataField = 'dt_aviso'
+        DataPipeline = pip_01
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Calibri'
+        Font.Size = 9
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'pip_01'
+        mmHeight = 3852
+        mmLeft = 35190
+        mmTop = 0
+        mmWidth = 19579
         BandType = 4
       end
     end

@@ -42,9 +42,9 @@ type
     ppDBMemo1: TppDBMemo;
     ppLabel9: TppLabel;
     ppDBText6: TppDBText;
-    dtp_ini: TwwDBDateTimePicker;
+    dtp_venc_ini: TwwDBDateTimePicker;
     Label1: TLabel;
-    dtp_fim: TwwDBDateTimePicker;
+    dtp_venc_fim: TwwDBDateTimePicker;
     Label3: TLabel;
     cmb_situacao: TwwDBComboBox;
     Label4: TLabel;
@@ -55,6 +55,13 @@ type
     cmb_cliente: TwwDBComboDlg;
     Label5: TLabel;
     qry: TUniQuery;
+    ppDBText7: TppDBText;
+    ppLabel10: TppLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    dtp_aviso_fim: TwwDBDateTimePicker;
+    dtp_aviso_ini: TwwDBDateTimePicker;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnFecharClick(Sender: TObject);
@@ -126,8 +133,10 @@ end;
 procedure Tfrm_relatorio.FormCreate(Sender: TObject);
 begin
   centralizar_tela(self);
-  dtp_ini.date := primeiro_dia_mes(incMonth(date));
-  dtp_fim.date := ultimo_dia_mes(incMonth(date));
+  dtp_venc_ini.Clear;
+  dtp_venc_fim.Clear;
+  dtp_aviso_ini.Clear;
+  dtp_aviso_fim.Clear;
 end;
 
 procedure Tfrm_relatorio.btnFecharClick(Sender: TObject);
@@ -137,21 +146,34 @@ end;
 
 procedure Tfrm_relatorio.imprimir_rel01;
 var
-  per_lic: string;
-  per_con: string;
+  venc_lic: string;
+  venc_con: string;
+  aviso_lic: string;
+  aviso_con: string;
   cli: string;
   sit: string;
 begin
 
-  if (dtp_ini.Text <> '') and (dtp_fim.Text <> '') then
+  if (dtp_venc_ini.Text <> '') and (dtp_venc_fim.Text <> '') then
   begin
-    per_lic := between_datas('l.dt_venc', dtp_ini.Date, dtp_fim.Date) + #13;
-    per_con := between_datas('c.dt_venc', dtp_ini.Date, dtp_fim.Date) + #13;
+    venc_lic := between_datas('l.dt_venc', dtp_venc_ini.Date, dtp_venc_fim.Date) + #13;
+    venc_con := between_datas('c.dt_venc', dtp_venc_ini.Date, dtp_venc_fim.Date) + #13;
   end
   else
   begin
-    per_lic := '  and l.dt_venc is not null          '#13;
-    per_con := '  and c.dt_venc is not null          '#13;
+    venc_lic := '  and l.dt_venc is not null          '#13;
+    venc_con := '  and c.dt_venc is not null          '#13;
+  end;
+
+  if (dtp_aviso_ini.Text <> '') and (dtp_aviso_fim.Text <> '') then
+  begin
+    aviso_lic := between_datas('l.dt_venc', dtp_aviso_ini.Date, dtp_aviso_fim.Date) + #13;
+    aviso_con := between_datas('c.dt_aviso', dtp_aviso_ini.Date, dtp_aviso_fim.Date) + #13;
+  end
+  else
+  begin
+    aviso_lic := '';
+    aviso_con := '';
   end;
 
   case cmb_situacao.ItemIndex of
@@ -175,13 +197,15 @@ begin
     '    p.fantasia,                      '#13+
     '    l.numero,                        '#13+
     '    l.descricao,                     '#13+
-    '    l.dt_venc                        '#13+
+    '    l.dt_venc,                       '#13+
+    '    null as dt_aviso                 '#13+
     'from pessoa p                        '#13+
     '  left join licenca l                '#13+
     '    on l.id_cliente = p.id           '#13+
     'where cliente = ''S''                '#13+
     cli +
-    per_lic +
+    venc_lic +
+    aviso_lic +
     '                                     '#13+
     'union                                '#13+
     '                                     '#13+
@@ -193,7 +217,8 @@ begin
     '    p.fantasia,                      '#13+
     '    l.numero,                        '#13+
     '    c.descricao,                     '#13+
-    '    c.dt_venc                        '#13+
+    '    c.dt_venc,                       '#13+
+    '    c.dt_aviso                       '#13+
     'from pessoa p                        '#13+
     '  left join licenca l                '#13+
     '    on l.id_cliente = p.id           '#13+
@@ -201,7 +226,8 @@ begin
     '    on c.id_licenca = l.id           '#13+
     'where cliente = ''S''                '#13+
     cli +
-    per_con +
+    venc_con +
+    aviso_con +
     sit +
     'order by dt_venc, id, numero ';
   qry_01.Open;
