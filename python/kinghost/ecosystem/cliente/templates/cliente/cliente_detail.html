@@ -1,0 +1,12 @@
+{% extends "cliente/base.html" %}
+
+{% block title %} {{cliente.id}}. {{cliente.nome}}  {% endblock %}
+
+{% block content %}
+  {% for cliente in cliente_list %}
+    <p>
+      Fantasia: {{cliente.fantasia}}<br>
+      CNPJ: {{cliente.cnpj}} <br>
+    </p>
+  {% endfor %}
+{% endblock  %}
