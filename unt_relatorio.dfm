@@ -3,14 +3,14 @@ object frm_relatorio: Tfrm_relatorio
   Top = 0
   BorderStyle = bsNone
   Caption = 'Relat'#243'rios'
-  ClientHeight = 270
-  ClientWidth = 397
+  ClientHeight = 269
+  ClientWidth = 394
   Color = clWindow
   Ctl3D = False
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Calibri'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -18,18 +18,18 @@ object frm_relatorio: Tfrm_relatorio
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 15
+  TextHeight = 17
   object Label7: TLabel
     Left = 135
     Top = 160
     Width = 7
-    Height = 15
+    Height = 17
     Caption = 'a'
   end
   object pnl_titulo: TPanel
     Left = 0
     Top = 0
-    Width = 397
+    Width = 394
     Height = 21
     Align = alTop
     Alignment = taLeftJustify
@@ -38,27 +38,27 @@ object frm_relatorio: Tfrm_relatorio
     Caption = ' RELAT'#211'RIOS'
     Color = 12159842
     Ctl3D = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -15
-    Font.Name = 'Calibri'
+    Font.Height = -13
+    Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 0
     OnMouseDown = pnl_tituloMouseDown
+    ExplicitWidth = 397
     DesignSize = (
-      395
+      392
       19)
     object btnFechar: TSpeedButton
-      Left = 362
+      Left = 372
       Top = -2
       Width = 22
       Height = 23
       Margins.Top = 0
       Anchors = [akTop, akRight]
-      Flat = True
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -87,31 +87,32 @@ object frm_relatorio: Tfrm_relatorio
         D0F1F1FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       OnClick = btnFecharClick
-      ExplicitLeft = 365
     end
   end
   object pnl_parametros: TPanel
     Left = 0
     Top = 21
-    Width = 397
-    Height = 249
+    Width = 394
+    Height = 248
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 397
+    ExplicitHeight = 249
     object Label2: TLabel
       Left = 10
       Top = 10
-      Width = 42
-      Height = 15
+      Width = 46
+      Height = 17
       Caption = 'Modelo'
     end
     object btn_imprimir: TSpeedButton
       Left = 316
       Top = 25
       Width = 65
-      Height = 54
+      Height = 68
       Caption = 'Imprimir'
       Glyph.Data = {
         360C0000424D360C000000000000360000002800000020000000200000000100
@@ -219,56 +220,57 @@ object frm_relatorio: Tfrm_relatorio
     object Label1: TLabel
       Left = 10
       Top = 100
-      Width = 124
-      Height = 15
+      Width = 136
+      Height = 17
       Caption = 'Per'#237'odo de Vencimento'
     end
     object Label3: TLabel
       Left = 135
       Top = 118
       Width = 7
-      Height = 15
+      Height = 17
       Caption = 'a'
     end
     object Label4: TLabel
       Left = 10
       Top = 190
-      Width = 48
-      Height = 15
+      Width = 49
+      Height = 17
       Caption = 'Situa'#231#227'o'
     end
     object Label5: TLabel
       Left = 10
       Top = 55
-      Width = 38
-      Height = 15
+      Width = 39
+      Height = 17
       Caption = 'Cliente'
     end
     object Label6: TLabel
       Left = 10
       Top = 145
-      Width = 91
-      Height = 15
+      Width = 100
+      Height = 17
       Caption = 'Per'#237'odo de Aviso'
     end
     object Label8: TLabel
       Left = 135
       Top = 163
       Width = 7
-      Height = 15
+      Height = 17
       Caption = 'a'
     end
     object cmb_tipo: TwwDBComboBox
       Left = 10
-      Top = 25
+      Top = 27
       Width = 300
-      Height = 21
+      Height = 23
       ShowButton = True
       Style = csDropDown
       MapList = True
       AllowClearKey = False
       AutoDropDown = True
       ShowMatchText = True
+      AutoSize = False
       BorderStyle = bsNone
       DataField = 'tipo'
       DropDownCount = 8
@@ -286,7 +288,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_venc_ini: TwwDBDateTimePicker
       Left = 10
-      Top = 115
+      Top = 117
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -300,7 +302,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_venc_fim: TwwDBDateTimePicker
       Left = 145
-      Top = 115
+      Top = 117
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -314,9 +316,9 @@ object frm_relatorio: Tfrm_relatorio
     end
     object cmb_situacao: TwwDBComboBox
       Left = 10
-      Top = 205
+      Top = 207
       Width = 121
-      Height = 21
+      Height = 23
       ShowButton = True
       Style = csDropDown
       MapList = True
@@ -334,12 +336,13 @@ object frm_relatorio: Tfrm_relatorio
     end
     object cmb_cliente: TwwDBComboDlg
       Left = 10
-      Top = 70
+      Top = 72
       Width = 300
-      Height = 21
+      Height = 23
       OnCustomDlg = cmb_clienteCustomDlg
       ShowButton = True
       Style = csDropDown
+      AutoSize = False
       BorderStyle = bsNone
       Frame.Enabled = True
       Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
@@ -350,7 +353,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_aviso_fim: TwwDBDateTimePicker
       Left = 145
-      Top = 160
+      Top = 162
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -364,7 +367,7 @@ object frm_relatorio: Tfrm_relatorio
     end
     object dtp_aviso_ini: TwwDBDateTimePicker
       Left = 10
-      Top = 160
+      Top = 162
       Width = 121
       Height = 23
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
@@ -418,19 +421,19 @@ object frm_relatorio: Tfrm_relatorio
       #9'and c.dt_venc is not null'
       ''
       'order by dt_venc')
-    Left = 255
-    Top = 185
+    Left = 263
+    Top = 225
   end
   object dts_01: TDataSource
     DataSet = qry_01
-    Left = 283
-    Top = 185
+    Left = 291
+    Top = 225
   end
   object pip_01: TppDBPipeline
     DataSource = dts_01
     UserName = 'pip_01'
-    Left = 311
-    Top = 185
+    Left = 319
+    Top = 225
     object pip_01ppField1: TppField
       FieldAlias = 'tipo'
       FieldName = 'tipo'
@@ -528,8 +531,8 @@ object frm_relatorio: Tfrm_relatorio
     PreviewFormSettings.ZoomSetting = zsPageWidth
     TextSearchSettings.DefaultString = '<FindText>'
     TextSearchSettings.Enabled = True
-    Left = 339
-    Top = 185
+    Left = 347
+    Top = 225
     Version = '10.06'
     mmColumnWidth = 0
     DataPipelineName = 'pip_01'
@@ -1008,6 +1011,6 @@ object frm_relatorio: Tfrm_relatorio
   object qry: TUniQuery
     Connection = dtm_dados.mysql_conn
     Left = 320
-    Top = 100
+    Top = 180
   end
 end

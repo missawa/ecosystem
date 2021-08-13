@@ -1,0 +1,1 @@
+Provider Name=ODBC;Server=ecoplan_real;User ID=root@multinote;Password=*mult1d3v;DetectFieldsOnPrepare=True;Login Prompt=False

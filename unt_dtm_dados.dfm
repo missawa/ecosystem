@@ -35,13 +35,13 @@ object dtm_dados: Tdtm_dados
     SQL.Strings = (
       'select *'
       'from usuario')
-    Active = True
     Left = 35
     Top = 100
   end
   object mysql_conn: TUniConnection
     ProviderName = 'ODBC'
-    Port = 3306
+    SpecificOptions.Strings = (
+      'ODBC.DetectFieldsOnPrepare=True')
     DefaultTransaction.DefaultCloseAction = taCommit
     Username = 'root'
     Server = 'ecoplan'

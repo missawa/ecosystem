@@ -4,11 +4,12 @@ object frm_vencimentos: Tfrm_vencimentos
   Caption = 'Vencimentos de Licen'#231'as e Condicionantes'
   ClientHeight = 616
   ClientWidth = 1116
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Color = clWindow
+  Ctl3D = False
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -16,21 +17,21 @@ object frm_vencimentos: Tfrm_vencimentos
   WindowState = wsMaximized
   OnActivate = FormActivate
   OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object grd_venc: TwwDBGrid
     Left = 0
-    Top = 52
+    Top = 56
     Width = 1116
-    Height = 564
+    Height = 560
     Selected.Strings = (
-      'tipo'#9'7'#9'TIPO'
+      'tipo'#9'9'#9'TIPO'
       'nome'#9'72'#9'CLIENTE'
       'cnpj'#9'20'#9'CNPJ'
       'numero'#9'20'#9'N'#218'MERO'
       'dt_aviso'#9'10'#9'AVISO'
-      'dt_venc'#9'10'#9'VENCIMENTO'
-      'desc_str'#9'100'#9'DESCRI'#199#195'O')
+      'dt_venc'#9'11'#9'VENCIMENTO')
     IniAttributes.Delimiter = ';;'
     TitleColor = clBtnFace
     FixedCols = 0
@@ -39,10 +40,10 @@ object frm_vencimentos: Tfrm_vencimentos
     DataSource = dts_venc
     TabOrder = 0
     TitleAlignment = taLeftJustify
-    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Charset = ANSI_CHARSET
     TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
+    TitleFont.Height = -13
+    TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
     TitleLines = 1
     TitleButtons = False
@@ -51,10 +52,10 @@ object frm_vencimentos: Tfrm_vencimentos
     Left = 0
     Top = 0
     Width = 1116
-    Height = 52
+    Height = 56
     AutoSize = True
-    ButtonHeight = 52
-    ButtonWidth = 47
+    ButtonHeight = 56
+    ButtonWidth = 55
     Caption = 'Novo'
     DisabledImages = dtm_images.img_32
     Images = dtm_images.img_32
@@ -62,8 +63,6 @@ object frm_vencimentos: Tfrm_vencimentos
     ShowCaptions = True
     ShowHint = True
     TabOrder = 1
-    ExplicitTop = 21
-    ExplicitWidth = 980
     object btn_licencas: TToolButton
       Left = 0
       Top = 0
@@ -72,7 +71,7 @@ object frm_vencimentos: Tfrm_vencimentos
       OnClick = btn_licencasClick
     end
     object sep_3: TToolButton
-      Left = 47
+      Left = 55
       Top = 0
       Width = 8
       Caption = 'sep_3'
@@ -80,7 +79,7 @@ object frm_vencimentos: Tfrm_vencimentos
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 55
+      Left = 63
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
@@ -116,7 +115,7 @@ object frm_vencimentos: Tfrm_vencimentos
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select '
-      '    '#39'LICEN'#199'A'#39' as tipo,'
+      '    cast('#39'LICEN'#199'A'#39' as char) as tipo,'
       '    p.id,'
       '    p.cnpj,'
       '    p.nome,'
@@ -135,7 +134,7 @@ object frm_vencimentos: Tfrm_vencimentos
       'union'
       ''
       'select '
-      '    '#39'CONDIC.'#39' as tipo,'
+      '    cast('#39'CONDIC.'#39' as char) as tipo,'
       '    p.id,'
       '    p.cnpj,'
       '    p.nome,'
@@ -156,86 +155,9 @@ object frm_vencimentos: Tfrm_vencimentos
       '    and (c.dt_venc <= (current_date - 30)'
       '        or c.dt_aviso <= (current_date - 30))'
       'order by dt_venc, dt_aviso')
-    Active = True
     OnCalcFields = qry_vencCalcFields
     Left = 255
     Top = 185
-    object qry_venctipo: TStringField
-      DisplayLabel = 'TIPO'
-      DisplayWidth = 7
-      FieldName = 'tipo'
-      ReadOnly = True
-      Required = True
-      Size = 7
-    end
-    object qry_vencnome: TStringField
-      DisplayLabel = 'CLIENTE'
-      DisplayWidth = 72
-      FieldName = 'nome'
-      ReadOnly = True
-      Size = 120
-    end
-    object qry_venccnpj: TStringField
-      DisplayLabel = 'CNPJ'
-      DisplayWidth = 20
-      FieldName = 'cnpj'
-      ReadOnly = True
-      EditMask = '00\.000\.000\/0000\-000;0;_'
-      Size = 14
-    end
-    object qry_vencnumero: TStringField
-      DisplayLabel = 'N'#218'MERO'
-      DisplayWidth = 20
-      FieldName = 'numero'
-      ReadOnly = True
-      Size = 60
-    end
-    object qry_vencdt_aviso: TDateField
-      DisplayLabel = 'AVISO'
-      DisplayWidth = 10
-      FieldName = 'dt_aviso'
-      ReadOnly = True
-    end
-    object qry_vencdt_venc: TDateField
-      DisplayLabel = 'VENCIMENTO'
-      DisplayWidth = 10
-      FieldName = 'dt_venc'
-      ReadOnly = True
-    end
-    object qry_vencdesc_str: TStringField
-      DisplayLabel = 'DESCRI'#199#195'O'
-      DisplayWidth = 100
-      FieldKind = fkCalculated
-      FieldName = 'desc_str'
-      Size = 400
-      Calculated = True
-    end
-    object qry_vencid_atividade: TIntegerField
-      FieldName = 'id_atividade'
-      ReadOnly = True
-      Visible = False
-    end
-    object qry_vencid: TIntegerField
-      DisplayWidth = 10
-      FieldName = 'id'
-      ReadOnly = True
-      Required = True
-      Visible = False
-    end
-    object qry_vencfantasia: TStringField
-      DisplayWidth = 100
-      FieldName = 'fantasia'
-      ReadOnly = True
-      Visible = False
-      Size = 100
-    end
-    object qry_vencdescricao: TMemoField
-      DisplayWidth = 10
-      FieldName = 'descricao'
-      ReadOnly = True
-      Visible = False
-      BlobType = ftMemo
-    end
   end
   object dts_venc: TDataSource
     DataSet = qry_venc

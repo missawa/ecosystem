@@ -6,10 +6,10 @@ object frm_principal: Tfrm_principal
   ClientWidth = 779
   Color = clAppWorkSpace
   Ctl3D = False
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIForm
   KeyPreview = True
@@ -21,12 +21,12 @@ object frm_principal: Tfrm_principal
     779
     403)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object Shape1: TShape
     Left = 0
-    Top = 68
+    Top = 72
     Width = 779
-    Height = 335
+    Height = 331
     Align = alClient
     ExplicitLeft = 65
     ExplicitTop = 195
@@ -604,10 +604,10 @@ object frm_principal: Tfrm_principal
     Left = 0
     Top = 0
     Width = 779
-    Height = 68
+    Height = 72
     AutoSize = True
-    ButtonHeight = 68
-    ButtonWidth = 67
+    ButtonHeight = 72
+    ButtonWidth = 80
     Caption = 'tol_principal'
     Color = clWhite
     DrawingStyle = dsGradient
@@ -623,7 +623,7 @@ object frm_principal: Tfrm_principal
       OnClick = btn_clienteClick
     end
     object btn_usuario: TToolButton
-      Left = 67
+      Left = 80
       Top = 0
       Caption = 'Usu'#225'rio'
       ImageIndex = 24
@@ -631,34 +631,34 @@ object frm_principal: Tfrm_principal
       OnClick = btn_usuarioClick
     end
     object btn_cadastro: TToolButton
-      Left = 134
+      Left = 160
       Top = 0
       Caption = 'Cadastro'
       DropdownMenu = mnu_cadastro
       ImageIndex = 1
     end
     object btn_vencimentos: TToolButton
-      Left = 201
+      Left = 240
       Top = 0
       Caption = 'Vencimentos'
       ImageIndex = 31
       OnClick = btn_vencimentosClick
     end
     object btn_relatorio: TToolButton
-      Left = 268
+      Left = 320
       Top = 0
       Caption = 'Relat'#243'rio'
       ImageIndex = 12
       OnClick = btn_relatorioClick
     end
     object btn_config: TToolButton
-      Left = 335
+      Left = 400
       Top = 0
       Caption = 'Config.'
       ImageIndex = 0
     end
     object ToolButton3: TToolButton
-      Left = 402
+      Left = 480
       Top = 0
       Width = 8
       Caption = 'ToolButton3'
@@ -666,7 +666,7 @@ object frm_principal: Tfrm_principal
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 410
+      Left = 488
       Top = 0
       Caption = 'Fechar'
       ImageIndex = 30
