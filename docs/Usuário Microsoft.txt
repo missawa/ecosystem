@@ -1,3 +1,15 @@
 Usuário Microsoft
 licenciamento@ecoplan.eco.br
 Eco@2020plan
+
+
+ECOPLAN
+sistema@ecoplan.eco.br
+mult1d3v
+pin servidor: 13042021
+
+
+MySQL Ecoplan
+admin
+Multi#2020
+
