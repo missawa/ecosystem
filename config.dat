@@ -1,1 +1,1 @@
-Provider Name=ODBC;Server=ecoplan;User ID=root;Password=*Mi251011;DetectFieldsOnPrepare=True;Login Prompt=False
+Provider Name=ODBC;Server=ecoserver;User ID=root;Password=Multi#2020;DetectFieldsOnPrepare=True;Login Prompt=False

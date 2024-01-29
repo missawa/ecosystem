@@ -1,4 +1,5 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{0fe87af4-49ea-4434-af57-07c2cec76fe0}</ProjectGuid>
     <MainSource>EcoSystem.dpr</MainSource>
@@ -53,6 +54,9 @@
     </DCCReference>
     <DCCReference Include="unt_cliente_atividade_apagar.pas">
       <Form>frm_cliente_atividade_apagar</Form>
+    </DCCReference>
+    <DCCReference Include="unt_cumprir_cond.pas">
+      <Form>frm_cumprir_cond</Form>
     </DCCReference>
     <DCCReference Include="unt_dtm_dados.pas">
       <Form>dtm_dados</Form>

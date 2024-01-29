@@ -6,10 +6,10 @@ object frm_licenca: Tfrm_licenca
   ClientWidth = 1308
   Color = clWhite
   Ctl3D = False
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -17,7 +17,7 @@ object frm_licenca: Tfrm_licenca
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object pnlTotal: TPanel
     Left = 0
     Top = 0
@@ -32,7 +32,7 @@ object frm_licenca: Tfrm_licenca
       Left = 3
       Top = 0
       Width = 1302
-      Height = 18
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -40,10 +40,10 @@ object frm_licenca: Tfrm_licenca
       Caption = ' CLIENTE / ATIVIDADE'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
@@ -53,9 +53,9 @@ object frm_licenca: Tfrm_licenca
     end
     object pnl_geral: TPanel
       Left = 3
-      Top = 18
+      Top = 20
       Width = 1302
-      Height = 52
+      Height = 50
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -63,37 +63,37 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 1
       object Label1: TLabel
         Left = 10
-        Top = 10
-        Width = 11
-        Height = 13
+        Top = 4
+        Width = 12
+        Height = 17
         Caption = 'ID'
       end
       object lbl_cnpj_cpf: TLabel
         Left = 75
-        Top = 10
-        Width = 54
-        Height = 13
+        Top = 4
+        Width = 63
+        Height = 17
         Caption = 'CNPJ / CPF'
       end
       object Label4: TLabel
         Left = 210
-        Top = 10
-        Width = 97
-        Height = 13
+        Top = 4
+        Width = 123
+        Height = 17
         Caption = 'Nome / Raz'#227'o Social'
       end
       object Label5: TLabel
         Left = 490
-        Top = 10
-        Width = 41
-        Height = 13
+        Top = 4
+        Width = 47
+        Height = 17
         Caption = 'Fantasia'
       end
       object Label2: TLabel
         Left = 770
-        Top = 10
-        Width = 45
-        Height = 13
+        Top = 4
+        Width = 54
+        Height = 17
         Caption = 'Atividade'
       end
       object btn_recarregar: TSpeedButton
@@ -239,9 +239,9 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_id: TwwDBEdit
         Left = 10
-        Top = 25
+        Top = 21
         Width = 60
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -259,9 +259,9 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_cnpj_cpf: TwwDBEdit
         Left = 75
-        Top = 25
+        Top = 21
         Width = 130
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -279,9 +279,9 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_nome: TwwDBEdit
         Left = 210
-        Top = 25
+        Top = 21
         Width = 275
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -300,9 +300,9 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_fantasia: TwwDBEdit
         Left = 491
-        Top = 25
+        Top = 21
         Width = 274
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -321,9 +321,9 @@ object frm_licenca: Tfrm_licenca
       end
       object edt_atividade: TwwDBEdit
         Left = 770
-        Top = 25
+        Top = 21
         Width = 274
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -360,7 +360,7 @@ object frm_licenca: Tfrm_licenca
       Left = 3
       Top = 3
       Width = 1303
-      Height = 18
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -368,10 +368,10 @@ object frm_licenca: Tfrm_licenca
       Caption = ' LICEN'#199'A'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       Padding.Right = 1
       ParentBackground = False
@@ -381,9 +381,9 @@ object frm_licenca: Tfrm_licenca
     end
     object grd: TwwDBGrid
       Left = 3
-      Top = 21
+      Top = 23
       Width = 959
-      Height = 119
+      Height = 117
       ControlType.Strings = (
         'id_tipo_licenca;CustomEdit;cmb_tipo;T'
         'id_orgao;CustomEdit;cmb_orgao;T'
@@ -405,20 +405,22 @@ object frm_licenca: Tfrm_licenca
       DataSource = dts_licenca
       TabOrder = 1
       TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Height = -13
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
+      ExplicitLeft = -3
+      ExplicitTop = 50
     end
     object pnl_desc_licenca: TPanel
       Left = 962
-      Top = 21
+      Top = 23
       Width = 344
-      Height = 119
+      Height = 117
       Align = alRight
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -438,7 +440,7 @@ object frm_licenca: Tfrm_licenca
         Left = 0
         Top = 21
         Width = 342
-        Height = 96
+        Height = 94
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -451,10 +453,10 @@ object frm_licenca: Tfrm_licenca
       end
     end
     object cmb_tipo: TwwDBLookupCombo
-      Left = 16
-      Top = 40
+      Left = 24
+      Top = 69
       Width = 67
-      Height = 19
+      Height = 23
       CharCase = ecUpperCase
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
@@ -473,9 +475,9 @@ object frm_licenca: Tfrm_licenca
     end
     object cmb_orgao: TwwDBLookupCombo
       Left = 84
-      Top = 40
-      Width = 64
-      Height = 16
+      Top = 69
+      Width = 74
+      Height = 23
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'sigla'#9'8'#9#211'RG'#195'O'#9'F')
@@ -495,8 +497,8 @@ object frm_licenca: Tfrm_licenca
     object cmb_municipio: TwwDBLookupCombo
       Left = 661
       Top = 81
-      Width = 214
-      Height = 16
+      Width = 249
+      Height = 23
       DropDownAlignment = taLeftJustify
       Selected.Strings = (
         'nome'#9'100'#9'MUNIC'#205'PIO'#9'F')
@@ -527,22 +529,23 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitHeight = 170
     object grd_condicionante: TwwDBGrid
       Left = 3
-      Top = 18
-      Width = 587
-      Height = 372
+      Top = 85
+      Width = 821
+      Height = 305
       ControlType.Strings = (
         'id_responsavel;CustomEdit;cmb_responsavel;F'
         'id_executor;CustomEdit;cmb_executor;F'
         'cumprida;CheckBox;S;N')
       Selected.Strings = (
         'numero'#9'7'#9'N'#218'M.'#9'F'
-        'id_responsavel'#9'20'#9'RESPONS'#193'VEL'#9'F'
+        'id_categoria'#9'10'#9'CATEGORIA'#9'F'
+        'dt_aviso'#9'15'#9'AVISO'#9'F'
         'dt_venc'#9'15'#9'VENCIMENTO'#9'F'
         'dt_cumprimento'#9'15'#9'DT.CUMP.'#9'F'
-        'dt_aviso'#9'15'#9'AVISO'#9'F'
+        'protocolo'#9'30'#9'PROTOCOLO'#9'F'
+        'id_responsavel'#9'12'#9'RESPONS'#193'VEL'#9'F'
         'cumprida'#9'2'#9'OK'#9'F')
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
@@ -550,24 +553,26 @@ object frm_licenca: Tfrm_licenca
       ShowHorzScrollBar = True
       Align = alClient
       DataSource = dts_condicionante
-      TabOrder = 3
+      TabOrder = 2
       TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Height = -13
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
       OnEnter = grd_condicionanteEnter
-      ExplicitHeight = 149
+      ExplicitTop = 20
+      ExplicitWidth = 587
+      ExplicitHeight = 370
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 0
       Width = 1302
-      Height = 18
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -575,10 +580,10 @@ object frm_licenca: Tfrm_licenca
       Caption = ' CONDICIONANTE'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
@@ -586,30 +591,32 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 590
-      Top = 18
-      Width = 715
-      Height = 372
+      Left = 824
+      Top = 85
+      Width = 481
+      Height = 305
       Align = alRight
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitHeight = 149
+      ExplicitTop = 74
+      ExplicitHeight = 316
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 713
+        Width = 479
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
+        ExplicitWidth = 713
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 713
-        Height = 349
+        Width = 479
+        Height = 282
         Align = alClient
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -619,33 +626,15 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitHeight = 126
+        ExplicitWidth = 423
+        ExplicitHeight = 293
       end
     end
-    object cmb_executor: TwwDBComboBox
-      Left = 250
-      Top = 60
-      Width = 190
-      Height = 19
-      ShowButton = True
-      Style = csDropDown
-      MapList = True
-      AllowClearKey = False
-      DataField = 'id_executor'
-      DataSource = dts_condicionante
-      DropDownCount = 8
-      ItemHeight = 0
-      Items.Strings = (
-        'PEDRO'#9'3')
-      Sorted = False
-      TabOrder = 2
-      UnboundDataType = wwDefault
-    end
     object cmb_responsavel: TwwDBComboBox
-      Left = 27
-      Top = 60
+      Left = 67
+      Top = 140
       Width = 121
-      Height = 19
+      Height = 23
       ShowButton = True
       Style = csDropDown
       MapList = True
@@ -655,11 +644,42 @@ object frm_licenca: Tfrm_licenca
       DropDownCount = 8
       ItemHeight = 0
       Items.Strings = (
-        'PEDRO MISSAWA'#9'3'
-        'LUIZ ALBERTO'#9'4')
+        'ECOPLAN'#9'1'
+        'CLIENTE'#9'2')
       Sorted = False
-      TabOrder = 4
+      TabOrder = 3
       UnboundDataType = wwDefault
+    end
+    object ToolBar2: TToolBar
+      Left = 3
+      Top = 20
+      Width = 1302
+      Height = 65
+      ButtonHeight = 64
+      ButtonWidth = 54
+      Color = clWhite
+      Images = dtm_images.img_40
+      Indent = 5
+      ParentColor = False
+      ParentShowHint = False
+      ShowCaptions = True
+      ShowHint = True
+      TabOrder = 4
+      Transparent = False
+      Wrapable = False
+      object btnEditarMTR: TToolButton
+        Left = 5
+        Top = 0
+        Caption = 'Editar'
+        ImageIndex = 4
+      end
+      object btnProcurarMTR: TToolButton
+        Left = 59
+        Top = 0
+        Hint = 'Procurar MTR'
+        Caption = 'Cumprir'
+        ImageIndex = 7
+      end
     end
   end
   object Panel6: TPanel
@@ -669,7 +689,6 @@ object frm_licenca: Tfrm_licenca
     Height = 37
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 383
     object btn_ok: TSpeedButton
       Left = 1251
       Top = -1
@@ -791,8 +810,8 @@ object frm_licenca: Tfrm_licenca
   end
   object dts_condicionante: TDataSource
     DataSet = dse_condicionante
-    Left = 246
-    Top = 300
+    Left = 350
+    Top = 412
   end
   object qry_cliente: TUniQuery
     Connection = dtm_dados.mysql_conn
@@ -866,7 +885,6 @@ object frm_licenca: Tfrm_licenca
       'where id_cliente = :id_cliente'
       '    and id_atividade = :id_atividade')
     Options.StrictUpdate = False
-    Active = True
     AfterScroll = dse_licencaAfterScroll
     OnNewRecord = dse_licencaNewRecord
     Left = 1277
@@ -953,9 +971,10 @@ object frm_licenca: Tfrm_licenca
     Active = True
     BeforeOpen = dse_condicionanteBeforeOpen
     BeforePost = dse_condicionanteBeforePost
+    AfterPost = dse_condicionanteAfterPost
     OnNewRecord = dse_condicionanteNewRecord
-    Left = 275
-    Top = 300
+    Left = 379
+    Top = 412
     ParamData = <
       item
         DataType = ftInteger

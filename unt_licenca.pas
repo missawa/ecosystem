@@ -27,7 +27,7 @@ uses
   MemDS,
   DBAccess,
   Uni,
-  ADODB, Buttons;
+  ADODB, Buttons, ComCtrls, ToolWin;
 
 type
   Tfrm_licenca = class(TForm)
@@ -61,7 +61,6 @@ type
     Panel4: TPanel;
     Panel5: TPanel;
     mmo_desc_condicionante: TDBMemo;
-    cmb_executor: TwwDBComboBox;
     qry_cliente: TUniQuery;
     dse_licenca: TUniQuery;
     qry_tipo: TUniQuery;
@@ -73,6 +72,9 @@ type
     cmb_responsavel: TwwDBComboBox;
     dse_condicionante: TUniQuery;
     btn_recarregar: TSpeedButton;
+    ToolBar2: TToolBar;
+    btnProcurarMTR: TToolButton;
+    btnEditarMTR: TToolButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -84,6 +86,7 @@ type
     procedure dse_licencaAfterScroll(DataSet: TDataSet);
     procedure grd_condicionanteEnter(Sender: TObject);
     procedure dse_condicionanteBeforePost(DataSet: TDataSet);
+    procedure dse_condicionanteAfterPost(DataSet: TDataSet);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -98,7 +101,7 @@ var
 
 implementation
 
-uses unt_procedures, unt_dtm_dados;
+uses unt_procedures, unt_dtm_dados, unt_dtm_images;
 
 {$R *.dfm}
 
@@ -146,6 +149,11 @@ begin
   dse_licenca.FieldByName('id_atividade').Value := qry_cliente.FieldByName('id_atividade').Value
 end;
 
+procedure Tfrm_licenca.dse_condicionanteAfterPost(DataSet: TDataSet);
+begin
+  dse_condicionante.CommitUpdates;
+end;
+
 procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
 begin
 
@@ -175,7 +183,7 @@ begin
   dse_condicionante.FieldByName('id_licenca').AsInteger := dse_licenca.FieldByName('id').AsInteger;
   dse_condicionante.FieldByName('cumprida').Text := 'N';
   dse_condicionante.FieldByName('id_executor').AsInteger := dtm_dados.id_usuario_logado;
-  dse_condicionante.FieldByName('id_responsavel').AsInteger := dtm_dados.id_usuario_logado;
+  dse_condicionante.FieldByName('id_responsavel').AsInteger := 1;
 end;
 
 procedure Tfrm_licenca.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -185,8 +193,6 @@ end;
 
 procedure Tfrm_licenca.FormCreate(Sender: TObject);
 begin
-  carrega_combo_usuarios(cmb_responsavel);
-  carrega_combo_usuarios(cmb_executor);
   centralizar_tela(self);
   open_aux_queries;
 end;

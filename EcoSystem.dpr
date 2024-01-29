@@ -34,7 +34,8 @@ uses
   unt_orgao_ambiental in 'unt_orgao_ambiental.pas' {frm_orgao_ambiental},
   unt_relatorio in 'unt_relatorio.pas' {frm_relatorio},
   unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca},
-  unt_vencimentos in 'unt_vencimentos.pas' {frm_vencimentos};
+  unt_vencimentos in 'unt_vencimentos.pas' {frm_vencimentos},
+  unt_cumprir_cond in 'unt_cumprir_cond.pas' {frm_cumprir_cond};
 
 {$R *.res}
 
@@ -52,6 +53,5 @@ begin
   Application.CreateForm(Tfrm_progresso, frm_progresso);
   Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
   Application.CreateForm(Tfrm_input_texto, frm_input_texto);
-  Application.CreateForm(Tfrm_vencimentos, frm_vencimentos);
   Application.Run;
 end.

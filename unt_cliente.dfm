@@ -3,25 +3,26 @@ object frm_cliente: Tfrm_cliente
   Top = 0
   Caption = 'Clientes'
   ClientHeight = 546
-  ClientWidth = 980
+  ClientWidth = 1184
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = True
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object pnlTotal: TPanel
     Left = 0
-    Top = 73
-    Width = 980
-    Height = 65
+    Top = 83
+    Width = 1184
+    Height = 70
     Align = alTop
     BevelOuter = bvNone
     Ctl3D = False
@@ -29,11 +30,13 @@ object frm_cliente: Tfrm_cliente
     Padding.Right = 3
     ParentCtl3D = False
     TabOrder = 0
+    ExplicitTop = 85
+    ExplicitWidth = 1024
     object Panel3: TPanel
       Left = 3
       Top = 0
-      Width = 974
-      Height = 15
+      Width = 1178
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -41,76 +44,77 @@ object frm_cliente: Tfrm_cliente
       Caption = ' DADOS GERAIS'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -9
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 974
     end
     object pnl_geral: TPanel
       Left = 3
-      Top = 15
-      Width = 974
+      Top = 20
+      Width = 1178
       Height = 50
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitLeft = -397
-      ExplicitTop = 49
+      ExplicitTop = 15
+      ExplicitWidth = 974
       object Label1: TLabel
         Left = 10
-        Top = 10
-        Width = 11
-        Height = 13
+        Top = 5
+        Width = 12
+        Height = 17
         Caption = 'ID'
       end
       object Label2: TLabel
         Left = 70
-        Top = 10
-        Width = 20
-        Height = 13
+        Top = 5
+        Width = 26
+        Height = 17
         Caption = 'Tipo'
       end
       object lbl_cnpj_cpf: TLabel
         Left = 165
-        Top = 10
-        Width = 62
-        Height = 13
+        Top = 5
+        Width = 73
+        Height = 17
         Cursor = crHandPoint
         Caption = 'CNPJ ou CPF'
         OnClick = lbl_cnpj_cpfClick
       end
       object Label4: TLabel
-        Left = 290
-        Top = 10
-        Width = 97
-        Height = 13
+        Left = 300
+        Top = 5
+        Width = 123
+        Height = 17
         Caption = 'Nome / Raz'#227'o Social'
       end
       object Label5: TLabel
-        Left = 535
-        Top = 10
-        Width = 41
-        Height = 13
+        Left = 565
+        Top = 5
+        Width = 47
+        Height = 17
         Caption = 'Fantasia'
       end
       object Label3: TLabel
-        Left = 780
-        Top = 10
-        Width = 41
-        Height = 13
+        Left = 810
+        Top = 5
+        Width = 49
+        Height = 17
         Caption = 'Situa'#231#227'o'
       end
       object edt_id: TwwDBEdit
         Left = 10
-        Top = 25
+        Top = 22
         Width = 55
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -128,9 +132,9 @@ object frm_cliente: Tfrm_cliente
       end
       object edt_cnpj_cpf: TwwDBEdit
         Left = 165
-        Top = 25
-        Width = 120
-        Height = 19
+        Top = 22
+        Width = 130
+        Height = 23
         BorderStyle = bsNone
         DataField = 'cnpj'
         DataSource = dts_cliente
@@ -145,10 +149,10 @@ object frm_cliente: Tfrm_cliente
         OnExit = edt_cnpj_cpfExit
       end
       object edt_nome: TwwDBEdit
-        Left = 290
-        Top = 25
-        Width = 240
-        Height = 19
+        Left = 300
+        Top = 22
+        Width = 260
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'nome'
@@ -164,9 +168,9 @@ object frm_cliente: Tfrm_cliente
       end
       object cmb_tipo: TwwDBComboBox
         Left = 70
-        Top = 25
+        Top = 22
         Width = 90
-        Height = 19
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -189,10 +193,10 @@ object frm_cliente: Tfrm_cliente
         OnCloseUp = cmb_tipoCloseUp
       end
       object edt_fantasia: TwwDBEdit
-        Left = 535
-        Top = 25
+        Left = 565
+        Top = 22
         Width = 240
-        Height = 19
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'fantasia'
@@ -207,10 +211,10 @@ object frm_cliente: Tfrm_cliente
         WordWrap = False
       end
       object cmb_situacao: TwwDBComboBox
-        Left = 780
-        Top = 25
+        Left = 810
+        Top = 22
         Width = 115
-        Height = 19
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -234,20 +238,22 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_endereco: TPanel
     Left = 0
-    Top = 138
-    Width = 980
-    Height = 68
+    Top = 153
+    Width = 1184
+    Height = 74
     Align = alTop
     BevelOuter = bvNone
     Padding.Left = 3
     Padding.Top = 3
     Padding.Right = 3
     TabOrder = 1
+    ExplicitTop = 157
+    ExplicitWidth = 1024
     object pnl_tit_endereco: TPanel
       Left = 3
       Top = 3
-      Width = 974
-      Height = 15
+      Width = 1178
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -255,21 +261,22 @@ object frm_cliente: Tfrm_cliente
       Caption = ' ENDERE'#199'O'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -9
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 974
     end
     object pnl_dados_endereco: TPanel
       Left = 3
-      Top = 18
-      Width = 974
-      Height = 50
+      Top = 23
+      Width = 1178
+      Height = 51
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -277,71 +284,75 @@ object frm_cliente: Tfrm_cliente
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 1
+      ExplicitTop = 18
+      ExplicitWidth = 974
+      ExplicitHeight = 50
       object Label6: TLabel
-        Left = 819
-        Top = 9
-        Width = 65
-        Height = 13
+        Left = 840
+        Top = 5
+        Width = 82
+        Height = 17
         Caption = 'Complemento'
       end
       object Label7: TLabel
         Left = 100
-        Top = 9
-        Width = 13
-        Height = 13
+        Top = 5
+        Width = 15
+        Height = 17
         Caption = 'UF'
       end
       object Label8: TLabel
         Left = 9
-        Top = 9
-        Width = 19
-        Height = 13
+        Top = 5
+        Width = 22
+        Height = 17
         Caption = 'CEP'
       end
       object Label9: TLabel
-        Left = 507
-        Top = 9
-        Width = 55
-        Height = 13
+        Left = 528
+        Top = 5
+        Width = 70
+        Height = 17
         Caption = 'Logradouro'
       end
       object Label10: TLabel
-        Left = 771
-        Top = 9
-        Width = 12
-        Height = 13
+        Left = 792
+        Top = 5
+        Width = 16
+        Height = 17
         Caption = 'N'#186
       end
       object Label11: TLabel
         Left = 152
-        Top = 9
-        Width = 43
-        Height = 13
+        Top = 5
+        Width = 57
+        Height = 17
         Caption = 'Munic'#237'pio'
       end
       object lbl_bairro: TLabel
         Left = 330
-        Top = 9
-        Width = 28
-        Height = 13
+        Top = 5
+        Width = 35
+        Height = 17
         Caption = 'Bairro'
         DragCursor = crHandPoint
       end
       object btn_bairro: TSpeedButton
-        Left = 485
+        Left = 505
         Top = 21
         Width = 15
-        Height = 20
+        Height = 23
         Caption = '+'
+        Flat = True
         Margin = 0
         Spacing = 0
         OnClick = btn_bairroClick
       end
       object edt_complemento: TwwDBEdit
-        Left = 819
+        Left = 840
         Top = 22
         Width = 147
-        Height = 19
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'complemento'
@@ -359,7 +370,7 @@ object frm_cliente: Tfrm_cliente
         Left = 9
         Top = 22
         Width = 86
-        Height = 19
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'cep'
@@ -375,10 +386,10 @@ object frm_cliente: Tfrm_cliente
         OnExit = edt_cepExit
       end
       object edt_logradouro: TwwDBEdit
-        Left = 507
+        Left = 528
         Top = 22
         Width = 260
-        Height = 19
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'logradouro'
@@ -393,10 +404,10 @@ object frm_cliente: Tfrm_cliente
         WordWrap = False
       end
       object edt_numero: TwwDBEdit
-        Left = 771
+        Left = 792
         Top = 22
         Width = 44
-        Height = 19
+        Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
         DataField = 'numero'
@@ -414,7 +425,7 @@ object frm_cliente: Tfrm_cliente
         Left = 100
         Top = 22
         Width = 47
-        Height = 19
+        Height = 23
         CharCase = ecUpperCase
         BorderStyle = bsNone
         DropDownAlignment = taLeftJustify
@@ -440,7 +451,7 @@ object frm_cliente: Tfrm_cliente
         Left = 152
         Top = 22
         Width = 173
-        Height = 19
+        Height = 23
         CharCase = ecUpperCase
         BorderStyle = bsNone
         DropDownAlignment = taLeftJustify
@@ -466,8 +477,8 @@ object frm_cliente: Tfrm_cliente
       object cmb_bairro: TwwDBComboBox
         Left = 330
         Top = 22
-        Width = 155
-        Height = 19
+        Width = 175
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -491,8 +502,8 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_contato: TPanel
     Left = 0
-    Top = 206
-    Width = 980
+    Top = 227
+    Width = 1184
     Height = 165
     Align = alTop
     BevelOuter = bvNone
@@ -503,10 +514,12 @@ object frm_cliente: Tfrm_cliente
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
+    ExplicitTop = 206
+    ExplicitWidth = 980
     object onl_telefone: TPanel
       Left = 3
       Top = 3
-      Width = 392
+      Width = 439
       Height = 159
       Align = alLeft
       BevelOuter = bvNone
@@ -514,8 +527,8 @@ object frm_cliente: Tfrm_cliente
       object pnl_tit_telefone: TPanel
         Left = 0
         Top = 0
-        Width = 392
-        Height = 16
+        Width = 439
+        Height = 20
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
@@ -523,21 +536,22 @@ object frm_cliente: Tfrm_cliente
         Caption = ' TELEFONES'
         Color = 12159842
         Ctl3D = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -9
-        Font.Name = 'Tahoma'
+        Font.Height = -13
+        Font.Name = 'Segoe UI Semibold'
         Font.Style = [fsBold]
         ParentBackground = False
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 392
       end
       object grd_tel: TwwDBGrid
         Left = 0
-        Top = 16
-        Width = 392
-        Height = 143
+        Top = 20
+        Width = 439
+        Height = 139
         ControlType.Strings = (
           'descricao;CustomEdit;cmb_desc_tel;F'
           'tipo;CustomEdit;cmb_tipo_tel;T'
@@ -552,17 +566,20 @@ object frm_cliente: Tfrm_cliente
         FixedCols = 0
         ShowHorzScrollBar = True
         Align = alClient
+        Ctl3D = False
         DataSource = dts_tel
+        ParentCtl3D = False
         TabOrder = 1
         TitleAlignment = taLeftJustify
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
+        TitleFont.Height = -13
+        TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
         UseTFields = False
+        ExplicitWidth = 392
       end
       object cmb_desc_tel: TwwDBComboBox
         Left = 12
@@ -597,7 +614,7 @@ object frm_cliente: Tfrm_cliente
         Left = 163
         Top = 70
         Width = 76
-        Height = 21
+        Height = 25
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -615,19 +632,21 @@ object frm_cliente: Tfrm_cliente
       end
     end
     object Panel1: TPanel
-      Left = 395
+      Left = 442
       Top = 3
-      Width = 582
+      Width = 739
       Height = 159
       Align = alClient
       BevelOuter = bvNone
       Padding.Left = 3
       TabOrder = 1
+      ExplicitLeft = 395
+      ExplicitWidth = 582
       object Panel2: TPanel
         Left = 3
         Top = 0
-        Width = 579
-        Height = 16
+        Width = 736
+        Height = 20
         Align = alTop
         Alignment = taLeftJustify
         BevelOuter = bvNone
@@ -635,21 +654,22 @@ object frm_cliente: Tfrm_cliente
         Caption = ' E-MAILS'
         Color = 12159842
         Ctl3D = False
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -9
-        Font.Name = 'Tahoma'
+        Font.Height = -13
+        Font.Name = 'Segoe UI Semibold'
         Font.Style = [fsBold]
         ParentBackground = False
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
+        ExplicitWidth = 579
       end
       object grd_email: TwwDBGrid
         Left = 3
-        Top = 16
-        Width = 579
-        Height = 143
+        Top = 20
+        Width = 736
+        Height = 139
         ControlType.Strings = (
           'descricao;CustomEdit;cmb_desc_email;F'
           'tipo;CustomEdit;cmb_tipo_email;F'
@@ -663,16 +683,19 @@ object frm_cliente: Tfrm_cliente
         FixedCols = 0
         ShowHorzScrollBar = True
         Align = alClient
+        Ctl3D = False
         DataSource = dts_email
+        ParentCtl3D = False
         TabOrder = 1
         TitleAlignment = taLeftJustify
-        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
+        TitleFont.Height = -13
+        TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
+        ExplicitWidth = 579
       end
       object cmb_tipo_email: TwwDBComboBox
         Left = 20
@@ -733,9 +756,9 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_obs: TPanel
     Left = 0
-    Top = 371
-    Width = 980
-    Height = 175
+    Top = 392
+    Width = 1184
+    Height = 154
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -745,11 +768,14 @@ object frm_cliente: Tfrm_cliente
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
+    ExplicitTop = 371
+    ExplicitWidth = 980
+    ExplicitHeight = 175
     object pnl_tit_obs: TPanel
       Left = 3
       Top = 3
-      Width = 974
-      Height = 15
+      Width = 1178
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -757,21 +783,22 @@ object frm_cliente: Tfrm_cliente
       Caption = ' OBSERVA'#199#213'ES'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -9
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 974
     end
     object Panel4: TPanel
       Left = 3
-      Top = 18
-      Width = 974
-      Height = 154
+      Top = 23
+      Width = 1178
+      Height = 128
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -783,20 +810,25 @@ object frm_cliente: Tfrm_cliente
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 1
+      ExplicitTop = 18
+      ExplicitWidth = 974
+      ExplicitHeight = 154
       object Panel5: TPanel
         Left = 10
         Top = 10
-        Width = 952
-        Height = 132
+        Width = 1156
+        Height = 106
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         TabOrder = 0
+        ExplicitWidth = 952
+        ExplicitHeight = 132
         object rce_obs: TwwDBRichEdit
           Left = 2
           Top = 2
-          Width = 948
-          Height = 128
+          Width = 1152
+          Height = 102
           Align = alClient
           AutoURLDetect = False
           BorderStyle = bsNone
@@ -827,6 +859,8 @@ object frm_cliente: Tfrm_cliente
           PrintFooter.Font.Name = 'Tahoma'
           PrintFooter.Font.Style = []
           RichEditVersion = 2
+          ExplicitWidth = 948
+          ExplicitHeight = 128
         end
       end
     end
@@ -834,14 +868,14 @@ object frm_cliente: Tfrm_cliente
   object toolbar: TToolBar
     Left = 0
     Top = 21
-    Width = 980
-    Height = 52
+    Width = 1184
+    Height = 62
     AutoSize = True
-    ButtonHeight = 52
-    ButtonWidth = 57
+    ButtonHeight = 62
+    ButtonWidth = 62
     Caption = 'Novo'
     DisabledImages = dtm_images.img_32
-    Images = dtm_images.img_32
+    Images = dtm_images.img_40
     ParentShowHint = False
     ShowCaptions = True
     ShowHint = True
@@ -850,32 +884,25 @@ object frm_cliente: Tfrm_cliente
       Left = 0
       Top = 0
       Caption = 'Novo'
-      ImageIndex = 25
+      ImageIndex = 2
       OnClick = btn_novoClick
     end
     object btn_editar: TToolButton
-      Left = 57
+      Left = 62
       Top = 0
       Caption = 'Editar'
-      ImageIndex = 7
+      ImageIndex = 4
       OnClick = btn_editarClick
     end
     object btn_excluir: TToolButton
-      Left = 114
+      Left = 124
       Top = 0
       Caption = 'Excluir'
-      ImageIndex = 1
+      ImageIndex = 3
       OnClick = btn_excluirClick
     end
-    object btn_atualizar: TToolButton
-      Left = 171
-      Top = 0
-      Caption = 'Atualizar'
-      ImageIndex = 13
-      OnClick = btn_atualizarClick
-    end
     object sep_1: TToolButton
-      Left = 228
+      Left = 186
       Top = 0
       Width = 8
       Caption = 'sep_1'
@@ -883,21 +910,21 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_salvar: TToolButton
-      Left = 236
+      Left = 194
       Top = 0
       Caption = 'Salvar'
-      ImageIndex = 32
+      ImageIndex = 5
       OnClick = btn_salvarClick
     end
     object btn_cancelar: TToolButton
-      Left = 293
+      Left = 256
       Top = 0
       Caption = 'Cancelar'
-      ImageIndex = 19
+      ImageIndex = 6
       OnClick = btn_cancelarClick
     end
     object sep_2: TToolButton
-      Left = 350
+      Left = 318
       Top = 0
       Width = 8
       Caption = 'sep_2'
@@ -905,42 +932,42 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_localizar: TToolButton
-      Left = 358
+      Left = 326
       Top = 0
       Caption = 'Localizar'
-      ImageIndex = 14
+      ImageIndex = 8
       OnClick = btn_localizarClick
     end
     object btn_primeiro: TToolButton
-      Left = 415
+      Left = 388
       Top = 0
       Caption = 'Primeiro'
-      ImageIndex = 96
+      ImageIndex = 9
       OnClick = btn_primeiroClick
     end
     object btn_anterior: TToolButton
-      Left = 472
+      Left = 450
       Top = 0
       Caption = 'Anterior'
-      ImageIndex = 97
+      ImageIndex = 10
       OnClick = btn_anteriorClick
     end
     object btn_proximo: TToolButton
-      Left = 529
+      Left = 512
       Top = 0
       Caption = 'Pr'#243'ximo'
-      ImageIndex = 98
+      ImageIndex = 11
       OnClick = btn_proximoClick
     end
     object btn_ultimo: TToolButton
-      Left = 586
+      Left = 574
       Top = 0
       Caption = #218'ltimo'
-      ImageIndex = 99
+      ImageIndex = 12
       OnClick = btn_ultimoClick
     end
     object ToolButton2: TToolButton
-      Left = 643
+      Left = 636
       Top = 0
       Width = 8
       Caption = 'ToolButton2'
@@ -948,14 +975,26 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_atividades: TToolButton
-      Left = 651
+      Left = 644
       Top = 0
       Caption = 'Atividades'
-      ImageIndex = 103
+      ImageIndex = 13
       OnClick = btn_atividadesClick
     end
+    object btn_pasta: TToolButton
+      Left = 706
+      Top = 0
+      Caption = 'Pasta'
+      ImageIndex = 15
+    end
+    object btn_whats: TToolButton
+      Left = 768
+      Top = 0
+      Caption = 'Whats.'
+      ImageIndex = 16
+    end
     object sep_3: TToolButton
-      Left = 708
+      Left = 830
       Top = 0
       Width = 8
       Caption = 'sep_3'
@@ -963,18 +1002,18 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 716
+      Left = 838
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
-      ImageIndex = 30
+      ImageIndex = 1
       OnClick = btn_fecharClick
     end
   end
   object pnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 980
+    Width = 1184
     Height = 21
     Align = alTop
     Alignment = taLeftJustify
@@ -993,11 +1032,12 @@ object frm_cliente: Tfrm_cliente
     ParentFont = False
     TabOrder = 5
     OnMouseDown = pnlTituloMouseDown
+    ExplicitWidth = 980
   end
   object dts_endereco: TDataSource
     DataSet = dse_endereco
-    Left = 948
-    Top = 178
+    Left = 1100
+    Top = 186
   end
   object dts_tel: TDataSource
     DataSet = dse_tel
@@ -1018,8 +1058,8 @@ object frm_cliente: Tfrm_cliente
   end
   object qry: TUniQuery
     Connection = dtm_dados.mysql_conn
-    Left = 790
-    Top = 35
+    Left = 926
+    Top = 43
   end
   object dse_cliente: TUniQuery
     UpdatingTable = 'pessoa'
@@ -1117,8 +1157,8 @@ object frm_cliente: Tfrm_cliente
     MasterSource = dts_cliente
     Options.StrictUpdate = False
     OnNewRecord = dse_enderecoNewRecord
-    Left = 921
-    Top = 178
+    Left = 1073
+    Top = 186
     ParamData = <
       item
         DataType = ftUnknown

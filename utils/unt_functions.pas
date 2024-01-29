@@ -5,8 +5,10 @@ interface
 uses
   Controls,
   Forms,
+  ShellApi,
   SysUtils,
-  Uni;
+  Uni,
+  Windows;
 
   function ajusta_numero_telefone(tel: string): string;
   function arredonda(valor: currency): currency;
@@ -553,6 +555,22 @@ var d, m, a: word;
 begin
 	decodeDate(data, a, m, d);
 	result := encodeDate(a, m, 1);
+end;
+
+procedure abrir_pasta_cliente(id: integer);
+var
+  pdf,caminho: string;
+  handle: HWND;
+
+begin
+
+  caminho := '\\ecoserver\clientes\' + intToStr(id) + '\';
+
+  if DirectoryExists(caminho) then
+    ShellExecute(handle,'open',PChar(caminho), '','',SW_SHOWNORMAL)
+  else if FileExists(pdf) then
+    ShellExecute(handle,'open',PChar(pdf), '','',SW_SHOWNORMAL)
+
 end;
 
 

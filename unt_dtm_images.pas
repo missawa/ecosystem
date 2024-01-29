@@ -9,6 +9,7 @@ type
   Tdtm_images = class(TDataModule)
     img_48: TImageList;
     img_32: TImageList;
+    img_40: TImageList;
   private
     { Private declarations }
   public

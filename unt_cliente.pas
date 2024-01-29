@@ -72,7 +72,6 @@ type
     btn_novo: TToolButton;
     btn_editar: TToolButton;
     btn_excluir: TToolButton;
-    btn_atualizar: TToolButton;
     sep_1: TToolButton;
     btn_salvar: TToolButton;
     btn_cancelar: TToolButton;
@@ -133,6 +132,8 @@ type
     cmb_desc_email: TwwDBComboBox;
     cmb_situacao: TwwDBComboBox;
     Label3: TLabel;
+    btn_pasta: TToolButton;
+    btn_whats: TToolButton;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
@@ -152,7 +153,6 @@ type
     procedure btn_novoClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
-    procedure btn_atualizarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_localizarClick(Sender: TObject);
@@ -173,7 +173,7 @@ type
     procedure cmb_bairroExit(Sender: TObject);
     procedure btn_bairroClick(Sender: TObject);
   protected
-    procedure CreateParams(var Params: TCreateParams); override;
+    //procedure CreateParams(var Params: TCreateParams); override;
   private
     procedure mostra_cnpj_cpf;
     procedure open_aux_queries; 
@@ -197,17 +197,17 @@ uses
   unt_functions,
   unt_integracao,
   unt_proc_abrir_telas,
-  unt_procedures;
+  unt_procedures, unt_dtm_images;
 
 {$R *.dfm}
 
-procedure Tfrm_cliente.CreateParams(var Params: TCreateParams);
+{procedure Tfrm_cliente.CreateParams(var Params: TCreateParams);
 begin
   inherited;
   Params.Style := WS_BORDER;
   BorderStyle := bsNone;
   BorderWidth := 0;
-end;
+end;}
 
 procedure Tfrm_cliente.btn_anteriorClick(Sender: TObject);
 begin
@@ -222,12 +222,6 @@ end;
 procedure Tfrm_cliente.btn_atividadesClick(Sender: TObject);
 begin
   abrir_atividade(dse_cliente.FieldByName(key_field).AsInteger);
-end;
-
-procedure Tfrm_cliente.btn_atualizarClick(Sender: TObject);
-begin
-  dse_cliente.Close;
-  dse_cliente.Open;  
 end;
 
 procedure Tfrm_cliente.btn_cancelarClick(Sender: TObject);
@@ -500,7 +494,6 @@ begin
     btn_novo.Enabled := not edt;
     btn_editar.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
     btn_excluir.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
-    btn_atualizar.Enabled := not (edt or dse_cliente.FieldByName(key_field).IsNull);
     btn_salvar.Enabled := edt;
     btn_cancelar.Enabled := edt;
     btn_localizar.Enabled := not edt;

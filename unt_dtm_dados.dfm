@@ -44,13 +44,13 @@ object dtm_dados: Tdtm_dados
       'ODBC.DetectFieldsOnPrepare=True')
     DefaultTransaction.DefaultCloseAction = taCommit
     Username = 'root'
-    Server = 'ecoplan'
+    Server = 'ecoserver'
     Connected = True
     LoginPrompt = False
     BeforeConnect = mysql_connBeforeConnect
     Left = 35
     Top = 55
-    EncryptedPassword = 'D5FFB2FF96FFCDFFCAFFCEFFCFFFCEFFCEFF'
+    EncryptedPassword = 'B2FF8AFF93FF8BFF96FFDCFFCDFFCFFFCDFFCFFF'
   end
   object ODBCUniProvider1: TODBCUniProvider
     Left = 140
