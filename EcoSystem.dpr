@@ -30,12 +30,14 @@ uses
   unt_cliente_atividade in 'unt_cliente_atividade.pas' {frm_cliente_atividade},
   unt_atividade in 'unt_atividade.pas' {frm_atividade},
   unt_input_texto in 'unt_input_texto.pas' {frm_input_texto},
-  unt_municipio in 'unt_municipio.pas' {frm_municipio},
   unt_orgao_ambiental in 'unt_orgao_ambiental.pas' {frm_orgao_ambiental},
   unt_relatorio in 'unt_relatorio.pas' {frm_relatorio},
   unt_tipo_licenca in 'unt_tipo_licenca.pas' {frm_tipo_licenca},
   unt_vencimentos in 'unt_vencimentos.pas' {frm_vencimentos},
-  unt_cumprir_cond in 'unt_cumprir_cond.pas' {frm_cumprir_cond};
+  unt_cumprir_cond in 'unt_cumprir_cond.pas' {frm_cumprir_cond},
+  unt_municipio in 'unt_municipio.pas' {frm_municipio},
+  unt_condicionante in 'unt_condicionante.pas' {frm_condicionante},
+  unt_categorias in 'unt_categorias.pas' {frm_categorias};
 
 {$R *.res}
 
@@ -53,5 +55,7 @@ begin
   Application.CreateForm(Tfrm_progresso, frm_progresso);
   Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
   Application.CreateForm(Tfrm_input_texto, frm_input_texto);
+  Application.CreateForm(Tfrm_cumprir_cond, frm_cumprir_cond);
+  Application.CreateForm(Tfrm_condicionante, frm_condicionante);
   Application.Run;
 end.

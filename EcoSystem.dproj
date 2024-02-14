@@ -46,6 +46,9 @@
     <DCCReference Include="unt_atividade.pas">
       <Form>frm_atividade</Form>
     </DCCReference>
+    <DCCReference Include="unt_categorias.pas">
+      <Form>frm_categorias</Form>
+    </DCCReference>
     <DCCReference Include="unt_cliente.pas">
       <Form>frm_cliente</Form>
     </DCCReference>
@@ -54,6 +57,9 @@
     </DCCReference>
     <DCCReference Include="unt_cliente_atividade_apagar.pas">
       <Form>frm_cliente_atividade_apagar</Form>
+    </DCCReference>
+    <DCCReference Include="unt_condicionante.pas">
+      <Form>frm_condicionante</Form>
     </DCCReference>
     <DCCReference Include="unt_cumprir_cond.pas">
       <Form>frm_cumprir_cond</Form>

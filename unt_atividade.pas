@@ -18,14 +18,13 @@ type
     Panel1: TPanel;
     btnOK: TSpeedButton;
     btnCancelar: TSpeedButton;
-    Bevel1: TBevel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnCancelarClick(Sender: TObject);
   protected
-    procedure CreateParams(var Params: TCreateParams); override;
+
   private
     FTabela: string;
     FChave: string;
@@ -53,14 +52,6 @@ procedure Tfrm_atividade.CarregarDados;
 begin
   if dse.SQL.Text <> EmptyStr then
     dse.Open;
-end;
-
-procedure Tfrm_atividade.CreateParams(var Params: TCreateParams);
-begin
-  inherited;
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
 end;
 
 procedure Tfrm_atividade.FormClose(Sender: TObject; var Action: TCloseAction);

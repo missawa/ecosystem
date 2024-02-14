@@ -1,29 +1,30 @@
 object frm_cliente_atividade: Tfrm_cliente_atividade
   Left = 0
   Top = 0
-  Caption = 'frm_cliente_atividade'
-  ClientHeight = 372
-  ClientWidth = 879
+  Caption = 'Atividades do Cliente'
+  ClientHeight = 548
+  ClientWidth = 1151
   Color = clWindow
   Ctl3D = False
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object pnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 879
-    Height = 21
+    Width = 1151
+    Height = 30
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
@@ -31,10 +32,10 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     Caption = ' ATIVIDADES DO CLIENTE'
     Color = 12159842
     Ctl3D = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -15
-    Font.Name = 'Calibri'
+    Font.Height = -19
+    Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentCtl3D = False
@@ -44,15 +45,15 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
   end
   object toolbar: TToolBar
     Left = 0
-    Top = 21
-    Width = 879
-    Height = 52
+    Top = 30
+    Width = 1151
+    Height = 64
     AutoSize = True
-    ButtonHeight = 52
-    ButtonWidth = 49
+    ButtonHeight = 64
+    ButtonWidth = 58
     Caption = 'Novo'
-    DisabledImages = dtm_images.img_32
-    Images = dtm_images.img_32
+    DisabledImages = dtm_images.img_40
+    Images = dtm_images.img_40
     ParentShowHint = False
     ShowCaptions = True
     ShowHint = True
@@ -61,28 +62,28 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Left = 0
       Top = 0
       Caption = 'Novo'
-      ImageIndex = 25
+      ImageIndex = 2
     end
     object btn_editar: TToolButton
-      Left = 49
+      Left = 58
       Top = 0
       Caption = 'Editar'
-      ImageIndex = 7
+      ImageIndex = 4
     end
     object btn_excluir: TToolButton
-      Left = 98
+      Left = 116
       Top = 0
       Caption = 'Excluir'
-      ImageIndex = 1
+      ImageIndex = 3
     end
     object btn_atualizar: TToolButton
-      Left = 147
+      Left = 174
       Top = 0
       Caption = 'Atualizar'
-      ImageIndex = 13
+      ImageIndex = 17
     end
     object sep_1: TToolButton
-      Left = 196
+      Left = 232
       Top = 0
       Width = 8
       Caption = 'sep_1'
@@ -90,19 +91,19 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Style = tbsSeparator
     end
     object btn_salvar: TToolButton
-      Left = 204
+      Left = 240
       Top = 0
       Caption = 'Salvar'
-      ImageIndex = 32
+      ImageIndex = 5
     end
     object btn_cancelar: TToolButton
-      Left = 253
+      Left = 298
       Top = 0
       Caption = 'Cancelar'
-      ImageIndex = 19
+      ImageIndex = 6
     end
     object sep_2: TToolButton
-      Left = 302
+      Left = 356
       Top = 0
       Width = 8
       Caption = 'sep_2'
@@ -110,37 +111,37 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Style = tbsSeparator
     end
     object btn_localizar: TToolButton
-      Left = 310
+      Left = 364
       Top = 0
       Caption = 'Localizar'
-      ImageIndex = 14
+      ImageIndex = 8
     end
     object btn_primeiro: TToolButton
-      Left = 359
+      Left = 422
       Top = 0
       Caption = 'Primeiro'
-      ImageIndex = 96
+      ImageIndex = 9
     end
     object btn_anterior: TToolButton
-      Left = 408
+      Left = 480
       Top = 0
       Caption = 'Anterior'
-      ImageIndex = 97
+      ImageIndex = 10
     end
     object btn_proximo: TToolButton
-      Left = 457
+      Left = 538
       Top = 0
       Caption = 'Pr'#243'ximo'
-      ImageIndex = 98
+      ImageIndex = 11
     end
     object btn_ultimo: TToolButton
-      Left = 506
+      Left = 596
       Top = 0
       Caption = #218'ltimo'
-      ImageIndex = 99
+      ImageIndex = 12
     end
     object sep_4: TToolButton
-      Left = 555
+      Left = 654
       Top = 0
       Width = 8
       Caption = 'sep_4'
@@ -148,14 +149,14 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Style = tbsSeparator
     end
     object btn_licencas: TToolButton
-      Left = 563
+      Left = 662
       Top = 0
       Caption = 'Licen'#231'as'
-      ImageIndex = 43
+      ImageIndex = 14
       OnClick = btn_licencasClick
     end
     object sep_3: TToolButton
-      Left = 612
+      Left = 720
       Top = 0
       Width = 8
       Caption = 'sep_3'
@@ -163,29 +164,31 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 620
+      Left = 728
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
-      ImageIndex = 30
+      ImageIndex = 1
       OnClick = btn_fecharClick
     end
   end
   object pnlTotal: TPanel
     Left = 0
-    Top = 73
-    Width = 879
+    Top = 94
+    Width = 1151
     Height = 70
     Align = alTop
     BevelOuter = bvNone
     Padding.Left = 3
     Padding.Right = 3
     TabOrder = 2
+    ExplicitTop = 73
+    ExplicitWidth = 879
     object pnl_tit_geral: TPanel
       Left = 3
       Top = 0
-      Width = 873
-      Height = 18
+      Width = 1145
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -193,10 +196,10 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Caption = ' CLIENTE'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
@@ -205,47 +208,50 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     end
     object pnl_geral: TPanel
       Left = 3
-      Top = 18
-      Width = 873
-      Height = 52
+      Top = 20
+      Width = 1145
+      Height = 50
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 18
+      ExplicitWidth = 873
+      ExplicitHeight = 52
       object Label1: TLabel
         Left = 10
-        Top = 10
-        Width = 11
-        Height = 13
+        Top = 5
+        Width = 12
+        Height = 17
         Caption = 'ID'
       end
       object lbl_cnpj_cpf: TLabel
         Left = 75
-        Top = 10
-        Width = 54
-        Height = 13
+        Top = 5
+        Width = 63
+        Height = 17
         Caption = 'CNPJ / CPF'
       end
       object Label4: TLabel
         Left = 210
-        Top = 10
-        Width = 97
-        Height = 13
+        Top = 5
+        Width = 123
+        Height = 17
         Caption = 'Nome / Raz'#227'o Social'
       end
       object Label5: TLabel
-        Left = 490
-        Top = 10
-        Width = 41
-        Height = 13
+        Left = 615
+        Top = 5
+        Width = 47
+        Height = 17
         Caption = 'Fantasia'
       end
       object edt_id: TwwDBEdit
         Left = 10
-        Top = 25
+        Top = 22
         Width = 60
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -263,9 +269,9 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       end
       object edt_cnpj_cpf: TwwDBEdit
         Left = 75
-        Top = 25
+        Top = 22
         Width = 130
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         Color = clBtnFace
@@ -283,9 +289,9 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       end
       object edt_nome: TwwDBEdit
         Left = 210
-        Top = 25
-        Width = 275
-        Height = 19
+        Top = 22
+        Width = 400
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -303,10 +309,10 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
         WordWrap = False
       end
       object edt_fantasia: TwwDBEdit
-        Left = 490
-        Top = 25
+        Left = 615
+        Top = 22
         Width = 274
-        Height = 19
+        Height = 23
         TabStop = False
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -327,9 +333,9 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
   end
   object Panel1: TPanel
     Left = 0
-    Top = 143
-    Width = 879
-    Height = 229
+    Top = 164
+    Width = 1151
+    Height = 384
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -339,11 +345,14 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
+    ExplicitTop = 143
+    ExplicitWidth = 879
+    ExplicitHeight = 229
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 3
-      Width = 873
-      Height = 18
+      Width = 1145
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -351,10 +360,10 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       Caption = ' ATIVIDADES'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
@@ -363,9 +372,9 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     end
     object grd_detalhe: TwwDBGrid
       Left = 3
-      Top = 21
-      Width = 873
-      Height = 205
+      Top = 23
+      Width = 1145
+      Height = 358
       ControlType.Strings = (
         'id_atividade;CustomEdit;cmb_atividade;F')
       Selected.Strings = (
@@ -378,20 +387,22 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       DataSource = dts_detalhe
       TabOrder = 1
       TitleAlignment = taLeftJustify
-      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Charset = ANSI_CHARSET
       TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
+      TitleFont.Height = -13
+      TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
+      ExplicitTop = 27
+      ExplicitHeight = 377
     end
     object cmb_atividade: TwwDBComboBox
       Left = 13
-      Top = 41
+      Top = 73
       Width = 743
-      Height = 19
+      Height = 23
       ShowButton = True
       Style = csDropDown
       MapList = True

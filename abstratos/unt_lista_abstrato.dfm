@@ -2,17 +2,18 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
   Left = 0
   Top = 0
   Caption = 'Lista Abstrato'
-  ClientHeight = 347
-  ClientWidth = 477
+  ClientHeight = 537
+  ClientWidth = 892
   Color = clWhite
   Font.Charset = ANSI_CHARSET
-  Font.Color = clWindowText
+  Font.Color = 2105376
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -20,8 +21,8 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
   object pnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 477
-    Height = 21
+    Width = 892
+    Height = 30
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
@@ -31,7 +32,7 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
     Ctl3D = False
     Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -13
+    Font.Height = -19
     Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     ParentBackground = False
@@ -39,13 +40,12 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
     ParentFont = False
     TabOrder = 0
     OnDblClick = pnlTituloDblClick
-    OnMouseDown = pnlTituloMouseDown
   end
   object pnlClient: TPanel
     Left = 0
-    Top = 21
-    Width = 477
-    Height = 326
+    Top = 30
+    Width = 892
+    Height = 507
     Align = alClient
     BevelOuter = bvNone
     BorderStyle = bsSingle
@@ -54,11 +54,14 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 1
+    ExplicitTop = 21
+    ExplicitWidth = 477
+    ExplicitHeight = 326
     object grd: TwwDBGrid
       Left = 0
       Top = 0
-      Width = 475
-      Height = 283
+      Width = 890
+      Height = 464
       IniAttributes.Delimiter = ';;'
       TitleColor = clBtnFace
       FixedCols = 0
@@ -69,17 +72,19 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
       TabOrder = 0
       TitleAlignment = taLeftJustify
       TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
+      TitleFont.Color = 2105376
       TitleFont.Height = -13
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
       TitleLines = 1
       TitleButtons = False
+      ExplicitWidth = 475
+      ExplicitHeight = 283
     end
     object Panel1: TPanel
       Left = 0
-      Top = 283
-      Width = 475
+      Top = 464
+      Width = 890
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
@@ -94,11 +99,12 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 1
+      ExplicitTop = 479
       DesignSize = (
-        475
+        890
         41)
       object btnOK: TSpeedButton
-        Left = 388
+        Left = 803
         Top = 1
         Width = 42
         Height = 38
@@ -261,7 +267,7 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
         ExplicitLeft = 324
       end
       object btnCancelar: TSpeedButton
-        Left = 430
+        Left = 845
         Top = 1
         Width = 42
         Height = 38
@@ -423,15 +429,6 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
         OnClick = btnCancelarClick
         ExplicitLeft = 710
       end
-      object Bevel1: TBevel
-        Left = 0
-        Top = 0
-        Width = 475
-        Height = 3
-        Align = alTop
-        Shape = bsTopLine
-        ExplicitWidth = 411
-      end
     end
   end
   object dts: TDataSource
@@ -446,7 +443,14 @@ object frm_lista_abstrato: Tfrm_lista_abstrato
   end
   object dse: TUniQuery
     Connection = dtm_dados.mysql_conn
+    Transaction = tra
     Left = 449
     Top = 278
+  end
+  object tra: TUniTransaction
+    DefaultConnection = dtm_dados.mysql_conn
+    DefaultCloseAction = taCommit
+    Left = 480
+    Top = 280
   end
 end

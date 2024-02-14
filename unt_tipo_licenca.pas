@@ -15,7 +15,6 @@ type
     Panel1: TPanel;
     btnOK: TSpeedButton;
     btnCancelar: TSpeedButton;
-    Bevel1: TBevel;
     edt_nome: TwwDBEdit;
     dts: TDataSource;
     qry: TUniQuery;
@@ -29,7 +28,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
   protected
-    procedure CreateParams(var Params: TCreateParams); override;
+
   private
     { Private declarations }
   public
@@ -44,14 +43,6 @@ implementation
 uses unt_dtm_dados, unt_procedures;
 
 {$R *.dfm}
-
-procedure Tfrm_tipo_licenca.CreateParams(var Params: TCreateParams);
-begin
-  inherited;
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
-end;
 
 procedure Tfrm_tipo_licenca.btnCancelarClick(Sender: TObject);
 begin

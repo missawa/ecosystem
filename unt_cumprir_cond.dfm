@@ -2,8 +2,8 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
   Left = 0
   Top = 0
   Caption = 'Cumprir Condicionante'
-  ClientHeight = 171
-  ClientWidth = 304
+  ClientHeight = 157
+  ClientWidth = 300
   Color = clWindow
   Ctl3D = False
   Font.Charset = ANSI_CHARSET
@@ -12,27 +12,27 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
-  Visible = True
+  Position = poOwnerFormCenter
   PixelsPerInch = 96
   TextHeight = 17
   object Panel2: TPanel
     Left = 0
-    Top = 123
-    Width = 304
-    Height = 48
+    Top = 121
+    Width = 300
+    Height = 36
     Align = alBottom
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 312
-    ExplicitWidth = 542
+    ExplicitTop = 135
+    ExplicitWidth = 304
     DesignSize = (
-      304
-      48)
+      300
+      36)
     object btnConfirmar: TSpeedButton
-      Left = 219
-      Top = 3
+      Left = 222
+      Top = -2
       Width = 40
       Height = 40
       Anchors = [akTop, akRight]
@@ -191,11 +191,12 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Transparent = False
-      ExplicitLeft = 457
+      OnClick = btnConfirmarClick
+      ExplicitLeft = 226
     end
     object btnCancelar: TSpeedButton
-      Left = 257
-      Top = 3
+      Left = 260
+      Top = -2
       Width = 40
       Height = 40
       Anchors = [akTop, akRight]
@@ -353,13 +354,14 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      ExplicitLeft = 495
+      OnClick = btnCancelarClick
+      ExplicitLeft = 264
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 304
+    Width = 300
     Height = 33
     Align = alTop
     Alignment = taLeftJustify
@@ -378,21 +380,19 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 542
+    ExplicitWidth = 304
   end
   object Panel1: TPanel
     Left = 0
     Top = 33
-    Width = 304
-    Height = 90
+    Width = 300
+    Height = 88
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 200
-    ExplicitTop = 176
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 304
+    ExplicitHeight = 90
     object Label5: TLabel
       Left = 160
       Top = 6
@@ -409,19 +409,27 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
     end
     object edt_protocolo: TEdit
       Left = 16
-      Top = 31
+      Top = 25
+      Width = 121
+      Height = 23
+      TabOrder = 0
+    end
+    object dtp_data: TwwDBDateTimePicker
+      Left = 160
+      Top = 24
       Width = 121
       Height = 23
       BorderStyle = bsNone
-      TabOrder = 0
-    end
-    object DateTimePicker1: TDateTimePicker
-      Left = 160
-      Top = 29
-      Width = 121
-      Height = 25
-      Date = 45319.795105787040000000
-      Time = 45319.795105787040000000
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      Epoch = 1950
+      Frame.Enabled = True
+      Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+      Frame.NonFocusStyle = efsFrameSingle
+      ShowButton = True
       TabOrder = 1
     end
   end

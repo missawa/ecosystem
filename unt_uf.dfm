@@ -1,49 +1,51 @@
 inherited frm_uf: Tfrm_uf
   Caption = 'Unidades Federativas'
-  ClientHeight = 352
-  ClientWidth = 404
-  ExplicitWidth = 420
-  ExplicitHeight = 391
+  ClientHeight = 399
+  ClientWidth = 763
+  ExplicitWidth = 779
+  ExplicitHeight = 438
   PixelsPerInch = 96
-  TextHeight = 15
+  TextHeight = 17
   inherited pnlTitulo: TPanel
-    Width = 404
+    Width = 763
     Caption = ' UNIDADES DA FEDERA'#199#195'O'
-    ExplicitWidth = 404
+    ExplicitWidth = 763
   end
   inherited pnlClient: TPanel
-    Width = 404
-    Height = 331
-    ExplicitWidth = 404
-    ExplicitHeight = 331
+    Width = 763
+    Height = 369
+    ExplicitWidth = 458
+    ExplicitHeight = 378
     inherited grd: TwwDBGrid
-      Width = 402
-      Height = 288
+      Width = 761
+      Height = 326
       Selected.Strings = (
         'id'#9'4'#9'ID'
         'nome'#9'42'#9'NOME'
         'sigla'#9'5'#9'SIGLA')
       ReadOnly = True
-      ExplicitWidth = 402
-      ExplicitHeight = 288
+      ExplicitWidth = 761
+      ExplicitHeight = 326
     end
     inherited Panel1: TPanel
-      Top = 288
-      Width = 402
-      ExplicitTop = 288
-      ExplicitWidth = 402
+      Top = 326
+      Width = 761
+      ExplicitTop = 335
+      ExplicitWidth = 456
       inherited btnOK: TSpeedButton
-        Left = 315
-        ExplicitLeft = 315
-      end
-      inherited btnCancelar: TSpeedButton
-        Left = 357
+        Left = 662
         ExplicitLeft = 357
       end
-      inherited Bevel1: TBevel
-        Width = 402
-        ExplicitWidth = 402
+      inherited btnCancelar: TSpeedButton
+        Left = 710
+        ExplicitLeft = 405
       end
     end
+  end
+  inherited dse: TUniQuery
+    SQL.Strings = (
+      'select *'
+      'from uf'
+      'order by sigla')
   end
 end

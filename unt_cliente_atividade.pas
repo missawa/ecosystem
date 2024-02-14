@@ -70,7 +70,6 @@ type
     procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   protected
-    procedure CreateParams(var Params: TCreateParams); override;
   private
     table_name: string;
     key_field: string;
@@ -89,18 +88,9 @@ uses
   unt_constantes,
   unt_functions,
   unt_proc_abrir_telas,
-  unt_procedures, unt_dtm_dados;
+  unt_procedures, unt_dtm_dados, unt_dtm_images;
 
 {$R *.dfm}
-
-procedure Tfrm_cliente_atividade.CreateParams(var Params: TCreateParams);
-begin 
-  inherited; 
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
-end;
-
 
 procedure Tfrm_cliente_atividade.btn_fecharClick(Sender: TObject);
 begin

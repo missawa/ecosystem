@@ -3,91 +3,93 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
   Top = 0
   BorderStyle = bsNone
   Caption = 'Cadastro Abstrato'
-  ClientHeight = 299
-  ClientWidth = 782
+  ClientHeight = 341
+  ClientWidth = 990
   Color = clWindow
   Ctl3D = False
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Calibri'
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = False
   Position = poDesigned
   Visible = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 15
+  TextHeight = 17
   object toolbar: TToolBar
     Left = 0
-    Top = 21
-    Width = 782
-    Height = 54
+    Top = 30
+    Width = 990
+    Height = 64
     AutoSize = True
-    ButtonHeight = 54
-    ButtonWidth = 57
+    ButtonHeight = 64
+    ButtonWidth = 58
     Caption = 'Novo'
-    DisabledImages = dtm_images.img_32
-    Images = dtm_images.img_32
+    DisabledImages = dtm_images.img_40
+    Images = dtm_images.img_40
     ParentShowHint = False
     ShowCaptions = True
     ShowHint = True
     TabOrder = 0
+    ExplicitWidth = 782
     object btn_novo: TToolButton
       Left = 0
       Top = 0
       Caption = 'Novo'
-      ImageIndex = 25
+      ImageIndex = 2
       OnClick = btn_novoClick
     end
     object btn_editar: TToolButton
-      Left = 57
+      Left = 58
       Top = 0
       Caption = 'Editar'
-      ImageIndex = 7
+      ImageIndex = 4
     end
     object btn_excluir: TToolButton
-      Left = 114
+      Left = 116
       Top = 0
       Caption = 'Excluir'
-      ImageIndex = 1
+      ImageIndex = 3
       OnClick = btn_excluirClick
     end
     object btn_atualizar: TToolButton
-      Left = 171
+      Left = 174
       Top = 0
       Caption = 'Atualizar'
-      ImageIndex = 13
+      ImageIndex = 17
       OnClick = btn_atualizarClick
     end
+    object btn_salvar: TToolButton
+      Left = 232
+      Top = 0
+      Caption = 'Salvar'
+      ImageIndex = 5
+      OnClick = btn_salvarClick
+    end
     object sep_1: TToolButton
-      Left = 228
+      Left = 290
       Top = 0
       Width = 8
       Caption = 'sep_1'
       ImageIndex = 31
       Style = tbsSeparator
     end
-    object btn_salvar: TToolButton
-      Left = 236
-      Top = 0
-      Caption = 'Salvar'
-      ImageIndex = 32
-      OnClick = btn_salvarClick
-    end
     object btn_cancelar: TToolButton
-      Left = 293
+      Left = 298
       Top = 0
       Caption = 'Cancelar'
-      ImageIndex = 19
+      ImageIndex = 6
       OnClick = btn_cancelarClick
     end
     object sep_2: TToolButton
-      Left = 350
+      Left = 356
       Top = 0
       Width = 8
       Caption = 'sep_2'
@@ -95,42 +97,42 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       Style = tbsSeparator
     end
     object btn_localizar: TToolButton
-      Left = 358
+      Left = 364
       Top = 0
       Caption = 'Localizar'
-      ImageIndex = 14
+      ImageIndex = 8
       OnClick = btn_localizarClick
     end
     object btn_primeiro: TToolButton
-      Left = 415
+      Left = 422
       Top = 0
       Caption = 'Primeiro'
-      ImageIndex = 96
+      ImageIndex = 9
       OnClick = btn_primeiroClick
     end
     object btn_anterior: TToolButton
-      Left = 472
+      Left = 480
       Top = 0
       Caption = 'Anterior'
-      ImageIndex = 97
+      ImageIndex = 10
       OnClick = btn_anteriorClick
     end
     object btn_proximo: TToolButton
-      Left = 529
+      Left = 538
       Top = 0
       Caption = 'Pr'#243'ximo'
-      ImageIndex = 98
+      ImageIndex = 11
       OnClick = btn_proximoClick
     end
     object btn_ultimo: TToolButton
-      Left = 586
+      Left = 596
       Top = 0
       Caption = #218'ltimo'
-      ImageIndex = 99
+      ImageIndex = 12
       OnClick = btn_ultimoClick
     end
     object sep_3: TToolButton
-      Left = 643
+      Left = 654
       Top = 0
       Width = 8
       Caption = 'sep_3'
@@ -138,19 +140,19 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 651
+      Left = 662
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
-      ImageIndex = 30
+      ImageIndex = 1
       OnClick = btn_fecharClick
     end
   end
   object pnlTitulo: TPanel
     Left = 0
     Top = 0
-    Width = 782
-    Height = 21
+    Width = 990
+    Height = 30
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
@@ -158,30 +160,34 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
     Caption = ' CADASTRO ABSTRATO'
     Color = 12159842
     Ctl3D = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -15
-    Font.Name = 'Calibri'
+    Font.Height = -19
+    Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
     OnMouseDown = pnlTituloMouseDown
+    ExplicitWidth = 782
   end
   object pnlTotal: TPanel
     Left = 0
-    Top = 75
-    Width = 782
-    Height = 224
+    Top = 94
+    Width = 990
+    Height = 247
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitTop = 75
+    ExplicitWidth = 782
+    ExplicitHeight = 224
     object pnl_tit_geral: TPanel
       Left = 0
       Top = 0
-      Width = 782
-      Height = 18
+      Width = 990
+      Height = 20
       Align = alTop
       Alignment = taLeftJustify
       BevelOuter = bvNone
@@ -189,10 +195,10 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
       Caption = ' GERAL'
       Color = 12159842
       Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Tahoma'
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentCtl3D = False
@@ -201,14 +207,17 @@ object frm_cad_abstrato: Tfrm_cad_abstrato
     end
     object pnl_geral: TPanel
       Left = 0
-      Top = 18
-      Width = 782
-      Height = 206
+      Top = 20
+      Width = 990
+      Height = 227
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 18
+      ExplicitWidth = 782
+      ExplicitHeight = 206
     end
   end
   object dts: TDataSource

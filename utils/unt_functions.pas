@@ -17,14 +17,17 @@ uses
   function cpf_valido(cpf: string): boolean;
   function cnpj_valido(cnpj: string): boolean;
   function data_sql(data: TDate): string;
+  function decmonth(data: TDate; n: integer = 1): TDate;
   function define_mascara_telefone(tel: string): string;
   function first_id(tabela: string; pk: string; filter: string): integer;
   function last_id(tabela: string; pk: string; filter: string): integer;
+  function leap_year(year: word): boolean;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
   function maiusculas(s: string): string;
   function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
+  function nome_categoria(id: integer): string;
   function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
   function primeiro_dia_mes(data: TDate): TDate;
@@ -40,7 +43,10 @@ uses
   unt_dtm_dados,
   unt_func_messages,
   unt_procedures,
-  unt_pesquisa, unt_input_inteiro, unt_dtm_geral, unt_input_texto;
+  unt_pesquisa,
+  unt_input_inteiro,
+  unt_dtm_geral,
+  unt_input_texto;
 
 function ajusta_numero_telefone(tel: string): string;
 var
@@ -573,5 +579,73 @@ begin
 
 end;
 
+function leap_year(year: word): boolean;
+begin
+  result := (year mod 4) = 0;
+end;
+
+function decmonth(data: TDate; n: integer = 1): TDate;
+var
+  d, m, a: word;
+  i: integer;
+begin
+
+  for i := 1 to n do
+  begin
+    DecodeDate(data,a,m,d);
+
+    if m = 1 then
+    begin
+      Dec(a);
+      m := 12;
+    end
+    else
+      dec(m);
+
+    if m = 2 then
+    begin
+      if leap_year(a) then
+      begin
+        if d > 29 then
+          d := 29
+      end
+      else
+      begin
+        if d > 28 then
+          d := 28;
+      end;
+    end
+    else
+    if (d = 31) and (m in [4,6,9,11]) then
+      d := 30;
+
+    Data := EncodeDate(a,m,d);
+  end;
+
+  result := Data;
+
+end;
+
+function nome_categoria(id: integer): string;
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+  result := '';
+
+  try
+    open_query(
+      q,
+      'select nome                                                              '#13+
+      'from categoria                                                           '#13+
+      'where id = ' + intToStr(id));
+    result := q.FieldByName('nome').Text;
+  finally
+    q.Free;
+  end;
+
+end;
 
 end.

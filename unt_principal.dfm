@@ -677,16 +677,20 @@ object frm_principal: Tfrm_principal
     Left = 128
     Top = 72
     object mnu_atividade: TMenuItem
-      Caption = 'Atividade'
+      Caption = 'Atividades'
       OnClick = mnu_atividadeClick
     end
     object rgoAmbiental1: TMenuItem
-      Caption = #211'rg'#227'o Ambiental'
+      Caption = #211'rg'#227'os Ambientais'
       OnClick = rgoAmbiental1Click
     end
     object mnu_tipo_licenca: TMenuItem
-      Caption = 'Tipo de Licen'#231'a'
+      Caption = 'Tipos de Licen'#231'a'
       OnClick = mnu_tipo_licencaClick
+    end
+    object mnu_categoria: TMenuItem
+      Caption = 'Categorias de Condicionante'
+      OnClick = mnu_categoriaClick
     end
     object N1: TMenuItem
       Caption = '-'

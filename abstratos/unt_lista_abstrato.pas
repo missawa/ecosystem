@@ -17,10 +17,9 @@ type
     Panel1: TPanel;
     btnOK: TSpeedButton;
     btnCancelar: TSpeedButton;
-    Bevel1: TBevel;
     qry: TUniQuery;
     dse: TUniQuery;
-    procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    tra: TUniTransaction;
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -32,7 +31,6 @@ type
   protected
     FTabela: string;
     FChave: string;
-    procedure CreateParams(var Params: TCreateParams); override;
   public
     Confirmado: boolean;
   end;
@@ -52,16 +50,9 @@ begin
     dse.Open;
 end;
 
-procedure Tfrm_lista_abstrato.CreateParams(var Params: TCreateParams);
-begin
-  inherited;
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
-end;
-
 procedure Tfrm_lista_abstrato.btnCancelarClick(Sender: TObject);
 begin
+  tra.Rollback;
   Confirmado := false;
   if FormStyle = fsMDIChild then
     close
@@ -71,6 +62,7 @@ end;
 
 procedure Tfrm_lista_abstrato.btnOKClick(Sender: TObject);
 begin
+  tra.Commit;
   Confirmado := true;
   if FormStyle = fsMDIChild then
     close
@@ -87,6 +79,7 @@ procedure Tfrm_lista_abstrato.FormCreate(Sender: TObject);
 begin
   CarregarDados;
   centralizar_tela(self);
+  tra.StartTransaction;
 end;
 
 procedure Tfrm_lista_abstrato.pnlTituloDblClick(Sender: TObject);
@@ -95,17 +88,6 @@ begin
     WindowState := wsNormal
   else
     WindowState := wsMaximized;
-end;
-
-procedure Tfrm_lista_abstrato.pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-const
-  SC_DRAGMOVE = $F012;
-begin
-  if Button = mbleft then
-  begin
-    ReleaseCapture;
-    self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
-  end;
 end;
 
 end.

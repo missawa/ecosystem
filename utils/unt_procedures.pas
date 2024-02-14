@@ -19,6 +19,8 @@ procedure abrir_arquivo(arquivo: string);
 procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true);
 procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure carrega_combo_bairro(cmb: TwwDBComboBox; id_municipio: integer; limpar: boolean = true);
+procedure carrega_combo_categoria(cmb: TwwDBComboBox; limpar: boolean = true);
+procedure carrega_combo_uf(cmb: TwwDBComboBox);
 procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
 procedure exec_sql(sql: widestring);
@@ -91,6 +93,21 @@ begin
 
 end;
 
+procedure carrega_combo_categoria(cmb: TwwDBComboBox; limpar: boolean = true);
+var
+  sql: string;
+
+begin
+
+  sql :=
+    'select id, nome            '#13+
+    'from categoria             '#13+
+    'order by nome';
+
+  carrega_combo(cmb, sql, limpar);
+
+end;
+
 procedure carrega_combo_bairro(
   cmb: TwwDBComboBox;
   id_municipio: integer;
@@ -115,6 +132,42 @@ begin
     'from usuario              '#13+
     'order by nome';
   carrega_combo(cmb, sql, limpar);
+end;
+
+procedure carrega_combo_uf(cmb: TwwDBComboBox);
+begin
+
+  cmb.Items.Clear;
+  cmb.Clear;
+
+  cmb.Items.Add('AC' +#9 + 'AC');
+  cmb.Items.Add('AL' +#9 + 'AL');
+  cmb.Items.Add('AM' +#9 + 'AM');
+  cmb.Items.Add('AP' +#9 + 'AP');
+  cmb.Items.Add('BA' +#9 + 'BA');
+  cmb.Items.Add('CE' +#9 + 'CE');
+  cmb.Items.Add('DF' +#9 + 'DF');
+  cmb.Items.Add('ES' +#9 + 'ES');
+  cmb.Items.Add('GO' +#9 + 'GO');
+  cmb.Items.Add('MA' +#9 + 'MA');
+  cmb.Items.Add('MG' +#9 + 'MG');
+  cmb.Items.Add('MS' +#9 + 'MS');
+  cmb.Items.Add('MT' +#9 + 'MT');
+  cmb.Items.Add('PA' +#9 + 'PA');
+  cmb.Items.Add('PB' +#9 + 'PB');
+  cmb.Items.Add('PE' +#9 + 'PE');
+  cmb.Items.Add('PI' +#9 + 'PI');
+  cmb.Items.Add('PR' +#9 + 'PR');
+  cmb.Items.Add('RJ' +#9 + 'RJ');
+  cmb.Items.Add('RN' +#9 + 'RN');
+  cmb.Items.Add('RO' +#9 + 'RO');
+  cmb.Items.Add('RR' +#9 + 'RR');
+  cmb.Items.Add('RS' +#9 + 'RS');
+  cmb.Items.Add('SC' +#9 + 'SC');
+  cmb.Items.Add('SE' +#9 + 'SE');
+  cmb.Items.Add('SP' +#9 + 'SP');
+  cmb.Items.Add('TO' +#9 + 'TO');
+
 end;
 
 procedure centralizar_tela(form: TForm);

@@ -4,11 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, MemDS, DBAccess, Uni, Grids, Wwdbigrd, Wwdbgrid, wwdblook,
-  StdCtrls, Mask, wwdbedit, ExtCtrls, ComCtrls, ToolWin;
+  Dialogs, ComCtrls, ToolWin, ExtCtrls, wwdblook, StdCtrls, Mask, wwdbedit,
+  Wwdotdot, Wwdbcomb, IdBaseComponent, IdComponent, IdTCPConnection,
+  IdTCPClient, IdTime, IdUnixTime, Grids, Wwdbigrd, Wwdbgrid, DB, MemDS,
+  DBAccess, Uni;
 
 type
   Tfrm_municipio = class(TForm)
+    pnlTitulo: TPanel;
     toolbar: TToolBar;
     btn_novo: TToolButton;
     btn_editar: TToolButton;
@@ -25,7 +28,6 @@ type
     btn_ultimo: TToolButton;
     sep_3: TToolButton;
     btn_fechar: TToolButton;
-    pnlTitulo: TPanel;
     pnlTotal: TPanel;
     pnl_tit_geral: TPanel;
     pnl_geral: TPanel;
@@ -36,38 +38,34 @@ type
     edt_id: TwwDBEdit;
     edt_ibge: TwwDBEdit;
     edt_municipio: TwwDBEdit;
-    wwDBLookupCombo1: TwwDBLookupCombo;
     Panel1: TPanel;
     pnl_tit_detalhe: TPanel;
     grd_detalhe: TwwDBGrid;
     dts: TDataSource;
-    qry: TUniQuery;
     dse: TUniQuery;
-    dts_detalhe: TDataSource;
     dse_detalhe: TUniQuery;
-    procedure dse_detalheNewRecord(DataSet: TDataSet);
+    dts_detalhe: TDataSource;
+    qry: TUniQuery;
+    cmb_uf: TwwDBLookupCombo;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_fecharClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btn_novoClick(Sender: TObject);
-    procedure btn_localizarClick(Sender: TObject);
-    procedure btn_primeiroClick(Sender: TObject);
-    procedure btn_proximoClick(Sender: TObject);
-    procedure btn_anteriorClick(Sender: TObject);
-    procedure btn_ultimoClick(Sender: TObject);
-    procedure btn_atualizarClick(Sender: TObject);
-    procedure btn_cancelarClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
-    procedure btn_fecharClick(Sender: TObject);
-    procedure pnlTituloMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-  protected
-    procedure CreateParams(var Params: TCreateParams); override;
+    procedure btn_excluirClick(Sender: TObject);
+    procedure btn_atualizarClick(Sender: TObject);
+    procedure btn_salvarClick(Sender: TObject);
+    procedure btn_cancelarClick(Sender: TObject);
+    procedure btn_primeiroClick(Sender: TObject);
+    procedure btn_anteriorClick(Sender: TObject);
+    procedure btn_proximoClick(Sender: TObject);
+    procedure btn_ultimoClick(Sender: TObject);
+    procedure btn_localizarClick(Sender: TObject);
   private
     table_name: string;
-    key_field: string;
+    key_field: string;  
     procedure open_dataset(pk: integer);
-    procedure dtsStateChange(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    { Private declarations }
   public
     { Public declarations }
   end;
@@ -77,53 +75,9 @@ var
 
 implementation
 
-uses unt_dtm_dados, unt_functions, unt_func_messages, unt_procedures;
+uses unt_procedures, unt_functions, unt_func_messages, unt_dtm_dados;
 
 {$R *.dfm}
-
-procedure Tfrm_municipio.CreateParams(var Params: TCreateParams);
-begin 
-  inherited; 
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
-end;
-
-procedure Tfrm_municipio.open_dataset(pk: integer);
-begin
-  dse.Close;
-  dse.SQL.Text :=
-    'select *                             '#13+
-    'from municipio                       '#13+
-    'where id = ' + intToStr(pk);
-  dse.Open;
-end;
-
-procedure Tfrm_municipio.pnlTituloMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-const
-  SC_DRAGMOVE = $F012;
-begin
-  if Button = mbleft then
-  begin
-    ReleaseCapture;
-    self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
-  end;
-end;
-
-procedure Tfrm_municipio.dse_detalheNewRecord(DataSet: TDataSet);
-begin
-  dse_detalhe.FieldByName('id_municipio').AsInteger := dse.FieldByName(key_field).AsInteger;
-end;
-
-procedure Tfrm_municipio.FormCreate(Sender: TObject);
-begin
-  table_name := 'municipio';
-  key_field := 'id';
-  dtm_dados.qry_uf.Open;
-  dse.Open;
-  dse_detalhe.Open;
-  centralizar_tela(self);
-end;
 
 procedure Tfrm_municipio.btn_anteriorClick(Sender: TObject);
 begin
@@ -137,18 +91,23 @@ end;
 
 procedure Tfrm_municipio.btn_atualizarClick(Sender: TObject);
 begin
-  dse.Close;
-  dse.Open;
+  dse.close;
+  dse.open;
 end;
 
 procedure Tfrm_municipio.btn_cancelarClick(Sender: TObject);
 begin
-  dse.Cancel;
+  dse.cancel;
 end;
 
 procedure Tfrm_municipio.btn_editarClick(Sender: TObject);
 begin
-  dse.Edit;
+  dse.edit;
+end;
+
+procedure Tfrm_municipio.btn_excluirClick(Sender: TObject);
+begin
+  dse.delete;
 end;
 
 procedure Tfrm_municipio.btn_fecharClick(Sender: TObject);
@@ -177,12 +136,11 @@ begin
     on e:exception do msg_error('Erro 8755: ' + e.message);
   end;
 
-
 end;
 
 procedure Tfrm_municipio.btn_novoClick(Sender: TObject);
 begin
-  dse.Append;
+  dse.append;
 end;
 
 procedure Tfrm_municipio.btn_primeiroClick(Sender: TObject);
@@ -195,6 +153,11 @@ begin
   open_dataset(next_id(table_name, key_field, dse.FieldByName(key_field).AsInteger,''));
 end;
 
+procedure Tfrm_municipio.btn_salvarClick(Sender: TObject);
+begin
+  dse.post;
+end;
+
 procedure Tfrm_municipio.btn_ultimoClick(Sender: TObject);
 begin
   open_dataset(
@@ -204,43 +167,30 @@ begin
       ''));
 end;
 
-procedure Tfrm_municipio.dtsStateChange(Sender: TObject);
-var edt: boolean;
-begin
-
-  if key_field <> '' then
-  begin
-
-    edt := dse.State in [dsEdit,dsInsert];
-
-    btn_novo.Enabled := not edt;
-    btn_editar.Enabled := not (edt or dse.FieldByName(key_field).IsNull);
-    btn_excluir.Enabled := not (edt or dse.FieldByName(key_field).IsNull);
-    btn_atualizar.Enabled := not (edt or dse.FieldByName(key_field).IsNull);
-    btn_salvar.Enabled := edt;
-    btn_cancelar.Enabled := edt;
-    btn_localizar.Enabled := not edt;
-
-  end;
-
-end;
-
 procedure Tfrm_municipio.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  dse.Close;
   Action := caFree;
 end;
 
-procedure Tfrm_municipio.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure Tfrm_municipio.FormCreate(Sender: TObject);
 begin
-  if dse.State in [dsEdit,dsInsert] then
-  begin
-    msg_info('Existem dados que ainda não foram salvos no banco de dados.'#13+
-             'Clique no botão "Salvar" para guardar os dados ou em "Cancelar" para desfazer as alterações.');
-    CanClose := false;
-  end
-  else
-    CanClose := true;
+  table_name := 'municipio';
+  key_field := 'id';
+  dtm_dados.qry_uf.Open;
+  dse.Open;
+  dse_detalhe.Open;
+  centralizar_tela(self);
 end;
+
+procedure Tfrm_municipio.open_dataset(pk: integer);
+begin
+  dse.Close;
+  dse.SQL.Text :=
+    'select *                             '#13+
+    'from municipio                       '#13+
+    'where id = ' + intToStr(pk);
+  dse.Open;
+end;
+
 
 end.

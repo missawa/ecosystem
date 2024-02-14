@@ -10,6 +10,7 @@ type
     img_48: TImageList;
     img_32: TImageList;
     img_40: TImageList;
+    img_40_des: TImageList;
   private
     { Private declarations }
   public

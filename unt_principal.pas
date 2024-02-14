@@ -29,6 +29,7 @@ type
     img_logo: TImage;
     Shape1: TShape;
     btn_vencimentos: TToolButton;
+    mnu_categoria: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_usuarioClick(Sender: TObject);
@@ -42,6 +43,7 @@ type
     procedure FormCanResize(Sender: TObject; var NewWidth, NewHeight: Integer;
       var Resize: Boolean);
     procedure btn_vencimentosClick(Sender: TObject);
+    procedure mnu_categoriaClick(Sender: TObject);
   private
     function log_ok: boolean;
   public
@@ -64,7 +66,7 @@ uses
   unt_senha,
   unt_tipo_licenca,
   unt_uf,
-  unt_usuario, unt_relatorio, unt_vencimentos;
+  unt_usuario, unt_relatorio, unt_vencimentos, unt_categorias;
 
 {$R *.dfm}
 
@@ -132,6 +134,11 @@ end;
 procedure Tfrm_principal.mnu_atividadeClick(Sender: TObject);
 begin
   Application.CreateForm(Tfrm_atividade, frm_atividade);
+end;
+
+procedure Tfrm_principal.mnu_categoriaClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfrm_categorias, frm_categorias);
 end;
 
 procedure Tfrm_principal.mnu_municipioClick(Sender: TObject);

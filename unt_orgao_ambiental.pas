@@ -13,7 +13,6 @@ type
     btn_novo: TToolButton;
     btn_editar: TToolButton;
     btn_excluir: TToolButton;
-    btn_atualizar: TToolButton;
     sep_1: TToolButton;
     btn_salvar: TToolButton;
     btn_cancelar: TToolButton;
@@ -46,7 +45,6 @@ type
     procedure btn_novoClick(Sender: TObject);
     procedure btn_editarClick(Sender: TObject);
     procedure btn_excluirClick(Sender: TObject);
-    procedure btn_atualizarClick(Sender: TObject);
     procedure btn_salvarClick(Sender: TObject);
     procedure btn_cancelarClick(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
@@ -73,7 +71,7 @@ var
 implementation
 
 uses unt_dtm_dados, unt_functions, unt_proc_abrir_telas, unt_func_messages,
-  unt_procedures;
+  unt_procedures, unt_dtm_images;
 
 {$R *.dfm}
 
@@ -108,12 +106,6 @@ begin
       key_field,
       dse.FieldByName(key_field).AsInteger,
       ''));
-end;
-
-procedure Tfrm_orgao_ambiental.btn_atualizarClick(Sender: TObject);
-begin
-  dse.Close;
-  dse.Open;
 end;
 
 procedure Tfrm_orgao_ambiental.btn_cancelarClick(Sender: TObject);

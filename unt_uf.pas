@@ -20,6 +20,8 @@ var
 
 implementation
 
+uses unt_dtm_dados;
+
 {$R *.dfm}
 
 end.

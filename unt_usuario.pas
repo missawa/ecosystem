@@ -30,16 +30,13 @@ type
     pnlTitulo: TPanel;
     pnlClient: TPanel;
     grd: TwwDBGrid;
-    Panel1: TPanel;
-    btnCancelar: TSpeedButton;
-    Bevel1: TBevel;
     dts_usuario: TDataSource;
     dse_usuario: TUniQuery;
+    btn_fechar: TSpeedButton;
     procedure FormCreate(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_fecharClick(Sender: TObject);
   protected
-    procedure CreateParams(var Params: TCreateParams); override;
   private
     { Private declarations }
   public
@@ -55,15 +52,7 @@ uses unt_dtm_dados, unt_procedures;
 
 {$R *.dfm}
 
-procedure Tfrm_usuario.CreateParams(var Params: TCreateParams);
-begin 
-  inherited; 
-  Params.Style := WS_BORDER;
-  BorderStyle := bsNone;
-  BorderWidth := 0;
-end;
-
-procedure Tfrm_usuario.btnCancelarClick(Sender: TObject);
+procedure Tfrm_usuario.btn_fecharClick(Sender: TObject);
 begin
   close;
 end;

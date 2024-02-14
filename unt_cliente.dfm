@@ -20,7 +20,7 @@ object frm_cliente: Tfrm_cliente
   TextHeight = 17
   object pnlTotal: TPanel
     Left = 0
-    Top = 83
+    Top = 94
     Width = 1184
     Height = 70
     Align = alTop
@@ -30,8 +30,6 @@ object frm_cliente: Tfrm_cliente
     Padding.Right = 3
     ParentCtl3D = False
     TabOrder = 0
-    ExplicitTop = 85
-    ExplicitWidth = 1024
     object Panel3: TPanel
       Left = 3
       Top = 0
@@ -53,7 +51,6 @@ object frm_cliente: Tfrm_cliente
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 974
     end
     object pnl_geral: TPanel
       Left = 3
@@ -64,8 +61,6 @@ object frm_cliente: Tfrm_cliente
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitTop = 15
-      ExplicitWidth = 974
       object Label1: TLabel
         Left = 10
         Top = 5
@@ -97,14 +92,14 @@ object frm_cliente: Tfrm_cliente
         Caption = 'Nome / Raz'#227'o Social'
       end
       object Label5: TLabel
-        Left = 565
+        Left = 705
         Top = 5
         Width = 47
         Height = 17
         Caption = 'Fantasia'
       end
       object Label3: TLabel
-        Left = 810
+        Left = 955
         Top = 5
         Width = 49
         Height = 17
@@ -151,7 +146,7 @@ object frm_cliente: Tfrm_cliente
       object edt_nome: TwwDBEdit
         Left = 300
         Top = 22
-        Width = 260
+        Width = 400
         Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -193,9 +188,9 @@ object frm_cliente: Tfrm_cliente
         OnCloseUp = cmb_tipoCloseUp
       end
       object edt_fantasia: TwwDBEdit
-        Left = 565
+        Left = 705
         Top = 22
-        Width = 240
+        Width = 245
         Height = 23
         BorderStyle = bsNone
         CharCase = ecUpperCase
@@ -211,7 +206,7 @@ object frm_cliente: Tfrm_cliente
         WordWrap = False
       end
       object cmb_situacao: TwwDBComboBox
-        Left = 810
+        Left = 955
         Top = 22
         Width = 115
         Height = 23
@@ -238,7 +233,7 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_endereco: TPanel
     Left = 0
-    Top = 153
+    Top = 164
     Width = 1184
     Height = 74
     Align = alTop
@@ -247,8 +242,6 @@ object frm_cliente: Tfrm_cliente
     Padding.Top = 3
     Padding.Right = 3
     TabOrder = 1
-    ExplicitTop = 157
-    ExplicitWidth = 1024
     object pnl_tit_endereco: TPanel
       Left = 3
       Top = 3
@@ -270,7 +263,6 @@ object frm_cliente: Tfrm_cliente
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 974
     end
     object pnl_dados_endereco: TPanel
       Left = 3
@@ -284,9 +276,6 @@ object frm_cliente: Tfrm_cliente
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 1
-      ExplicitTop = 18
-      ExplicitWidth = 974
-      ExplicitHeight = 50
       object Label6: TLabel
         Left = 840
         Top = 5
@@ -338,11 +327,11 @@ object frm_cliente: Tfrm_cliente
         DragCursor = crHandPoint
       end
       object btn_bairro: TSpeedButton
-        Left = 505
+        Left = 504
         Top = 21
-        Width = 15
+        Width = 18
         Height = 23
-        Caption = '+'
+        Caption = ' +'
         Flat = True
         Margin = 0
         Spacing = 0
@@ -502,7 +491,7 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_contato: TPanel
     Left = 0
-    Top = 227
+    Top = 238
     Width = 1184
     Height = 165
     Align = alTop
@@ -514,8 +503,6 @@ object frm_cliente: Tfrm_cliente
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 206
-    ExplicitWidth = 980
     object onl_telefone: TPanel
       Left = 3
       Top = 3
@@ -545,7 +532,6 @@ object frm_cliente: Tfrm_cliente
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 392
       end
       object grd_tel: TwwDBGrid
         Left = 0
@@ -579,13 +565,12 @@ object frm_cliente: Tfrm_cliente
         TitleLines = 1
         TitleButtons = False
         UseTFields = False
-        ExplicitWidth = 392
       end
       object cmb_desc_tel: TwwDBComboBox
         Left = 12
         Top = 68
         Width = 145
-        Height = 19
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = False
@@ -640,8 +625,6 @@ object frm_cliente: Tfrm_cliente
       BevelOuter = bvNone
       Padding.Left = 3
       TabOrder = 1
-      ExplicitLeft = 395
-      ExplicitWidth = 582
       object Panel2: TPanel
         Left = 3
         Top = 0
@@ -663,7 +646,6 @@ object frm_cliente: Tfrm_cliente
         ParentCtl3D = False
         ParentFont = False
         TabOrder = 0
-        ExplicitWidth = 579
       end
       object grd_email: TwwDBGrid
         Left = 3
@@ -695,13 +677,12 @@ object frm_cliente: Tfrm_cliente
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
-        ExplicitWidth = 579
       end
       object cmb_tipo_email: TwwDBComboBox
         Left = 20
         Top = 57
         Width = 80
-        Height = 19
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = True
@@ -727,7 +708,7 @@ object frm_cliente: Tfrm_cliente
         Left = 187
         Top = 72
         Width = 91
-        Height = 19
+        Height = 23
         ShowButton = True
         Style = csDropDown
         MapList = False
@@ -756,9 +737,9 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_obs: TPanel
     Left = 0
-    Top = 392
+    Top = 403
     Width = 1184
-    Height = 154
+    Height = 143
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -768,9 +749,6 @@ object frm_cliente: Tfrm_cliente
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 371
-    ExplicitWidth = 980
-    ExplicitHeight = 175
     object pnl_tit_obs: TPanel
       Left = 3
       Top = 3
@@ -792,13 +770,12 @@ object frm_cliente: Tfrm_cliente
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 974
     end
     object Panel4: TPanel
       Left = 3
       Top = 23
       Width = 1178
-      Height = 128
+      Height = 117
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -810,25 +787,20 @@ object frm_cliente: Tfrm_cliente
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 1
-      ExplicitTop = 18
-      ExplicitWidth = 974
-      ExplicitHeight = 154
       object Panel5: TPanel
         Left = 10
         Top = 10
         Width = 1156
-        Height = 106
+        Height = 95
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         TabOrder = 0
-        ExplicitWidth = 952
-        ExplicitHeight = 132
         object rce_obs: TwwDBRichEdit
           Left = 2
           Top = 2
           Width = 1152
-          Height = 102
+          Height = 91
           Align = alClient
           AutoURLDetect = False
           BorderStyle = bsNone
@@ -859,22 +831,26 @@ object frm_cliente: Tfrm_cliente
           PrintFooter.Font.Name = 'Tahoma'
           PrintFooter.Font.Style = []
           RichEditVersion = 2
-          ExplicitWidth = 948
-          ExplicitHeight = 128
+          Data = {
+            800000007B5C727466315C616E73695C616E7369637067313235325C64656666
+            305C6465666C616E67313034367B5C666F6E7474626C7B5C66305C666E696C5C
+            666368617273657430205365676F652055493B7D7D0D0A5C766965776B696E64
+            345C7563315C706172645C66305C66733230207263655F6F62735C7061720D0A
+            7D0D0A00}
         end
       end
     end
   end
   object toolbar: TToolBar
     Left = 0
-    Top = 21
+    Top = 30
     Width = 1184
-    Height = 62
+    Height = 64
     AutoSize = True
-    ButtonHeight = 62
-    ButtonWidth = 62
+    ButtonHeight = 64
+    ButtonWidth = 67
     Caption = 'Novo'
-    DisabledImages = dtm_images.img_32
+    DisabledImages = dtm_images.img_40
     Images = dtm_images.img_40
     ParentShowHint = False
     ShowCaptions = True
@@ -888,21 +864,21 @@ object frm_cliente: Tfrm_cliente
       OnClick = btn_novoClick
     end
     object btn_editar: TToolButton
-      Left = 62
+      Left = 67
       Top = 0
       Caption = 'Editar'
       ImageIndex = 4
       OnClick = btn_editarClick
     end
     object btn_excluir: TToolButton
-      Left = 124
+      Left = 134
       Top = 0
       Caption = 'Excluir'
       ImageIndex = 3
       OnClick = btn_excluirClick
     end
     object sep_1: TToolButton
-      Left = 186
+      Left = 201
       Top = 0
       Width = 8
       Caption = 'sep_1'
@@ -910,21 +886,21 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_salvar: TToolButton
-      Left = 194
+      Left = 209
       Top = 0
       Caption = 'Salvar'
       ImageIndex = 5
       OnClick = btn_salvarClick
     end
     object btn_cancelar: TToolButton
-      Left = 256
+      Left = 276
       Top = 0
       Caption = 'Cancelar'
       ImageIndex = 6
       OnClick = btn_cancelarClick
     end
     object sep_2: TToolButton
-      Left = 318
+      Left = 343
       Top = 0
       Width = 8
       Caption = 'sep_2'
@@ -932,42 +908,42 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_localizar: TToolButton
-      Left = 326
+      Left = 351
       Top = 0
       Caption = 'Localizar'
       ImageIndex = 8
       OnClick = btn_localizarClick
     end
     object btn_primeiro: TToolButton
-      Left = 388
+      Left = 418
       Top = 0
       Caption = 'Primeiro'
       ImageIndex = 9
       OnClick = btn_primeiroClick
     end
     object btn_anterior: TToolButton
-      Left = 450
+      Left = 485
       Top = 0
       Caption = 'Anterior'
       ImageIndex = 10
       OnClick = btn_anteriorClick
     end
     object btn_proximo: TToolButton
-      Left = 512
+      Left = 552
       Top = 0
       Caption = 'Pr'#243'ximo'
       ImageIndex = 11
       OnClick = btn_proximoClick
     end
     object btn_ultimo: TToolButton
-      Left = 574
+      Left = 619
       Top = 0
       Caption = #218'ltimo'
       ImageIndex = 12
       OnClick = btn_ultimoClick
     end
     object ToolButton2: TToolButton
-      Left = 636
+      Left = 686
       Top = 0
       Width = 8
       Caption = 'ToolButton2'
@@ -975,26 +951,26 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_atividades: TToolButton
-      Left = 644
+      Left = 694
       Top = 0
       Caption = 'Atividades'
       ImageIndex = 13
       OnClick = btn_atividadesClick
     end
     object btn_pasta: TToolButton
-      Left = 706
+      Left = 761
       Top = 0
       Caption = 'Pasta'
       ImageIndex = 15
     end
     object btn_whats: TToolButton
-      Left = 768
+      Left = 828
       Top = 0
       Caption = 'Whats.'
       ImageIndex = 16
     end
     object sep_3: TToolButton
-      Left = 830
+      Left = 895
       Top = 0
       Width = 8
       Caption = 'sep_3'
@@ -1002,7 +978,7 @@ object frm_cliente: Tfrm_cliente
       Style = tbsSeparator
     end
     object btn_fechar: TToolButton
-      Left = 838
+      Left = 903
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
@@ -1014,7 +990,7 @@ object frm_cliente: Tfrm_cliente
     Left = 0
     Top = 0
     Width = 1184
-    Height = 21
+    Height = 30
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
@@ -1022,17 +998,16 @@ object frm_cliente: Tfrm_cliente
     Caption = ' CLIENTES'
     Color = 12159842
     Ctl3D = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWhite
-    Font.Height = -15
-    Font.Name = 'Calibri'
+    Font.Height = -19
+    Font.Name = 'Segoe UI Semibold'
     Font.Style = [fsBold]
     ParentBackground = False
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 5
     OnMouseDown = pnlTituloMouseDown
-    ExplicitWidth = 980
   end
   object dts_endereco: TDataSource
     DataSet = dse_endereco
@@ -1053,8 +1028,8 @@ object frm_cliente: Tfrm_cliente
     AutoEdit = False
     DataSet = dse_cliente
     OnStateChange = dts_clienteStateChange
-    Left = 921
-    Top = 110
+    Left = 1017
+    Top = 46
   end
   object qry: TUniQuery
     Connection = dtm_dados.mysql_conn
@@ -1101,14 +1076,13 @@ object frm_cliente: Tfrm_cliente
       'where id = :id'
       '    and cliente = '#39'S'#39)
     Options.StrictUpdate = False
-    Active = True
     AfterOpen = dse_clienteAfterOpen
     AfterClose = dse_clienteAfterClose
     AfterEdit = dse_clienteAfterEdit
     AfterScroll = dse_clienteAfterScroll
     OnNewRecord = dse_clienteNewRecord
-    Left = 949
-    Top = 110
+    Left = 1045
+    Top = 46
     ParamData = <
       item
         DataType = ftUnknown

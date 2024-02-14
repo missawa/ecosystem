@@ -12,7 +12,6 @@ uses
 type
   Tfrm_relatorio = class(TForm)
     qry_01: TUniQuery;
-    pnl_titulo: TPanel;
     pnl_parametros: TPanel;
     Label2: TLabel;
     cmb_tipo: TwwDBComboBox;
@@ -38,7 +37,6 @@ type
     ppSystemVariable2: TppSystemVariable;
     ppLabel8: TppLabel;
     btn_imprimir: TSpeedButton;
-    btnFechar: TSpeedButton;
     ppDBMemo1: TppDBMemo;
     ppLabel9: TppLabel;
     ppDBText6: TppDBText;
@@ -62,13 +60,15 @@ type
     Label8: TLabel;
     dtp_aviso_fim: TwwDBDateTimePicker;
     dtp_aviso_ini: TwwDBDateTimePicker;
+    Panel3: TPanel;
+    btn_fechar: TSpeedButton;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure btnFecharClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btn_imprimirClick(Sender: TObject);
     procedure cmb_clienteCustomDlg(Sender: TObject);
+    procedure btn_fecharClick(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -86,6 +86,11 @@ implementation
 uses unt_dtm_dados, unt_procedures, unt_functions, unt_func_messages;
 
 {$R *.dfm}
+
+procedure Tfrm_relatorio.btn_fecharClick(Sender: TObject);
+begin
+  close;
+end;
 
 procedure Tfrm_relatorio.btn_imprimirClick(Sender: TObject);
 begin
@@ -139,11 +144,6 @@ begin
   dtp_aviso_fim.Clear;
 end;
 
-procedure Tfrm_relatorio.btnFecharClick(Sender: TObject);
-begin
-  close;
-end;
-
 procedure Tfrm_relatorio.imprimir_rel01;
 var
   venc_lic: string;
@@ -191,6 +191,7 @@ begin
   qry_01.SQL.Text :=
     'select                               '#13+
     '    ''LICENÇA'' as tipo,             '#13+
+    '    l.id as id_licenca,              '#13+
     '    p.id,                            '#13+
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
@@ -211,6 +212,7 @@ begin
     '                                     '#13+
     'select                               '#13+
     '    ''CONDIC.'' as tipo,             '#13+
+    '    l.id as id_licenca,              '#13+
     '    p.id,                            '#13+
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
@@ -229,7 +231,7 @@ begin
     venc_con +
     aviso_con +
     sit +
-    'order by dt_venc, id, numero ';
+    'order by nome, id_licenca, dt_aviso';
   qry_01.Open;
 
   rel_01.Print;
