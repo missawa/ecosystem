@@ -962,6 +962,7 @@ object frm_cliente: Tfrm_cliente
       Top = 0
       Caption = 'Pasta'
       ImageIndex = 15
+      OnClick = btn_pastaClick
     end
     object btn_whats: TToolButton
       Left = 828
@@ -1089,6 +1090,54 @@ object frm_cliente: Tfrm_cliente
         Name = 'id'
         Value = Null
       end>
+    object dse_clienteid: TIntegerField
+      FieldName = 'id'
+    end
+    object dse_clientetipo: TStringField
+      FieldName = 'tipo'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clientecpf: TStringField
+      FieldName = 'cpf'
+      Size = 11
+    end
+    object dse_clientecnpj: TStringField
+      FieldName = 'cnpj'
+      Size = 14
+    end
+    object dse_clientenome: TStringField
+      FieldName = 'nome'
+      Size = 120
+    end
+    object dse_clientefantasia: TStringField
+      FieldName = 'fantasia'
+      Size = 100
+    end
+    object dse_clientecliente: TStringField
+      FieldName = 'cliente'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clientefornecedor: TStringField
+      FieldName = 'fornecedor'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clienteusuario: TStringField
+      FieldName = 'usuario'
+      FixedChar = True
+      Size = 1
+    end
+    object dse_clienteobs: TMemoField
+      FieldName = 'obs'
+      BlobType = ftMemo
+    end
+    object dse_clientesituacao: TStringField
+      FieldName = 'situacao'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dse_endereco: TUniQuery
     SQLInsert.Strings = (

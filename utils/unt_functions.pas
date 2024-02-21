@@ -20,6 +20,7 @@ uses
   function decmonth(data: TDate; n: integer = 1): TDate;
   function define_mascara_telefone(tel: string): string;
   function first_id(tabela: string; pk: string; filter: string): integer;
+  function get_customer_folder(id: integer): string;
   function last_id(tabela: string; pk: string; filter: string): integer;
   function leap_year(year: word): boolean;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
@@ -646,6 +647,26 @@ begin
     q.Free;
   end;
 
+end;
+
+function get_customer_folder(id: integer): string;
+var
+  caminho: string;
+  handle: HWND;
+
+begin
+
+  handle := GetTopWindow(0);
+  caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
+
+  if not DirectoryExists(caminho) then
+    try
+      CreateDir(caminho);
+    except
+      msg_info('Pasta não existente. Acesso negado para a criação');
+    end;
+
+  result := caminho;
 end;
 
 end.

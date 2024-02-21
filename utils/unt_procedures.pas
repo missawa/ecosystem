@@ -16,6 +16,7 @@ uses
   wwDBComb;
 
 procedure abrir_arquivo(arquivo: string);
+procedure abrir_pasta_cliente(id: integer);
 procedure carrega_combo(cmb: TwwDBComboBox; sql: string; Limpar: boolean = true);
 procedure carrega_combo_atividade(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure carrega_combo_bairro(cmb: TwwDBComboBox; id_municipio: integer; limpar: boolean = true);
@@ -39,7 +40,7 @@ uses
   unt_dtm_geral,
   unt_func_messages,
   unt_principal,
-  unt_progresso;
+  unt_progresso, unt_functions;
 
 procedure abrir_arquivo(arquivo: string);
 begin
@@ -339,6 +340,22 @@ begin
   finally
     reg.Free;
   end;
+end;
+
+procedure abrir_pasta_cliente(id: integer);
+var
+  pdf,caminho: string;
+  handle: HWND;
+
+begin
+
+  caminho := get_customer_folder(id);
+
+  if DirectoryExists(caminho) then
+    ShellExecute(handle,'open',PChar(caminho), '','',SW_SHOWNORMAL)
+  else
+    CreateDir(caminho);
+
 end;
 
 end.

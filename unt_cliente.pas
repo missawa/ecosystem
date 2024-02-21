@@ -134,6 +134,17 @@ type
     Label3: TLabel;
     btn_pasta: TToolButton;
     btn_whats: TToolButton;
+    dse_clienteid: TIntegerField;
+    dse_clientetipo: TStringField;
+    dse_clientecpf: TStringField;
+    dse_clientecnpj: TStringField;
+    dse_clientenome: TStringField;
+    dse_clientefantasia: TStringField;
+    dse_clientecliente: TStringField;
+    dse_clientefornecedor: TStringField;
+    dse_clienteusuario: TStringField;
+    dse_clienteobs: TMemoField;
+    dse_clientesituacao: TStringField;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
@@ -172,6 +183,7 @@ type
       FillTable: TDataSet; modified: Boolean);
     procedure cmb_bairroExit(Sender: TObject);
     procedure btn_bairroClick(Sender: TObject);
+    procedure btn_pastaClick(Sender: TObject);
   protected
     //procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -271,6 +283,11 @@ procedure Tfrm_cliente.btn_novoClick(Sender: TObject);
 begin
   dse_cliente.Append;
   edt_cnpj_cpf.SetFocus;
+end;
+
+procedure Tfrm_cliente.btn_pastaClick(Sender: TObject);
+begin
+  abrir_pasta_cliente(dse_clienteId.AsInteger);
 end;
 
 procedure Tfrm_cliente.btn_primeiroClick(Sender: TObject);
