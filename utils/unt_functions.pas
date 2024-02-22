@@ -24,6 +24,7 @@ uses
   function last_id(tabela: string; pk: string; filter: string): integer;
   function leap_year(year: word): boolean;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
+  function inicio_licenca(id_licenca: integer): TDate;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
   function maiusculas(s: string): string;
@@ -653,7 +654,6 @@ function get_customer_folder(id: integer): string;
 var
   caminho: string;
   handle: HWND;
-
 begin
 
   handle := GetTopWindow(0);
@@ -667,6 +667,28 @@ begin
     end;
 
   result := caminho;
+end;
+
+function inicio_licenca(id_licenca: integer): TDate;
+var
+  q: TUniQuery;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+  result := 0;
+
+  try
+    open_query(
+      q,
+      'select dt_ini                                                            '#13+
+      'from licenca                                                             '#13+
+      'where id = ' + intToStr(id_licenca));
+    result := q.FieldByName('dt_ini').AsDateTime;
+  finally
+    q.Free;
+  end;
+
 end;
 
 end.

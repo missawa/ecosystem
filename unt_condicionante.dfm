@@ -2,7 +2,7 @@ object frm_condicionante: Tfrm_condicionante
   Left = 0
   Top = 0
   Caption = 'Condicionante'
-  ClientHeight = 334
+  ClientHeight = 394
   ClientWidth = 885
   Color = clWindow
   Ctl3D = False
@@ -39,22 +39,20 @@ object frm_condicionante: Tfrm_condicionante
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 370
   end
   object Panel1: TPanel
     Left = 0
     Top = 33
     Width = 885
-    Height = 265
+    Height = 325
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 27
-    ExplicitWidth = 897
+    ExplicitHeight = 265
     object Label5: TLabel
       Left = 16
-      Top = 100
+      Top = 150
       Width = 98
       Height = 17
       Caption = 'Data Vencimento'
@@ -75,14 +73,14 @@ object frm_condicionante: Tfrm_condicionante
     end
     object Label3: TLabel
       Left = 16
-      Top = 155
+      Top = 205
       Width = 62
       Height = 17
       Caption = 'Data Aviso'
     end
     object Label4: TLabel
       Left = 16
-      Top = 210
+      Top = 260
       Width = 73
       Height = 17
       Caption = 'Respons'#225'vel'
@@ -93,6 +91,20 @@ object frm_condicionante: Tfrm_condicionante
       Width = 57
       Height = 17
       Caption = 'Descri'#231#227'o'
+    end
+    object Label7: TLabel
+      Left = 15
+      Top = 100
+      Width = 33
+      Height = 17
+      Caption = 'Prazo'
+    end
+    object Label8: TLabel
+      Left = 109
+      Top = 120
+      Width = 24
+      Height = 17
+      Caption = 'dias'
     end
     object edt_numero: TEdit
       Left = 16
@@ -108,9 +120,10 @@ object frm_condicionante: Tfrm_condicionante
       Width = 120
       Height = 23
       ShowButton = True
-      Style = csDropDown
+      Style = csDropDownList
       MapList = True
       AllowClearKey = False
+      ShowMatchText = True
       BorderStyle = bsNone
       DropDownCount = 8
       ItemHeight = 0
@@ -123,13 +136,14 @@ object frm_condicionante: Tfrm_condicionante
     end
     object cmb_responsavel: TwwDBComboBox
       Left = 16
-      Top = 228
+      Top = 278
       Width = 120
       Height = 23
       ShowButton = True
-      Style = csDropDown
+      Style = csDropDownList
       MapList = True
       AllowClearKey = False
+      ShowMatchText = True
       BorderStyle = bsNone
       DropDownCount = 8
       ItemHeight = 0
@@ -137,58 +151,12 @@ object frm_condicionante: Tfrm_condicionante
         'ECOPLAN'#9'1'
         'CLIENTE'#9'2')
       Sorted = False
-      TabOrder = 4
+      TabOrder = 5
       UnboundDataType = wwDefault
     end
     object dtp_venc: TwwDBDateTimePicker
       Left = 16
-      Top = 121
-      Width = 121
-      Height = 23
-      BorderStyle = bsNone
-      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
-      CalendarAttributes.Font.Color = clWindowText
-      CalendarAttributes.Font.Height = -11
-      CalendarAttributes.Font.Name = 'Tahoma'
-      CalendarAttributes.Font.Style = []
-      ButtonStyle = cbsCustom
-      Epoch = 1950
-      Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
-      Frame.NonFocusStyle = efsFrameSingle
-      ButtonGlyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
-        FFFFFFFBFBFBF3F3F3EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFF1F1F1F7F7F7FDFD
-        FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F3F3DBDBDBCFCFCFCFCFCFCF
-        CFCFCFCFCFCFCFCFD3D3D3E1E1E1F3F3F3FDFDFDFFFFFFFFFFFFFFFFFFFFFFFF
-        A6A8AF686B77686B77686B77686B77686B77686B77686B77686B77C2C2C3E1E1
-        E1F7F7F7FFFFFFFFFFFFFFFFFFFFFFFF686B77F7EFEAF5ECE7F4E8E2F2E5DEF1
-        E3DBF0E1D8EFDFD6686B778C8E95C9C9CAF1F1F1FFFFFFFFFFFFFFFFFFFFFFFF
-        686B77F9F2EFC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACBCB0A952545D686B77686B
-        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FAF5F3C3BEBBF7EFEAC0B9B5F4
-        E8E2BEB4AEF1E3DBBCB0A9EFDFD6686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
-        686B77FCF8F7C4C0BFC3BEBBC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACF0E1D8686B
-        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FDFBFAC6C3C2FAF5F3C3BEBBF7
-        EFEAC0B9B5F4E8E2BEB4AEF1E3DB686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
-        686B77FEFEFDC6C5C4C6C3C2C4C0BFC3BEBBC2BBB8C0B9B5BFB6B1F2E5DE686B
-        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC7C7C6FDFBFAC6C3C2FA
-        F5F3C3BEBBF7EFEAC0B9B5F4E8E2686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
-        686B77FFFFFFC8C8C8C7C7C6C6C5C4C6C3C2C4C0BFC3BEBBC2BBB8F5ECE7686B
-        77F3F3F3FFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFFFFFFFFFFFFFFEFEFDFD
-        FBFAFCF8F7FAF5F3F9F2EFF7EFEA686B77FBFBFBFFFFFFFFFFFFFFFFFFFFFFFF
-        686B77FFFFFFC8C8C8C8C8C8C8C8C8C7C7C6C6C5C4C6C3C2C4C0BFF9F2EF686B
-        77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77686B77686B7768
-        6B77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
-      ShowButton = True
-      TabOrder = 2
-      OnExit = dtp_vencExit
-    end
-    object dtp_aviso: TwwDBDateTimePicker
-      Left = 16
-      Top = 175
+      Top = 171
       Width = 121
       Height = 23
       BorderStyle = bsNone
@@ -230,19 +198,76 @@ object frm_condicionante: Tfrm_condicionante
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       ShowButton = True
       TabOrder = 3
+      OnExit = dtp_vencExit
+    end
+    object dtp_aviso: TwwDBDateTimePicker
+      Left = 16
+      Top = 225
+      Width = 121
+      Height = 23
+      BorderStyle = bsNone
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'Tahoma'
+      CalendarAttributes.Font.Style = []
+      ButtonStyle = cbsCustom
+      Epoch = 1950
+      Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+      Frame.NonFocusStyle = efsFrameSingle
+      ButtonGlyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000120B0000120B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFBFBFBF3F3F3EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFF1F1F1F7F7F7FDFD
+        FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF3F3F3DBDBDBCFCFCFCFCFCFCF
+        CFCFCFCFCFCFCFCFD3D3D3E1E1E1F3F3F3FDFDFDFFFFFFFFFFFFFFFFFFFFFFFF
+        A6A8AF686B77686B77686B77686B77686B77686B77686B77686B77C2C2C3E1E1
+        E1F7F7F7FFFFFFFFFFFFFFFFFFFFFFFF686B77F7EFEAF5ECE7F4E8E2F2E5DEF1
+        E3DBF0E1D8EFDFD6686B778C8E95C9C9CAF1F1F1FFFFFFFFFFFFFFFFFFFFFFFF
+        686B77F9F2EFC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACBCB0A952545D686B77686B
+        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FAF5F3C3BEBBF7EFEAC0B9B5F4
+        E8E2BEB4AEF1E3DBBCB0A9EFDFD6686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
+        686B77FCF8F7C4C0BFC3BEBBC2BBB8C0B9B5BFB6B1BEB4AEBDB2ACF0E1D8686B
+        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FDFBFAC6C3C2FAF5F3C3BEBBF7
+        EFEAC0B9B5F4E8E2BEB4AEF1E3DB686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
+        686B77FEFEFDC6C5C4C6C3C2C4C0BFC3BEBBC2BBB8C0B9B5BFB6B1F2E5DE686B
+        77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFC7C7C6FDFBFAC6C3C2FA
+        F5F3C3BEBBF7EFEAC0B9B5F4E8E2686B77EFEFEFFFFFFFFFFFFFFFFFFFFFFFFF
+        686B77FFFFFFC8C8C8C7C7C6C6C5C4C6C3C2C4C0BFC3BEBBC2BBB8F5ECE7686B
+        77F3F3F3FFFFFFFFFFFFFFFFFFFFFFFF686B77FFFFFFFFFFFFFFFFFFFEFEFDFD
+        FBFAFCF8F7FAF5F3F9F2EFF7EFEA686B77FBFBFBFFFFFFFFFFFFFFFFFFFFFFFF
+        686B77FFFFFFC8C8C8C8C8C8C8C8C8C7C7C6C6C5C4C6C3C2C4C0BFF9F2EF686B
+        77FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA6A8AF686B77686B77686B77686B7768
+        6B77686B77686B77686B77686B77A6A8AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      ShowButton = True
+      TabOrder = 4
     end
     object mmo_descricao: TMemo
       Left = 152
       Top = 23
       Width = 721
-      Height = 228
+      Height = 278
       BorderStyle = bsNone
-      TabOrder = 5
+      TabOrder = 6
+    end
+    object spn_prazo: TwwDBSpinEdit
+      Left = 15
+      Top = 118
+      Width = 74
+      Height = 23
+      Increment = 1.000000000000000000
+      BorderStyle = bsNone
+      TabOrder = 2
+      UnboundDataType = wwDefault
+      OnExit = spn_prazoExit
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 298
+    Top = 358
     Width = 885
     Height = 36
     Align = alBottom
@@ -250,7 +275,7 @@ object frm_condicionante: Tfrm_condicionante
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 370
+    ExplicitTop = 298
     DesignSize = (
       885
       36)

@@ -106,6 +106,8 @@ type
     dse_licencaid_municipio: TIntegerField;
     dse_licencadescricao: TMemoField;
     dse_licencaprocesso: TStringField;
+    btn_excluir: TToolButton;
+    dse_condicionanteprazo: TIntegerField;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -126,6 +128,7 @@ type
     procedure btn_novaClick(Sender: TObject);
     procedure grd_condicionanteDblClick(Sender: TObject);
     procedure dse_condicionanteAfterScroll(DataSet: TDataSet);
+    procedure btn_excluirClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
@@ -161,6 +164,7 @@ var
 begin
   id := dse_condicionante.RecNo;
   frm_condicionante.id_condicionante := dse_condicionanteId.AsInteger;
+  frm_condicionante.id_licenca := dse_condicionanteId_licenca.AsInteger;
   frm_condicionante.edt_numero.Text := dse_condicionanteNumero.Text;
   frm_condicionante.dtp_aviso.Date := dse_condicionanteDt_aviso.AsDateTime;
   frm_condicionante.dtp_venc.Date := dse_condicionanteDt_venc.AsDateTime;
@@ -170,6 +174,12 @@ begin
   frm_condicionante.ShowModal;
   dse_condicionante.Refresh;
   dse_condicionante.RecNo := id;
+end;
+
+procedure Tfrm_licenca.btn_excluirClick(Sender: TObject);
+begin
+  if msg_quest('Confirma exclusão de condicionante?') then
+    dse_condicionante.Delete;
 end;
 
 procedure Tfrm_licenca.btn_confirmarClick(Sender: TObject);

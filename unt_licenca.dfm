@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         34)
       object btn_ok: TSpeedButton
-        Left = 1240
+        Left = 1238
         Top = -2
         Width = 36
         Height = 36
@@ -377,7 +377,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1242
       end
       object btnCancelar: TSpeedButton
-        Left = 1278
+        Left = 1276
         Top = -2
         Width = 36
         Height = 36
@@ -914,7 +914,7 @@ object frm_licenca: Tfrm_licenca
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 66
-      Width = 841
+      Width = 861
       Height = 289
       ControlType.Strings = (
         'id_responsavel;CustomEdit;cmb_responsavel;F'
@@ -923,6 +923,7 @@ object frm_licenca: Tfrm_licenca
       Selected.Strings = (
         'numero'#9'7'#9'N'#218'M.'#9'F'
         'categoria'#9'12'#9'CATEGORIA'#9'F'
+        'prazo'#9'3'#9'PRAZO'#9'F'
         'dt_aviso'#9'15'#9'AVISO'#9'F'
         'dt_venc'#9'15'#9'VENCIMENTO'#9'F'
         'dt_cumprimento'#9'15'#9'DT.CUMP.'#9'F'
@@ -948,6 +949,7 @@ object frm_licenca: Tfrm_licenca
       UseTFields = False
       OnDblClick = grd_condicionanteDblClick
       OnEnter = grd_condicionanteEnter
+      ExplicitWidth = 841
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -972,9 +974,9 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 844
+      Left = 864
       Top = 66
-      Width = 481
+      Width = 461
       Height = 289
       Align = alRight
       BevelOuter = bvNone
@@ -983,17 +985,18 @@ object frm_licenca: Tfrm_licenca
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 479
+        Width = 459
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
+        ExplicitWidth = 479
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 479
+        Width = 459
         Height = 266
         Align = alClient
         BevelInner = bvNone
@@ -1004,6 +1007,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
+        ExplicitWidth = 479
       end
     end
     object cmb_responsavel: TwwDBComboBox
@@ -1059,15 +1063,22 @@ object frm_licenca: Tfrm_licenca
         ImageIndex = 4
         OnClick = btn_editarClick
       end
-      object btn_salvar: TToolButton
+      object btn_excluir: TToolButton
         Left = 99
+        Top = 0
+        Caption = 'btn_excluir'
+        ImageIndex = 3
+        OnClick = btn_excluirClick
+      end
+      object btn_salvar: TToolButton
+        Left = 146
         Top = 0
         Caption = 'Salvar'
         ImageIndex = 5
         OnClick = btn_salvarClick
       end
       object ToolButton2: TToolButton
-        Left = 146
+        Left = 193
         Top = 0
         Width = 8
         Caption = 'ToolButton2'
@@ -1075,7 +1086,7 @@ object frm_licenca: Tfrm_licenca
         Style = tbsSeparator
       end
       object btn_confirmar: TToolButton
-        Left = 154
+        Left = 201
         Top = 0
         Hint = 'Procurar MTR'
         Caption = 'Cumprir'
@@ -1364,6 +1375,9 @@ object frm_licenca: Tfrm_licenca
       FieldName = 'categoria'
       Size = 60
       Calculated = True
+    end
+    object dse_condicionanteprazo: TIntegerField
+      FieldName = 'prazo'
     end
   end
   object tra: TUniTransaction

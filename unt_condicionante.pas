@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, ComCtrls, StdCtrls, ExtCtrls, Mask, wwdbedit, Wwdotdot,
-  Wwdbcomb, wwdbdatetimepicker;
+  Wwdbcomb, wwdbdatetimepicker, Wwdbspin;
 
 type
   Tfrm_condicionante = class(TForm)
@@ -26,11 +26,15 @@ type
     dtp_aviso: TwwDBDateTimePicker;
     Label6: TLabel;
     mmo_descricao: TMemo;
+    spn_prazo: TwwDBSpinEdit;
+    Label7: TLabel;
+    Label8: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_okClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure dtp_vencExit(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure spn_prazoExit(Sender: TObject);
   private
     procedure editar_condicionante;
     procedure nova_condicionante;
@@ -60,6 +64,7 @@ begin
     'insert into condicionante (                                                '#13+
     '  id_licenca,                                                              '#13+
     '  numero,                                                                  '#13+
+    '  prazo,                                                                   '#13+
     '  dt_venc,                                                                 '#13+
     '  dt_aviso,                                                                '#13+
     '  id_categoria,                                                            '#13+
@@ -68,11 +73,22 @@ begin
     'values (                                                                   '#13+
     intToStr(id_licenca) + ',' +
     quotedstr(edt_numero.text) + ',' +
+    intToStr(trunc(spn_prazo.Value)) + ',' +
     data_sql(dtp_venc.Date) + ',' +
     data_sql(dtp_aviso.Date) + ',' +
     cmb_categoria.Value + ',' +
     cmb_responsavel.Value + ',' +
     quotedStr(mmo_descricao.Text) + ')');
+end;
+
+procedure Tfrm_condicionante.spn_prazoExit(Sender: TObject);
+var
+  dt_ini: TDate;
+begin
+  dt_ini := inicio_licenca(id_licenca);
+  dtp_venc.Date := dt_ini + spn_prazo.Value;
+  dtp_vencExit(Sender);
+  cmb_responsavel.SetFocus;
 end;
 
 procedure Tfrm_condicionante.editar_condicionante;
@@ -83,6 +99,7 @@ begin
   exec_sql(
     'update condicionante                                                       '#13+
     'set numero = ' + quotedstr(edt_numero.text) + ','                          +#13+
+    '    prazo = ' + intToStr(trunc(spn_prazo.Value)) + ','                     +#13+
     '    dt_venc = ' + data_sql(dtp_venc.Date) + ','                            +#13+
     '    dt_aviso = ' + data_sql(dtp_aviso.Date) + ','                          +#13+
     '    id_categoria = ' + cmb_categoria.Value + ','                           +#13+
