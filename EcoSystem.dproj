@@ -69,7 +69,7 @@
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
     <DCCReference Include="unt_dtm_geral.pas">
-      <Form>dtm_geral</Form>
+      <Form>dm_geral</Form>
       <DesignClass>TDataModule</DesignClass>
     </DCCReference>
     <DCCReference Include="unt_dtm_images.pas">

@@ -1,32 +1,40 @@
 inherited frm_categorias: Tfrm_categorias
   Caption = 'Categorias'
-  ClientWidth = 563
-  ExplicitWidth = 579
-  ExplicitHeight = 576
+  ClientWidth = 1171
+  ExplicitWidth = 1187
   PixelsPerInch = 96
   TextHeight = 17
   inherited pnlTitulo: TPanel
-    Width = 563
+    Width = 1171
     Caption = ' CATEGORIAS'
+    ExplicitWidth = 563
   end
   inherited pnlClient: TPanel
-    Width = 563
+    Width = 1171
+    ExplicitWidth = 563
     inherited grd: TwwDBGrid
-      Width = 561
+      Width = 1169
       Selected.Strings = (
         'id'#9'10'#9'ID'
         'nome'#9'45'#9'CATEGORIA'#9'F')
       ExplicitWidth = 561
-      ExplicitHeight = 464
     end
-    inherited Panel1: TPanel
-      Width = 561
-      inherited btnOK: TSpeedButton
-        Left = 474
-      end
-      inherited btnCancelar: TSpeedButton
-        Left = 516
-      end
+  end
+  inherited Panel1: TPanel
+    Width = 1171
+    ExplicitTop = 30
+    ExplicitWidth = 563
+    inherited btnOK: TSpeedButton
+      Left = 1083
+      Top = 0
+      ExplicitLeft = 1083
+      ExplicitTop = 0
+    end
+    inherited btnCancelar: TSpeedButton
+      Left = 1127
+      Top = 0
+      ExplicitLeft = 1127
+      ExplicitTop = 0
     end
   end
   inherited dse: TUniQuery
@@ -34,6 +42,5 @@ inherited frm_categorias: Tfrm_categorias
       'select *'
       'from categoria'
       'order by id')
-    Active = True
   end
 end

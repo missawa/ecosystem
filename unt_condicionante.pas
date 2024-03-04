@@ -33,8 +33,10 @@ type
     procedure btn_okClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure dtp_vencExit(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure spn_prazoExit(Sender: TObject);
+    procedure cmb_categoriaExit(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure cmb_categoriaCloseUp(Sender: TwwDBComboBox; Select: Boolean);
   private
     procedure editar_condicionante;
     procedure nova_condicionante;
@@ -42,6 +44,9 @@ type
   public
     id_condicionante: integer;
     id_licenca: integer;
+    id_categoria: integer;
+    cumprida: string;
+    dt_cump: TDate;
   end;
 
 var
@@ -92,18 +97,45 @@ begin
 end;
 
 procedure Tfrm_condicionante.editar_condicionante;
+var
+  str_venc: string;
+  str_aviso: string;
+  str_dt_cump: string;
+  str_cump: string;
 begin
 
-//  mmo_descricao.Text := StringReplace(mmo_descricao.Text, '''','''',[rfReplaceAll]);
+  cmb_categoriaExit(cmb_categoria);
+
+  if cumprida = 'S' then
+    str_cump := quotedStr('S')
+  else
+    str_cump := quotedStr('N');
+
+  if dt_cump = 0 then
+    str_dt_cump := 'null'
+  else
+    str_dt_cump := data_sql(dt_cump);
+
+  if (dtp_venc.Text = '') or (dtp_venc.Text = '31/12/1899') then
+    str_venc := 'null'
+  else
+    str_venc := data_sql(dtp_venc.Date);
+
+  if (dtp_aviso.Text = '') or (dtp_aviso.Text = '31/12/1899') then
+    str_aviso := 'null'
+  else
+    str_aviso := data_sql(dtp_aviso.Date);
 
   exec_sql(
     'update condicionante                                                       '#13+
     'set numero = ' + quotedstr(edt_numero.text) + ','                          +#13+
     '    prazo = ' + intToStr(trunc(spn_prazo.Value)) + ','                     +#13+
-    '    dt_venc = ' + data_sql(dtp_venc.Date) + ','                            +#13+
-    '    dt_aviso = ' + data_sql(dtp_aviso.Date) + ','                          +#13+
+    '    dt_venc = ' + str_venc + ','                                           +#13+
+    '    dt_aviso = ' + str_aviso + ','                                         +#13+
+    '    dt_cumprimento = ' + str_dt_cump + ','                                 +#13+
     '    id_categoria = ' + cmb_categoria.Value + ','                           +#13+
     '    descricao = ' + quotedStr(mmo_descricao.Text) + ','                    +#13+
+    '    cumprida = ' + str_cump + ','                                          +#13+
     '    id_responsavel = ' + cmb_responsavel.Value                             +#13+
     'where id = ' + inttostr(id_condicionante));
 end;
@@ -118,6 +150,36 @@ begin
   close;
 end;
 
+procedure Tfrm_condicionante.cmb_categoriaCloseUp(Sender: TwwDBComboBox;
+  Select: Boolean);
+begin
+  cmb_categoriaExit(Sender);
+end;
+
+procedure Tfrm_condicionante.cmb_categoriaExit(Sender: TObject);
+begin
+  if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
+  begin
+    spn_prazo.Value := 0;
+    dtp_venc.Clear;
+    dtp_aviso.Clear;
+    cumprida := 'S';
+    dt_cump := 0;
+
+    spn_prazo.Enabled := false;
+    dtp_venc.Enabled := false;
+    dtp_aviso.Enabled := false;
+    cmb_responsavel.SetFocus;
+  end
+  else
+  begin
+    spn_prazo.Enabled := true;
+    dtp_venc.Enabled := true;
+    dtp_aviso.Enabled := true;
+    spn_prazo.SetFocus;
+  end;
+end;
+
 procedure Tfrm_condicionante.dtp_vencExit(Sender: TObject);
 begin
   dtp_aviso.Date := decmonth(dtp_venc.Date);
@@ -129,9 +191,12 @@ begin
   close;
 end;
 
-procedure Tfrm_condicionante.FormCreate(Sender: TObject);
+procedure Tfrm_condicionante.FormShow(Sender: TObject);
 begin
   carrega_combo_categoria(cmb_categoria);
+  cmb_categoria.Value := intToStr(id_categoria);
+  cmb_categoriaExit(Sender);
+  edt_numero.SetFocus;
 end;
 
 end.

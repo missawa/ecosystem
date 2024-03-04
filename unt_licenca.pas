@@ -108,6 +108,10 @@ type
     dse_licencaprocesso: TStringField;
     btn_excluir: TToolButton;
     dse_condicionanteprazo: TIntegerField;
+    btn_prot_lic: TSpeedButton;
+    btn_prot_cond: TToolButton;
+    dse_condicionanteImg_protocolo: TBooleanField;
+    btn_abrir_pasta: TSpeedButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -129,6 +133,9 @@ type
     procedure grd_condicionanteDblClick(Sender: TObject);
     procedure dse_condicionanteAfterScroll(DataSet: TDataSet);
     procedure btn_excluirClick(Sender: TObject);
+    procedure btn_prot_condClick(Sender: TObject);
+    procedure btn_prot_licClick(Sender: TObject);
+    procedure btn_abrir_pastaClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
@@ -143,7 +150,8 @@ var
 implementation
 
 uses unt_procedures, unt_dtm_dados, unt_dtm_images, unt_cumprir_cond,
-  unt_condicionante, unt_functions, unt_mensagem, unt_func_messages;
+  unt_condicionante, unt_functions, unt_mensagem, unt_func_messages,
+  unt_dtm_geral;
 
 {$R *.dfm}
 
@@ -165,11 +173,14 @@ begin
   id := dse_condicionante.RecNo;
   frm_condicionante.id_condicionante := dse_condicionanteId.AsInteger;
   frm_condicionante.id_licenca := dse_condicionanteId_licenca.AsInteger;
+  frm_condicionante.id_categoria := dse_condicionanteId_categoria.AsInteger;
+  frm_condicionante.cumprida := dse_condicionanteCumprida.AsString;
+  frm_condicionante.dt_cump := dse_condicionanteDt_cumprimento.AsDateTime;
+
   frm_condicionante.edt_numero.Text := dse_condicionanteNumero.Text;
   frm_condicionante.dtp_aviso.Date := dse_condicionanteDt_aviso.AsDateTime;
   frm_condicionante.dtp_venc.Date := dse_condicionanteDt_venc.AsDateTime;
   frm_condicionante.cmb_responsavel.Value := dse_condicionanteId_responsavel.AsString;
-  frm_condicionante.cmb_categoria.Value := dse_condicionanteId_categoria.AsString;
   frm_condicionante.mmo_descricao.Lines.Text := dse_condicionanteDescricao.AsString;
   frm_condicionante.ShowModal;
   dse_condicionante.Refresh;
@@ -182,6 +193,14 @@ begin
     dse_condicionante.Delete;
 end;
 
+procedure Tfrm_licenca.btn_abrir_pastaClick(Sender: TObject);
+var
+  pst_cliente: string;
+begin
+  pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
+  abrir_arquivo(pst_cliente + '\' + dse_licencaId.AsString + '\Lic_' + dse_licencaId.AsString + '.pdf');
+end;
+
 procedure Tfrm_licenca.btn_confirmarClick(Sender: TObject);
 var
   id: integer;
@@ -191,7 +210,12 @@ begin
     id := dse_condicionante.RecNo;
     frm_cumprir_cond.edt_protocolo.Clear;
     frm_cumprir_cond.dtp_data.Date := date;
-    frm_cumprir_cond.id_condicionante := dse_condicionante.FieldByName('id').AsInteger;
+    frm_cumprir_cond.id_cliente := dse_licencaId_cliente.AsInteger;
+    frm_cumprir_cond.id_licenca := dse_licencaId.AsInteger;
+    frm_cumprir_cond.id_condicionante := dse_condicionanteId.AsInteger;
+    frm_cumprir_cond.num_cond := dse_condicionanteNumero.AsInteger;
+
+
     frm_cumprir_cond.ShowModal;
     dse_condicionante.Refresh;
     dse_condicionante.RecNo := id;
@@ -225,6 +249,47 @@ begin
     if tra.Active then
       tra.commit;
     close;
+  end;
+
+end;
+
+procedure Tfrm_licenca.btn_prot_condClick(Sender: TObject);
+begin
+  if trim(dse_condicionanteProtocolo.AsString) = '' then
+    msg_info('Sem protocolo cadastrado')
+  else
+    abrir_arquivo(dse_condicionanteProtocolo.Text);
+end;
+
+procedure Tfrm_licenca.btn_prot_licClick(Sender: TObject);
+var
+  pst_cliente: string;
+  pst_licenca: string;
+  arq: string;
+  arq_lic: string;
+begin
+
+  pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
+
+  if not DirectoryExists(pst_cliente) then
+    CreateDir(pst_cliente);
+
+  pst_licenca := pst_cliente + '\' + intToStr(dse_licencaId.AsInteger);
+
+  if not DirectoryExists(pst_licenca) then
+    CreateDir(pst_licenca);
+
+  dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+  if dm_geral.open_dialog.execute then
+  begin
+    arq := dm_geral.open_dialog.filename;
+    arq_lic := pst_licenca + '\' + 'Lic_' + intToStr(dse_licencaId.AsInteger)  + '.pdf';
+    arq_lic := StringReplace(arq_lic,'\','\\',[rfReplaceAll]);
+
+    CopyFile(
+      pchar(arq),
+      pchar(arq_lic),
+      false)
   end;
 
 end;
@@ -278,7 +343,8 @@ end;
 
 procedure Tfrm_licenca.dse_condicionanteAfterScroll(DataSet: TDataSet);
 begin
-  btn_confirmar.Enabled := dse_condicionantecumprida.AsString <> 'S';
+  btn_confirmar.Enabled := dse_condicionanteCumprida.AsString <> 'S';
+  btn_prot_cond.Enabled := trim(dse_condicionanteProtocolo.AsString)<> '';
 end;
 
 procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);
@@ -308,6 +374,7 @@ end;
 procedure Tfrm_licenca.dse_condicionanteCalcFields(DataSet: TDataSet);
 begin
   dse_condicionanteCategoria.AsString := nome_categoria(dse_condicionanteid_categoria.AsInteger);
+  dse_condicionanteImg_protocolo.AsBoolean := dse_condicionanteprotocolo.AsString <> '';
 end;
 
 procedure Tfrm_licenca.dse_condicionanteNewRecord(DataSet: TDataSet);

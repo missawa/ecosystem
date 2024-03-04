@@ -221,13 +221,13 @@ begin
     incrementar_progresso;
   end;
 
-  dtm_geral.save_dialog.FileName := 'Export' + FormatDateTime('yyyyMMdd-hhmm',now) + '.csv';
+  dm_geral.save_dialog.FileName := 'Export' + FormatDateTime('yyyyMMdd-hhmm',now) + '.csv';
 
   fechar_progresso;
 
-  if dtm_geral.save_dialog.Execute then
+  if dm_geral.save_dialog.Execute then
   begin
-    nomeArq := dtm_geral.save_dialog.Filename;
+    nomeArq := dm_geral.save_dialog.Filename;
     if pos('.csv',nomeArq) = 0 then
       nomeArq := nomeArq + '.csv';
 

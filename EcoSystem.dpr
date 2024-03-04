@@ -14,7 +14,7 @@ uses
   unt_cad_abstrato in 'abstratos\unt_cad_abstrato.pas' {frm_cad_abstrato},
   unt_lista_abstrato in 'abstratos\unt_lista_abstrato.pas' {frm_lista_abstrato},
   unt_lista_toolbar_abstrato in 'abstratos\unt_lista_toolbar_abstrato.pas' {frm_lista_toolbar_abstrato},
-  unt_dtm_geral in 'unt_dtm_geral.pas' {dtm_geral: TDataModule},
+  unt_dtm_geral in 'unt_dtm_geral.pas' {dm_geral: TDataModule},
   unt_progresso in 'unt_progresso.pas' {frm_progresso},
   unt_proc_abrir_telas in 'utils\unt_proc_abrir_telas.pas',
   unt_usuario in 'unt_usuario.pas' {frm_usuario},
@@ -48,7 +48,7 @@ begin
   Application.CreateForm(Tfrm_principal, frm_principal);
   Application.CreateForm(Tdtm_dados, dtm_dados);
   Application.CreateForm(Tdtm_images, dtm_images);
-  Application.CreateForm(Tdtm_geral, dtm_geral);
+  Application.CreateForm(Tdm_geral, dm_geral);
   Application.CreateForm(Tfrm_senha, frm_senha);
   Application.CreateForm(Tfrm_mensagem, frm_mensagem);
   Application.CreateForm(Tfrm_pesquisa, frm_pesquisa);

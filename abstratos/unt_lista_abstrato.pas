@@ -14,12 +14,12 @@ type
     pnlClient: TPanel;
     dts: TDataSource;
     grd: TwwDBGrid;
-    Panel1: TPanel;
-    btnOK: TSpeedButton;
-    btnCancelar: TSpeedButton;
     qry: TUniQuery;
     dse: TUniQuery;
     tra: TUniTransaction;
+    Panel1: TPanel;
+    btnOK: TSpeedButton;
+    btnCancelar: TSpeedButton;
     procedure btnOKClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

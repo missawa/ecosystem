@@ -22,14 +22,9 @@ type
     ppDetailBand1: TppDetailBand;
     ppFooterBand1: TppFooterBand;
     ppLabel1: TppLabel;
-    ppLabel2: TppLabel;
-    ppLabel3: TppLabel;
-    ppLabel5: TppLabel;
     ppLabel6: TppLabel;
     ppDBText1: TppDBText;
-    ppLabel7: TppLabel;
     ppDBText2: TppDBText;
-    ppDBText3: TppDBText;
     ppDBText4: TppDBText;
     ppDBText5: TppDBText;
     ppLabel4: TppLabel;
@@ -38,7 +33,6 @@ type
     ppLabel8: TppLabel;
     btn_imprimir: TSpeedButton;
     ppDBMemo1: TppDBMemo;
-    ppLabel9: TppLabel;
     ppDBText6: TppDBText;
     dtp_venc_ini: TwwDBDateTimePicker;
     Label1: TLabel;
@@ -48,7 +42,6 @@ type
     Label4: TLabel;
     ppShape1: TppShape;
     raCodeModule1: TraCodeModule;
-    ppShape2: TppShape;
     ppParameterList1: TppParameterList;
     cmb_cliente: TwwDBComboDlg;
     Label5: TLabel;
@@ -62,6 +55,11 @@ type
     dtp_aviso_ini: TwwDBDateTimePicker;
     Panel3: TPanel;
     btn_fechar: TSpeedButton;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppLine1: TppLine;
+    ppImage1: TppImage;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -69,6 +67,7 @@ type
     procedure btn_imprimirClick(Sender: TObject);
     procedure cmb_clienteCustomDlg(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
+    procedure ppDBText1GetText(Sender: TObject; var Text: string);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -192,6 +191,7 @@ begin
     'select                               '#13+
     '    ''LICENÇA'' as tipo,             '#13+
     '    l.id as id_licenca,              '#13+
+    '    0 as condicionante,              '#13+
     '    p.id,                            '#13+
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
@@ -213,6 +213,7 @@ begin
     'select                               '#13+
     '    ''CONDIC.'' as tipo,             '#13+
     '    l.id as id_licenca,              '#13+
+    '    c.numero as condicionante,       '#13+
     '    p.id,                            '#13+
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
@@ -227,6 +228,7 @@ begin
     '  left join condicionante c          '#13+
     '    on c.id_licenca = l.id           '#13+
     'where cliente = ''S''                '#13+
+    '  and situacao = ''A''               '#13+
     cli +
     venc_con +
     aviso_con +
@@ -246,6 +248,13 @@ begin
     ReleaseCapture;
     self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end
+end;
+
+procedure Tfrm_relatorio.ppDBText1GetText(Sender: TObject; var Text: string);
+begin
+  if qry_01.FieldByName('tipo').AsString = 'CONDIC.' then
+    Text := qry_01.FieldByName('condicionante').AsString;
+  
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   SysUtils, Classes, Dialogs;
 
 type
-  Tdtm_geral = class(TDataModule)
+  Tdm_geral = class(TDataModule)
     open_dialog: TOpenDialog;
     save_dialog: TSaveDialog;
   private
@@ -16,7 +16,7 @@ type
   end;
 
 var
-  dtm_geral: Tdtm_geral;
+  dm_geral: Tdm_geral;
 
 implementation
 

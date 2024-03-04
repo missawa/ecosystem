@@ -658,6 +658,7 @@ begin
 
   handle := GetTopWindow(0);
   caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
+//  caminho := 'c:\multidev\clientes\' + intToStr(id);
 
   if not DirectoryExists(caminho) then
     try

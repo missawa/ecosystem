@@ -42,7 +42,7 @@ object dtm_dados: Tdtm_dados
     ProviderName = 'ODBC'
     SpecificOptions.Strings = (
       'ODBC.DetectFieldsOnPrepare=True')
-    DefaultTransaction.DefaultCloseAction = taCommit
+    DefaultTransaction = mysql_tran
     Username = 'root'
     Server = 'ecoserver'
     Connected = True
@@ -182,5 +182,11 @@ object dtm_dados: Tdtm_dados
         ParamType = ptInput
         Value = 1
       end>
+  end
+  object mysql_tran: TUniTransaction
+    DefaultConnection = mysql_conn
+    DefaultCloseAction = taCommit
+    Left = 40
+    Top = 192
   end
 end

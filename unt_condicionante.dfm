@@ -14,7 +14,7 @@ object frm_condicionante: Tfrm_condicionante
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnClose = FormClose
-  OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
   object Panel3: TPanel
@@ -42,14 +42,13 @@ object frm_condicionante: Tfrm_condicionante
   end
   object Panel1: TPanel
     Left = 0
-    Top = 33
+    Top = 69
     Width = 885
     Height = 325
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 265
     object Label5: TLabel
       Left = 16
       Top = 150
@@ -133,6 +132,8 @@ object frm_condicionante: Tfrm_condicionante
       Sorted = False
       TabOrder = 1
       UnboundDataType = wwDefault
+      OnCloseUp = cmb_categoriaCloseUp
+      OnExit = cmb_categoriaExit
     end
     object cmb_responsavel: TwwDBComboBox
       Left = 16
@@ -267,15 +268,14 @@ object frm_condicionante: Tfrm_condicionante
   end
   object Panel2: TPanel
     Left = 0
-    Top = 358
+    Top = 33
     Width = 885
     Height = 36
-    Align = alBottom
+    Align = alTop
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 298
     DesignSize = (
       885
       36)

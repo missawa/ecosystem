@@ -26,6 +26,7 @@ type
     dts_municipio: TDataSource;
     dts_bairro: TDataSource;
     qry_municipio: TUniQuery;
+    mysql_tran: TUniTransaction;
     procedure con_mysqlBeforeConnect(Sender: TObject);
     procedure con_mysqlAfterConnect(Sender: TObject);
     procedure mysql_connBeforeConnect(Sender: TObject);
