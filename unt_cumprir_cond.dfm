@@ -2,7 +2,7 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
   Left = 0
   Top = 0
   Caption = 'Cumprir Condicionante'
-  ClientHeight = 185
+  ClientHeight = 232
   ClientWidth = 458
   Color = clWindow
   Ctl3D = False
@@ -17,7 +17,7 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
   TextHeight = 17
   object Panel2: TPanel
     Left = 0
-    Top = 149
+    Top = 196
     Width = 458
     Height = 36
     Align = alBottom
@@ -25,8 +25,7 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 121
-    ExplicitWidth = 300
+    ExplicitTop = 149
     DesignSize = (
       458
       36)
@@ -380,36 +379,34 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 300
   end
   object Panel1: TPanel
     Left = 0
     Top = 33
     Width = 458
-    Height = 116
+    Height = 163
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 300
-    ExplicitHeight = 88
+    ExplicitHeight = 116
     object Label5: TLabel
       Left = 16
-      Top = 6
+      Top = 60
       Width = 27
       Height = 17
       Caption = 'Data'
     end
     object Label2: TLabel
       Left = 16
-      Top = 56
+      Top = 110
       Width = 57
       Height = 17
       Caption = 'Protocolo'
     end
     object SpeedButton1: TSpeedButton
       Left = 399
-      Top = 61
+      Top = 115
       Width = 44
       Height = 35
       Glyph.Data = {
@@ -569,16 +566,25 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
       Spacing = -2
       OnClick = SpeedButton1Click
     end
+    object Label1: TLabel
+      Left = 16
+      Top = 10
+      Width = 57
+      Height = 17
+      Caption = 'Categoria'
+      Enabled = False
+    end
     object edt_protocolo: TEdit
       Left = 16
-      Top = 73
+      Top = 127
       Width = 377
       Height = 23
+      BorderStyle = bsNone
       TabOrder = 0
     end
     object dtp_data: TwwDBDateTimePicker
       Left = 16
-      Top = 24
+      Top = 78
       Width = 121
       Height = 23
       BorderStyle = bsNone
@@ -588,11 +594,31 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
       CalendarAttributes.Font.Name = 'Tahoma'
       CalendarAttributes.Font.Style = []
       Epoch = 1950
-      Frame.Enabled = True
       Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
       Frame.NonFocusStyle = efsFrameSingle
       ShowButton = True
       TabOrder = 1
+    end
+    object cmb_categoria: TwwDBComboBox
+      Left = 16
+      Top = 27
+      Width = 120
+      Height = 23
+      ShowButton = True
+      Style = csDropDownList
+      MapList = True
+      AllowClearKey = False
+      ShowMatchText = True
+      BorderStyle = bsNone
+      DropDownCount = 8
+      Enabled = False
+      ItemHeight = 0
+      Items.Strings = (
+        'Categoria 1'#9'1'
+        'Categoria 2'#9'2')
+      Sorted = False
+      TabOrder = 2
+      UnboundDataType = wwDefault
     end
   end
 end

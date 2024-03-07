@@ -6,6 +6,7 @@ uses
   DB,
   Forms,
   Classes,
+  Controls,
   ComObj,
   Registry,
   ShellApi,
@@ -30,6 +31,7 @@ procedure exportar_excel(grdExportar: TwwDBGrid);
 procedure fechar_progresso;
 procedure incrementar_progresso;
 procedure inicializar_progresso(caption: string; max: integer);
+procedure nova_condicionante(id_licenca: integer; numero: string; prazo: integer; id_categoria: integer; id_responsavel: integer; cumprida: string; dt_cump: TDate; dt_venc: TDate; dt_aviso: TDate; descricao: string);
 procedure open_query(var dataset: TUniQuery; sql: string; retorna_erro: boolean = true);
 procedure verifica_conf_data_windows;
 
@@ -357,5 +359,69 @@ begin
     CreateDir(caminho);
 
 end;
+
+procedure nova_condicionante(
+  id_licenca: integer;
+  numero: string;
+  prazo: integer;
+  id_categoria: integer;
+  id_responsavel: integer;
+  cumprida: string;
+  dt_cump: TDate;
+  dt_venc: TDate;
+  dt_aviso: TDate;
+  descricao: string);
+var
+  str_venc: string;
+  str_aviso: string;
+  str_dt_cump: string;
+  str_cump: string;
+begin
+
+  if cumprida = 'S' then
+    str_cump := quotedStr('S')
+  else
+    str_cump := quotedStr('N');
+
+  if dt_cump = 0 then
+    str_dt_cump := 'null'
+  else
+    str_dt_cump := data_sql(dt_cump);
+
+  if dt_venc = 0 then
+    str_venc := 'null'
+  else
+    str_venc := data_sql(dt_venc);
+
+  if dt_aviso = 0 then
+    str_aviso := 'null'
+  else
+    str_aviso := data_sql(dt_Aviso);
+
+  exec_sql(
+    'insert into condicionante (                                                '#13+
+    '  id_licenca,                                                              '#13+
+    '  numero,                                                                  '#13+
+    '  prazo,                                                                   '#13+
+    '  dt_venc,                                                                 '#13+
+    '  dt_aviso,                                                                '#13+
+    '  id_categoria,                                                            '#13+
+    '  id_responsavel,                                                          '#13+
+    '  dt_cumprimento,                                                          '#13+
+    '  cumprida,                                                                '#13+
+    '  descricao)                                                               '#13+
+    'values (                                                                   '#13+
+    intToStr(id_licenca) + ',' +
+    quotedstr(numero) + ',' +
+    intToStr(trunc(prazo)) + ',' +
+    str_venc + ',' +
+    str_aviso + ',' +
+    intToStr(id_categoria) + ',' +
+    intToStr(id_responsavel) + ',' +
+    str_dt_cump + ',' +
+    str_cump + ',' +
+    quotedStr(descricao) + ')');
+end;
+
 
 end.

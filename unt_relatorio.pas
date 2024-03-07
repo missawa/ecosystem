@@ -177,8 +177,8 @@ begin
 
   case cmb_situacao.ItemIndex of
     0: sit := '';
-    1: sit := '    and c.cumprida = ''S'''#13;
-    2: sit := '    and c.cumprida = ''N'''#13;
+    1: sit := '    and c.cumprida = ''S''                                       '#13;
+    2: sit := '    and (c.cumprida = ''N'' or c.cumprida is null)               '#13;
   end;
 
   if cmb_cliente.Text = '' then
@@ -204,6 +204,7 @@ begin
     '  left join licenca l                '#13+
     '    on l.id_cliente = p.id           '#13+
     'where cliente = ''S''                '#13+
+    '  and p.situacao = ''A''             '#13+
     cli +
     venc_lic +
     aviso_lic +
@@ -227,13 +228,14 @@ begin
     '    on l.id_cliente = p.id           '#13+
     '  left join condicionante c          '#13+
     '    on c.id_licenca = l.id           '#13+
-    'where cliente = ''S''                '#13+
-    '  and situacao = ''A''               '#13+
+    'where p.cliente = ''S''              '#13+
+    '  and p.situacao = ''A''             '#13+
     cli +
     venc_con +
     aviso_con +
     sit +
     'order by nome, id_licenca, dt_aviso';
+
   qry_01.Open;
 
   rel_01.Print;

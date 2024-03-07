@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         40)
       object btn_ok: TSpeedButton
-        Left = 1234
+        Left = 1230
         Top = -2
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1242
       end
       object btnCancelar: TSpeedButton
-        Left = 1272
+        Left = 1268
         Top = -2
         Width = 36
         Height = 36

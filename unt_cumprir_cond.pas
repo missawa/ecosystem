@@ -17,7 +17,7 @@ uses
   Buttons,
   ExtCtrls,
   ShellApi,
-  wwdbdatetimepicker;
+  wwdbdatetimepicker, Mask, wwdbedit, Wwdotdot, Wwdbcomb;
 
 type
   Tfrm_cumprir_cond = class(TForm)
@@ -31,6 +31,8 @@ type
     edt_protocolo: TEdit;
     dtp_data: TwwDBDateTimePicker;
     SpeedButton1: TSpeedButton;
+    Label1: TLabel;
+    cmb_categoria: TwwDBComboBox;
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
@@ -41,7 +43,13 @@ type
     id_cliente: integer;
     id_licenca: integer;
     id_condicionante: integer;
-    num_cond: integer;
+    id_categoria: integer;
+    dt_venc: TDate;
+    prazo: integer;
+    num_cond: string;
+    id_responsavel: integer;
+    cumprida: string;
+    descricao: string;
   end;
 
 var
@@ -90,7 +98,7 @@ begin
   if dm_geral.open_dialog.execute then
   begin
     arq := dm_geral.open_dialog.filename;
-    edt_protocolo.Text := pst_licenca + '\' + 'Cond_' + intToStr(num_cond) + '.pdf';
+    edt_protocolo.Text := pst_licenca + '\' + 'Cond_' + num_cond + '.pdf';
     
     CopyFile(
       pchar(arq),
@@ -105,6 +113,9 @@ begin
 end;
 
 procedure Tfrm_cumprir_cond.btnConfirmarClick(Sender: TObject);
+var
+  novo_venc: TDate;
+  num_lic: string;
 begin
   if trim(edt_protocolo.Text) = '' then
   begin
@@ -114,7 +125,29 @@ begin
       msg_alert('Informe o número do protocolo');
   end
   else
+  begin
+    if id_categoria in [3,4,5,6,7]  then
+    begin
+      if msg_quest('Deseja criar uma cópia desta condicionante ' + cmb_categoria.Text + '?') then
+      begin
+        num_lic := input_texto('Número', num_cond);
+        novo_venc := proximo_vencimento(id_categoria, dt_venc);
+        nova_condicionante(
+          id_licenca,
+          num_lic,
+          prazo,
+          id_categoria,
+          id_responsavel,
+          cumprida,
+          0,
+          novo_venc,
+          decmonth(novo_venc),
+          descricao);
+      end;
+    end;
+
     cumprir;
+  end;
 end;
 
 end.

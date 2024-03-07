@@ -343,7 +343,7 @@ object frm_relatorio: Tfrm_relatorio
       457
       31)
     object btn_fechar: TSpeedButton
-      Left = 416
+      Left = 414
       Top = -5
       Width = 42
       Height = 38

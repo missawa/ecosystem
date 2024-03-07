@@ -33,6 +33,7 @@ uses
   function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
   function pesquisar(var q: TUniQuery; sql: string; campo: string; tela: string; window_state: TWindowState = wsNormal): boolean;
   function primeiro_dia_mes(data: TDate): TDate;
+  function proximo_vencimento(id_categoria: integer; venc: TDate): TDate;
   function prior_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function troca_acentos(texto: string): string;
   function ultimo_dia_mes(data: TDate):TDate;
@@ -690,6 +691,19 @@ begin
     q.Free;
   end;
 
+end;
+
+function proximo_vencimento(
+  id_categoria: integer;
+  venc: TDate): TDate;
+begin
+  case id_categoria of
+    3: result := IncMonth(venc, 3);
+    4: result := IncMonth(venc, 6);
+    5: result := IncMonth(venc, 12);
+    6: result := IncMonth(venc, 24);
+    7: result := IncMonth(venc, 36);
+  end;
 end;
 
 end.

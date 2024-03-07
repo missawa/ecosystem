@@ -208,14 +208,21 @@ begin
   if msg_quest('Confirma cumprimento de condicionante?') then
   begin
     id := dse_condicionante.RecNo;
+
     frm_cumprir_cond.edt_protocolo.Clear;
     frm_cumprir_cond.dtp_data.Date := date;
     frm_cumprir_cond.id_cliente := dse_licencaId_cliente.AsInteger;
     frm_cumprir_cond.id_licenca := dse_licencaId.AsInteger;
     frm_cumprir_cond.id_condicionante := dse_condicionanteId.AsInteger;
-    frm_cumprir_cond.num_cond := dse_condicionanteNumero.AsInteger;
-
-
+    carrega_combo_categoria(frm_cumprir_cond.cmb_categoria);
+    frm_cumprir_cond.id_categoria := dse_condicionanteid_categoria.AsInteger;
+    frm_cumprir_cond.cmb_categoria.Value := dse_condicionanteid_categoria.AsString;
+    frm_cumprir_cond.dt_venc := dse_condicionanteDt_venc.AsDateTime;
+    frm_cumprir_cond.num_cond := dse_condicionanteNumero.Text;
+    frm_cumprir_cond.prazo := dse_condicionantePrazo.AsInteger;
+    frm_cumprir_cond.id_responsavel := dse_condicionanteId_responsavel.AsInteger;
+    frm_cumprir_cond.cumprida := dse_condicionanteCumprida.AsString;
+    frm_cumprir_cond.descricao := dse_condicionanteDescricao.AsString;
     frm_cumprir_cond.ShowModal;
     dse_condicionante.Refresh;
     dse_condicionante.RecNo := id;
@@ -267,29 +274,60 @@ var
   pst_licenca: string;
   arq: string;
   arq_lic: string;
-begin
+  msg: string;
 
-  pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
-
-  if not DirectoryExists(pst_cliente) then
-    CreateDir(pst_cliente);
-
-  pst_licenca := pst_cliente + '\' + intToStr(dse_licencaId.AsInteger);
-
-  if not DirectoryExists(pst_licenca) then
-    CreateDir(pst_licenca);
-
-  dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
-  if dm_geral.open_dialog.execute then
+  procedure carregar;
   begin
-    arq := dm_geral.open_dialog.filename;
-    arq_lic := pst_licenca + '\' + 'Lic_' + intToStr(dse_licencaId.AsInteger)  + '.pdf';
-    arq_lic := StringReplace(arq_lic,'\','\\',[rfReplaceAll]);
+    pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
 
-    CopyFile(
-      pchar(arq),
-      pchar(arq_lic),
-      false)
+    if not DirectoryExists(pst_cliente) then
+      CreateDir(pst_cliente);
+
+    pst_licenca := pst_cliente + '\' + intToStr(dse_licencaId.AsInteger);
+
+    if not DirectoryExists(pst_licenca) then
+      CreateDir(pst_licenca);
+
+    dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+    if dm_geral.open_dialog.execute then
+    begin
+      arq := dm_geral.open_dialog.filename;
+      arq_lic := pst_licenca + '\' + 'Lic_' + intToStr(dse_licencaId.AsInteger)  + '.pdf';
+
+      msg_info('Origem: ' + arq +#13+'Destino: ' + arq_lic);
+
+      try
+        CopyFile(
+          pchar(arq),
+          pchar(arq_lic),
+          false)
+      except
+        on e:exception do msg_error(e.message);
+      end;
+    end;
+
+  end;
+
+begin
+  try
+
+    arq := get_customer_folder(dse_licencaId_cliente.AsInteger) + '\' + dse_licencaId.AsString + '\Lic_' + dse_licencaId.AsString + '.pdf';
+
+    if FileExists(pchar(arq)) then
+    begin
+
+      msg := 'Deseja substituir o arquivo da licença que já existe?';
+
+      if msg_quest(msg) then
+        carregar
+      else
+        btn_abrir_pasta.Click;
+    end
+    else
+      carregar;
+
+  except
+    on e:exception do msg_error(e.message);
   end;
 
 end;

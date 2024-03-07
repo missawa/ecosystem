@@ -64,7 +64,35 @@ begin
 end;
 
 procedure Tfrm_condicionante.nova_condicionante;
+var
+  str_venc: string;
+  str_aviso: string;
+  str_dt_cump: string;
+  str_cump: string;
 begin
+
+  cmb_categoriaExit(cmb_categoria);
+
+  if cumprida = 'S' then
+    str_cump := quotedStr('S')
+  else
+    str_cump := quotedStr('N');
+
+  if dt_cump = 0 then
+    str_dt_cump := 'null'
+  else
+    str_dt_cump := data_sql(dt_cump);
+
+  if (dtp_venc.Text = '') or (dtp_venc.Text = '31/12/1899') then
+    str_venc := 'null'
+  else
+    str_venc := data_sql(dtp_venc.Date);
+
+  if (dtp_aviso.Text = '') or (dtp_aviso.Text = '31/12/1899') then
+    str_aviso := 'null'
+  else
+    str_aviso := data_sql(dtp_aviso.Date);
+
   exec_sql(
     'insert into condicionante (                                                '#13+
     '  id_licenca,                                                              '#13+
@@ -74,15 +102,19 @@ begin
     '  dt_aviso,                                                                '#13+
     '  id_categoria,                                                            '#13+
     '  id_responsavel,                                                          '#13+
+    '  dt_cumprimento,                                                          '#13+
+    '  cumprida,                                                                '#13+
     '  descricao)                                                               '#13+
     'values (                                                                   '#13+
     intToStr(id_licenca) + ',' +
     quotedstr(edt_numero.text) + ',' +
     intToStr(trunc(spn_prazo.Value)) + ',' +
-    data_sql(dtp_venc.Date) + ',' +
-    data_sql(dtp_aviso.Date) + ',' +
+    str_venc + ',' +
+    str_aviso + ',' +
     cmb_categoria.Value + ',' +
     cmb_responsavel.Value + ',' +
+    str_dt_cump + ',' +
+    str_cump + ',' +
     quotedStr(mmo_descricao.Text) + ')');
 end;
 
@@ -196,6 +228,7 @@ begin
   carrega_combo_categoria(cmb_categoria);
   cmb_categoria.Value := intToStr(id_categoria);
   cmb_categoriaExit(Sender);
+  application.processmessages;
   edt_numero.SetFocus;
 end;
 
