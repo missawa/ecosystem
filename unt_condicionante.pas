@@ -73,10 +73,7 @@ begin
 
   cmb_categoriaExit(cmb_categoria);
 
-  if cumprida = 'S' then
-    str_cump := quotedStr('S')
-  else
-    str_cump := quotedStr('N');
+  str_cump := quotedStr('N');
 
   if dt_cump = 0 then
     str_dt_cump := 'null'
