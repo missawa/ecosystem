@@ -68,12 +68,14 @@ var
   str_venc: string;
   str_aviso: string;
   str_dt_cump: string;
-  str_cump: string;
 begin
 
   cmb_categoriaExit(cmb_categoria);
 
-  str_cump := quotedStr('N');
+  if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
+    cumprida := 'S'
+  else
+    cumprida := 'N';
 
   if dt_cump = 0 then
     str_dt_cump := 'null'
@@ -111,7 +113,7 @@ begin
     cmb_categoria.Value + ',' +
     cmb_responsavel.Value + ',' +
     str_dt_cump + ',' +
-    str_cump + ',' +
+    quotedStr(cumprida) + ',' +
     quotedStr(mmo_descricao.Text) + ')');
 end;
 
@@ -205,6 +207,7 @@ begin
     spn_prazo.Enabled := true;
     dtp_venc.Enabled := true;
     dtp_aviso.Enabled := true;
+    cumprida := 'N';
     spn_prazo.SetFocus;
   end;
 end;

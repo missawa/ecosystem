@@ -395,7 +395,7 @@ begin
       dse_condicionante.SQL.Text :=
         'select *                                                   '#13+
         'from condicionante                                         '#13+
-        'where id_licenca is null'
+        'where id_licenca is null                                   '
     else
       dse_condicionante.SQL.Text :=
         'select *                                                   '#13+

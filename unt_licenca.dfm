@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         40)
       object btn_ok: TSpeedButton
-        Left = 1230
+        Left = 1228
         Top = -2
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1242
       end
       object btnCancelar: TSpeedButton
-        Left = 1268
+        Left = 1266
         Top = -2
         Width = 36
         Height = 36
@@ -1675,7 +1675,8 @@ object frm_licenca: Tfrm_licenca
     SQL.Strings = (
       'select *'
       'from condicionante'
-      'where id_licenca = :id')
+      'where id_licenca = :id'
+      'order by numero')
     MasterSource = dts_licenca
     BeforeOpen = dse_condicionanteBeforeOpen
     BeforePost = dse_condicionanteBeforePost
@@ -1692,6 +1693,7 @@ object frm_licenca: Tfrm_licenca
         ParamType = ptInput
       end>
     object dse_condicionanteid: TIntegerField
+      AutoGenerateValue = arAutoInc
       FieldName = 'id'
     end
     object dse_condicionanteid_licenca: TIntegerField
