@@ -100,6 +100,9 @@
     <DCCReference Include="unt_senha.pas">
       <Form>frm_senha</Form>
     </DCCReference>
+    <DCCReference Include="unt_solicitar_prazo.pas">
+      <Form>frm_solicitar_prazo</Form>
+    </DCCReference>
     <DCCReference Include="unt_tipo_licenca.pas">
       <Form>frm_tipo_licenca</Form>
     </DCCReference>

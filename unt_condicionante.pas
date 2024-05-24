@@ -131,21 +131,9 @@ procedure Tfrm_condicionante.editar_condicionante;
 var
   str_venc: string;
   str_aviso: string;
-  str_dt_cump: string;
-  str_cump: string;
 begin
 
   cmb_categoriaExit(cmb_categoria);
-
-  if cumprida = 'S' then
-    str_cump := quotedStr('S')
-  else
-    str_cump := quotedStr('N');
-
-  if dt_cump = 0 then
-    str_dt_cump := 'null'
-  else
-    str_dt_cump := data_sql(dt_cump);
 
   if (dtp_venc.Text = '') or (dtp_venc.Text = '31/12/1899') then
     str_venc := 'null'
@@ -163,10 +151,8 @@ begin
     '    prazo = ' + intToStr(trunc(spn_prazo.Value)) + ','                     +#13+
     '    dt_venc = ' + str_venc + ','                                           +#13+
     '    dt_aviso = ' + str_aviso + ','                                         +#13+
-    '    dt_cumprimento = ' + str_dt_cump + ','                                 +#13+
     '    id_categoria = ' + cmb_categoria.Value + ','                           +#13+
     '    descricao = ' + quotedStr(mmo_descricao.Text) + ','                    +#13+
-    '    cumprida = ' + str_cump + ','                                          +#13+
     '    id_responsavel = ' + cmb_responsavel.Value                             +#13+
     'where id = ' + inttostr(id_condicionante));
 end;

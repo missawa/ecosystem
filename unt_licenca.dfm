@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         40)
       object btn_ok: TSpeedButton
-        Left = 1228
+        Left = 1226
         Top = -2
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1242
       end
       object btnCancelar: TSpeedButton
-        Left = 1266
+        Left = 1264
         Top = -2
         Width = 36
         Height = 36
@@ -1256,7 +1256,7 @@ object frm_licenca: Tfrm_licenca
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 66
-      Width = 693
+      Width = 775
       Height = 289
       ControlType.Strings = (
         'id_responsavel;CustomEdit;cmb_responsavel;F'
@@ -1268,8 +1268,9 @@ object frm_licenca: Tfrm_licenca
         'categoria'#9'12'#9'CATEGORIA'#9'F'
         'prazo'#9'3'#9'PRAZO'#9'F'
         'dt_aviso'#9'15'#9'AVISO'#9'F'
-        'dt_venc'#9'15'#9'VENCIMENTO'#9'F'
-        'dt_cumprimento'#9'15'#9'DT.CUMP.'#9'F'
+        'dt_venc'#9'12'#9'VENCIMENTO'#9'F'
+        'solic_prazo'#9'12'#9'SOLIC.'#9'F'
+        'dt_cumprimento'#9'12'#9'DT.CUMP.'#9'F'
         'id_responsavel'#9'12'#9'RESPONS'#193'VEL'#9'F'
         'Img_protocolo'#9'5'#9'PRO'#9'F'
         'cumprida'#9'2'#9'OK'#9'F')
@@ -1277,7 +1278,7 @@ object frm_licenca: Tfrm_licenca
       TitleColor = clBtnFace
       FixedCols = 0
       ShowHorzScrollBar = True
-      Align = alClient
+      Align = alLeft
       DataSource = dts_condicionante
       ReadOnly = True
       TabOrder = 2
@@ -1316,28 +1317,31 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 696
+      Left = 778
       Top = 66
-      Width = 629
+      Width = 547
       Height = 289
-      Align = alRight
+      Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
+      ExplicitLeft = 856
+      ExplicitWidth = 469
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 627
+        Width = 545
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
+        ExplicitWidth = 627
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 627
+        Width = 545
         Height = 266
         Align = alClient
         BevelInner = bvNone
@@ -1348,11 +1352,12 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
+        ExplicitWidth = 627
       end
     end
     object cmb_responsavel: TwwDBComboBox
-      Left = 67
-      Top = 140
+      Left = 75
+      Top = 180
       Width = 121
       Height = 23
       ShowButton = True
@@ -1447,8 +1452,16 @@ object frm_licenca: Tfrm_licenca
         ShowHint = True
         OnClick = btn_confirmarClick
       end
-      object btn_prot_cond: TToolButton
+      object btn_prazo: TToolButton
         Left = 248
+        Top = 0
+        Hint = 'Solicita'#231#227'o de Prazo'
+        Caption = 'btn_prazo'
+        ImageIndex = 19
+        OnClick = btn_prazoClick
+      end
+      object btn_prot_cond: TToolButton
+        Left = 295
         Top = 0
         Hint = 'Abrir Protocolo Carregado'
         Caption = 'btn_prot_cond'
@@ -1641,11 +1654,13 @@ object frm_licenca: Tfrm_licenca
       'INSERT INTO condicionante'
       
         '  (id, id_licenca, numero, descricao, cumprida, dt_venc, dt_cump' +
-        'rimento, dt_aviso, id_responsavel, id_executor)'
+        'rimento, dt_aviso, id_responsavel, id_executor, protocolo, id_ca' +
+        'tegoria, prazo, solic_prazo)'
       'VALUES'
       
         '  (:id, :id_licenca, :numero, :descricao, :cumprida, :dt_venc, :' +
-        'dt_cumprimento, :dt_aviso, :id_responsavel, :id_executor)')
+        'dt_cumprimento, :dt_aviso, :id_responsavel, :id_executor, :proto' +
+        'colo, :id_categoria, :prazo, :solic_prazo)')
     SQLDelete.Strings = (
       'DELETE FROM condicionante'
       'WHERE'
@@ -1657,14 +1672,16 @@ object frm_licenca: Tfrm_licenca
         '  id = :id, id_licenca = :id_licenca, numero = :numero, descrica' +
         'o = :descricao, cumprida = :cumprida, dt_venc = :dt_venc, dt_cum' +
         'primento = :dt_cumprimento, dt_aviso = :dt_aviso, id_responsavel' +
-        ' = :id_responsavel, id_executor = :id_executor'
+        ' = :id_responsavel, id_executor = :id_executor, protocolo = :pro' +
+        'tocolo, id_categoria = :id_categoria, prazo = :prazo, solic_praz' +
+        'o = :solic_prazo'
       'WHERE'
       '  id = :Old_id')
     SQLRefresh.Strings = (
       
         'SELECT id, id_licenca, numero, descricao, cumprida, dt_venc, dt_' +
-        'cumprimento, dt_aviso, id_responsavel, id_executor FROM condicio' +
-        'nante'
+        'cumprimento, dt_aviso, id_responsavel, id_executor, protocolo, i' +
+        'd_categoria, prazo, solic_prazo FROM condicionante'
       'WHERE'
       '  id = :id')
     SQLRecCount.Strings = (
@@ -1749,6 +1766,9 @@ object frm_licenca: Tfrm_licenca
       FieldKind = fkCalculated
       FieldName = 'Img_protocolo'
       Calculated = True
+    end
+    object dse_condicionantesolic_prazo: TDateField
+      FieldName = 'solic_prazo'
     end
   end
   object tra: TUniTransaction

@@ -21,6 +21,7 @@ uses
   function define_mascara_telefone(tel: string): string;
   function first_id(tabela: string; pk: string; filter: string): integer;
   function get_customer_folder(id: integer): string;
+  function get_customer_folder_lic(id_customer: integer; id_licenca: integer): string;
   function last_id(tabela: string; pk: string; filter: string): integer;
   function leap_year(year: word): boolean;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
@@ -659,7 +660,7 @@ begin
 
   handle := GetTopWindow(0);
   caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
-//  caminho := 'c:\multidev\clientes\' + intToStr(id);
+//  caminho := 'd:\multidev\clientes\' + intToStr(id);
 
   if not DirectoryExists(caminho) then
     try
@@ -704,6 +705,27 @@ begin
     6: result := IncMonth(venc, 24);
     7: result := IncMonth(venc, 36);
   end;
+end;
+
+function get_customer_folder_lic(
+  id_customer: integer;
+  id_licenca: integer): string;
+var
+  pst_cliente: string;
+  pst_licenca: string;
+begin
+
+  pst_cliente := get_customer_folder(id_customer);
+
+  if not DirectoryExists(pst_cliente) then
+    CreateDir(pst_cliente);
+
+  pst_licenca := pst_cliente + '\' + intToStr(id_licenca);
+
+  if not DirectoryExists(pst_licenca) then
+    CreateDir(pst_licenca);
+
+  result := pst_licenca + '\';
 end;
 
 end.

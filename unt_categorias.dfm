@@ -17,10 +17,13 @@ inherited frm_categorias: Tfrm_categorias
     ExplicitHeight = 466
     inherited grd: TwwDBGrid
       Width = 1169
+      ControlType.Strings = (
+        'criar_copia;CheckBox;S;N')
       Selected.Strings = (
-        'id'#9'10'#9'ID'
-        'nome'#9'45'#9'CATEGORIA'
-        'dias_recorrencia'#9'6'#9'DIAS')
+        'id'#9'10'#9'ID'#9#9
+        'nome'#9'45'#9'CATEGORIA'#9#9
+        'dias_recorrencia'#9'6'#9'DIAS'#9#9
+        'criar_copia'#9'1'#9'C'#211'P'#9#9)
       ExplicitWidth = 1169
     end
   end

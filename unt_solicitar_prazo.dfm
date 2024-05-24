@@ -1,35 +1,35 @@
-object frm_cumprir_cond: Tfrm_cumprir_cond
+object frm_solicitar_prazo: Tfrm_solicitar_prazo
   Left = 0
   Top = 0
-  Caption = 'Cumprir Condicionante'
-  ClientHeight = 232
-  ClientWidth = 458
-  Color = clWindow
-  Ctl3D = False
-  Font.Charset = ANSI_CHARSET
+  Caption = 'Solicitar Prazo'
+  ClientHeight = 136
+  ClientWidth = 219
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
-  Font.Name = 'Segoe UI'
+  Font.Height = -11
+  Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poOwnerFormCenter
   PixelsPerInch = 96
-  TextHeight = 17
+  TextHeight = 13
   object Panel2: TPanel
     Left = 0
-    Top = 196
-    Width = 458
+    Top = 100
+    Width = 219
     Height = 36
     Align = alBottom
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitTop = 196
+    ExplicitWidth = 458
     DesignSize = (
-      458
+      219
       36)
     object btnConfirmar: TSpeedButton
-      Left = 380
+      Left = 141
       Top = -2
       Width = 40
       Height = 40
@@ -193,7 +193,7 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
       ExplicitLeft = 226
     end
     object btnCancelar: TSpeedButton
-      Left = 418
+      Left = 179
       Top = -2
       Width = 40
       Height = 40
@@ -359,13 +359,13 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 458
+    Width = 219
     Height = 33
     Align = alTop
     Alignment = taLeftJustify
     BevelOuter = bvNone
     BorderStyle = bsSingle
-    Caption = '  CUMPRIR  CONDICIONANTE'
+    Caption = '  SOLICITAR PRAZO'
     Color = 12159842
     Ctl3D = False
     Font.Charset = ANSI_CHARSET
@@ -378,33 +378,29 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 458
   end
   object Panel1: TPanel
     Left = 0
     Top = 33
-    Width = 458
-    Height = 163
+    Width = 219
+    Height = 67
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 458
+    ExplicitHeight = 163
     object Label5: TLabel
       Left = 16
-      Top = 60
-      Width = 27
-      Height = 17
+      Top = 10
+      Width = 23
+      Height = 13
       Caption = 'Data'
     end
-    object Label2: TLabel
-      Left = 16
-      Top = 110
-      Width = 57
-      Height = 17
-      Caption = 'Protocolo'
-    end
-    object btn_doc: TSpeedButton
-      Left = 399
-      Top = 115
+    object SpeedButton1: TSpeedButton
+      Left = 151
+      Top = 12
       Width = 44
       Height = 35
       Glyph.Data = {
@@ -562,29 +558,13 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
       Spacing = -2
-      OnClick = btn_docClick
-    end
-    object Label1: TLabel
-      Left = 16
-      Top = 10
-      Width = 57
-      Height = 17
-      Caption = 'Categoria'
-      Enabled = False
-    end
-    object edt_protocolo: TEdit
-      Left = 16
-      Top = 127
-      Width = 377
-      Height = 23
-      BorderStyle = bsNone
-      TabOrder = 0
+      OnClick = SpeedButton1Click
     end
     object dtp_data: TwwDBDateTimePicker
       Left = 16
-      Top = 78
+      Top = 28
       Width = 121
-      Height = 23
+      Height = 19
       BorderStyle = bsNone
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
       CalendarAttributes.Font.Color = clWindowText
@@ -595,28 +575,7 @@ object frm_cumprir_cond: Tfrm_cumprir_cond
       Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
       Frame.NonFocusStyle = efsFrameSingle
       ShowButton = True
-      TabOrder = 1
-    end
-    object cmb_categoria: TwwDBComboBox
-      Left = 16
-      Top = 27
-      Width = 120
-      Height = 23
-      ShowButton = True
-      Style = csDropDownList
-      MapList = True
-      AllowClearKey = False
-      ShowMatchText = True
-      BorderStyle = bsNone
-      DropDownCount = 8
-      Enabled = False
-      ItemHeight = 0
-      Items.Strings = (
-        'Categoria 1'#9'1'
-        'Categoria 2'#9'2')
-      Sorted = False
-      TabOrder = 2
-      UnboundDataType = wwDefault
+      TabOrder = 0
     end
   end
 end

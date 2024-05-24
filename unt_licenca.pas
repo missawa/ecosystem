@@ -112,6 +112,8 @@ type
     btn_prot_cond: TToolButton;
     dse_condicionanteImg_protocolo: TBooleanField;
     btn_abrir_pasta: TSpeedButton;
+    dse_condicionantesolic_prazo: TDateField;
+    btn_prazo: TToolButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -136,9 +138,13 @@ type
     procedure btn_prot_condClick(Sender: TObject);
     procedure btn_prot_licClick(Sender: TObject);
     procedure btn_abrir_pastaClick(Sender: TObject);
+    procedure btn_prazoClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
+    procedure inf_sol_prazo;
+    procedure cumprir_condicionante;
+    procedure cancelar_cumprimento;
     { Private declarations }
   public
     procedure open_dataset(id_cliente: integer; id_atividade: integer);
@@ -151,7 +157,7 @@ implementation
 
 uses unt_procedures, unt_dtm_dados, unt_dtm_images, unt_cumprir_cond,
   unt_condicionante, unt_functions, unt_mensagem, unt_func_messages,
-  unt_dtm_geral;
+  unt_dtm_geral, unt_solicitar_prazo;
 
 {$R *.dfm}
 
@@ -202,6 +208,31 @@ begin
 end;
 
 procedure Tfrm_licenca.btn_confirmarClick(Sender: TObject);
+begin
+  if btn_confirmar.ImageIndex = 7 then
+    cumprir_condicionante
+  else
+    cancelar_cumprimento;
+end;
+
+procedure Tfrm_licenca.cancelar_cumprimento;
+var
+  id: integer;
+begin
+  if msg_quest('Confirma Cancelamento de Cumprimento?') then
+  begin
+    id := dse_condicionante.RecNo;
+    exec_sql(
+      'update condicionante                                                       '#13+
+      'set dt_cumprimento = null,                                                 '#13+
+      '    cumprida = ''N''                                                       '#13+
+      'where id = ' + dse_condicionanteId.AsString);
+    dse_condicionante.Refresh;
+    dse_condicionante.RecNo := id;
+  end;
+end;
+
+procedure Tfrm_licenca.cumprir_condicionante;
 var
   id: integer;
 begin
@@ -258,6 +289,41 @@ begin
     close;
   end;
 
+end;
+
+procedure Tfrm_licenca.btn_prazoClick(Sender: TObject);
+var
+  arq: string;
+begin
+  arq := get_customer_folder_lic(
+    dse_licencaId_cliente.AsInteger,
+    dse_licencaid.AsInteger) +
+    'Prazo_' + dse_condicionanteNumero.AsString + '.pdf';
+
+  if FileExists(arq) then
+    abrir_arquivo(arq)
+  else
+    inf_sol_prazo;
+
+end;
+
+procedure Tfrm_licenca.inf_sol_prazo;
+var
+  id: integer;
+begin
+  if msg_quest('Deseja informar Solicitação de Prazo?') then
+  begin
+    id := dse_condicionante.RecNo;
+
+    frm_solicitar_prazo.dtp_data.Date := date;
+    frm_solicitar_prazo.id_cliente := dse_licencaId_cliente.AsInteger;
+    frm_solicitar_prazo.id_licenca := dse_licencaId.AsInteger;
+    frm_solicitar_prazo.id_condicionante := dse_condicionanteId.AsInteger;
+    frm_solicitar_prazo.num_cond := dse_condicionanteNumero.Text;
+    frm_solicitar_prazo.ShowModal;
+    dse_condicionante.Refresh;
+    dse_condicionante.RecNo := id;
+  end;
 end;
 
 procedure Tfrm_licenca.btn_prot_condClick(Sender: TObject);
@@ -381,8 +447,19 @@ end;
 
 procedure Tfrm_licenca.dse_condicionanteAfterScroll(DataSet: TDataSet);
 begin
-  btn_confirmar.Enabled := dse_condicionanteCumprida.AsString <> 'S';
+
   btn_prot_cond.Enabled := trim(dse_condicionanteProtocolo.AsString)<> '';
+
+  if dse_condicionanteCumprida.AsString = 'S' then
+  begin
+    btn_confirmar.Hint := 'Cancelar Cumprimento de Condicionante';
+    btn_confirmar.ImageIndex := 20;
+  end
+  else
+  begin
+    btn_confirmar.Hint := 'Cumprir Condicionante';
+    btn_confirmar.ImageIndex := 7;
+  end;
 end;
 
 procedure Tfrm_licenca.dse_condicionanteBeforeOpen(DataSet: TDataSet);

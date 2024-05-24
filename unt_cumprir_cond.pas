@@ -17,7 +17,12 @@ uses
   Buttons,
   ExtCtrls,
   ShellApi,
-  wwdbdatetimepicker, Mask, wwdbedit, Wwdotdot, Wwdbcomb;
+  wwdbdatetimepicker,
+  Mask,
+  wwdbedit,
+  Wwdotdot,
+  Wwdbcomb,
+  Uni;
 
 type
   Tfrm_cumprir_cond = class(TForm)
@@ -30,14 +35,16 @@ type
     Label2: TLabel;
     edt_protocolo: TEdit;
     dtp_data: TwwDBDateTimePicker;
-    SpeedButton1: TSpeedButton;
+    btn_doc: TSpeedButton;
     Label1: TLabel;
     cmb_categoria: TwwDBComboBox;
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btn_docClick(Sender: TObject);
   private
+    arq: string;
     procedure cumprir;
+    procedure criar_copia_cond;
     { Private declarations }
   public
     id_cliente: integer;
@@ -57,7 +64,12 @@ var
 
 implementation
 
-uses unt_func_messages, unt_functions, unt_procedures, unt_dtm_geral;
+uses
+  unt_func_messages,
+  unt_functions,
+  unt_procedures,
+  unt_dtm_geral,
+  unt_dtm_dados;
 
 {$R *.dfm}
 
@@ -66,22 +78,33 @@ var
   prot: string;
 begin
 
-  prot := StringReplace(edt_protocolo.Text,'\','\\',[rfReplaceAll]);
+  try
+    CopyFile(
+      pchar(arq),
+      pchar(edt_protocolo.Text),
+      false);
 
-  exec_sql(
-    'update condicionante                                                       '#13+
-    'set protocolo = ' + quotedstr(prot) + ','                                  +#13+
-    '    dt_cumprimento = ' + data_sql(dtp_data.Date) + ','                     +#13+
-    '    cumprida = ''S''                                                       '#13+
-    'where id = ' + inttostr(id_condicionante));
-  close;
+    prot := StringReplace(edt_protocolo.Text,'\','\\',[rfReplaceAll]);
+
+    exec_sql(
+      'update condicionante                                                       '#13+
+      'set protocolo = ' + quotedstr(prot) + ','                                  +#13+
+      '    dt_cumprimento = ' + data_sql(dtp_data.Date) + ','                     +#13+
+      '    cumprida = ''S''                                                       '#13+
+      'where id = ' + inttostr(id_condicionante));
+
+    criar_copia_cond;
+    close;
+  except
+    on e:exception do msg_error('Erro ao cumprir condicionante'#13#13+e.message);
+
+  end;
 end;
 
-procedure Tfrm_cumprir_cond.SpeedButton1Click(Sender: TObject);
+procedure Tfrm_cumprir_cond.btn_docClick(Sender: TObject);
 var
   pst_cliente: string;
   pst_licenca: string;
-  arq: string;
 begin
 
   pst_cliente := get_customer_folder(id_cliente);
@@ -99,11 +122,6 @@ begin
   begin
     arq := dm_geral.open_dialog.filename;
     edt_protocolo.Text := pst_licenca + '\' + 'Cond_' + num_cond + '.pdf';
-    
-    CopyFile(
-      pchar(arq),
-      pchar(edt_protocolo.Text),
-      false)
   end;
 end;
 
@@ -112,10 +130,50 @@ begin
   close;
 end;
 
-procedure Tfrm_cumprir_cond.btnConfirmarClick(Sender: TObject);
+procedure Tfrm_cumprir_cond.criar_copia_cond;
 var
   novo_venc: TDate;
   num_lic: string;
+  q: TUniQuery;
+  criar: boolean;
+begin
+
+  q := TUniQuery.Create(nil);
+  q.Connection := dtm_dados.mysql_conn;
+
+  open_query(
+    q,
+    'select criar_copia from categoria where id = ' + intToStr(id_categoria));
+
+  if q.IsEmpty then
+    criar := false
+  else
+    criar := q.FieldByName('criar_copia').AsString = 'S';
+
+  if criar  then
+  begin
+    if msg_quest('Deseja criar uma cópia desta condicionante ' + cmb_categoria.Text + '?') then
+    begin
+      num_lic := input_texto('Número', num_cond);
+      novo_venc := proximo_vencimento(id_categoria, dt_venc);
+      nova_condicionante(
+        id_licenca,
+        num_lic,
+        prazo,
+        id_categoria,
+        id_responsavel,
+        cumprida,
+        0,
+        novo_venc,
+        decmonth(novo_venc),
+        descricao);
+    end;
+  end;
+  q.free;
+
+end;
+
+procedure Tfrm_cumprir_cond.btnConfirmarClick(Sender: TObject);
 begin
   if trim(edt_protocolo.Text) = '' then
   begin
@@ -125,29 +183,7 @@ begin
       msg_alert('Informe o número do protocolo');
   end
   else
-  begin
-    if id_categoria in [3,4,5,6,7]  then
-    begin
-      if msg_quest('Deseja criar uma cópia desta condicionante ' + cmb_categoria.Text + '?') then
-      begin
-        num_lic := input_texto('Número', num_cond);
-        novo_venc := proximo_vencimento(id_categoria, dt_venc);
-        nova_condicionante(
-          id_licenca,
-          num_lic,
-          prazo,
-          id_categoria,
-          id_responsavel,
-          cumprida,
-          0,
-          novo_venc,
-          decmonth(novo_venc),
-          descricao);
-      end;
-    end;
-
     cumprir;
-  end;
 end;
 
 end.
