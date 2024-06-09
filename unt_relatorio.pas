@@ -150,7 +150,9 @@ var
   aviso_lic: string;
   aviso_con: string;
   cli: string;
-  sit: string;
+  sit_lic: string;
+  sit_con: string;
+
 begin
 
   if (dtp_venc_ini.Text <> '') and (dtp_venc_fim.Text <> '') then
@@ -176,9 +178,22 @@ begin
   end;
 
   case cmb_situacao.ItemIndex of
-    0: sit := '';
-    1: sit := '    and c.cumprida = ''S''                                       '#13;
-    2: sit := '    and (c.cumprida = ''N'' or c.cumprida is null)               '#13;
+    0:
+      begin
+        sit_lic := '';
+        sit_con := '';
+      end;
+    1:
+      begin
+        sit_lic := '    and l.renovada = ''S''                                  '#13;
+        sit_con := '    and c.cumprida = ''S''                                  '#13;
+      end;
+
+    2:
+      begin
+        sit_lic := '    and (l.renovada = ''N'' or l.renovada is null)          '#13;
+        sit_con := '    and (c.cumprida = ''N'' or c.cumprida is null)          '#13;
+      end;
   end;
 
   if cmb_cliente.Text = '' then
@@ -208,6 +223,7 @@ begin
     cli +
     venc_lic +
     aviso_lic +
+    sit_lic +
     '                                     '#13+
     'union                                '#13+
     '                                     '#13+
@@ -233,7 +249,7 @@ begin
     cli +
     venc_con +
     aviso_con +
-    sit +
+    sit_con +
     'order by nome, id_licenca, dt_aviso';
 
   qry_01.Open;

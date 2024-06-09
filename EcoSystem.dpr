@@ -38,6 +38,7 @@ uses
   unt_municipio in 'unt_municipio.pas' {frm_municipio},
   unt_condicionante in 'unt_condicionante.pas' {frm_condicionante},
   unt_categorias in 'unt_categorias.pas' {frm_categorias},
+  unt_solicitar_desconsideracao in 'unt_solicitar_desconsideracao.pas' {frm_solicitar_desconsideracao},
   unt_solicitar_prazo in 'unt_solicitar_prazo.pas' {frm_solicitar_prazo};
 
 {$R *.res}
@@ -58,6 +59,7 @@ begin
   Application.CreateForm(Tfrm_input_texto, frm_input_texto);
   Application.CreateForm(Tfrm_cumprir_cond, frm_cumprir_cond);
   Application.CreateForm(Tfrm_condicionante, frm_condicionante);
+  Application.CreateForm(Tfrm_solicitar_desconsideracao, frm_solicitar_desconsideracao);
   Application.CreateForm(Tfrm_solicitar_prazo, frm_solicitar_prazo);
   Application.Run;
 end.

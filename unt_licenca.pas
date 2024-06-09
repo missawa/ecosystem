@@ -114,6 +114,9 @@ type
     btn_abrir_pasta: TSpeedButton;
     dse_condicionantesolic_prazo: TDateField;
     btn_prazo: TToolButton;
+    dse_licencarenovada: TStringField;
+    dse_condicionantesolic_desconsid: TDateField;
+    ToolButton1: TToolButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -139,12 +142,14 @@ type
     procedure btn_prot_licClick(Sender: TObject);
     procedure btn_abrir_pastaClick(Sender: TObject);
     procedure btn_prazoClick(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
     procedure inf_sol_prazo;
     procedure cumprir_condicionante;
     procedure cancelar_cumprimento;
+    procedure inf_sol_desconsid;
     { Private declarations }
   public
     procedure open_dataset(id_cliente: integer; id_atividade: integer);
@@ -157,7 +162,7 @@ implementation
 
 uses unt_procedures, unt_dtm_dados, unt_dtm_images, unt_cumprir_cond,
   unt_condicionante, unt_functions, unt_mensagem, unt_func_messages,
-  unt_dtm_geral, unt_solicitar_prazo;
+  unt_dtm_geral, unt_solicitar_prazo, unt_solicitar_desconsideracao;
 
 {$R *.dfm}
 
@@ -321,6 +326,25 @@ begin
     frm_solicitar_prazo.id_condicionante := dse_condicionanteId.AsInteger;
     frm_solicitar_prazo.num_cond := dse_condicionanteNumero.Text;
     frm_solicitar_prazo.ShowModal;
+    dse_condicionante.Refresh;
+    dse_condicionante.RecNo := id;
+  end;
+end;
+
+procedure Tfrm_licenca.inf_sol_desconsid;
+var
+  id: integer;
+begin
+  if msg_quest('Deseja informar Solicitação de Desconsideração?') then
+  begin
+    id := dse_condicionante.RecNo;
+
+    frm_solicitar_desconsideracao.dtp_data.Date := date;
+    frm_solicitar_desconsideracao.id_cliente := dse_licencaId_cliente.AsInteger;
+    frm_solicitar_desconsideracao.id_licenca := dse_licencaId.AsInteger;
+    frm_solicitar_desconsideracao.id_condicionante := dse_condicionanteId.AsInteger;
+    frm_solicitar_desconsideracao.num_cond := dse_condicionanteNumero.Text;
+    frm_solicitar_desconsideracao.ShowModal;
     dse_condicionante.Refresh;
     dse_condicionante.RecNo := id;
   end;
@@ -573,6 +597,23 @@ begin
     ReleaseCapture;
     self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end;
+end;
+
+procedure Tfrm_licenca.ToolButton1Click(Sender: TObject);
+var
+  arq: string;
+begin
+
+  arq := get_customer_folder_lic(
+    dse_licencaId_cliente.AsInteger,
+    dse_licencaid.AsInteger) +
+    'Desconsid_' + dse_condicionanteNumero.AsString + '.pdf';
+
+  if FileExists(arq) then
+    abrir_arquivo(arq)
+  else
+    inf_sol_desconsid;
+
 end;
 
 end.
