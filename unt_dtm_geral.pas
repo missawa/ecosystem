@@ -15,6 +15,10 @@ type
     { Public declarations }
   end;
 
+const
+  mdInsert = 1;
+  mdEdit = 2;
+
 var
   dm_geral: Tdm_geral;
 

@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         40)
       object btn_ok: TSpeedButton
-        Left = 1224
+        Left = 1222
         Top = -2
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1242
       end
       object btnCancelar: TSpeedButton
-        Left = 1262
+        Left = 1260
         Top = -2
         Width = 36
         Height = 36
@@ -1115,7 +1115,7 @@ object frm_licenca: Tfrm_licenca
         'id_orgao;CustomEdit;cmb_orgao;T'
         'assinatura;CustomEdit;edt_assinou;F'
         'id_municipio;CustomEdit;cmb_municipio;T'
-        'renovada;CheckBox;Yes;No')
+        'renovada;CheckBox;S;N')
       Selected.Strings = (
         'id_tipo_licenca'#9'9'#9'TIPO'#9'F'
         'id_orgao'#9'10'#9#211'RG'#195'O'#9'F'
@@ -1258,7 +1258,7 @@ object frm_licenca: Tfrm_licenca
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 66
-      Width = 830
+      Width = 842
       Height = 289
       ControlType.Strings = (
         'id_responsavel;CustomEdit;cmb_responsavel;F'
@@ -1320,31 +1320,31 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 833
+      Left = 845
       Top = 66
-      Width = 492
+      Width = 480
       Height = 289
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitLeft = 778
-      ExplicitWidth = 547
+      ExplicitLeft = 833
+      ExplicitWidth = 492
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 490
+        Width = 478
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
-        ExplicitWidth = 545
+        ExplicitWidth = 490
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 490
+        Width = 478
         Height = 266
         Align = alClient
         BevelInner = bvNone
@@ -1355,7 +1355,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitWidth = 545
+        ExplicitWidth = 490
       end
     end
     object cmb_responsavel: TwwDBComboBox
@@ -1463,12 +1463,13 @@ object frm_licenca: Tfrm_licenca
         ImageIndex = 19
         OnClick = btn_prazoClick
       end
-      object ToolButton1: TToolButton
+      object btn_solic_descosid: TToolButton
         Left = 295
         Top = 0
-        Caption = 'ToolButton1'
+        Hint = 'Solicita'#231#227'o de Desconsidera'#231#227'o'
+        Caption = 'btn_solic_descosid'
         ImageIndex = 21
-        OnClick = ToolButton1Click
+        OnClick = btn_solic_descosidClick
       end
       object btn_prot_cond: TToolButton
         Left = 342
@@ -1533,12 +1534,13 @@ object frm_licenca: Tfrm_licenca
       'INSERT INTO licenca'
       
         '  (id, id_tipo_licenca, id_atividade, id_orgao, numero, dt_ini, ' +
-        'dt_venc, id_cliente, id_municipio, descricao, processo)'
+        'dt_venc, assinatura, id_cliente, id_municipio, descricao, proces' +
+        'so, renovada)'
       'VALUES'
       
         '  (:id, :id_tipo_licenca, :id_atividade, :id_orgao, :numero, :dt' +
-        '_ini, :dt_venc, :id_cliente, :id_municipio, :descricao, :process' +
-        'o)')
+        '_ini, :dt_venc, :assinatura, :id_cliente, :id_municipio, :descri' +
+        'cao, :processo, :renovada)')
     SQLDelete.Strings = (
       'DELETE FROM licenca'
       'WHERE'
@@ -1549,15 +1551,16 @@ object frm_licenca: Tfrm_licenca
       
         '  id = :id, id_tipo_licenca = :id_tipo_licenca, id_atividade = :' +
         'id_atividade, id_orgao = :id_orgao, numero = :numero, dt_ini = :' +
-        'dt_ini, dt_venc = :dt_venc, id_cliente = :id_cliente, id_municip' +
-        'io = :id_municipio, descricao = :descricao, processo = :processo'
+        'dt_ini, dt_venc = :dt_venc, assinatura = :assinatura, id_cliente' +
+        ' = :id_cliente, id_municipio = :id_municipio, descricao = :descr' +
+        'icao, processo = :processo, renovada = :renovada'
       'WHERE'
       '  id = :Old_id')
     SQLRefresh.Strings = (
       
         'SELECT id, id_tipo_licenca, id_atividade, id_orgao, numero, dt_i' +
-        'ni, dt_venc, id_cliente, id_municipio, descricao, processo FROM ' +
-        'licenca'
+        'ni, dt_venc, assinatura, id_cliente, id_municipio, descricao, pr' +
+        'ocesso, renovada FROM licenca'
       'WHERE'
       '  id = :id')
     SQLRecCount.Strings = (
@@ -1578,12 +1581,10 @@ object frm_licenca: Tfrm_licenca
       item
         DataType = ftUnknown
         Name = 'id_cliente'
-        Value = Null
       end
       item
         DataType = ftUnknown
         Name = 'id_atividade'
-        Value = Null
       end>
     object dse_licencaid: TIntegerField
       FieldName = 'id'

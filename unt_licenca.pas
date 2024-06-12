@@ -116,7 +116,7 @@ type
     btn_prazo: TToolButton;
     dse_licencarenovada: TStringField;
     dse_condicionantesolic_desconsid: TDateField;
-    ToolButton1: TToolButton;
+    btn_solic_descosid: TToolButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -142,7 +142,7 @@ type
     procedure btn_prot_licClick(Sender: TObject);
     procedure btn_abrir_pastaClick(Sender: TObject);
     procedure btn_prazoClick(Sender: TObject);
-    procedure ToolButton1Click(Sender: TObject);
+    procedure btn_solic_descosidClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
@@ -193,6 +193,8 @@ begin
   frm_condicionante.dtp_venc.Date := dse_condicionanteDt_venc.AsDateTime;
   frm_condicionante.cmb_responsavel.Value := dse_condicionanteId_responsavel.AsString;
   frm_condicionante.mmo_descricao.Lines.Text := dse_condicionanteDescricao.AsString;
+  frm_condicionante.modo := mdEdit;
+
   frm_condicionante.ShowModal;
   dse_condicionante.Refresh;
   dse_condicionante.RecNo := id;
@@ -275,6 +277,7 @@ begin
   frm_condicionante.cmb_responsavel.Clear;
   frm_condicionante.cmb_categoria.Clear;
   frm_condicionante.mmo_descricao.Lines.Clear;
+  frm_condicionante.modo := mdInsert;
   frm_condicionante.ShowModal;
   dse_condicionante.Refresh;
   dse_condicionante.Last;
@@ -599,7 +602,7 @@ begin
   end;
 end;
 
-procedure Tfrm_licenca.ToolButton1Click(Sender: TObject);
+procedure Tfrm_licenca.btn_solic_descosidClick(Sender: TObject);
 var
   arq: string;
 begin

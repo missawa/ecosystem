@@ -42,6 +42,7 @@ type
     procedure nova_condicionante;
     { Private declarations }
   public
+    modo: integer;
     id_condicionante: integer;
     id_licenca: integer;
     id_categoria: integer;
@@ -54,7 +55,7 @@ var
 
 implementation
 
-uses unt_procedures, unt_functions;
+uses unt_procedures, unt_functions, unt_dtm_geral;
 
 {$R *.dfm}
 
@@ -213,9 +214,12 @@ procedure Tfrm_condicionante.FormShow(Sender: TObject);
 begin
   carrega_combo_categoria(cmb_categoria);
   cmb_categoria.Value := intToStr(id_categoria);
-  cmb_categoriaExit(Sender);
-  application.processmessages;
-  edt_numero.SetFocus;
+  if modo = mdInsert then
+  begin
+    cmb_categoriaExit(Sender);
+    application.processmessages;
+    edt_numero.SetFocus;
+  end;
 end;
 
 end.

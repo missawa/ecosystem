@@ -44,7 +44,7 @@ object dtm_dados: Tdtm_dados
       'ODBC.DetectFieldsOnPrepare=True')
     DefaultTransaction = mysql_tran
     Username = 'root'
-    Server = 'ecoserver'
+    Server = 'ecoplan'
     Connected = True
     LoginPrompt = False
     BeforeConnect = mysql_connBeforeConnect
