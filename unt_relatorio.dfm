@@ -343,7 +343,7 @@ object frm_relatorio: Tfrm_relatorio
       457
       31)
     object btn_fechar: TSpeedButton
-      Left = 412
+      Left = 410
       Top = -5
       Width = 42
       Height = 38
@@ -520,7 +520,7 @@ object frm_relatorio: Tfrm_relatorio
       '    0 as condicionante,'
       '    l.descricao,'
       '    l.dt_venc,'
-      '    '
+      '    0 as id_responsavel,'
       '    null as dt_aviso'
       'from pessoa p'
       #9'left join licenca l'
@@ -540,6 +540,7 @@ object frm_relatorio: Tfrm_relatorio
       '    c.numero as condicionante,'
       '    c.descricao,'
       '    c.dt_venc,'
+      '    c.id_responsavel,'
       '    c.dt_aviso'
       'from pessoa p'
       #9'left join licenca l'
@@ -639,6 +640,14 @@ object frm_relatorio: Tfrm_relatorio
       DataType = dtDate
       DisplayWidth = 10
       Position = 9
+    end
+    object pip_01ppField11: TppField
+      FieldAlias = 'id_responsavel'
+      FieldName = 'id_responsavel'
+      FieldLength = 10
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 10
     end
   end
   object rel_01: TppReport
@@ -2719,7 +2728,7 @@ object frm_relatorio: Tfrm_relatorio
         mmHeight = 3969
         mmLeft = 15610
         mmTop = 529
-        mmWidth = 37306
+        mmWidth = 17727
         BandType = 4
       end
       object ppDBText2: TppDBText
@@ -2852,6 +2861,28 @@ object frm_relatorio: Tfrm_relatorio
         mmLeft = 114200
         mmTop = 529
         mmWidth = 7874
+        BandType = 4
+      end
+      object ppDBText3: TppDBText
+        UserName = 'txt_resp'
+        OnGetText = ppDBText1GetText
+        Border.BorderPositions = []
+        Border.Color = clBlack
+        Border.Style = psSolid
+        Border.Visible = False
+        DataField = 'id_responsavel'
+        DataPipeline = pip_01
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Calibri'
+        Font.Size = 9
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'pip_01'
+        mmHeight = 3969
+        mmLeft = 41010
+        mmTop = 529
+        mmWidth = 17727
         BandType = 4
       end
     end
@@ -3050,7 +3081,18 @@ object frm_relatorio: Tfrm_relatorio
         616E7461736961203A3D2027273B0D0A202020200D0A202054657874203A3D20
         7069705F30315B276E6F6D65275D202B2066616E7461736961203B0D0A656E64
         3B0D0A0D436F6D706F6E656E744E616D6506087478745F6E6F6D65094576656E
-        744E616D6506094F6E47657454657874074576656E74494402350000}
+        744E616D6506094F6E47657454657874074576656E74494402350001060F5472
+        614576656E7448616E646C65720B50726F6772616D4E616D6506117478745F72
+        6573704F6E476574546578740B50726F6772616D54797065070B747450726F63
+        656475726506536F7572636506C370726F636564757265207478745F72657370
+        4F6E476574546578742876617220546578743A20537472696E67293B0D0A6265
+        67696E0D0A0D0A202063617365207069705F30315B2769645F726573706F6E73
+        6176656C275D206F660D0A20202020303A2054657874203A3D2027273B0D0A20
+        202020313A2054657874203A3D2027524553503A2045434F504C414E273B0D0A
+        20202020323A2054657874203A3D2027524553503A20434C49454E5445273B0D
+        0A2020656E643B0D0A0D0A656E643B0D0A0D436F6D706F6E656E744E616D6506
+        087478745F72657370094576656E744E616D6506094F6E476574546578740745
+        76656E74494402350000}
     end
     object ppParameterList1: TppParameterList
     end

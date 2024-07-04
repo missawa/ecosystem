@@ -60,6 +60,8 @@ type
     ppGroupFooterBand1: TppGroupFooterBand;
     ppLine1: TppLine;
     ppImage1: TppImage;
+    ppDBText3: TppDBText;
+    pip_01ppField11: TppField;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

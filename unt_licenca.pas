@@ -27,7 +27,7 @@ uses
   MemDS,
   DBAccess,
   Uni,
-  ADODB, Buttons, ComCtrls, ToolWin;
+  ADODB, Buttons, ComCtrls, ToolWin, Menus;
 
 type
   Tfrm_licenca = class(TForm)
@@ -36,9 +36,6 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     grd: TwwDBGrid;
-    pnl_desc_licenca: TPanel;
-    pnl_tit_desc_licenca: TPanel;
-    mmo_desc_licenca: TDBMemo;
     cmb_tipo: TwwDBLookupCombo;
     cmb_orgao: TwwDBLookupCombo;
     cmb_municipio: TwwDBLookupCombo;
@@ -80,7 +77,6 @@ type
     btnCancelar: TSpeedButton;
     btn_nova: TToolButton;
     ToolButton2: TToolButton;
-    btn_recarregar: TSpeedButton;
     dse_condicionanteid: TIntegerField;
     dse_condicionanteid_licenca: TIntegerField;
     dse_condicionantenumero: TStringField;
@@ -108,15 +104,25 @@ type
     dse_licencaprocesso: TStringField;
     btn_excluir: TToolButton;
     dse_condicionanteprazo: TIntegerField;
-    btn_prot_lic: TSpeedButton;
     btn_prot_cond: TToolButton;
     dse_condicionanteImg_protocolo: TBooleanField;
-    btn_abrir_pasta: TSpeedButton;
     dse_condicionantesolic_prazo: TDateField;
     btn_prazo: TToolButton;
     dse_licencarenovada: TStringField;
     dse_condicionantesolic_desconsid: TDateField;
     btn_solic_descosid: TToolButton;
+    dse_licencaprazo: TIntegerField;
+    dse_licencadt_solic: TDateField;
+    pop_abrir: TPopupMenu;
+    pop_carregar: TPopupMenu;
+    mnu_load_licenca: TMenuItem;
+    mnu_open_licen: TMenuItem;
+    mnu_open_solic: TMenuItem;
+    toolbar: TToolBar;
+    btn_recarregar: TToolButton;
+    ToolButton1: TToolButton;
+    ToolButton3: TToolButton;
+    mnu_load_solic: TMenuItem;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -139,10 +145,12 @@ type
     procedure dse_condicionanteAfterScroll(DataSet: TDataSet);
     procedure btn_excluirClick(Sender: TObject);
     procedure btn_prot_condClick(Sender: TObject);
-    procedure btn_prot_licClick(Sender: TObject);
-    procedure btn_abrir_pastaClick(Sender: TObject);
+    procedure mnu_load_licencaClick(Sender: TObject);
+    procedure mnu_open_licenClick(Sender: TObject);
     procedure btn_prazoClick(Sender: TObject);
     procedure btn_solic_descosidClick(Sender: TObject);
+    procedure mnu_load_solicClick(Sender: TObject);
+    procedure mnu_open_solicClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
@@ -206,12 +214,20 @@ begin
     dse_condicionante.Delete;
 end;
 
-procedure Tfrm_licenca.btn_abrir_pastaClick(Sender: TObject);
+procedure Tfrm_licenca.mnu_open_licenClick(Sender: TObject);
 var
   pst_cliente: string;
 begin
   pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
   abrir_arquivo(pst_cliente + '\' + dse_licencaId.AsString + '\Lic_' + dse_licencaId.AsString + '.pdf');
+end;
+
+procedure Tfrm_licenca.mnu_open_solicClick(Sender: TObject);
+var
+  pst_cliente: string;
+begin
+  pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
+  abrir_arquivo(pst_cliente + '\' + dse_licencaId.AsString + '\Solic_' + dse_licencaId.AsString + '.pdf');
 end;
 
 procedure Tfrm_licenca.btn_confirmarClick(Sender: TObject);
@@ -361,7 +377,7 @@ begin
     abrir_arquivo(dse_condicionanteProtocolo.Text);
 end;
 
-procedure Tfrm_licenca.btn_prot_licClick(Sender: TObject);
+procedure Tfrm_licenca.mnu_load_licencaClick(Sender: TObject);
 var
   pst_cliente: string;
   pst_licenca: string;
@@ -414,7 +430,71 @@ begin
       if msg_quest(msg) then
         carregar
       else
-        btn_abrir_pasta.Click;
+        mnu_open_licen.Click;
+    end
+    else
+      carregar;
+
+  except
+    on e:exception do msg_error(e.message);
+  end;
+
+end;
+
+procedure Tfrm_licenca.mnu_load_solicClick(Sender: TObject);
+var
+  pst_cliente: string;
+  pst_licenca: string;
+  arq: string;
+  arq_lic: string;
+  msg: string;
+
+  procedure carregar;
+  begin
+    pst_cliente := get_customer_folder(dse_licencaId_cliente.AsInteger);
+
+    if not DirectoryExists(pst_cliente) then
+      CreateDir(pst_cliente);
+
+    pst_licenca := pst_cliente + '\' + intToStr(dse_licencaId.AsInteger);
+
+    if not DirectoryExists(pst_licenca) then
+      CreateDir(pst_licenca);
+
+    dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+    if dm_geral.open_dialog.execute then
+    begin
+      arq := dm_geral.open_dialog.filename;
+      arq_lic := pst_licenca + '\' + 'Solic_' + intToStr(dse_licencaId.AsInteger)  + '.pdf';
+
+      msg_info('Origem: ' + arq +#13+'Destino: ' + arq_lic);
+
+      try
+        CopyFile(
+          pchar(arq),
+          pchar(arq_lic),
+          false)
+      except
+        on e:exception do msg_error(e.message);
+      end;
+    end;
+
+  end;
+
+begin
+  try
+
+    arq := get_customer_folder(dse_licencaId_cliente.AsInteger) + '\' + dse_licencaId.AsString + '\Solic_' + dse_licencaId.AsString + '.pdf';
+
+    if FileExists(pchar(arq)) then
+    begin
+
+      msg := 'Deseja substituir o arquivo da Solicitação que já existe?';
+
+      if msg_quest(msg) then
+        carregar
+      else
+        mnu_open_licen.Click;
     end
     else
       carregar;
