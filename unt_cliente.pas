@@ -32,7 +32,7 @@ uses
   Provider,
   MemDS,
   DBAccess,
-  Uni, Buttons;
+  Uni, Buttons, wwdbdatetimepicker;
 
 type
   Tfrm_cliente = class(TForm)
@@ -145,6 +145,18 @@ type
     dse_clienteusuario: TStringField;
     dse_clienteobs: TMemoField;
     dse_clientesituacao: TStringField;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Label12: TLabel;
+    wwDBDateTimePicker1: TwwDBDateTimePicker;
+    Label13: TLabel;
+    wwDBDateTimePicker2: TwwDBDateTimePicker;
+    Label14: TLabel;
+    wwDBDateTimePicker3: TwwDBDateTimePicker;
+    dse_clientedt_venc_anp: TDateField;
+    dse_clientedt_venc_modal_rod: TDateField;
+    dse_clientedt_venc_cert_reg: TDateField;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);

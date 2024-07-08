@@ -2,7 +2,7 @@ object frm_cliente: Tfrm_cliente
   Left = 0
   Top = 0
   Caption = 'Clientes'
-  ClientHeight = 546
+  ClientHeight = 643
   ClientWidth = 1184
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -737,9 +737,9 @@ object frm_cliente: Tfrm_cliente
   end
   object pnl_obs: TPanel
     Left = 0
-    Top = 403
+    Top = 484
     Width = 1184
-    Height = 143
+    Height = 159
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
@@ -749,6 +749,8 @@ object frm_cliente: Tfrm_cliente
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
+    ExplicitTop = 536
+    ExplicitHeight = 107
     object pnl_tit_obs: TPanel
       Left = 3
       Top = 3
@@ -775,7 +777,7 @@ object frm_cliente: Tfrm_cliente
       Left = 3
       Top = 23
       Width = 1178
-      Height = 117
+      Height = 133
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
@@ -787,20 +789,22 @@ object frm_cliente: Tfrm_cliente
       ParentBackground = False
       ParentCtl3D = False
       TabOrder = 1
+      ExplicitHeight = 117
       object Panel5: TPanel
         Left = 10
         Top = 10
         Width = 1156
-        Height = 95
+        Height = 111
         Align = alClient
         BevelInner = bvRaised
         BevelOuter = bvLowered
         TabOrder = 0
+        ExplicitHeight = 95
         object rce_obs: TwwDBRichEdit
           Left = 2
           Top = 2
           Width = 1152
-          Height = 91
+          Height = 107
           Align = alClient
           AutoURLDetect = False
           BorderStyle = bsNone
@@ -831,6 +835,7 @@ object frm_cliente: Tfrm_cliente
           PrintFooter.Font.Name = 'Tahoma'
           PrintFooter.Font.Style = []
           RichEditVersion = 2
+          ExplicitHeight = 91
           Data = {
             800000007B5C727466315C616E73695C616E7369637067313235325C64656666
             305C6465666C616E67313034367B5C666F6E7474626C7B5C66305C666E696C5C
@@ -1010,6 +1015,143 @@ object frm_cliente: Tfrm_cliente
     TabOrder = 5
     OnMouseDown = pnlTituloMouseDown
   end
+  object Panel6: TPanel
+    Left = 0
+    Top = 403
+    Width = 1184
+    Height = 81
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWhite
+    Padding.Left = 3
+    Padding.Top = 3
+    Padding.Right = 3
+    Padding.Bottom = 3
+    ParentBackground = False
+    TabOrder = 6
+    object Panel7: TPanel
+      Left = 3
+      Top = 3
+      Width = 1178
+      Height = 20
+      Align = alTop
+      Alignment = taLeftJustify
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      Caption = ' VENCIMENTOS'
+      Color = 12159842
+      Ctl3D = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentBackground = False
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
+      ExplicitTop = 2
+    end
+    object Panel8: TPanel
+      Left = 3
+      Top = 23
+      Width = 1178
+      Height = 55
+      Align = alClient
+      BevelOuter = bvNone
+      BorderStyle = bsSingle
+      Ctl3D = False
+      Padding.Left = 10
+      Padding.Top = 10
+      Padding.Right = 10
+      Padding.Bottom = 10
+      ParentBackground = False
+      ParentCtl3D = False
+      TabOrder = 1
+      ExplicitHeight = 107
+      object Label12: TLabel
+        Left = 12
+        Top = 5
+        Width = 25
+        Height = 17
+        Caption = 'ANP'
+      end
+      object Label13: TLabel
+        Left = 138
+        Top = 5
+        Width = 106
+        Height = 17
+        Caption = 'Modal Rodovi'#225'rio'
+      end
+      object Label14: TLabel
+        Left = 264
+        Top = 5
+        Width = 109
+        Height = 17
+        Caption = 'Cert. Regularidade'
+      end
+      object wwDBDateTimePicker1: TwwDBDateTimePicker
+        Left = 10
+        Top = 22
+        Width = 120
+        Height = 23
+        BorderStyle = bsNone
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'Tahoma'
+        CalendarAttributes.Font.Style = []
+        DataField = 'dt_venc_anp'
+        DataSource = dts_cliente
+        Epoch = 1950
+        Frame.Enabled = True
+        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.NonFocusStyle = efsFrameEtched
+        ShowButton = True
+        TabOrder = 0
+      end
+      object wwDBDateTimePicker2: TwwDBDateTimePicker
+        Left = 136
+        Top = 22
+        Width = 120
+        Height = 23
+        BorderStyle = bsNone
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'Tahoma'
+        CalendarAttributes.Font.Style = []
+        DataField = 'dt_venc_modal_rod'
+        DataSource = dts_cliente
+        Epoch = 1950
+        Frame.Enabled = True
+        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.NonFocusStyle = efsFrameEtched
+        ShowButton = True
+        TabOrder = 1
+      end
+      object wwDBDateTimePicker3: TwwDBDateTimePicker
+        Left = 262
+        Top = 22
+        Width = 120
+        Height = 23
+        BorderStyle = bsNone
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'Tahoma'
+        CalendarAttributes.Font.Style = []
+        DataField = 'dt_venc_cert_reg'
+        DataSource = dts_cliente
+        Epoch = 1950
+        Frame.Enabled = True
+        Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
+        Frame.NonFocusStyle = efsFrameEtched
+        ShowButton = True
+        TabOrder = 2
+      end
+    end
+  end
   object dts_endereco: TDataSource
     DataSet = dse_endereco
     Left = 1100
@@ -1043,11 +1185,13 @@ object frm_cliente: Tfrm_cliente
       'INSERT INTO pessoa'
       
         '  (id, tipo, cpf, cnpj, nome, fantasia, cliente, fornecedor, usu' +
-        'ario, obs, situacao)'
+        'ario, obs, situacao, dt_venc_anp, dt_venc_modal_rod, dt_venc_cer' +
+        't_reg)'
       'VALUES'
       
         '  (:id, :tipo, :cpf, :cnpj, :nome, :fantasia, :cliente, :fornece' +
-        'dor, :usuario, :obs, :situacao)')
+        'dor, :usuario, :obs, :situacao, :dt_venc_anp, :dt_venc_modal_rod' +
+        ', :dt_venc_cert_reg)')
     SQLDelete.Strings = (
       'DELETE FROM pessoa'
       'WHERE'
@@ -1058,13 +1202,16 @@ object frm_cliente: Tfrm_cliente
       
         '  id = :id, tipo = :tipo, cpf = :cpf, cnpj = :cnpj, nome = :nome' +
         ', fantasia = :fantasia, cliente = :cliente, fornecedor = :fornec' +
-        'edor, usuario = :usuario, obs = :obs, situacao = :situacao'
+        'edor, usuario = :usuario, obs = :obs, situacao = :situacao, dt_v' +
+        'enc_anp = :dt_venc_anp, dt_venc_modal_rod = :dt_venc_modal_rod, ' +
+        'dt_venc_cert_reg = :dt_venc_cert_reg'
       'WHERE'
       '  id = :Old_id')
     SQLRefresh.Strings = (
       
         'SELECT id, tipo, cpf, cnpj, nome, fantasia, cliente, fornecedor,' +
-        ' usuario, obs, situacao FROM pessoa'
+        ' usuario, obs, situacao, dt_venc_anp, dt_venc_modal_rod, dt_venc' +
+        '_cert_reg FROM pessoa'
       'WHERE'
       '  id = :id')
     SQLRecCount.Strings = (
@@ -1088,7 +1235,6 @@ object frm_cliente: Tfrm_cliente
       item
         DataType = ftUnknown
         Name = 'id'
-        Value = Null
       end>
     object dse_clienteid: TIntegerField
       FieldName = 'id'
@@ -1137,6 +1283,15 @@ object frm_cliente: Tfrm_cliente
       FieldName = 'situacao'
       FixedChar = True
       Size = 1
+    end
+    object dse_clientedt_venc_anp: TDateField
+      FieldName = 'dt_venc_anp'
+    end
+    object dse_clientedt_venc_modal_rod: TDateField
+      FieldName = 'dt_venc_modal_rod'
+    end
+    object dse_clientedt_venc_cert_reg: TDateField
+      FieldName = 'dt_venc_cert_reg'
     end
   end
   object dse_endereco: TUniQuery
