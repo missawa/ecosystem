@@ -149,14 +149,17 @@ type
     Panel7: TPanel;
     Panel8: TPanel;
     Label12: TLabel;
-    wwDBDateTimePicker1: TwwDBDateTimePicker;
+    dtp_anp: TwwDBDateTimePicker;
     Label13: TLabel;
-    wwDBDateTimePicker2: TwwDBDateTimePicker;
+    dtp_modal_rod: TwwDBDateTimePicker;
     Label14: TLabel;
-    wwDBDateTimePicker3: TwwDBDateTimePicker;
+    dtp_cert_reg: TwwDBDateTimePicker;
     dse_clientedt_venc_anp: TDateField;
     dse_clientedt_venc_modal_rod: TDateField;
     dse_clientedt_venc_cert_reg: TDateField;
+    btn_anp: TSpeedButton;
+    btn_modal_rod: TSpeedButton;
+    btn_cert_reg: TSpeedButton;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
@@ -196,6 +199,9 @@ type
     procedure cmb_bairroExit(Sender: TObject);
     procedure btn_bairroClick(Sender: TObject);
     procedure btn_pastaClick(Sender: TObject);
+    procedure btn_anpClick(Sender: TObject);
+    procedure btn_modal_rodClick(Sender: TObject);
+    procedure btn_cert_regClick(Sender: TObject);
   protected
     //procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -221,7 +227,7 @@ uses
   unt_functions,
   unt_integracao,
   unt_proc_abrir_telas,
-  unt_procedures, unt_dtm_images;
+  unt_procedures, unt_dtm_images, unt_dtm_geral;
 
 {$R *.dfm}
 
@@ -232,6 +238,73 @@ begin
   BorderStyle := bsNone;
   BorderWidth := 0;
 end;}
+
+procedure Tfrm_cliente.btn_anpClick(Sender: TObject);
+var
+  pst_cliente: string;
+  arq: string;
+  arq_anp: string;
+  msg: string;
+  data: TDate;
+
+  procedure carregar;
+  begin
+
+    data := input_data;
+
+    if not DirectoryExists(pst_cliente) then
+      CreateDir(pst_cliente);
+
+    dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+
+    if dm_geral.open_dialog.execute then
+    begin
+      arq := dm_geral.open_dialog.filename;
+
+      msg_info('Origem: ' + arq +#13+'Destino: ' + arq_anp);
+
+      try
+        CopyFile(
+          pchar(arq),
+          pchar(arq_anp),
+          false)
+      except
+        on e:exception do msg_error(e.message);
+      end;
+    end;
+
+    dse_cliente.Edit;
+    dse_clientedt_venc_anp.AsDateTime := data;
+    dse_cliente.Post;
+
+  end;
+
+begin
+  try
+
+    pst_cliente := get_customer_folder(dse_clienteid.AsInteger) + '\';
+
+    arq_anp := pst_cliente + 'ANP_' + dse_clienteid.AsString + '.pdf';
+
+    if FileExists(pchar(arq)) then
+    begin
+
+      msg := 'Deseja substituir o arquivo da ANP que já existe?';
+
+      if msg_quest(msg) then
+        carregar
+      else
+        abrir_arquivo(arq_anp);
+    end
+    else
+      carregar;
+
+  except
+    on e:exception do msg_error(e.message);
+  end;
+
+
+end;
 
 procedure Tfrm_cliente.btn_anteriorClick(Sender: TObject);
 begin
@@ -251,6 +324,73 @@ end;
 procedure Tfrm_cliente.btn_cancelarClick(Sender: TObject);
 begin
   dse_cliente.Cancel;
+end;
+
+procedure Tfrm_cliente.btn_cert_regClick(Sender: TObject);
+var
+  pst_cliente: string;
+  arq: string;
+  arq_reg: string;
+  msg: string;
+  data: TDate;
+
+  procedure carregar;
+  begin
+
+    data := input_data;
+
+    if not DirectoryExists(pst_cliente) then
+      CreateDir(pst_cliente);
+
+    dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+
+    if dm_geral.open_dialog.execute then
+    begin
+      arq := dm_geral.open_dialog.filename;
+
+      msg_info('Origem: ' + arq +#13+'Destino: ' + arq_reg);
+
+      try
+        CopyFile(
+          pchar(arq),
+          pchar(arq_reg),
+          false)
+      except
+        on e:exception do msg_error(e.message);
+      end;
+    end;
+
+    dse_cliente.Edit;
+    dse_clientedt_venc_cert_reg.AsDateTime := data;
+    dse_cliente.Post;
+
+  end;
+
+begin
+  try
+
+    pst_cliente := get_customer_folder(dse_clienteid.AsInteger) + '\';
+
+    arq_reg := pst_cliente + 'CR_' + dse_clienteid.AsString + '.pdf';
+
+    if FileExists(pchar(arq)) then
+    begin
+
+      msg := 'Deseja substituir o arquivo do Certificado de Regularidade que já existe?';
+
+      if msg_quest(msg) then
+        carregar
+      else
+        abrir_arquivo(arq_reg);
+    end
+    else
+      carregar;
+
+  except
+    on e:exception do msg_error(e.message);
+  end;
+
+
 end;
 
 procedure Tfrm_cliente.btn_editarClick(Sender: TObject);
@@ -289,6 +429,73 @@ begin
   except
     on e:exception do msg_error('Erro 8755: ' + e.message);
   end;
+end;
+
+procedure Tfrm_cliente.btn_modal_rodClick(Sender: TObject);
+var
+  pst_cliente: string;
+  arq: string;
+  arq_modal: string;
+  msg: string;
+  data: TDate;
+
+  procedure carregar;
+  begin
+
+    data := input_data;
+
+    if not DirectoryExists(pst_cliente) then
+      CreateDir(pst_cliente);
+
+    dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
+
+    if dm_geral.open_dialog.execute then
+    begin
+      arq := dm_geral.open_dialog.filename;
+
+      msg_info('Origem: ' + arq +#13+'Destino: ' + arq_modal);
+
+      try
+        CopyFile(
+          pchar(arq),
+          pchar(arq_modal),
+          false)
+      except
+        on e:exception do msg_error(e.message);
+      end;
+    end;
+
+    dse_cliente.Edit;
+    dse_clientedt_venc_modal_rod.AsDateTime := data;
+    dse_cliente.Post;
+
+  end;
+
+begin
+  try
+
+    pst_cliente := get_customer_folder(dse_clienteid.AsInteger) + '\';
+
+    arq_modal := pst_cliente + 'MR_' + dse_clienteid.AsString + '.pdf';
+
+    if FileExists(pchar(arq)) then
+    begin
+
+      msg := 'Deseja substituir o arquivo do Modal Rodoviário que já existe?';
+
+      if msg_quest(msg) then
+        carregar
+      else
+        abrir_arquivo(arq_modal);
+    end
+    else
+      carregar;
+
+  except
+    on e:exception do msg_error(e.message);
+  end;
+
+
 end;
 
 procedure Tfrm_cliente.btn_novoClick(Sender: TObject);

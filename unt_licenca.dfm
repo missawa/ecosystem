@@ -51,7 +51,6 @@ object frm_licenca: Tfrm_licenca
       ParentFont = False
       TabOrder = 0
       OnMouseDown = pnl_tit_geralMouseDown
-      ExplicitLeft = 1
     end
     object pnl_geral: TPanel
       Left = 3
@@ -63,7 +62,6 @@ object frm_licenca: Tfrm_licenca
       BorderStyle = bsSingle
       ParentBackground = False
       TabOrder = 1
-      ExplicitHeight = 95
       object Label1: TLabel
         Left = 10
         Top = 4
@@ -216,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1234
+        Left = 1230
         Top = 4
         Width = 36
         Height = 36
@@ -379,9 +377,10 @@ object frm_licenca: Tfrm_licenca
         ParentShowHint = False
         ShowHint = True
         OnClick = btn_okClick
+        ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1272
+        Left = 1268
         Top = 4
         Width = 36
         Height = 36
@@ -544,6 +543,7 @@ object frm_licenca: Tfrm_licenca
         ParentShowHint = False
         ShowHint = True
         OnClick = btnCancelarClick
+        ExplicitLeft = 1272
       end
       object toolbar: TToolBar
         Left = 0
@@ -560,8 +560,6 @@ object frm_licenca: Tfrm_licenca
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
-        ExplicitLeft = 344
-        ExplicitTop = 10
         object btn_recarregar: TToolButton
           Left = 0
           Top = 0
@@ -609,7 +607,6 @@ object frm_licenca: Tfrm_licenca
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 3
-      ExplicitTop = 72
     end
   end
   object Panel2: TPanel
@@ -626,7 +623,6 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 142
     object Panel3: TPanel
       Left = 3
       Top = 3
@@ -688,8 +684,6 @@ object frm_licenca: Tfrm_licenca
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitLeft = 78
-      ExplicitTop = 29
     end
     object cmb_tipo: TwwDBLookupCombo
       Left = 24
@@ -768,8 +762,6 @@ object frm_licenca: Tfrm_licenca
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 285
-    ExplicitHeight = 358
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 66
@@ -811,7 +803,6 @@ object frm_licenca: Tfrm_licenca
       UseTFields = False
       OnDblClick = grd_condicionanteDblClick
       OnEnter = grd_condicionanteEnter
-      ExplicitHeight = 289
     end
     object pnl_tit_detalhe: TPanel
       Left = 3
@@ -844,7 +835,6 @@ object frm_licenca: Tfrm_licenca
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitHeight = 289
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -869,7 +859,6 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitHeight = 266
       end
     end
     object cmb_responsavel: TwwDBComboBox

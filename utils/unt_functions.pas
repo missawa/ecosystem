@@ -26,6 +26,7 @@ uses
   function leap_year(year: word): boolean;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function inicio_licenca(id_licenca: integer): TDate;
+  function input_data(titulo: string = 'DATA'; default: TDate = 0): TDate;
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
   function maiusculas(s: string): string;
@@ -50,7 +51,7 @@ uses
   unt_pesquisa,
   unt_input_inteiro,
   unt_dtm_geral,
-  unt_input_texto;
+  unt_input_texto, unt_input_data;
 
 function ajusta_numero_telefone(tel: string): string;
 var
@@ -238,6 +239,28 @@ begin
   else
     Result := result_false;
 end;
+
+function input_data(titulo: string = 'DATA'; default: TDate = 0): TDate;
+begin
+
+  frm_input_data.Caption := titulo;
+  if default = 0 then
+    frm_input_data.dtp_data.Clear
+  else
+    frm_input_data.dtp_data.Date := default;
+
+  if frm_input_data.ShowModal = mrOk then
+  begin
+    if frm_input_data.dtp_data.Text = '' then
+      result := 0
+    else
+      result := frm_input_data.dtp_data.Date;
+  end
+  else
+    result := 0;
+
+end;
+
 
 function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
 begin

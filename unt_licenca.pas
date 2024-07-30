@@ -195,6 +195,7 @@ begin
   frm_condicionante.id_categoria := dse_condicionanteId_categoria.AsInteger;
   frm_condicionante.cumprida := dse_condicionanteCumprida.AsString;
   frm_condicionante.dt_cump := dse_condicionanteDt_cumprimento.AsDateTime;
+  frm_condicionante.spn_prazo.Text := dse_condicionanteprazo.Text;
 
   frm_condicionante.edt_numero.Text := dse_condicionanteNumero.Text;
   frm_condicionante.dtp_aviso.Date := dse_condicionanteDt_aviso.AsDateTime;
@@ -285,6 +286,7 @@ end;
 
 procedure Tfrm_licenca.btn_novaClick(Sender: TObject);
 begin
+  frm_condicionante.auto := true;
   frm_condicionante.id_condicionante := 0;
   frm_condicionante.id_licenca := dse_licencaId.AsInteger;
   frm_condicionante.edt_numero.Clear;

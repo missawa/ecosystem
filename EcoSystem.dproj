@@ -121,6 +121,9 @@
     <DCCReference Include="utils\unt_constantes.pas" />
     <DCCReference Include="utils\unt_functions.pas" />
     <DCCReference Include="utils\unt_func_messages.pas" />
+    <DCCReference Include="utils\unt_input_data.pas">
+      <Form>frm_input_data</Form>
+    </DCCReference>
     <DCCReference Include="utils\unt_input_inteiro.pas">
       <Form>frm_input_inteiro</Form>
     </DCCReference>

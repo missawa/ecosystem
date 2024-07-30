@@ -43,6 +43,7 @@ type
     { Private declarations }
   public
     modo: integer;
+    auto: boolean;
     id_condicionante: integer;
     id_licenca: integer;
     id_categoria: integer;
@@ -55,7 +56,7 @@ var
 
 implementation
 
-uses unt_procedures, unt_functions, unt_dtm_geral;
+uses unt_procedures, unt_functions, unt_dtm_geral, unt_func_messages;
 
 {$R *.dfm}
 
@@ -121,11 +122,25 @@ end;
 procedure Tfrm_condicionante.spn_prazoExit(Sender: TObject);
 var
   dt_ini: TDate;
+  dt_venc: TDate;
+  msg: string;
 begin
-  dt_ini := inicio_licenca(id_licenca);
-  dtp_venc.Date := dt_ini + spn_prazo.Value;
-  dtp_vencExit(Sender);
-  cmb_responsavel.SetFocus;
+
+  if (spn_prazo.Value <> 0) and (spn_prazo.Text <> '')  then
+  begin
+    dt_ini := inicio_licenca(id_licenca);
+    dt_venc := dt_ini + spn_prazo.Value;
+
+    msg := 'Confirma alteração do vencimento para ' + FormatDateTime('dd/mm/yyyy', dt_venc) + '?';
+
+    if auto or msg_quest(msg) then
+    begin
+      dtp_venc.Date := dt_venc;
+      dtp_vencExit(Sender);
+      cmb_responsavel.SetFocus;
+    end;
+  end;
+
 end;
 
 procedure Tfrm_condicionante.editar_condicionante;
@@ -176,11 +191,11 @@ end;
 
 procedure Tfrm_condicionante.cmb_categoriaExit(Sender: TObject);
 begin
-  if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
+    if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
   begin
     spn_prazo.Value := 0;
-    dtp_venc.Clear;
-    dtp_aviso.Clear;
+    dtp_venc.Text := '';
+    dtp_aviso.Text := '';
     cumprida := 'S';
     dt_cump := 0;
 
@@ -201,7 +216,8 @@ end;
 
 procedure Tfrm_condicionante.dtp_vencExit(Sender: TObject);
 begin
-  dtp_aviso.Date := decmonth(dtp_venc.Date);
+  if (dtp_venc.Text <> '') and (dtp_aviso.Text = '') then
+    dtp_aviso.Date := decmonth(dtp_venc.Date);
 end;
 
 procedure Tfrm_condicionante.FormClose(Sender: TObject;
@@ -220,6 +236,7 @@ begin
     application.processmessages;
     edt_numero.SetFocus;
   end;
+  auto := false;
 end;
 
 end.

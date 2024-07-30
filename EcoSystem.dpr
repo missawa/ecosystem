@@ -23,7 +23,7 @@ uses
   unt_cliente in 'unt_cliente.pas' {frm_cliente},
   unt_integracao in 'utils\unt_integracao.pas',
   unt_classe_endereco in 'classes\unt_classe_endereco.pas',
-  unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro},
+  unt_input_data in 'utils\unt_input_data.pas' {frm_input_data},
   unt_constantes in 'utils\unt_constantes.pas',
   unt_cliente_atividade_apagar in 'unt_cliente_atividade_apagar.pas' {frm_cliente_atividade_apagar},
   unt_licenca in 'unt_licenca.pas' {frm_licenca},
@@ -39,7 +39,8 @@ uses
   unt_condicionante in 'unt_condicionante.pas' {frm_condicionante},
   unt_categorias in 'unt_categorias.pas' {frm_categorias},
   unt_solicitar_desconsideracao in 'unt_solicitar_desconsideracao.pas' {frm_solicitar_desconsideracao},
-  unt_solicitar_prazo in 'unt_solicitar_prazo.pas' {frm_solicitar_prazo};
+  unt_solicitar_prazo in 'unt_solicitar_prazo.pas' {frm_solicitar_prazo},
+  unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro};
 
 {$R *.res}
 
@@ -55,11 +56,12 @@ begin
   Application.CreateForm(Tfrm_mensagem, frm_mensagem);
   Application.CreateForm(Tfrm_pesquisa, frm_pesquisa);
   Application.CreateForm(Tfrm_progresso, frm_progresso);
-  Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
+  Application.CreateForm(Tfrm_input_data, frm_input_data);
   Application.CreateForm(Tfrm_input_texto, frm_input_texto);
   Application.CreateForm(Tfrm_cumprir_cond, frm_cumprir_cond);
   Application.CreateForm(Tfrm_condicionante, frm_condicionante);
   Application.CreateForm(Tfrm_solicitar_desconsideracao, frm_solicitar_desconsideracao);
   Application.CreateForm(Tfrm_solicitar_prazo, frm_solicitar_prazo);
+  Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
   Application.Run;
 end.
