@@ -182,8 +182,6 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     Padding.Left = 3
     Padding.Right = 3
     TabOrder = 2
-    ExplicitTop = 73
-    ExplicitWidth = 879
     object pnl_tit_geral: TPanel
       Left = 3
       Top = 0
@@ -216,9 +214,6 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       BorderStyle = bsSingle
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 18
-      ExplicitWidth = 873
-      ExplicitHeight = 52
       object Label1: TLabel
         Left = 10
         Top = 5
@@ -345,9 +340,6 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
     Padding.Bottom = 3
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 143
-    ExplicitWidth = 879
-    ExplicitHeight = 229
     object pnl_tit_detalhe: TPanel
       Left = 3
       Top = 3
@@ -395,8 +387,6 @@ object frm_cliente_atividade: Tfrm_cliente_atividade
       TitleLines = 1
       TitleButtons = False
       UseTFields = False
-      ExplicitTop = 27
-      ExplicitHeight = 377
     end
     object cmb_atividade: TwwDBComboBox
       Left = 13

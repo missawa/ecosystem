@@ -159,13 +159,13 @@ begin
       nova_condicionante(
         id_licenca,
         num_lic,
-        prazo,
+        0,
         id_categoria,
         id_responsavel,
         cumprida,
         0,
-        novo_venc,
-        decmonth(novo_venc),
+        0,
+        0,
         descricao);
     end;
   end;

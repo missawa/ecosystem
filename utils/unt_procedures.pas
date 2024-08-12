@@ -376,6 +376,7 @@ var
   str_aviso: string;
   str_dt_cump: string;
   str_cump: string;
+  str_prazo: string;
 begin
 
   if cumprida = 'S' then
@@ -398,6 +399,11 @@ begin
   else
     str_aviso := data_sql(dt_Aviso);
 
+  if prazo = 0 then
+    str_prazo := 'null'
+  else
+    str_prazo := intToStr(trunc(prazo));
+
   exec_sql(
     'insert into condicionante (                                                '#13+
     '  id_licenca,                                                              '#13+
@@ -413,7 +419,7 @@ begin
     'values (                                                                   '#13+
     intToStr(id_licenca) + ',' +
     quotedstr(numero) + ',' +
-    intToStr(trunc(prazo)) + ',' +
+    str_prazo + ',' +
     str_venc + ',' +
     str_aviso + ',' +
     intToStr(id_categoria) + ',' +

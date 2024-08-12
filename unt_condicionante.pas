@@ -191,7 +191,7 @@ end;
 
 procedure Tfrm_condicionante.cmb_categoriaExit(Sender: TObject);
 begin
-    if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
+  if UpperCase(cmb_categoria.Text) = 'ORIENTATIVA' then
   begin
     spn_prazo.Value := 0;
     dtp_venc.Text := '';
@@ -202,7 +202,6 @@ begin
     spn_prazo.Enabled := false;
     dtp_venc.Enabled := false;
     dtp_aviso.Enabled := false;
-    cmb_responsavel.SetFocus;
   end
   else
   begin
@@ -210,13 +209,13 @@ begin
     dtp_venc.Enabled := true;
     dtp_aviso.Enabled := true;
     cumprida := 'N';
-    spn_prazo.SetFocus;
+
   end;
 end;
 
 procedure Tfrm_condicionante.dtp_vencExit(Sender: TObject);
 begin
-  if (dtp_venc.Text <> '') and (dtp_aviso.Text = '') then
+  if (dtp_venc.Text <> '') then
     dtp_aviso.Date := decmonth(dtp_venc.Date);
 end;
 
@@ -230,13 +229,10 @@ procedure Tfrm_condicionante.FormShow(Sender: TObject);
 begin
   carrega_combo_categoria(cmb_categoria);
   cmb_categoria.Value := intToStr(id_categoria);
-  if modo = mdInsert then
-  begin
-    cmb_categoriaExit(Sender);
-    application.processmessages;
-    edt_numero.SetFocus;
-  end;
+  cmb_categoriaExit(Sender);
+  application.processmessages;
   auto := false;
+  edt_numero.SetFocus;
 end;
 
 end.

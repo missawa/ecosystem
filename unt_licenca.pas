@@ -586,7 +586,8 @@ begin
       dse_condicionante.SQL.Text :=
         'select *                                                   '#13+
         'from condicionante                                         '#13+
-        'where id_licenca = ' + dse_licenca.FieldByName('id').Text;
+        'where id_licenca = ' + dse_licenca.FieldByName('id').Text  +#13+
+        'order by numero';
   end;
 end;
 

@@ -160,6 +160,9 @@ type
     btn_anp: TSpeedButton;
     btn_modal_rod: TSpeedButton;
     btn_cert_reg: TSpeedButton;
+    btn_abrir_anp: TSpeedButton;
+    btn_abrir_modal: TSpeedButton;
+    btn_abrir_certidao: TSpeedButton;
     procedure dse_enderecoNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
     procedure dse_clienteAfterPost(DataSet: TDataSet);
@@ -202,6 +205,9 @@ type
     procedure btn_anpClick(Sender: TObject);
     procedure btn_modal_rodClick(Sender: TObject);
     procedure btn_cert_regClick(Sender: TObject);
+    procedure btn_abrir_anpClick(Sender: TObject);
+    procedure btn_abrir_modalClick(Sender: TObject);
+    procedure btn_abrir_certidaoClick(Sender: TObject);
   protected
     //procedure CreateParams(var Params: TCreateParams); override;
   private
@@ -239,15 +245,40 @@ begin
   BorderWidth := 0;
 end;}
 
+procedure Tfrm_cliente.btn_abrir_anpClick(Sender: TObject);
+var
+  arq_anp: string;
+begin
+  arq_anp := get_customer_folder(dse_clienteid.AsInteger) + '\ANP_' + dse_clienteid.AsString + '.pdf';
+  abrir_arquivo(arq_anp);
+end;
+
+procedure Tfrm_cliente.btn_abrir_certidaoClick(Sender: TObject);
+var
+  arq_cert: string;
+begin
+  arq_cert := get_customer_folder(dse_clienteid.AsInteger) + '\CR_' + dse_clienteid.AsString + '.pdf';
+  abrir_arquivo(arq_cert);
+end;
+
+procedure Tfrm_cliente.btn_abrir_modalClick(Sender: TObject);
+var
+  arq_mr: string;
+begin
+  arq_mr := get_customer_folder(dse_clienteid.AsInteger) + '\MR_' + dse_clienteid.AsString + '.pdf';
+  abrir_arquivo(arq_mr);
+end;
+
 procedure Tfrm_cliente.btn_anpClick(Sender: TObject);
 var
   pst_cliente: string;
-  arq: string;
   arq_anp: string;
   msg: string;
   data: TDate;
 
   procedure carregar;
+  var
+    arq: string;
   begin
 
     data := input_data;
@@ -274,7 +305,7 @@ var
     end;
 
     dse_cliente.Edit;
-    dse_clientedt_venc_anp.AsDateTime := data;
+    dse_clientedt_venc_anp.AsDateTime := IncMonth(data, 3);
     dse_cliente.Post;
 
   end;
@@ -283,10 +314,9 @@ begin
   try
 
     pst_cliente := get_customer_folder(dse_clienteid.AsInteger) + '\';
-
     arq_anp := pst_cliente + 'ANP_' + dse_clienteid.AsString + '.pdf';
 
-    if FileExists(pchar(arq)) then
+    if FileExists(pchar(arq_anp)) then
     begin
 
       msg := 'Deseja substituir o arquivo da ANP que já existe?';
@@ -302,7 +332,6 @@ begin
   except
     on e:exception do msg_error(e.message);
   end;
-
 
 end;
 
@@ -329,12 +358,13 @@ end;
 procedure Tfrm_cliente.btn_cert_regClick(Sender: TObject);
 var
   pst_cliente: string;
-  arq: string;
   arq_reg: string;
   msg: string;
   data: TDate;
 
   procedure carregar;
+  var
+    arq: string;
   begin
 
     data := input_data;
@@ -361,7 +391,7 @@ var
     end;
 
     dse_cliente.Edit;
-    dse_clientedt_venc_cert_reg.AsDateTime := data;
+    dse_clientedt_venc_cert_reg.AsDateTime := IncMonth(data, 3);
     dse_cliente.Post;
 
   end;
@@ -373,7 +403,7 @@ begin
 
     arq_reg := pst_cliente + 'CR_' + dse_clienteid.AsString + '.pdf';
 
-    if FileExists(pchar(arq)) then
+    if FileExists(pchar(arq_reg)) then
     begin
 
       msg := 'Deseja substituir o arquivo do Certificado de Regularidade que já existe?';
@@ -434,12 +464,13 @@ end;
 procedure Tfrm_cliente.btn_modal_rodClick(Sender: TObject);
 var
   pst_cliente: string;
-  arq: string;
   arq_modal: string;
   msg: string;
   data: TDate;
 
   procedure carregar;
+  var
+    arq: string;
   begin
 
     data := input_data;
@@ -466,7 +497,7 @@ var
     end;
 
     dse_cliente.Edit;
-    dse_clientedt_venc_modal_rod.AsDateTime := data;
+    dse_clientedt_venc_modal_rod.AsDateTime := IncMonth(data, 3);
     dse_cliente.Post;
 
   end;
@@ -478,7 +509,7 @@ begin
 
     arq_modal := pst_cliente + 'MR_' + dse_clienteid.AsString + '.pdf';
 
-    if FileExists(pchar(arq)) then
+    if FileExists(pchar(arq_modal)) then
     begin
 
       msg := 'Deseja substituir o arquivo do Modal Rodoviário que já existe?';

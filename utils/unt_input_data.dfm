@@ -249,20 +249,20 @@ object frm_input_data: Tfrm_input_data
       Left = 13
       Top = 32
       Width = 120
-      Height = 23
+      Height = 21
       BorderStyle = bsNone
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
       CalendarAttributes.Font.Color = clWindowText
       CalendarAttributes.Font.Height = -11
       CalendarAttributes.Font.Name = 'Tahoma'
       CalendarAttributes.Font.Style = []
-      DataField = 'dt_venc_anp'
       Epoch = 1950
       Frame.Enabled = True
       Frame.NonFocusBorders = [efLeftBorder, efTopBorder, efRightBorder, efBottomBorder]
       Frame.NonFocusStyle = efsFrameEtched
       ShowButton = True
       TabOrder = 1
+      UnboundDataType = wwDTEdtDate
     end
   end
 end

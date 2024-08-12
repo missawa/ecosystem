@@ -88,7 +88,7 @@ uses
   unt_constantes,
   unt_functions,
   unt_proc_abrir_telas,
-  unt_procedures, unt_dtm_dados, unt_dtm_images;
+  unt_procedures, unt_dtm_dados, unt_dtm_images, unt_func_messages;
 
 {$R *.dfm}
 
@@ -98,10 +98,22 @@ begin
 end;
 
 procedure Tfrm_cliente_atividade.btn_licencasClick(Sender: TObject);
+
+  procedure abrir;
+  begin
+    abrir_licenca(
+      dse.FieldByName('id').AsInteger,
+      dse_detalhe.FieldByName('id_atividade').AsInteger);
+  end;
+
 begin
-  abrir_licenca(
-    dse.FieldByName('id').AsInteger,
-    dse_detalhe.FieldByName('id_atividade').AsInteger);
+  if dse_detalhe.RecordCount > 1 then
+  begin
+    if msg_quest('Deseja abrir as Licenças da atividade "' + cmb_atividade.Text + '"') then
+      abrir;
+  end
+  else
+      abrir;
 end;
 
 procedure Tfrm_cliente_atividade.dseAfterOpen(DataSet: TDataSet);
