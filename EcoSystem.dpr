@@ -40,7 +40,8 @@ uses
   unt_categorias in 'unt_categorias.pas' {frm_categorias},
   unt_solicitar_desconsideracao in 'unt_solicitar_desconsideracao.pas' {frm_solicitar_desconsideracao},
   unt_solicitar_prazo in 'unt_solicitar_prazo.pas' {frm_solicitar_prazo},
-  unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro};
+  unt_input_inteiro in 'utils\unt_input_inteiro.pas' {frm_input_inteiro},
+  unt_solicitar_subst in 'unt_solicitar_subst.pas' {frm_solicitar_subst};
 
 {$R *.res}
 
@@ -63,5 +64,6 @@ begin
   Application.CreateForm(Tfrm_solicitar_desconsideracao, frm_solicitar_desconsideracao);
   Application.CreateForm(Tfrm_solicitar_prazo, frm_solicitar_prazo);
   Application.CreateForm(Tfrm_input_inteiro, frm_input_inteiro);
+  Application.CreateForm(Tfrm_solicitar_subst, frm_solicitar_subst);
   Application.Run;
 end.

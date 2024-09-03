@@ -1284,7 +1284,7 @@ object frm_cliente: Tfrm_cliente
       end
       object btn_abrir_certidao: TSpeedButton
         Left = 533
-        Top = 20
+        Top = 19
         Width = 29
         Height = 30
         Glyph.Data = {

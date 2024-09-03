@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1228
+        Left = 1224
         Top = 4
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1266
+        Left = 1262
         Top = 4
         Width = 36
         Height = 36
@@ -974,8 +974,15 @@ object frm_licenca: Tfrm_licenca
         ImageIndex = 21
         OnClick = btn_solic_descosidClick
       end
-      object btn_prot_cond: TToolButton
+      object btn_subst: TToolButton
         Left = 342
+        Top = 0
+        Caption = 'btn_subst'
+        ImageIndex = 22
+        OnClick = btn_substClick
+      end
+      object btn_prot_cond: TToolButton
+        Left = 389
         Top = 0
         Hint = 'Abrir Protocolo Carregado'
         Caption = 'btn_prot_cond'

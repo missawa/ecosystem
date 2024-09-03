@@ -44,6 +44,7 @@ type
       var Resize: Boolean);
     procedure btn_vencimentosClick(Sender: TObject);
     procedure mnu_categoriaClick(Sender: TObject);
+    procedure img_logoDblClick(Sender: TObject);
   private
     function log_ok: boolean;
   public
@@ -66,7 +67,7 @@ uses
   unt_senha,
   unt_tipo_licenca,
   unt_uf,
-  unt_usuario, unt_relatorio, unt_vencimentos, unt_categorias;
+  unt_usuario, unt_relatorio, unt_vencimentos, unt_categorias, unt_procedures;
 
 {$R *.dfm}
 
@@ -108,6 +109,11 @@ procedure Tfrm_principal.FormShow(Sender: TObject);
 begin
   if not log_ok then
     Application.Terminate;
+end;
+
+procedure Tfrm_principal.img_logoDblClick(Sender: TObject);
+begin
+  enviar_email;
 end;
 
 procedure Tfrm_principal.mnu_tipo_licencaClick(Sender: TObject);

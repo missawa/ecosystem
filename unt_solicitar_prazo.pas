@@ -14,9 +14,9 @@ type
     Panel3: TPanel;
     Panel1: TPanel;
     Label5: TLabel;
-    SpeedButton1: TSpeedButton;
+    btn_solicitar: TSpeedButton;
     dtp_data: TwwDBDateTimePicker;
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btn_solicitarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
   private
@@ -58,7 +58,7 @@ begin
   close;
 end;
 
-procedure Tfrm_solicitar_prazo.SpeedButton1Click(Sender: TObject);
+procedure Tfrm_solicitar_prazo.btn_solicitarClick(Sender: TObject);
 var
   pst_cliente: string;
   pst_licenca: string;

@@ -3,7 +3,7 @@ object frm_vencimentos: Tfrm_vencimentos
   Top = 0
   Caption = 'Vencimentos de Licen'#231'as e Condicionantes'
   ClientHeight = 616
-  ClientWidth = 1116
+  ClientWidth = 1267
   Color = clWindow
   Ctl3D = False
   Font.Charset = ANSI_CHARSET
@@ -23,13 +23,15 @@ object frm_vencimentos: Tfrm_vencimentos
   object grd_venc: TwwDBGrid
     Left = 0
     Top = 56
-    Width = 1116
+    Width = 1267
     Height = 560
     Selected.Strings = (
-      'tipo'#9'9'#9'TIPO'
-      'nome'#9'72'#9'CLIENTE'
+      'id'#9'4'#9'ID'
       'cnpj'#9'20'#9'CNPJ'
-      'numero'#9'20'#9'N'#218'MERO'
+      'nome'#9'40'#9'CLIENTE'
+      'tipo'#9'17'#9'TIPO'
+      'condicionante'#9'11'#9'COND.'
+      'numero'#9'18'#9'N'#218'MERO'
       'dt_aviso'#9'10'#9'AVISO'
       'dt_venc'#9'11'#9'VENCIMENTO')
     IniAttributes.Delimiter = ';;'
@@ -51,7 +53,7 @@ object frm_vencimentos: Tfrm_vencimentos
   object toolbar: TToolBar
     Left = 0
     Top = 0
-    Width = 1116
+    Width = 1267
     Height = 56
     AutoSize = True
     ButtonHeight = 56
@@ -78,8 +80,15 @@ object frm_vencimentos: Tfrm_vencimentos
       ImageIndex = 31
       Style = tbsSeparator
     end
-    object btn_fechar: TToolButton
+    object btn_email: TToolButton
       Left = 63
+      Top = 0
+      Caption = 'E-mail'
+      ImageIndex = 92
+      Visible = False
+    end
+    object btn_fechar: TToolButton
+      Left = 118
       Top = 0
       Hint = 'Fechar Tela'
       Caption = 'Fechar'
@@ -115,32 +124,31 @@ object frm_vencimentos: Tfrm_vencimentos
     Connection = dtm_dados.mysql_conn
     SQL.Strings = (
       'select '
-      '    cast('#39'LICEN'#199'A'#39' as char) as tipo,'
+      '    cast('#39'Licen'#231'a'#39' as char) as tipo,'
       '    p.id,'
       '    p.cnpj,'
       '    p.nome,'
-      '    p.fantasia,'
-      '    l.id_atividade,'
       '    l.numero,'
+      '    null as condicionante,'
       '    l.descricao,'
       '    l.dt_venc,    '
-      '    null as dt_aviso'
+      '    l.dt_venc - 30 as dt_aviso'
       'from pessoa p'
       '    left join licenca l'
       '        on l.id_cliente = p.id'
-      'where cliente = '#39'S'#39
+      'where p.cliente = '#39'S'#39
       '    and p.situacao = '#39'A'#39
       '    and l.dt_venc <= (current_date - 30)'
+      ''
       'union'
       ''
       'select '
-      '    cast('#39'CONDIC.'#39' as char) as tipo,'
+      '    '#39'Condicionante'#39' as tipo,'
       '    p.id,'
       '    p.cnpj,'
       '    p.nome,'
-      '    p.fantasia,'
-      '    l.id_atividade,'
-      '    c.numero,'
+      '    l.numero,'
+      '    c.numero as condicionante,'
       '    c.descricao,'
       '    c.dt_venc,'
       '    c.dt_aviso'
@@ -150,11 +158,66 @@ object frm_vencimentos: Tfrm_vencimentos
       #9'left join condicionante c'
       #9#9'on c.id_licenca = l.id'
       'where p.cliente = '#39'S'#39
-      '    and c.cumprida <> '#39'S'#39
-      '    and p.situacao = '#39'A'#39
-      '    and (c.dt_venc <= (current_date - 30)'
-      '        or c.dt_aviso <= (current_date - 30))'
-      'order by dt_venc, dt_aviso')
+      #9'and p.situacao = '#39'A'#39
+      #9'and c.dt_aviso < current_date() '
+      '    and c.cumprida = '#39'N'#39
+      ''
+      'union'
+      ''
+      'select '
+      '    '#39'ANP'#39' as tipo,'
+      '    p.id,'
+      '    p.cnpj,'
+      '    p.nome,'
+      '    null as numero,'
+      '    null as condicionante,'
+      '    '#39'Vencimento ANP'#39' as descricao,'
+      '    p.dt_venc_anp as dt_vencimento,'
+      '    p.dt_venc_anp - 30 as dt_aviso'
+      '    '
+      'from pessoa p'
+      'where p.cliente = '#39'S'#39
+      #9'and p.situacao = '#39'A'#39
+      #9'and p.dt_venc_anp <= current_date() '
+      '    '
+      'union'
+      ''
+      'select '
+      '    '#39'Modal Rod.'#39' as tipo,'
+      '    p.id,'
+      '    p.cnpj,'
+      '    p.nome,'
+      '    null as numero,'
+      '    null as condicionante,'
+      '    '#39'Vencimento Modal Rodovi'#225'rio'#39' as descricao,'
+      '    p.dt_venc_modal_rod as dt_vencimento,'
+      '    p.dt_venc_modal_rod - 30 as dt_aviso'
+      '    '
+      'from pessoa p'
+      'where p.cliente = '#39'S'#39
+      #9'and p.situacao = '#39'A'#39
+      #9'and p.dt_venc_modal_rod <= current_date() '
+      '    '
+      'union'
+      ''
+      'select '
+      '    '#39'Cert. Regularidade'#39' as tipo,'
+      '    p.id,'
+      '    p.cnpj,'
+      '    p.nome,'
+      '    null as numero,'
+      '    null as condicionante,'
+      '    '#39'Vencimento Cerficado de Regularidade'#39' as descricao,'
+      '    p.dt_venc_cert_reg as dt_vencimento,'
+      '    p.dt_venc_cert_reg - 30 as dt_aviso'
+      '    '
+      'from pessoa p'
+      'where p.cliente = '#39'S'#39
+      #9'and p.situacao = '#39'A'#39
+      #9'and p.dt_venc_cert_reg <= current_date() '
+      ''
+      'order by nome, cnpj')
+    Active = True
     OnCalcFields = qry_vencCalcFields
     Left = 255
     Top = 185

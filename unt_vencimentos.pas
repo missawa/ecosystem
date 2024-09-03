@@ -16,6 +16,7 @@ type
     sep_3: TToolButton;
     btn_fechar: TToolButton;
     dts_venc: TDataSource;
+    btn_email: TToolButton;
     procedure qry_vencCalcFields(DataSet: TDataSet);
     procedure btn_fecharClick(Sender: TObject);
     procedure btn_licencasClick(Sender: TObject);

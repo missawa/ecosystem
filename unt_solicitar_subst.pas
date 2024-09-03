@@ -1,13 +1,13 @@
-unit unt_solicitar_desconsideracao;
+unit unt_solicitar_subst;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, wwdbdatetimepicker, StdCtrls, Buttons, ExtCtrls;
+  Dialogs, StdCtrls, wwdbdatetimepicker, Buttons, ExtCtrls;
 
 type
-  Tfrm_solicitar_desconsideracao = class(TForm)
+  Tfrm_solicitar_subst = class(TForm)
     Panel2: TPanel;
     btnConfirmar: TSpeedButton;
     btnCancelar: TSpeedButton;
@@ -18,7 +18,6 @@ type
     dtp_data: TwwDBDateTimePicker;
     procedure btn_solicitarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
-    procedure btnCancelarClick(Sender: TObject);
   private
     arq: string;
     arq_dest: string;
@@ -30,7 +29,7 @@ type
   end;
 
 var
-  frm_solicitar_desconsideracao: Tfrm_solicitar_desconsideracao;
+  frm_solicitar_subst: Tfrm_solicitar_subst;
 
 implementation
 
@@ -38,17 +37,11 @@ uses unt_functions, unt_dtm_geral, unt_procedures;
 
 {$R *.dfm}
 
-procedure Tfrm_solicitar_desconsideracao.btnCancelarClick(Sender: TObject);
+procedure Tfrm_solicitar_subst.btnConfirmarClick(Sender: TObject);
 begin
-  close;
-end;
-
-procedure Tfrm_solicitar_desconsideracao.btnConfirmarClick(Sender: TObject);
-begin
-
   exec_sql(
     'update condicionante                                                       '#13+
-    'set solic_desconsid = ' + data_sql(dtp_data.Date)                          +#13+
+    'set solic_subst = ' + data_sql(dtp_data.Date)                              +#13+
     'where id = ' + inttostr(id_condicionante));
 
   CopyFile(
@@ -58,7 +51,7 @@ begin
   close;
 end;
 
-procedure Tfrm_solicitar_desconsideracao.btn_solicitarClick(Sender: TObject);
+procedure Tfrm_solicitar_subst.btn_solicitarClick(Sender: TObject);
 var
   pst_cliente: string;
   pst_licenca: string;
@@ -78,7 +71,7 @@ begin
   if dm_geral.open_dialog.execute then
   begin
     arq := dm_geral.open_dialog.filename;
-    arq_dest := pst_licenca + '\' + 'Desconsid_' + num_cond + '.pdf';
+    arq_dest := pst_licenca + '\' + 'Subst_' + num_cond + '.pdf';
   end;
 end;
 

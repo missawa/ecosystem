@@ -5,14 +5,14 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
   ClientHeight = 136
   ClientWidth = 219
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
   object Panel2: TPanel
     Left = 0
     Top = 100
@@ -23,8 +23,6 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 196
-    ExplicitWidth = 458
     DesignSize = (
       219
       36)
@@ -378,7 +376,6 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 458
   end
   object Panel1: TPanel
     Left = 0
@@ -389,16 +386,14 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 458
-    ExplicitHeight = 163
     object Label5: TLabel
       Left = 16
       Top = 10
-      Width = 23
-      Height = 13
+      Width = 27
+      Height = 17
       Caption = 'Data'
     end
-    object SpeedButton1: TSpeedButton
+    object btn_solicitar: TSpeedButton
       Left = 151
       Top = 12
       Width = 44
@@ -558,7 +553,7 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       Layout = blGlyphTop
       Spacing = -2
-      OnClick = SpeedButton1Click
+      OnClick = btn_solicitarClick
     end
     object dtp_data: TwwDBDateTimePicker
       Left = 16

@@ -123,6 +123,7 @@ type
     ToolButton1: TToolButton;
     ToolButton3: TToolButton;
     mnu_load_solic: TMenuItem;
+    btn_subst: TToolButton;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -151,6 +152,7 @@ type
     procedure btn_solic_descosidClick(Sender: TObject);
     procedure mnu_load_solicClick(Sender: TObject);
     procedure mnu_open_solicClick(Sender: TObject);
+    procedure btn_substClick(Sender: TObject);
   protected
   private
     procedure open_aux_queries;
@@ -158,6 +160,7 @@ type
     procedure cumprir_condicionante;
     procedure cancelar_cumprimento;
     procedure inf_sol_desconsid;
+    procedure inf_subst;
     { Private declarations }
   public
     procedure open_dataset(id_cliente: integer; id_atividade: integer);
@@ -170,7 +173,8 @@ implementation
 
 uses unt_procedures, unt_dtm_dados, unt_dtm_images, unt_cumprir_cond,
   unt_condicionante, unt_functions, unt_mensagem, unt_func_messages,
-  unt_dtm_geral, unt_solicitar_prazo, unt_solicitar_desconsideracao;
+  unt_dtm_geral, unt_solicitar_prazo, unt_solicitar_desconsideracao,
+  unt_solicitar_subst;
 
 {$R *.dfm}
 
@@ -366,6 +370,25 @@ begin
     frm_solicitar_desconsideracao.id_condicionante := dse_condicionanteId.AsInteger;
     frm_solicitar_desconsideracao.num_cond := dse_condicionanteNumero.Text;
     frm_solicitar_desconsideracao.ShowModal;
+    dse_condicionante.Refresh;
+    dse_condicionante.RecNo := id;
+  end;
+end;
+
+procedure Tfrm_licenca.inf_subst;
+var
+  id: integer;
+begin
+  if msg_quest('Deseja informar Substituição?') then
+  begin
+    id := dse_condicionante.RecNo;
+
+    frm_solicitar_subst.dtp_data.Date := date;
+    frm_solicitar_subst.id_cliente := dse_licencaId_cliente.AsInteger;
+    frm_solicitar_subst.id_licenca := dse_licencaId.AsInteger;
+    frm_solicitar_subst.id_condicionante := dse_condicionanteId.AsInteger;
+    frm_solicitar_subst.num_cond := dse_condicionanteNumero.Text;
+    frm_solicitar_subst.ShowModal;
     dse_condicionante.Refresh;
     dse_condicionante.RecNo := id;
   end;
@@ -700,6 +723,22 @@ begin
   else
     inf_sol_desconsid;
 
+end;
+
+procedure Tfrm_licenca.btn_substClick(Sender: TObject);
+var
+  arq: string;
+begin
+
+  arq := get_customer_folder_lic(
+    dse_licencaId_cliente.AsInteger,
+    dse_licencaid.AsInteger) +
+    'Subst_' + dse_condicionanteNumero.AsString + '.pdf';
+
+  if FileExists(arq) then
+    abrir_arquivo(arq)
+  else
+    inf_sol_desconsid;
 end;
 
 end.

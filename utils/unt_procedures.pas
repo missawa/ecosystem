@@ -14,7 +14,11 @@ uses
   Uni,
   Windows,
   wwDBGrid,
-  wwDBComb;
+  wwDBComb,
+  IdSMTP,
+  IdMessage,
+  IdSSLOpenSSL,
+  IdExplicitTLSClientServerBase;
 
 procedure abrir_arquivo(arquivo: string);
 procedure abrir_pasta_cliente(id: integer);
@@ -25,6 +29,7 @@ procedure carrega_combo_categoria(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure carrega_combo_uf(cmb: TwwDBComboBox);
 procedure carrega_combo_usuarios(cmb: TwwDBComboBox; limpar: boolean = true);
 procedure centralizar_tela(form: TForm);
+procedure enviar_email;
 procedure exec_sql(sql: widestring);
 procedure exportar_csv(qry: TUniQuery);
 procedure exportar_excel(grdExportar: TwwDBGrid);
@@ -427,6 +432,46 @@ begin
     str_dt_cump + ',' +
     str_cump + ',' +
     quotedStr(descricao) + ')');
+end;
+
+procedure enviar_email;
+var
+  SMTP: TIdSMTP;
+  Msg: TIdMessage;
+  SSLHandler: TIdSSLIOHandlerSocketOpenSSL;
+begin
+  SMTP := TIdSMTP.Create(nil);
+  Msg := TIdMessage.Create(nil);
+  SSLHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+  try
+    // Configuração do servidor SMTP
+    SMTP.Host := 'smtp.ecoplan.eco.br';
+    SMTP.Port := 587; // Porta do servidor SMTP
+    SMTP.Username := 'sistema@ecoplan.eco.br';
+    SMTP.Password := 'Multi#2020';
+    SMTP.IOHandler := SSLHandler;
+    SMTP.UseTLS := utUseExplicitTLS;
+
+    // Configuração da mensagem
+    Msg.From.Address := 'sistema@ecoplan.eco.br';
+    Msg.Recipients.EmailAddresses := 'missawa@multidev.com.br';
+    Msg.Subject := 'Assunto do Email';
+    Msg.Body.Text := 'Corpo do email';
+
+    // Enviar o email
+    SMTP.Connect;
+    try
+      SMTP.Send(Msg);
+    finally
+      SMTP.Disconnect;
+    end;
+
+    msg_info('Email enviado com sucesso!');
+  finally
+    SMTP.Free;
+    Msg.Free;
+    SSLHandler.Free;
+  end;
 end;
 
 
