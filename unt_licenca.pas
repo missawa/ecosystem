@@ -738,7 +738,7 @@ begin
   if FileExists(arq) then
     abrir_arquivo(arq)
   else
-    inf_sol_desconsid;
+    inf_subst;
 end;
 
 end.

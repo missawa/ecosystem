@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1224
+        Left = 1222
         Top = 4
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1262
+        Left = 1260
         Top = 4
         Width = 36
         Height = 36
@@ -977,6 +977,7 @@ object frm_licenca: Tfrm_licenca
       object btn_subst: TToolButton
         Left = 342
         Top = 0
+        Hint = 'Solicita'#231#227'o de Substitui'#231#227'o'
         Caption = 'btn_subst'
         ImageIndex = 22
         OnClick = btn_substClick
