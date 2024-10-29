@@ -35,20 +35,20 @@ type
     ppDBMemo1: TppDBMemo;
     ppDBText6: TppDBText;
     dtp_venc_ini: TwwDBDateTimePicker;
-    Label1: TLabel;
+    lbl_periodo_venc: TLabel;
     dtp_venc_fim: TwwDBDateTimePicker;
     Label3: TLabel;
     cmb_situacao: TwwDBComboBox;
-    Label4: TLabel;
+    lbl_situacao: TLabel;
     ppShape1: TppShape;
     raCodeModule1: TraCodeModule;
     ppParameterList1: TppParameterList;
     cmb_cliente: TwwDBComboDlg;
-    Label5: TLabel;
+    lbl_cliente: TLabel;
     qry: TUniQuery;
     ppDBText7: TppDBText;
     ppLabel10: TppLabel;
-    Label6: TLabel;
+    lbl_periodo_aviso: TLabel;
     Label7: TLabel;
     Label8: TLabel;
     dtp_aviso_fim: TwwDBDateTimePicker;
@@ -62,6 +62,32 @@ type
     ppImage1: TppImage;
     ppDBText3: TppDBText;
     pip_01ppField11: TppField;
+    qry_02: TUniQuery;
+    qry_02municipio: TStringField;
+    qry_02cnpj: TStringField;
+    qry_02nome: TStringField;
+    qry_02fantasia: TStringField;
+    dts_02: TDataSource;
+    pip_02: TppDBPipeline;
+    rel_02: TppReport;
+    ppHeaderBand2: TppHeaderBand;
+    ppDetailBand2: TppDetailBand;
+    ppFooterBand2: TppFooterBand;
+    ppLabel2: TppLabel;
+    ppImage2: TppImage;
+    ppLabel3: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel7: TppLabel;
+    ppShape2: TppShape;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    raCodeModule2: TraCodeModule;
+    ppLine2: TppLine;
+    ppSystemVariable3: TppSystemVariable;
+    ppSystemVariable4: TppSystemVariable;
+    ppLabel9: TppLabel;
+    ppShape3: TppShape;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -70,10 +96,14 @@ type
     procedure cmb_clienteCustomDlg(Sender: TObject);
     procedure btn_fecharClick(Sender: TObject);
     procedure ppDBText1GetText(Sender: TObject; var Text: string);
+    procedure cmb_tipoChange(Sender: TObject);
   protected
     procedure CreateParams(var Params: TCreateParams); override;
   private
     procedure imprimir_rel01;
+    procedure imprimir_rel02;
+    procedure set_option_01;
+    procedure set_option_02;
     { Private declarations }
   public
     { Public declarations }
@@ -95,7 +125,12 @@ end;
 
 procedure Tfrm_relatorio.btn_imprimirClick(Sender: TObject);
 begin
-  imprimir_rel01;
+  case cmb_tipo.ItemIndex +1 of
+    1: imprimir_rel01;
+    2: imprimir_rel02;
+  end;
+
+
 end;
 
 procedure Tfrm_relatorio.cmb_clienteCustomDlg(Sender: TObject);
@@ -120,6 +155,14 @@ begin
 
   except
     on e:exception do msg_error('Erro 8755: ' + e.message);
+  end;
+end;
+
+procedure Tfrm_relatorio.cmb_tipoChange(Sender: TObject);
+begin
+  case cmb_tipo.ItemIndex +1 of
+    1: set_option_01;
+    2: set_option_02;
   end;
 end;
 
@@ -274,7 +317,52 @@ procedure Tfrm_relatorio.ppDBText1GetText(Sender: TObject; var Text: string);
 begin
   if qry_01.FieldByName('tipo').AsString = 'CONDIC.' then
     Text := qry_01.FieldByName('condicionante').AsString;
-  
+
 end;
+
+procedure Tfrm_relatorio.imprimir_rel02;
+begin
+  qry_02.Open;
+  rel_02.Print;
+  //exportar_csv(qry_02);
+end;
+
+
+procedure Tfrm_relatorio.set_option_01;
+begin
+  lbl_cliente.Enabled := true;
+  cmb_cliente.Enabled := true;
+
+  lbl_periodo_venc.Enabled := true;
+  dtp_venc_ini.Enabled := true;
+  dtp_venc_fim.Enabled := true;
+
+  lbl_periodo_aviso.Enabled := true;
+  dtp_aviso_ini.Enabled := true;
+  dtp_aviso_fim.Enabled := true;
+
+  lbl_situacao.Enabled := true;
+  cmb_situacao.Enabled := true;
+  cmb_situacao.Font.Color := clWindowText;
+end;
+
+procedure Tfrm_relatorio.set_option_02;
+begin
+  lbl_cliente.Enabled := false;
+  cmb_cliente.Enabled := false;
+
+  lbl_periodo_venc.Enabled := false;
+  dtp_venc_ini.Enabled := false;
+  dtp_venc_fim.Enabled := false;
+
+  lbl_periodo_aviso.Enabled := false;
+  dtp_aviso_ini.Enabled := false;
+  dtp_aviso_fim.Enabled := false;
+
+  lbl_situacao.Enabled := false;
+  cmb_situacao.Enabled := false;
+  cmb_situacao.Font.Color := clBtnFace;
+end;
+
 
 end.

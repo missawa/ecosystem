@@ -204,6 +204,31 @@ var
   coluna: integer;
   planilha: TStringList;
   nomeArq: string;
+
+  procedure exportar;
+  var
+    col: integer;
+  begin
+    linha := '';
+    for col := 0 to qry.FieldCount - 1 do
+    begin
+      if qry.Fields[col].Tag <> -1 then  //Colunas indesejadas, que devem estar marcadas na query
+      begin
+
+        if uppercase(qry.Fields[col].DisplayLabel) = 'CNPJ' then
+          linha := linha + '"' + mask_cnpj(qry.Fields[col].Text) + '"' + ';'
+        else if uppercase(qry.Fields[col].DisplayLabel) = 'CPF' then
+          linha := linha + '"' + mask_cpf(qry.Fields[col].Text) + '"' + ';'
+        else if qry.Fields[col].DataType = ftString then
+          linha := linha + '"' + qry.Fields[col].Text + '"' + ';'
+        else
+          linha := linha + qry.Fields[col].Text + ';';
+      end;
+    end;
+    planilha.Add(linha);
+  end;
+
+
 begin
 
   planilha:= TStringList.Create;
@@ -220,9 +245,10 @@ begin
 
   while not qry.eof do
   begin
-    linha := '';
+    {linha := '';
     for coluna := 0 to qry.FieldCount - 1 do
-      linha := linha + qry.Fields[coluna].Text + ';';
+      linha := linha + qry.Fields[coluna].Text + ';';}
+    exportar;
     planilha.Add(linha);
     qry.Next;
     incrementar_progresso;

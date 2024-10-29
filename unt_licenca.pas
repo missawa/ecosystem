@@ -124,6 +124,7 @@ type
     ToolButton3: TToolButton;
     mnu_load_solic: TMenuItem;
     btn_subst: TToolButton;
+    dse_condicionantesolic_subst: TDateField;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);

@@ -30,6 +30,8 @@ uses
   function input_inteiro(titulo: string = 'Número'; default: string = ''): integer;
   function input_texto(titulo: string; default: string = ''; max: integer = 0; CharCase: char = 'U'): string;
   function maiusculas(s: string): string;
+  function mask_cnpj(cnpj: string): string;
+  function mask_cpf(cpf: string): string;
   function next_id(tabela: string; pk: string; id: integer; filter: string): integer;
   function nome_categoria(id: integer): string;
   function novo_bairro(id_municipio: integer; bairro: string = ''): integer;
@@ -749,6 +751,22 @@ begin
     CreateDir(pst_licenca);
 
   result := pst_licenca + '\';
+end;
+
+function mask_cnpj(cnpj: string): string;
+begin
+  if cnpj <> '' then
+    result := Copy(cnpj,1,2) + '.' + Copy(cnpj,3,3) + '.' + Copy(cnpj,6,3) + '/' + Copy(cnpj,9,4) + '-' + Copy(cnpj,13,2)
+  else
+    result := '';
+end;
+
+function mask_cpf(cpf: string): string;
+begin
+  if CPF <> '' then
+    result := Copy(cpf,1,3) + '.' + Copy(cpf,4,3) + '.' + Copy(cpf,7,3) + '-' + Copy(cpf,10,2)
+  else
+    result := '';
 end;
 
 end.

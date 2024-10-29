@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1222
+        Left = 1220
         Top = 4
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1260
+        Left = 1258
         Top = 4
         Width = 36
         Height = 36
@@ -765,7 +765,7 @@ object frm_licenca: Tfrm_licenca
     object grd_condicionante: TwwDBGrid
       Left = 3
       Top = 66
-      Width = 842
+      Width = 857
       Height = 282
       ControlType.Strings = (
         'id_responsavel;CustomEdit;cmb_responsavel;F'
@@ -773,15 +773,16 @@ object frm_licenca: Tfrm_licenca
         'cumprida;CheckBox;S;N'
         'Img_protocolo;CheckBox;true;false')
       Selected.Strings = (
-        'numero'#9'7'#9'N'#218'M.'#9'F'
-        'categoria'#9'12'#9'CATEGORIA'#9'F'
+        'numero'#9'6'#9'N'#186#9'F'
+        'categoria'#9'13'#9'CATEGORIA'#9'F'
         'prazo'#9'3'#9'PRAZO'#9'F'
-        'dt_aviso'#9'15'#9'AVISO'#9'F'
-        'dt_venc'#9'12'#9'VENCIMENTO'#9'F'
-        'solic_prazo'#9'12'#9'SOL.PRAZO'#9'F'
-        'solic_desconsid'#9'12'#9'SOL.DESCONS.'#9'F'
-        'dt_cumprimento'#9'12'#9'DT.CUMP.'#9'F'
-        'id_responsavel'#9'12'#9'RESPONS'#193'VEL'#9'F'
+        'dt_aviso'#9'11'#9'AVISO'#9'F'
+        'dt_venc'#9'11'#9'VENC.'#9'F'
+        'solic_prazo'#9'11'#9'SOL.PRAZO'#9'F'
+        'solic_desconsid'#9'11'#9'SOL.DESC'#9'F'
+        'solic_subst'#9'11'#9'SOL.SUBS'#9'F'
+        'dt_cumprimento'#9'11'#9'DT.CUMP.'#9'F'
+        'id_responsavel'#9'10'#9'RESP.'#9'F'
         'Img_protocolo'#9'5'#9'PRO'#9'F'
         'cumprida'#9'2'#9'OK'#9'F')
       IniAttributes.Delimiter = ';;'
@@ -827,28 +828,31 @@ object frm_licenca: Tfrm_licenca
       TabOrder = 0
     end
     object Panel4: TPanel
-      Left = 845
+      Left = 860
       Top = 66
-      Width = 480
+      Width = 465
       Height = 282
       Align = alClient
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
+      ExplicitLeft = 845
+      ExplicitWidth = 480
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 478
+        Width = 463
         Height = 21
         Align = alTop
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
+        ExplicitWidth = 478
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
         Top = 21
-        Width = 478
+        Width = 463
         Height = 259
         Align = alClient
         BevelInner = bvNone
@@ -859,6 +863,7 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
+        ExplicitWidth = 478
       end
     end
     object cmb_responsavel: TwwDBComboBox
@@ -1188,12 +1193,13 @@ object frm_licenca: Tfrm_licenca
       
         '  (id, id_licenca, numero, descricao, cumprida, dt_venc, dt_cump' +
         'rimento, dt_aviso, id_responsavel, id_executor, protocolo, id_ca' +
-        'tegoria, prazo, solic_prazo, solic_desconsid)'
+        'tegoria, prazo, solic_prazo, solic_desconsid, solic_subst)'
       'VALUES'
       
         '  (:id, :id_licenca, :numero, :descricao, :cumprida, :dt_venc, :' +
         'dt_cumprimento, :dt_aviso, :id_responsavel, :id_executor, :proto' +
-        'colo, :id_categoria, :prazo, :solic_prazo, :solic_desconsid)')
+        'colo, :id_categoria, :prazo, :solic_prazo, :solic_desconsid, :so' +
+        'lic_subst)')
     SQLDelete.Strings = (
       'DELETE FROM condicionante'
       'WHERE'
@@ -1207,15 +1213,16 @@ object frm_licenca: Tfrm_licenca
         'primento = :dt_cumprimento, dt_aviso = :dt_aviso, id_responsavel' +
         ' = :id_responsavel, id_executor = :id_executor, protocolo = :pro' +
         'tocolo, id_categoria = :id_categoria, prazo = :prazo, solic_praz' +
-        'o = :solic_prazo, solic_desconsid = :solic_desconsid'
+        'o = :solic_prazo, solic_desconsid = :solic_desconsid, solic_subs' +
+        't = :solic_subst'
       'WHERE'
       '  id = :Old_id')
     SQLRefresh.Strings = (
       
         'SELECT id, id_licenca, numero, descricao, cumprida, dt_venc, dt_' +
         'cumprimento, dt_aviso, id_responsavel, id_executor, protocolo, i' +
-        'd_categoria, prazo, solic_prazo, solic_desconsid FROM condiciona' +
-        'nte'
+        'd_categoria, prazo, solic_prazo, solic_desconsid, solic_subst FR' +
+        'OM condicionante'
       'WHERE'
       '  id = :id')
     SQLRecCount.Strings = (
@@ -1306,6 +1313,9 @@ object frm_licenca: Tfrm_licenca
     end
     object dse_condicionantesolic_desconsid: TDateField
       FieldName = 'solic_desconsid'
+    end
+    object dse_condicionantesolic_subst: TDateField
+      FieldName = 'solic_subst'
     end
   end
   object tra: TUniTransaction
