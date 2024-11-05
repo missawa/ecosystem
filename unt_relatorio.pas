@@ -88,6 +88,32 @@ type
     ppSystemVariable4: TppSystemVariable;
     ppLabel9: TppLabel;
     ppShape3: TppShape;
+    dts_03: TDataSource;
+    pop_03: TppDBPipeline;
+    rel_03: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppShape4: TppShape;
+    ppLabel11: TppLabel;
+    ppImage3: TppImage;
+    ppLabel12: TppLabel;
+    ppLabel13: TppLabel;
+    ppLabel14: TppLabel;
+    ppSystemVariable5: TppSystemVariable;
+    ppDetailBand3: TppDetailBand;
+    ppShape5: TppShape;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppLine3: TppLine;
+    ppSystemVariable6: TppSystemVariable;
+    ppLabel15: TppLabel;
+    raCodeModule3: TraCodeModule;
+    qry_03: TUniQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
     procedure pnl_tituloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -104,6 +130,8 @@ type
     procedure imprimir_rel02;
     procedure set_option_01;
     procedure set_option_02;
+    procedure set_option_03;
+    procedure imprimir_rel03;
     { Private declarations }
   public
     { Public declarations }
@@ -128,6 +156,7 @@ begin
   case cmb_tipo.ItemIndex +1 of
     1: imprimir_rel01;
     2: imprimir_rel02;
+    3: imprimir_rel03;
   end;
 
 
@@ -163,6 +192,7 @@ begin
   case cmb_tipo.ItemIndex +1 of
     1: set_option_01;
     2: set_option_02;
+    3: set_option_03
   end;
 end;
 
@@ -324,7 +354,12 @@ procedure Tfrm_relatorio.imprimir_rel02;
 begin
   qry_02.Open;
   rel_02.Print;
-  //exportar_csv(qry_02);
+end;
+
+procedure Tfrm_relatorio.imprimir_rel03;
+begin
+  qry_03.Open;
+  rel_03.Print;
 end;
 
 
@@ -361,7 +396,25 @@ begin
 
   lbl_situacao.Enabled := false;
   cmb_situacao.Enabled := false;
-  cmb_situacao.Font.Color := clBtnFace;
+  cmb_situacao.Font.Color := cl3DLight;
+end;
+
+procedure Tfrm_relatorio.set_option_03;
+begin
+  lbl_cliente.Enabled := false;
+  cmb_cliente.Enabled := false;
+
+  lbl_periodo_venc.Enabled := false;
+  dtp_venc_ini.Enabled := false;
+  dtp_venc_fim.Enabled := false;
+
+  lbl_periodo_aviso.Enabled := false;
+  dtp_aviso_ini.Enabled := false;
+  dtp_aviso_fim.Enabled := false;
+
+  lbl_situacao.Enabled := false;
+  cmb_situacao.Enabled := false;
+  cmb_situacao.Font.Color := cl3DLight;
 end;
 
 
