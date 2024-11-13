@@ -286,6 +286,7 @@ begin
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
     '    p.fantasia,                      '#13+
+    '    0 as id_responsavel,             '#13+
     '    l.numero,                        '#13+
     '    l.descricao,                     '#13+
     '    l.dt_venc,                       '#13+
@@ -293,7 +294,8 @@ begin
     'from pessoa p                        '#13+
     '  left join licenca l                '#13+
     '    on l.id_cliente = p.id           '#13+
-    'where cliente = ''S''                '#13+
+    'where p.cliente = ''S''                              '#13+
+    '  and coalesce(l.renovada,''N'') <> ''S''            '#13+
     '  and p.situacao = ''A''             '#13+
     cli +
     venc_lic +
@@ -310,6 +312,7 @@ begin
     '    p.cnpj,                          '#13+
     '    p.nome,                          '#13+
     '    p.fantasia,                      '#13+
+    '    c.id_responsavel,                '#13+
     '    l.numero,                        '#13+
     '    c.descricao,                     '#13+
     '    c.dt_venc,                       '#13+
@@ -319,7 +322,8 @@ begin
     '    on l.id_cliente = p.id           '#13+
     '  left join condicionante c          '#13+
     '    on c.id_licenca = l.id           '#13+
-    'where p.cliente = ''S''              '#13+
+    'where p.cliente = ''S''                              '#13+
+    '  and coalesce(l.renovada,''N'') <> ''S''            '#13+
     '  and p.situacao = ''A''             '#13+
     cli +
     venc_con +
