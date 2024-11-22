@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1220
+        Left = 1218
         Top = 4
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1258
+        Left = 1256
         Top = 4
         Width = 36
         Height = 36
@@ -836,8 +836,6 @@ object frm_licenca: Tfrm_licenca
       BevelOuter = bvNone
       BorderStyle = bsSingle
       TabOrder = 1
-      ExplicitLeft = 845
-      ExplicitWidth = 480
       object Panel5: TPanel
         Left = 0
         Top = 0
@@ -847,7 +845,6 @@ object frm_licenca: Tfrm_licenca
         BevelOuter = bvNone
         Caption = 'DESCRI'#199#195'O'
         TabOrder = 0
-        ExplicitWidth = 478
       end
       object mmo_desc_condicionante: TDBMemo
         Left = 0
@@ -863,7 +860,6 @@ object frm_licenca: Tfrm_licenca
         DataSource = dts_condicionante
         ParentCtl3D = False
         TabOrder = 1
-        ExplicitWidth = 478
       end
     end
     object cmb_responsavel: TwwDBComboBox
@@ -1260,7 +1256,7 @@ object frm_licenca: Tfrm_licenca
     end
     object dse_condicionantenumero: TStringField
       FieldName = 'numero'
-      Size = 6
+      Size = 30
     end
     object dse_condicionantedescricao: TMemoField
       FieldName = 'descricao'

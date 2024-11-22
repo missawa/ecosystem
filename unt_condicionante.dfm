@@ -111,6 +111,7 @@ object frm_condicionante: Tfrm_condicionante
       Width = 120
       Height = 23
       BorderStyle = bsNone
+      MaxLength = 30
       TabOrder = 0
     end
     object cmb_categoria: TwwDBComboBox
