@@ -214,7 +214,7 @@ object frm_licenca: Tfrm_licenca
         1320
         46)
       object btn_ok: TSpeedButton
-        Left = 1218
+        Left = 1216
         Top = 4
         Width = 36
         Height = 36
@@ -380,7 +380,7 @@ object frm_licenca: Tfrm_licenca
         ExplicitLeft = 1234
       end
       object btnCancelar: TSpeedButton
-        Left = 1256
+        Left = 1254
         Top = 4
         Width = 36
         Height = 36
@@ -964,8 +964,8 @@ object frm_licenca: Tfrm_licenca
         Top = 0
         Hint = 'Solicita'#231#227'o de Prazo'
         Caption = 'btn_prazo'
+        DropdownMenu = pop_solic_prazo
         ImageIndex = 19
-        OnClick = btn_prazoClick
       end
       object btn_solic_descosid: TToolButton
         Left = 295
@@ -1029,6 +1029,7 @@ object frm_licenca: Tfrm_licenca
       '        on a.id = ca.id_atividade'
       'where p.id = :id_cliente'
       '    and a.id = :id_atividade')
+    AfterScroll = qry_clienteAfterScroll
     Left = 1190
     Top = 220
     ParamData = <
@@ -1341,6 +1342,21 @@ object frm_licenca: Tfrm_licenca
     object mnu_load_solic: TMenuItem
       Caption = 'Solicita'#231#227'o'
       OnClick = mnu_load_solicClick
+    end
+  end
+  object pop_solic_prazo: TPopupMenu
+    AutoHotkeys = maManual
+    OnPopup = pop_solic_prazoPopup
+    Left = 264
+    Top = 320
+    object mnu_sol_prazo_informar: TMenuItem
+      Tag = 1
+      Caption = 'Informar'
+      OnClick = mnu_sol_prazo_informarClick
+    end
+    object VerPDF1: TMenuItem
+      Caption = 'Ver PDF'
+      OnClick = VerPDF1Click
     end
   end
 end

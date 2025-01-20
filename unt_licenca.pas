@@ -10,6 +10,7 @@ uses
   Classes,
   Graphics,
   Controls,
+  ShellApi,
   Forms,
   Dialogs,
   DB,
@@ -27,7 +28,11 @@ uses
   MemDS,
   DBAccess,
   Uni,
-  ADODB, Buttons, ComCtrls, ToolWin, Menus;
+  ADODB,
+  Buttons,
+  ComCtrls,
+  ToolWin,
+  Menus;
 
 type
   Tfrm_licenca = class(TForm)
@@ -125,6 +130,9 @@ type
     mnu_load_solic: TMenuItem;
     btn_subst: TToolButton;
     dse_condicionantesolic_subst: TDateField;
+    pop_solic_prazo: TPopupMenu;
+    mnu_sol_prazo_informar: TMenuItem;
+    VerPDF1: TMenuItem;
     procedure dse_licencaNewRecord(DataSet: TDataSet);
     procedure dse_condicionanteNewRecord(DataSet: TDataSet);
     procedure FormCreate(Sender: TObject);
@@ -149,19 +157,25 @@ type
     procedure btn_prot_condClick(Sender: TObject);
     procedure mnu_load_licencaClick(Sender: TObject);
     procedure mnu_open_licenClick(Sender: TObject);
-    procedure btn_prazoClick(Sender: TObject);
     procedure btn_solic_descosidClick(Sender: TObject);
     procedure mnu_load_solicClick(Sender: TObject);
     procedure mnu_open_solicClick(Sender: TObject);
     procedure btn_substClick(Sender: TObject);
+    procedure mnu_sol_prazo_informarClick(Sender: TObject);
+    procedure VerPDF1Click(Sender: TObject);
+    procedure pop_solic_prazoPopup(Sender: TObject);
+    procedure qry_clienteAfterScroll(DataSet: TDataSet);
   protected
   private
+    FPasta: string;
+    pst_cliente: string;
     procedure open_aux_queries;
     procedure inf_sol_prazo;
     procedure cumprir_condicionante;
     procedure cancelar_cumprimento;
     procedure inf_sol_desconsid;
     procedure inf_subst;
+    procedure MenuItemClick(Sender: TObject);
     { Private declarations }
   public
     procedure open_dataset(id_cliente: integer; id_atividade: integer);
@@ -319,22 +333,6 @@ begin
       tra.commit;
     close;
   end;
-
-end;
-
-procedure Tfrm_licenca.btn_prazoClick(Sender: TObject);
-var
-  arq: string;
-begin
-  arq := get_customer_folder_lic(
-    dse_licencaId_cliente.AsInteger,
-    dse_licencaid.AsInteger) +
-    'Prazo_' + dse_condicionanteNumero.AsString + '.pdf';
-
-  if FileExists(arq) then
-    abrir_arquivo(arq)
-  else
-    inf_sol_prazo;
 
 end;
 
@@ -656,6 +654,11 @@ begin
     dse_licenca.Post;
 end;
 
+procedure Tfrm_licenca.mnu_sol_prazo_informarClick(Sender: TObject);
+begin
+  inf_sol_prazo;
+end;
+
 procedure Tfrm_licenca.open_aux_queries;
 begin
   qry_orgao.Open;
@@ -707,6 +710,70 @@ begin
     ReleaseCapture;
     self.Perform(WM_SYSCOMMAND, SC_DRAGMOVE, 0);
   end;
+end;
+
+procedure Tfrm_licenca.MenuItemClick(Sender: TObject);
+var
+  MenuItem: TMenuItem;
+  NomeArquivo: string;
+begin
+  MenuItem := Sender as TMenuItem;
+  NomeArquivo := IncludeTrailingPathDelimiter(FPasta) + MenuItem.Caption;
+  ShellExecute(Application.Handle, 'open', PChar(NomeArquivo), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure Tfrm_licenca.pop_solic_prazoPopup(Sender: TObject);
+var
+  ListaArquivos: TStringList;
+  NovoMenuItem: TMenuItem;
+  I: Integer;
+
+begin
+
+  // Define o caminho da pasta onde estão os PDFs
+  FPasta := pst_cliente + '\' + dse_licenca.FieldByName('id').AsString + '\';
+
+  // Limpa o menu popup antes de adicionar novos itens
+  Pop_solic_prazo.Items.Clear;
+
+  // Adiciona o item fixo no início do menu
+  NovoMenuItem := TMenuItem.Create(Pop_solic_prazo);
+  NovoMenuItem.Caption := 'Informar Prazo';
+  NovoMenuItem.OnClick := mnu_sol_prazo_informarClick;
+  Pop_solic_prazo.Items.Add(NovoMenuItem);
+
+  // Obtém a lista de arquivos PDF
+  ListaArquivos := ListarArquivosPDF(FPasta, 'Prazo_' + dse_condicionanteNumero.AsString);
+  
+  try
+    for i := 0 to ListaArquivos.Count - 1 do
+    begin
+      // Cria um novo item de menu para cada arquivo encontrado
+      NovoMenuItem := TMenuItem.Create(Pop_solic_prazo);
+      NovoMenuItem.Caption := ListaArquivos[i];
+      NovoMenuItem.Tag := i; // Armazena o índice do arquivo na propriedade Tag
+
+      // Associa o evento de clique
+      NovoMenuItem.OnClick := MenuItemClick;
+
+      // Adiciona o novo item ao menu popup
+      Pop_solic_prazo.Items.Add(NovoMenuItem);
+    end;
+  finally
+    ListaArquivos.Free;
+  end;
+end;
+
+procedure Tfrm_licenca.qry_clienteAfterScroll(DataSet: TDataSet);
+begin
+  pst_cliente := get_customer_folder(qry_cliente.FieldByName('id').AsInteger);
+end;
+
+procedure Tfrm_licenca.VerPDF1Click(Sender: TObject);
+begin
+  abrir_arquivo(get_customer_folder_lic(
+    dse_licencaId_cliente.AsInteger,
+    dse_licencaid.AsInteger));
 end;
 
 procedure Tfrm_licenca.btn_solic_descosidClick(Sender: TObject);

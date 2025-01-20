@@ -4,6 +4,7 @@ interface
 
 uses
   Controls,
+  Classes,
   Forms,
   ShellApi,
   SysUtils,
@@ -24,6 +25,7 @@ uses
   function get_customer_folder_lic(id_customer: integer; id_licenca: integer): string;
   function last_id(tabela: string; pk: string; filter: string): integer;
   function leap_year(year: word): boolean;
+  function ListarArquivosPDF(const Pasta: string; const Prefixo: string): TStringList;
   function iif(condicao: boolean; result_true: variant; result_false: variant): variant;
   function inicio_licenca(id_licenca: integer): TDate;
   function input_data(titulo: string = 'DATA'; default: TDate = 0): TDate;
@@ -684,8 +686,8 @@ var
 begin
 
   handle := GetTopWindow(0);
-  caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
-//  caminho := 'd:\multidev\clientes\' + intToStr(id);
+//  caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
+  caminho := 'd:\multidev\clientes\' + intToStr(id);
 
   if not DirectoryExists(caminho) then
     try
@@ -767,6 +769,30 @@ begin
     result := Copy(cpf,1,3) + '.' + Copy(cpf,4,3) + '.' + Copy(cpf,7,3) + '-' + Copy(cpf,10,2)
   else
     result := '';
+end;
+
+function ListarArquivosPDF(const Pasta: string; const Prefixo: string): TStringList;
+var
+  SR: TSearchRec;
+begin
+  Result := TStringList.Create;
+  try
+    if FindFirst(IncludeTrailingPathDelimiter(Pasta) + '*.pdf', faAnyFile, SR) = 0 then
+    try
+      repeat
+        // Verifica se o nome do arquivo começa com o prefixo especificado
+        if Copy(SR.Name, 1, Length(Prefixo)) = Prefixo then
+        begin
+          Result.Add(SR.Name);
+        end;
+      until FindNext(SR) <> 0;
+    finally
+      SysUtils.FindClose(SR);
+    end;
+  except
+    Result.Free;
+    raise;
+  end;
 end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, wwdbdatetimepicker, StdCtrls, Buttons, ExtCtrls;
+  Dialogs, wwdbdatetimepicker, StdCtrls, Buttons, ExtCtrls, Mask, wwdbedit;
 
 type
   Tfrm_solicitar_prazo = class(TForm)
@@ -16,6 +16,8 @@ type
     Label5: TLabel;
     btn_solicitar: TSpeedButton;
     dtp_data: TwwDBDateTimePicker;
+    edt_arq: TwwDBEdit;
+    Label1: TLabel;
     procedure btn_solicitarClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -75,11 +77,14 @@ begin
     CreateDir(pst_licenca);
 
   dm_geral.open_dialog.filter := 'Portable Document File|*.pdf' ;
-  if dm_geral.open_dialog.execute then
+
+  if (dtp_data.Text <> '') and dm_geral.open_dialog.execute then
   begin
     arq := dm_geral.open_dialog.filename;
-    arq_dest := pst_licenca + '\' + 'Prazo_' + num_cond + '.pdf';
+    arq_dest := pst_licenca + '\' + 'Prazo_' + num_cond + '_' + FormatDateTime('yymmdd', dtp_data.date) + '.pdf';
+    edt_arq.Text := arq_dest;
   end;
+
 end;
 
 end.

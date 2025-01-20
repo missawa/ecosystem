@@ -2,8 +2,8 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
   Left = 0
   Top = 0
   Caption = 'Solicitar Prazo'
-  ClientHeight = 136
-  ClientWidth = 219
+  ClientHeight = 192
+  ClientWidth = 440
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -15,19 +15,22 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
   TextHeight = 17
   object Panel2: TPanel
     Left = 0
-    Top = 100
-    Width = 219
+    Top = 156
+    Width = 440
     Height = 36
     Align = alBottom
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitLeft = 267
+    ExplicitTop = 111
+    ExplicitWidth = 337
     DesignSize = (
-      219
+      440
       36)
     object btnConfirmar: TSpeedButton
-      Left = 141
+      Left = 362
       Top = -2
       Width = 40
       Height = 40
@@ -191,7 +194,7 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
       ExplicitLeft = 226
     end
     object btnCancelar: TSpeedButton
-      Left = 179
+      Left = 400
       Top = -2
       Width = 40
       Height = 40
@@ -357,7 +360,7 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 219
+    Width = 440
     Height = 33
     Align = alTop
     Alignment = taLeftJustify
@@ -376,16 +379,19 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
     ParentCtl3D = False
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 219
   end
   object Panel1: TPanel
     Left = 0
     Top = 33
-    Width = 219
-    Height = 67
+    Width = 440
+    Height = 123
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 219
+    ExplicitHeight = 67
     object Label5: TLabel
       Left = 16
       Top = 10
@@ -394,10 +400,10 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
       Caption = 'Data'
     end
     object btn_solicitar: TSpeedButton
-      Left = 151
-      Top = 12
+      Left = 386
+      Top = 61
       Width = 44
-      Height = 35
+      Height = 42
       Glyph.Data = {
         F6120000424DF612000000000000360000002800000028000000280000000100
         180000000000C0120000C30E0000C30E00000000000000000000FFFFFFFFFFFF
@@ -555,11 +561,18 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
       Spacing = -2
       OnClick = btn_solicitarClick
     end
+    object Label1: TLabel
+      Left = 16
+      Top = 61
+      Width = 45
+      Height = 17
+      Caption = 'Arquivo'
+    end
     object dtp_data: TwwDBDateTimePicker
       Left = 16
       Top = 28
       Width = 121
-      Height = 19
+      Height = 23
       BorderStyle = bsNone
       CalendarAttributes.Font.Charset = DEFAULT_CHARSET
       CalendarAttributes.Font.Color = clWindowText
@@ -571,6 +584,23 @@ object frm_solicitar_prazo: Tfrm_solicitar_prazo
       Frame.NonFocusStyle = efsFrameSingle
       ShowButton = True
       TabOrder = 0
+    end
+    object edt_arq: TwwDBEdit
+      Left = 16
+      Top = 79
+      Width = 364
+      Height = 23
+      BorderStyle = bsNone
+      CharCase = ecUpperCase
+      DataField = 'fantasia'
+      Frame.Enabled = True
+      Frame.NonFocusBorders = []
+      Frame.FocusStyle = efsFrameEtched
+      Frame.NonFocusStyle = efsFrameEtched
+      TabOrder = 1
+      UnboundDataType = wwDefault
+      WantReturns = False
+      WordWrap = False
     end
   end
 end
