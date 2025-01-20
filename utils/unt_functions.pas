@@ -686,8 +686,8 @@ var
 begin
 
   handle := GetTopWindow(0);
-//  caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
-  caminho := 'd:\multidev\clientes\' + intToStr(id);
+  caminho := '\\ecoserver\multidev\clientes\' + intToStr(id);
+//  caminho := 'd:\multidev\clientes\' + intToStr(id);
 
   if not DirectoryExists(caminho) then
     try
